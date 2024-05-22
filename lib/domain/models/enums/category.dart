@@ -1,0 +1,15 @@
+enum Category {
+  rent,
+  groceries,
+  transportation,
+  automobile,
+  insurance,
+  communication,
+  entertainment,
+  personalCare,
+  healthCare,
+  creditCard,
+  debt,
+  investiment,
+  miscellaneous,
+}

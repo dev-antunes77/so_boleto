@@ -1,0 +1,17 @@
+{
+    "errorNoConnectionPage": "Sem conexão",
+    "signIn": "Cadastrar",
+    "loginSubtitle": "Tente novamente",
+    "loginTitle": "Tente novamente",
+    "tryAgain": "Tente novamente",
+    "validatorEmail": "Tente novamente",
+    "insertNumber": "Tente novamente",
+    "subscribeHintNumber": "Tente novamente",
+    "termsAndPolicies1": "Tente novamente",
+    "termsAndPolicies2": "Tente novamente",
+    "termsAndPolicies3": "Tente novamente",
+    "loginPincodeInsert": "Tente novamente",
+    "loginPincodeInfo": "Tente novamente",
+    "errorUnknowError": "Tente novamente",
+    "errorTryAgain": "Tente novamente"
+}
