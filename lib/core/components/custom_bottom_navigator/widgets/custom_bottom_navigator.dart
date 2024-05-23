@@ -46,20 +46,22 @@ class CustomBottomNavigator extends StatelessWidget {
             currentIndex: currentScreen,
             type: BottomNavigationBarType.fixed,
             selectedLabelStyle: context.textRobotoSubtitleTiny,
+            iconSize: 30,
             unselectedLabelStyle: context.textRobotoSubtitleTiny,
             items: [
               buildBottomNavigationBarItem(
-                'Your payments',
-                AppIcons.payment,
+                'Your bills',
+                AppIcons.coins,
               ),
-              // buildBottomNavigationBarItem(
-              //   AppLocalizations.current.favoriteRadios,
-              //   AppIcons.heartEmpty,
-              // ),
+              buildBottomNavigationBarItem(
+                'Gastos',
+                // AppLocalizations.current.favoriteRadios,
+                AppIcons.expense,
+              ),
               buildBottomNavigationBarItem(
                 'Perfil',
                 // AppLocalizations.current.profile,
-                AppIcons.person,
+                AppIcons.profile,
               ),
             ],
           ),

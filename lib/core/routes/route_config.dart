@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:so_boleto/presenter/expenses/pages/expenses_page.dart';
 import 'package:so_boleto/presenter/home/pages/home_page.dart';
 import 'package:so_boleto/presenter/initial/app_shell.dart';
 import 'package:so_boleto/presenter/initial/pages/splash_page.dart';
+import 'package:so_boleto/presenter/profile/pages/profile_page.dart';
 
 import 'routes.dart';
 
@@ -57,23 +59,31 @@ abstract class RoutesConfig {
       //   ],
       // ),
       ShellRoute(
-        builder: (context, state, child) => const AppShell(),
+        builder: (context, state, child) => AppShell(child: child),
         navigatorKey: _shellKey,
         routes: [
           GoRoute(
-            path: RelativePaths.radios,
+            path: RelativePaths.home,
             parentNavigatorKey: _shellKey,
             pageBuilder: (_, state) => _fadeTransition(
               state,
               const HomePage(),
             ),
           ),
-          // GoRoute(
-          //   path: RelativePaths.favorites,
-          //   parentNavigatorKey: _shellKey,
-          //   pageBuilder: (_, state) =>
-          //       _fadeTransition(state, const FavoriteRadiosPage()),
-          // ),
+          GoRoute(
+            path: RelativePaths.expenses,
+            parentNavigatorKey: _shellKey,
+            pageBuilder: (_, state) => _fadeTransition(
+              state,
+              const ExpensesPage(),
+            ),
+          ),
+          GoRoute(
+            path: RelativePaths.profile,
+            parentNavigatorKey: _shellKey,
+            pageBuilder: (_, state) =>
+                _fadeTransition(state, const ProfilePage()),
+          ),
           // GoRoute(
           //   path: RelativePaths.profile,
           //   parentNavigatorKey: _shellKey,

@@ -11,11 +11,15 @@ BottomNavigationBarItem buildBottomNavigationBarItem(
       label: text,
       icon: Padding(
         padding: const EdgeInsets.only(bottom: AppThemeValues.spaceTiny),
-        child: SvgAsset(svg: icon),
+        child: SvgAsset(
+          height: 30,
+          svg: icon,
+        ),
       ),
       activeIcon: Padding(
         padding: const EdgeInsets.only(bottom: AppThemeValues.spaceTiny),
         child: SvgAsset(
+          height: 35,
           svg: icon,
           color: AppColors.primary,
         ),

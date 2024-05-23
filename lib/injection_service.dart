@@ -1,8 +1,13 @@
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:so_boleto/domain/database/hive_bills.dart';
+import 'package:so_boleto/domain/usecases/create_bill_usecase.dart';
+import 'package:so_boleto/domain/usecases/delete_bill_usecase.dart';
+import 'package:so_boleto/domain/usecases/get_bills_usecase.dart';
 import 'package:so_boleto/infra/local_database/hive_database/hive_bill_model.dart';
 import 'package:so_boleto/infra/local_database/hive_database/hive_bills_database.dart';
+import 'package:so_boleto/presenter/home/cubit/bill_cubit.dart';
+import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
 
 abstract class InjectionService {
   static final _i = GetIt.instance;
@@ -19,7 +24,8 @@ abstract class InjectionService {
   static Future<HiveBills> _initStorages() async {
     await Hive.initFlutter();
     Hive.registerAdapter(HiveBillModelAdapter());
-    return HiveBillsDatabase();
+    _i.registerFactory<HiveBillsDatabase>(() => HiveBillsDatabase());
+    return _i.get<HiveBillsDatabase>();
   }
 
   // static Future<void> _initFirebase() async {
@@ -43,7 +49,6 @@ abstract class InjectionService {
   //   _i.registerSingleton<ApiService>(HttpApiService(_i.get<RadiosClient>()));
   // }
 
-  // static void _initRepositories() {
   //   final apiService = _i.get<ApiService>();
 
   //   _i.registerFactory<AuthRepository>(() => ApiAuthRepository(apiService));
@@ -69,14 +74,16 @@ abstract class InjectionService {
   // }
 
   static void _initUseCases() {
-    //Auth Use Case
-    // _i.registerFactory(() => ListenUserChangesUseCase(_i.get<AuthService>()));
-    // _i.registerFactory(
-    //   () => SignInUseCase(
-    //     _i.get<AuthService>(),
-    //     _i.get<LocalStorage>(),
-    //   ),
-    // );
+    // Bill Usecase
+    _i.registerFactory(
+      () => GetBillsUseCase(_i.get<HiveBillsDatabase>()),
+    );
+    _i.registerFactory(
+      () => CreateBillUseCase(_i.get<HiveBillsDatabase>()),
+    );
+    _i.registerFactory(
+      () => DeleteBillUseCase(_i.get<HiveBillsDatabase>()),
+    );
     // _i.registerFactory(
     //   () => SignUpUseCase(
     //     _i.get<AuthService>(),
@@ -147,21 +154,15 @@ abstract class InjectionService {
   }
 
   static void _initBloc() {
-    // _i.registerFactory(
-    //   () => InitialCubit(
-    //     _i.get<CheckVersionUpdateUseCase>(),
-    //     _i.get<ListenUserChangesUseCase>(),
-    //     _i.get<SignInUseCase>(),
-    //     _i.get<BottomButtonEventUseCase>(),
-    //   ),
-    // );
+    _i.registerFactory(
+      () => BillCubit(
+        _i.get<GetBillsUseCase>(),
+      ),
+    );
 
-    // _i.registerFactory(
-    //   () => LoginCubit(
-    //     _i.get<SignUpUseCase>(),
-    //     _i.get<SignInUseCase>(),
-    //   ),
-    // );
+    _i.registerFactory(
+      () => InitialCubit(),
+    );
 
     // _i.registerFactory(
     //   () => PlayerCubit(

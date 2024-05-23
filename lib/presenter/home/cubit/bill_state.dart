@@ -4,28 +4,28 @@ class BillState extends BaseState with EquatableMixin {
   BillState({
     required super.status,
     super.callbackMessage,
-    required this.bill,
+    required this.bills,
   });
 
-  final List<BillModel> bill;
+  final List<BillModel> bills;
 
   @override
   List<Object?> get props => [
         status,
         callbackMessage,
-        bill,
+        bills,
       ];
 
   @override
   BillState copyWith({
     BaseStateStatus? status,
     String? callbackMessage,
-    List<BillModel>? bill,
+    List<BillModel>? bills,
     UserModel? user,
   }) =>
       BillState(
         status: status ?? this.status,
         callbackMessage: callbackMessage ?? this.callbackMessage,
-        bill: bill ?? this.bill,
+        bills: bills ?? this.bills,
       );
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/route_config.dart';
 import 'package:so_boleto/core/theme/settings/theme_config.dart';
@@ -24,6 +25,9 @@ class AppWidget extends StatelessWidget {
         themeMode: ThemeMode.light,
         localizationsDelegates: const [
           AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
         ],
         supportedLocales: AppLocalizations.delegate.supportedLocales,
         routerConfig: RoutesConfig.router,

@@ -3,12 +3,16 @@ export 'routes_extensions.dart';
 ///Represents the entire routes to navigate in the app
 class Routes {
   static const app = '/';
+  static const home = '/home';
+  static const expenses = '/expenses';
+  static const profile = '/profile';
+
+///////////////////////
+
   static const live = '/live';
   static const radios = '/radios';
   static const favorites = '/favorites';
 
-  static const home = '/home';
-  static const profile = '/profile';
   static const account = '/profile/account';
   static const about = '/profile/about';
   static const editorial = '/profile/editorial';
@@ -28,11 +32,11 @@ class Routes {
 ///It should be used only in the routes_config.dart to easy the configuration
 class RelativePaths {
   static const app = '/';
-  static const live = '/live';
-  static const radios = '/radios';
   static const home = '/home';
-  static const favorites = '/favorites';
   static const profile = '/profile';
+  static const expenses = '/expenses';
+  static const radios = '/radios';
+  static const favorites = '/favorites';
   static const login = '/login';
   static const msisdn = '/login/msisdn';
   static const pinCode = '/login/pincode';

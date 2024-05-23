@@ -2,7 +2,8 @@ import 'package:so_boleto/core/routes/routes.dart';
 
 enum BottomNavigatorPage {
   list(0),
-  profile(1);
+  expenses(1),
+  profile(2);
 
   const BottomNavigatorPage(this.value);
 
@@ -23,6 +24,8 @@ enum BottomNavigatorPage {
     switch (page) {
       case BottomNavigatorPage.list:
         route = Routes.home;
+      case BottomNavigatorPage.expenses:
+        route = Routes.expenses;
       case BottomNavigatorPage.profile:
         route = Routes.profile;
 
