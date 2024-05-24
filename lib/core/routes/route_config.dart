@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:so_boleto/domain/models/bill.dart';
+import 'package:so_boleto/presenter/bill/pages/bill_page.dart';
+import 'package:so_boleto/presenter/bill/widgets/bill_shell.dart';
 import 'package:so_boleto/presenter/expenses/pages/expenses_page.dart';
 import 'package:so_boleto/presenter/home/pages/home_page.dart';
 import 'package:so_boleto/presenter/initial/app_shell.dart';
@@ -11,7 +14,7 @@ import 'routes.dart';
 abstract class RoutesConfig {
   static final _rootKey = GlobalKey<NavigatorState>(debugLabel: 'Root Key');
   static final _shellKey = GlobalKey<NavigatorState>(debugLabel: 'Shell Key');
-  // static final _loginKey = GlobalKey<NavigatorState>(debugLabel: 'Login Key');
+  static final _billKey = GlobalKey<NavigatorState>(debugLabel: 'Bill Key');
 
   static final router = GoRouter(
     initialLocation: RelativePaths.app,
@@ -22,24 +25,22 @@ abstract class RoutesConfig {
         parentNavigatorKey: _rootKey,
         builder: (_, __) => const SplashPage(),
       ),
-      // GoRoute(
-      //   path: RelativePaths.update,
-      //   parentNavigatorKey: _rootKey,
-      //   pageBuilder: (_, state) => _fadeTransition(state, const AppShell()),
-      // ),
-      // ShellRoute(
-      //   navigatorKey: _loginKey,
-      //   builder: (context, state, child) => LoginShell(
-      //     hasBackButton: state.fullPath == RelativePaths.login ? false : true,
-      //     child: child,
-      //   ),
-      //   routes: [
-      //     GoRoute(
-      //       path: RelativePaths.login,
-      //       parentNavigatorKey: _loginKey,
-      //       pageBuilder: (_, state) =>
-      //           _fadeTransition(state, const LoginPage()),
-      //     ),
+
+      ShellRoute(
+        navigatorKey: _billKey,
+        builder: (context, state, child) => BillShell(
+          child: child,
+        ),
+        routes: [
+          GoRoute(
+            path: RelativePaths.bill,
+            parentNavigatorKey: _billKey,
+            builder: (_, state) => BillPage(
+              bill: state.extra as BillModel?,
+            ),
+          ),
+        ],
+      ),
       //     GoRoute(
       //       path: RelativePaths.msisdn,
       //       parentNavigatorKey: _loginKey,

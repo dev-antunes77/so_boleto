@@ -13,3 +13,5 @@ enum Category {
   investiment,
   miscellaneous,
 }
+
+List<String> values = Category.values.map((e) => e.name).toList();

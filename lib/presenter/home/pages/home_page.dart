@@ -16,13 +16,14 @@ class HomePage extends StatelessWidget {
           buildWhen: (previous, current) => current.bills != previous.bills,
           builder: (context, state) {
             return ListView.separated(
-                itemCount: 16,
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                separatorBuilder: (context, index) => const ListSeparator(),
-                itemBuilder: (context, index) {
-                  return BillListTile();
-                });
+              itemCount: 16,
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              separatorBuilder: (context, index) => const ListSeparator(),
+              itemBuilder: (context, index) {
+                return BillListTile();
+              },
+            );
           },
         ),
       ),

@@ -1,8 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:so_boleto/core/components/custom_app_bar/custom_app_bar.dart';
 import 'package:so_boleto/core/components/custom_bottom_navigator/bottom_navigator_page.dart';
 import 'package:so_boleto/core/components/custom_bottom_navigator/widgets/custom_bottom_navigator.dart';
+import 'package:so_boleto/core/components/custom_pop_scope/custom_pop_scope.dart';
 import 'package:so_boleto/core/components/status_page/widgets/shimmer.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
@@ -24,21 +26,19 @@ class _AppShellState extends State<AppShell> {
     return BlocBuilder<InitialCubit, InitialState>(
       buildWhen: (previous, current) =>
           previous.currentPage != current.currentPage,
-      builder: (context, state) => PopScope(
-        canPop: false,
+      builder: (context, state) => CustomPopScope(
+        doesLeaveTheApp: true,
         child: Scaffold(
-          appBar: PreferredSize(
-            preferredSize: Size(double.infinity, 40),
-            child: AppBar(
-              title: Text('Example'),
-              centerTitle: true,
-              actions: [
-                IconButton(
-                    onPressed: () {},
-                    color: AppColors.primary,
-                    icon: Icon(Icons.add)),
-              ],
-            ),
+          appBar: customAppBar(
+            context: context,
+            title: 'Example',
+            actions: [
+              IconButton(
+                onPressed: () => context.navigateTo(Routes.bill),
+                color: AppColors.primary,
+                icon: const Icon(Icons.add),
+              ),
+            ],
           ),
           body: Shimmer(child: widget.child),
           extendBody: true,

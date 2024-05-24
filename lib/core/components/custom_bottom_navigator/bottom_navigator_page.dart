@@ -1,7 +1,7 @@
 import 'package:so_boleto/core/routes/routes.dart';
 
 enum BottomNavigatorPage {
-  list(0),
+  bills(0),
   expenses(1),
   profile(2);
 
@@ -15,14 +15,13 @@ enum BottomNavigatorPage {
         return page;
       }
     }
-
-    return list;
+    return bills;
   }
 
   static String getRoute(BottomNavigatorPage page) {
     String route;
     switch (page) {
-      case BottomNavigatorPage.list:
+      case BottomNavigatorPage.bills:
         route = Routes.home;
       case BottomNavigatorPage.expenses:
         route = Routes.expenses;

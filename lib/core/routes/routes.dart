@@ -6,10 +6,10 @@ class Routes {
   static const home = '/home';
   static const expenses = '/expenses';
   static const profile = '/profile';
+  static const bill = '/bill';
 
 ///////////////////////
 
-  static const live = '/live';
   static const radios = '/radios';
   static const favorites = '/favorites';
 
@@ -35,6 +35,10 @@ class RelativePaths {
   static const home = '/home';
   static const profile = '/profile';
   static const expenses = '/expenses';
+  static const bill = '/bill';
+
+/////////////////////////
+
   static const radios = '/radios';
   static const favorites = '/favorites';
   static const login = '/login';

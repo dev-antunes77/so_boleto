@@ -16,7 +16,7 @@ class InitialCubit extends Cubit<InitialState> with BaseCubit {
       )
       : super(InitialState(
           status: BaseStateStatus.initial,
-          currentPage: BottomNavigatorPage.list,
+          currentPage: BottomNavigatorPage.bills,
         ));
 
   // final CheckVersionUpdateUseCase _checkVersionUpdate;
