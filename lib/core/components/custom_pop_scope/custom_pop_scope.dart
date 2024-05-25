@@ -29,7 +29,7 @@ class CustomPopScope extends StatelessWidget {
   void _leaveAppDialog(BuildContext context) => showBaseDialog(
         context: context,
         title: 'Sair do app?',
-        description: 'Tem certeza que deseja sair do app?',
+        description: 'Tem certeza que deseja\nsair do app?',
         onAcept: () => SystemNavigator.pop(),
       );
 }

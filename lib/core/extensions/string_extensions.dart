@@ -1,3 +1,5 @@
+import 'package:so_boleto/domain/models/enums/category.dart';
+
 extension StringExtensions on String {
   String replaceCharAt(String newChar, int position) {
     if (position < 0 || position >= length) {
@@ -9,4 +11,8 @@ extension StringExtensions on String {
 
     return characters.join();
   }
+
+  Category textToEnum() => categoryMap.entries
+      .firstWhere((element) => element.value['string'] == this)
+      .key;
 }

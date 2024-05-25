@@ -24,7 +24,7 @@ class HiveBillModelAdapter extends TypeAdapter<HiveBillModel> {
       totalParcels: fields[6] as int,
       payedParcels: fields[7] as int,
       value: fields[8] as int,
-      dueDate: fields[9] as DateTime,
+      dueDayOfTheMonth: fields[9] as int,
       createdAt: fields[10] as DateTime?,
       hiveIndex: fields[11] as int,
     );
@@ -49,7 +49,7 @@ class HiveBillModelAdapter extends TypeAdapter<HiveBillModel> {
       ..writeByte(8)
       ..write(obj.value)
       ..writeByte(9)
-      ..write(obj.dueDate)
+      ..write(obj.dueDayOfTheMonth)
       ..writeByte(10)
       ..write(obj.createdAt)
       ..writeByte(11)

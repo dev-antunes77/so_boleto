@@ -50,7 +50,10 @@ class ChoiceDialog extends StatelessWidget {
                   children: [
                     Text(title, style: context.textSubtitleMedium),
                     AppThemeValues.spaceVerticalXLarge,
-                    Text(description),
+                    Text(
+                      description,
+                      textAlign: TextAlign.center,
+                    ),
                     AppThemeValues.spaceVerticalLarge,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,

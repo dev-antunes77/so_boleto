@@ -4,9 +4,9 @@ export 'routes_extensions.dart';
 class Routes {
   static const app = '/';
   static const home = '/home';
+  static const bill = '/bill';
   static const expenses = '/expenses';
   static const profile = '/profile';
-  static const bill = '/bill';
 
 ///////////////////////
 

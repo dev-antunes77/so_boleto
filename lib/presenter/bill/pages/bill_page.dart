@@ -1,123 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
-import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
-import 'package:so_boleto/core/theme/settings/app_colors.dart';
-import 'package:so_boleto/core/theme/settings/app_icons.dart';
-import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
-import 'package:so_boleto/domain/models/bill.dart';
+import 'package:so_boleto/presenter/bill/pages/sections/bill_category_section.dart';
+import 'package:so_boleto/presenter/bill/pages/sections/bill_description_section.dart';
+import 'package:so_boleto/presenter/bill/pages/sections/bill_due_day_of_the_month_section.dart';
+import 'package:so_boleto/presenter/bill/pages/sections/bill_name_section.dart';
+import 'package:so_boleto/presenter/bill/pages/sections/bill_parcel_section.dart';
+import 'package:so_boleto/presenter/bill/pages/sections/bill_value_section.dart';
 
 class BillPage extends StatefulWidget {
-  const BillPage({super.key, this.bill});
-
-  final BillModel? bill;
+  const BillPage({super.key});
 
   @override
   State<BillPage> createState() => _BillPageState();
 }
 
-class _BillPageState extends State<BillPage> {
-  final TextEditingController billNameController = TextEditingController();
-  final TextEditingController billDescriptionController =
-      TextEditingController();
-
-  bool testing = true;
-
-  List<String> values = [
-    'rent',
-    'groceries',
-    'transportation',
-    'automobile',
-    'insurance',
-    'communication',
-    'entertainment',
-    'healthCare',
-    'creditCard',
-    'travel',
-    'debt',
-    'investiment',
-    'miscellaneous',
-  ];
+class _BillPageState extends State<BillPage> with TickerProviderStateMixin {
+  PageController pageCtrl = PageController();
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 22),
-      child: Column(
-        children: [
-          BillTextField(hitText: 'Nome da conta'),
-          BillTextField(hitText: 'Descrição da conta'),
-          Row(
-            children: [
-              BillTextField(
-                hitText: 'Valor',
-                width: context.width * 0.3,
-              ),
-              SizedBox(
-                width: context.width * 0.4,
-                child: DropdownButton(
-                    underline: const SizedBox(),
-                    hint: Text('Categories'),
-                    menuMaxHeight: context.height * 0.45,
-                    value: values.first,
-                    items: values
-                        .map(
-                          (e) => DropdownMenuItem(value: e, child: Text(e)),
-                        )
-                        .toList(),
-                    onChanged: (newValue) => testing = false),
-              ),
-            ],
-          ),
-        ],
-      ),
+    return PageView.builder(
+      controller: pageCtrl,
+      physics: const NeverScrollableScrollPhysics(),
+      itemBuilder: (context, index) {
+        return _returnBillSection(index);
+      },
     );
   }
-}
 
-class BillTextField extends StatelessWidget {
-  const BillTextField({
-    super.key,
-    required this.hitText,
-    this.icon,
-    this.textInputType,
-    this.width,
-  });
-
-  final String hitText;
-  final String? icon;
-  final TextInputType? textInputType;
-  final double? width;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: AppThemeValues.spaceMedium),
-      child: Row(
-        children: [
-          SvgAsset(svg: icon ?? AppIcons.miscellaneous, height: 26),
-          AppThemeValues.spaceHorizontalMedium,
-          Container(height: 30, color: AppColors.greyLight, width: 1),
-          AppThemeValues.spaceHorizontalMedium,
-          SizedBox(
-            width: width ?? context.width * 0.65,
-            child: TextField(
-              keyboardType: textInputType ?? TextInputType.text,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.zero,
-                hintText: hitText,
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.grey,
-                  ),
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.primary),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+  Widget _returnBillSection(int index) {
+    switch (index) {
+      case 0:
+        return BillNameSection(_navigateSection);
+      case 1:
+        return BillDescriptionSection(_navigateSection);
+      case 2:
+        return BillParcelSection(_navigateSection);
+      case 3:
+        return BillValueSection(_navigateSection);
+      case 4:
+        return BillDueDayOfTheMonthSection(_navigateSection);
+      case 5:
+        return BillCategorySection(_navigateSection);
+    }
+    return const SizedBox.shrink();
   }
+
+  _navigateSection(bool moveNext) => moveNext
+      ? pageCtrl.nextPage(
+          duration: const Duration(milliseconds: 400), curve: Curves.bounceIn)
+      : pageCtrl.previousPage(
+          duration: const Duration(milliseconds: 400), curve: Curves.bounceIn);
 }

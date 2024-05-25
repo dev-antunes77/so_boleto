@@ -16,7 +16,7 @@ final class HiveBillModel extends BillModel with HiveObjectMixin {
     required super.totalParcels,
     required super.payedParcels,
     required super.value,
-    required super.dueDate,
+    required super.dueDayOfTheMonth,
     required super.createdAt,
     required super.hiveIndex,
   });
@@ -29,7 +29,7 @@ final class HiveBillModel extends BillModel with HiveObjectMixin {
         totalParcels: bill.totalParcels,
         payedParcels: bill.payedParcels,
         value: bill.value,
-        dueDate: bill.dueDate,
+        dueDayOfTheMonth: bill.dueDayOfTheMonth,
         createdAt: bill.createdAt,
         hiveIndex: bill.hiveIndex,
       );
@@ -64,7 +64,7 @@ final class HiveBillModel extends BillModel with HiveObjectMixin {
 
   @override
   @HiveField(9)
-  DateTime get dueDate => super.dueDate;
+  int get dueDayOfTheMonth => super.dueDayOfTheMonth;
 
   @override
   @HiveField(10)

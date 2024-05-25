@@ -8,7 +8,6 @@ part 'bill.g.dart';
 @JsonSerializable()
 class BillModel extends Equatable {
   BillModel({
-    required this.dueDate,
     this.id = '',
     this.name = '',
     this.description = '',
@@ -16,6 +15,7 @@ class BillModel extends Equatable {
     this.value = 1,
     this.payedParcels = 0,
     this.hiveIndex = 0,
+    this.dueDayOfTheMonth = 1,
     Category? category,
     BillState? billState,
     DateTime? createdAt,
@@ -34,7 +34,7 @@ class BillModel extends Equatable {
   final Category category;
   final int value;
   final DateTime createdAt;
-  final DateTime dueDate;
+  final int dueDayOfTheMonth;
   final BillState billState;
   final int totalParcels;
   final int payedParcels;
@@ -51,7 +51,7 @@ class BillModel extends Equatable {
         value,
         createdAt,
         billState,
-        dueDate,
+        dueDayOfTheMonth,
         totalParcels,
         payedParcels,
         hiveIndex,
@@ -65,7 +65,7 @@ class BillModel extends Equatable {
     int? value,
     DateTime? createdAt,
     BillState? billState,
-    DateTime? dueDate,
+    int? dueDayOfTheMonth,
     int? totalParcels,
     int? payedParcels,
     int? hiveIndex,
@@ -78,7 +78,7 @@ class BillModel extends Equatable {
       value: value ?? this.value,
       createdAt: createdAt ?? this.createdAt,
       billState: billState ?? this.billState,
-      dueDate: dueDate ?? this.dueDate,
+      dueDayOfTheMonth: dueDayOfTheMonth ?? this.dueDayOfTheMonth,
       totalParcels: totalParcels ?? this.totalParcels,
       payedParcels: payedParcels ?? this.payedParcels,
       hiveIndex: hiveIndex ?? this.hiveIndex,

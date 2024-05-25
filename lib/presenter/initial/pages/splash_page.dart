@@ -23,42 +23,40 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: AppColors.background,
-        body: Center(
-          child: CircleAvatar(
-            backgroundColor: AppColors.primary,
-            radius: 100,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Stack(
-                  alignment: Alignment.bottomLeft,
-                  children: [
-                    Text(
-                      'Só',
-                      style: context.textSubtitleLarge
-                          .copyWith(color: AppColors.white),
+    return Scaffold(
+      backgroundColor: AppColors.background,
+      body: Center(
+        child: CircleAvatar(
+          backgroundColor: AppColors.primary,
+          radius: 100,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Stack(
+                alignment: Alignment.bottomLeft,
+                children: [
+                  Text(
+                    'Só',
+                    style: context.textSubtitleLarge
+                        .copyWith(color: AppColors.white),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(left: AppThemeValues.spaceSmall),
+                    child: SvgAsset(
+                      svg: AppIcons.money,
+                      height: 80,
+                      color: AppColors.white,
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: AppThemeValues.spaceSmall),
-                      child: SvgAsset(
-                        svg: AppIcons.money,
-                        height: 80,
-                        color: AppColors.white,
-                      ),
-                    ),
-                  ],
-                ),
-                Text(
-                  'Boleto',
-                  style:
-                      context.textSubtitleHuge.copyWith(color: AppColors.white),
-                ),
-              ],
-            ),
+                  ),
+                ],
+              ),
+              Text(
+                'Boleto',
+                style:
+                    context.textSubtitleHuge.copyWith(color: AppColors.white),
+              ),
+            ],
           ),
         ),
       ),

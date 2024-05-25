@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/presenter/bill/pages/bill_page.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_shell.dart';
 import 'package:so_boleto/presenter/expenses/pages/expenses_page.dart';
@@ -35,9 +34,7 @@ abstract class RoutesConfig {
           GoRoute(
             path: RelativePaths.bill,
             parentNavigatorKey: _billKey,
-            builder: (_, state) => BillPage(
-              bill: state.extra as BillModel?,
-            ),
+            builder: (_, state) => BillPage(),
           ),
         ],
       ),
@@ -145,6 +142,7 @@ abstract class RoutesConfig {
     return CustomTransitionPage(
       key: state.pageKey,
       child: child,
+      transitionDuration: const Duration(milliseconds: 200),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         return FadeTransition(
           opacity: animation.drive(tween),

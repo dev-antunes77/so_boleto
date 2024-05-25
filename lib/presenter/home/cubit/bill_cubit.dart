@@ -5,6 +5,7 @@ import 'package:so_boleto/core/errors/app_errors.dart';
 import 'package:so_boleto/core/utils/base_cubit.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
 import 'package:so_boleto/domain/models/bill.dart';
+import 'package:so_boleto/domain/models/enums/category.dart';
 import 'package:so_boleto/domain/models/user.dart';
 import 'package:so_boleto/domain/usecases/get_bills_usecase.dart';
 
@@ -28,6 +29,51 @@ class BillCubit extends Cubit<BillState> with BaseCubit {
       );
     }
     return [];
+  }
+
+  void onBillNameChange(String billName) {
+    emit(state.copyWith(
+        // status: BaseStateStatus.loading,
+        newBill: state.newBill.copyWith(name: billName)));
+    // emit(state.copyWith(status: BaseStateStatus.success));
+  }
+
+  void onBillDescriptionChange(String billDescription) {
+    emit(state.copyWith(
+        // status: BaseStateStatus.loading,
+        newBill: state.newBill.copyWith(description: billDescription)));
+    // emit(state.copyWith(status: BaseStateStatus.success));
+  }
+
+  void onBillValueChange(String billValue) {
+    final numValue = int.parse(billValue);
+    emit(state.copyWith(
+        // status: BaseStateStatus.loading,
+        newBill: state.newBill.copyWith(value: numValue)));
+    // emit(state.copyWith(status: BaseStateStatus.success));
+  }
+
+  void onBillParcelsChange(String? billParcels) {
+    final numValue = int.parse(billParcels ?? '1');
+
+    emit(state.copyWith(
+        // status: BaseStateStatus.loading,
+        newBill: state.newBill.copyWith(totalParcels: numValue)));
+    // emit(state.copyWith(status: BaseStateStatus.success));
+  }
+
+  void onBillCategoryChange(Category billCategory) {
+    emit(state.copyWith(
+        status: BaseStateStatus.loading,
+        newBill: state.newBill.copyWith(category: billCategory)));
+    emit(state.copyWith(status: BaseStateStatus.success));
+  }
+
+  void onBillDueeDayOfTheMonthChange(int billDueDate) {
+    emit(state.copyWith(
+        status: BaseStateStatus.loading,
+        newBill: state.newBill.copyWith(dueDayOfTheMonth: billDueDate)));
+    emit(state.copyWith(status: BaseStateStatus.success));
   }
 
   Future<void> createBill(BillModel bill) async {}

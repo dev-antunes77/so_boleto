@@ -7,7 +7,6 @@ part of 'bill.dart';
 // **************************************************************************
 
 BillModel _$BillModelFromJson(Map<String, dynamic> json) => BillModel(
-      dueDate: DateTime.parse(json['dueDate'] as String),
       id: json['id'] as String? ?? '',
       name: json['name'] as String? ?? '',
       description: json['description'] as String? ?? '',
@@ -15,6 +14,7 @@ BillModel _$BillModelFromJson(Map<String, dynamic> json) => BillModel(
       value: (json['value'] as num?)?.toInt() ?? 1,
       payedParcels: (json['payedParcels'] as num?)?.toInt() ?? 0,
       hiveIndex: (json['hiveIndex'] as num?)?.toInt() ?? 0,
+      dueDayOfTheMonth: (json['dueDayOfTheMonth'] as num?)?.toInt() ?? 1,
       category: $enumDecodeNullable(_$CategoryEnumMap, json['category']),
       billState: $enumDecodeNullable(_$BillStateEnumMap, json['billState']),
       createdAt: json['createdAt'] == null
@@ -29,7 +29,7 @@ Map<String, dynamic> _$BillModelToJson(BillModel instance) => <String, dynamic>{
       'category': _$CategoryEnumMap[instance.category]!,
       'value': instance.value,
       'createdAt': instance.createdAt.toIso8601String(),
-      'dueDate': instance.dueDate.toIso8601String(),
+      'dueDayOfTheMonth': instance.dueDayOfTheMonth,
       'billState': _$BillStateEnumMap[instance.billState]!,
       'totalParcels': instance.totalParcels,
       'payedParcels': instance.payedParcels,
@@ -37,19 +37,20 @@ Map<String, dynamic> _$BillModelToJson(BillModel instance) => <String, dynamic>{
     };
 
 const _$CategoryEnumMap = {
-  Category.rent: 'rent',
-  Category.groceries: 'groceries',
-  Category.transportation: 'transportation',
   Category.automobile: 'automobile',
-  Category.insurance: 'insurance',
   Category.communication: 'communication',
-  Category.entertainment: 'entertainment',
-  Category.healthCare: 'healthCare',
   Category.creditCard: 'creditCard',
-  Category.travel: 'travel',
   Category.debt: 'debt',
-  Category.investiment: 'investiment',
+  Category.education: 'education',
+  Category.entertainment: 'entertainment',
+  Category.groceries: 'groceries',
+  Category.healthCare: 'healthCare',
+  Category.insurance: 'insurance',
+  Category.investment: 'investment',
   Category.miscellaneous: 'miscellaneous',
+  Category.rent: 'rent',
+  Category.transportation: 'transportation',
+  Category.travel: 'travel',
 };
 
 const _$BillStateEnumMap = {
