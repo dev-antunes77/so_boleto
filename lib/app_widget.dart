@@ -5,7 +5,8 @@ import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/route_config.dart';
 import 'package:so_boleto/core/theme/settings/theme_config.dart';
 import 'package:so_boleto/injection_service.dart';
-import 'package:so_boleto/presenter/home/cubit/bill_cubit.dart';
+import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
+import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
 
 class AppWidget extends StatelessWidget {
@@ -16,6 +17,7 @@ class AppWidget extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => InjectionService.get<InitialCubit>()),
+        BlocProvider(create: (_) => InjectionService.get<HomeBillsCubit>()),
         BlocProvider(create: (_) => InjectionService.get<BillCubit>()),
       ],
       child: MaterialApp.router(

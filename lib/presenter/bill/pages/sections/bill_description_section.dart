@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
+import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_section_button_row.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_section_top_icon.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_text_field.dart';
-import 'package:so_boleto/presenter/home/cubit/bill_cubit.dart';
 
 class BillDescriptionSection extends StatefulWidget {
   const BillDescriptionSection(this.pageCtrl, {super.key});

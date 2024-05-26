@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/custom_safe_area/custom_safe_area.dart';
+import 'package:so_boleto/core/components/thin_line_separator/horizontal_thin_line_separator.dart';
+import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 import 'package:so_boleto/presenter/home/widgets/bill_list_tile.dart';
-import 'package:so_boleto/presenter/home/widgets/list_separator.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -10,15 +12,26 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomSafeArea(
       child: SingleChildScrollView(
-        child: ListView.separated(
-          itemCount: 16,
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          separatorBuilder: (context, index) => const ListSeparator(),
-          itemBuilder: (context, index) {
-            return BillListTile();
-          },
-        ),
+        child: BlocBuilder<HomeBillsCubit, HomeBillsState>(
+            buildWhen: (previous, current) => previous.status != current.status,
+            builder: (context, state) {
+              if (state.bills.isEmpty) {
+                return Center(
+                  child: Text('Lista vazia'),
+                );
+              }
+              return ListView.separated(
+                itemCount: state.bills.length,
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                separatorBuilder: (context, index) =>
+                    const HorizontalThinLineSeparator(),
+                itemBuilder: (context, index) {
+                  final bill = state.bills[index];
+                  return BillListTile(bill);
+                },
+              );
+            }),
       ),
     );
   }

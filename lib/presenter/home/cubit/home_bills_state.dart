@@ -1,36 +1,31 @@
-part of 'bill_cubit.dart';
+part of 'home_bills_cubit.dart';
 
-class BillState extends BaseState with EquatableMixin {
-  BillState({
+class HomeBillsState extends BaseState with EquatableMixin {
+  HomeBillsState({
     required super.status,
     super.callbackMessage,
     required this.bills,
-    BillModel? newBill,
-  }) : newBill = newBill ?? BillModel();
+  });
 
   final List<BillModel> bills;
-  final BillModel newBill;
 
   @override
   List<Object?> get props => [
         status,
         callbackMessage,
         bills,
-        newBill,
       ];
 
   @override
-  BillState copyWith({
+  HomeBillsState copyWith({
     BaseStateStatus? status,
     String? callbackMessage,
     List<BillModel>? bills,
     UserModel? user,
-    BillModel? newBill,
   }) =>
-      BillState(
+      HomeBillsState(
         status: status ?? this.status,
         callbackMessage: callbackMessage ?? this.callbackMessage,
         bills: bills ?? this.bills,
-        newBill: newBill ?? this.newBill,
       );
 }

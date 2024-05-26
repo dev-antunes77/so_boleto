@@ -11,19 +11,17 @@ import 'package:so_boleto/presenter/bill/widgets/bill_background_card.dart';
 
 class BillPage extends StatefulWidget {
   const BillPage({super.key});
-
   @override
   State<BillPage> createState() => _BillPageState();
 }
 
 class _BillPageState extends State<BillPage> with TickerProviderStateMixin {
   PageController pageCtrl = PageController();
-  double pageNumber = 0;
 
   @override
   Widget build(BuildContext context) {
     return BillBackgroundCard(
-      height: pageNumber > 5 ? context.height * 0.45 : context.height * 0.45,
+      height: context.height * 0.45,
       child: PageView.builder(
         controller: pageCtrl,
         physics: const NeverScrollableScrollPhysics(),
@@ -35,7 +33,6 @@ class _BillPageState extends State<BillPage> with TickerProviderStateMixin {
   }
 
   Widget _returnBillSection(int index) {
-    pageNumber = index.toDouble();
     switch (index) {
       case 0:
         return BillNameSection(pageCtrl);

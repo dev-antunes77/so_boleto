@@ -4,10 +4,10 @@ import 'package:so_boleto/core/components/expanded_section/expanded_section.dart
 import 'package:so_boleto/core/constants/app_constants.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
+import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_dropdown_menu.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_section_button_row.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_parcel_switch_row.dart';
-import 'package:so_boleto/presenter/home/cubit/bill_cubit.dart';
 
 class BillParcelSection extends StatefulWidget {
   const BillParcelSection(this.pageCtrl, {super.key});
@@ -75,7 +75,7 @@ class _BillParcelSectionState extends State<BillParcelSection> {
                     builder: (context, state) {
                       return BillDropdownMenu(
                           list: AppConstants.parcelsLength,
-                          dueDayOfTheMonth: state.newBill.totalParcels,
+                          dueDayOfTheMonth: state.bill.totalParcels,
                           onChanged: (value) => _onSelectingParcels(value));
                     },
                   ),

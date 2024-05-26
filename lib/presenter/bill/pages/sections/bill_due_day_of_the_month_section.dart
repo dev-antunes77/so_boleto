@@ -4,10 +4,10 @@ import 'package:so_boleto/core/constants/app_constants.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
+import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_dropdown_menu.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_section_button_row.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_section_top_icon.dart';
-import 'package:so_boleto/presenter/home/cubit/bill_cubit.dart';
 
 class BillDueDayOfTheMonthSection extends StatelessWidget {
   const BillDueDayOfTheMonthSection(this.pageCtrl, {super.key});
@@ -35,7 +35,7 @@ class BillDueDayOfTheMonthSection extends StatelessWidget {
             ),
             BillDropdownMenu(
               list: AppConstants.monthDays,
-              dueDayOfTheMonth: state.newBill.dueDayOfTheMonth,
+              dueDayOfTheMonth: state.bill.dueDayOfTheMonth,
               onChanged: (newValue) => context
                   .read<BillCubit>()
                   .onBillDueeDayOfTheMonthChange(newValue),
