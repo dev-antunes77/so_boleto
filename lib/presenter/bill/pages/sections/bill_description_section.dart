@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_section_button_row.dart';
@@ -8,10 +9,12 @@ import 'package:so_boleto/presenter/bill/widgets/bill_text_field.dart';
 import 'package:so_boleto/presenter/home/cubit/bill_cubit.dart';
 
 class BillDescriptionSection extends StatefulWidget {
-  const BillDescriptionSection(this.pageCtrl, {super.key});
+  const BillDescriptionSection({
+    super.key,
+    this.isEditionFlow = false,
+  });
 
-  final PageController pageCtrl;
-
+  final bool isEditionFlow;
   @override
   State<BillDescriptionSection> createState() => _BillDescriptionSectionState();
 }
@@ -35,7 +38,10 @@ class _BillDescriptionSectionState extends State<BillDescriptionSection> {
               onChanged: (value) =>
                   context.read<BillCubit>().onBillDescriptionChange(value),
             ),
-            BillSectionButtonRow(pageCtrl: widget.pageCtrl),
+            BillSectionButtonRow(
+              onNavigate: () => context.navigateTo(Routes.billParcel),
+              isEditionFlow: widget.isEditionFlow,
+            ),
             AppThemeValues.spaceVerticalLarge
           ],
         );

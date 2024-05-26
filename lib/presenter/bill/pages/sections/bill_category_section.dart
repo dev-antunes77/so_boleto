@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/extensions/enum_extension.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
+import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
@@ -11,13 +12,12 @@ import 'package:so_boleto/presenter/bill/widgets/bill_section_top_icon.dart';
 import 'package:so_boleto/presenter/home/cubit/bill_cubit.dart';
 
 class BillCategorySection extends StatelessWidget {
-  const BillCategorySection(
-    this.pageCtrl, {
+  const BillCategorySection({
     super.key,
+    this.isEditionFlow = false,
   });
 
-  final PageController pageCtrl;
-
+  final bool isEditionFlow;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BillCubit, BillState>(
@@ -57,7 +57,10 @@ class BillCategorySection extends StatelessWidget {
               ),
             ),
             const Expanded(child: AppThemeValues.spaceHorizontalXTiny),
-            BillSectionButtonRow(pageCtrl: pageCtrl),
+            BillSectionButtonRow(
+              onNavigate: () => context.navigateTo(Routes.billCheck),
+              isEditionFlow: isEditionFlow,
+            ),
           ],
         );
       },

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/expanded_section/expanded_section.dart';
 import 'package:so_boleto/core/constants/app_constants.dart';
+import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_dropdown_menu.dart';
@@ -10,9 +11,12 @@ import 'package:so_boleto/presenter/bill/widgets/bill_parcel_switch_row.dart';
 import 'package:so_boleto/presenter/home/cubit/bill_cubit.dart';
 
 class BillParcelSection extends StatefulWidget {
-  const BillParcelSection(this.pageCtrl, {super.key});
+  const BillParcelSection({
+    super.key,
+    this.isEditionFlow = false,
+  });
 
-  final PageController pageCtrl;
+  final bool isEditionFlow;
 
   @override
   State<BillParcelSection> createState() => _BillParcelSectionState();
@@ -84,7 +88,10 @@ class _BillParcelSectionState extends State<BillParcelSection> {
             ),
           ),
         const Expanded(child: AppThemeValues.spaceVerticalEnormous),
-        BillSectionButtonRow(pageCtrl: widget.pageCtrl),
+        BillSectionButtonRow(
+          onNavigate: () => context.navigateTo(Routes.billValue),
+          isEditionFlow: widget.isEditionFlow,
+        ),
       ],
     );
   }

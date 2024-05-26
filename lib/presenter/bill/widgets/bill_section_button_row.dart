@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:so_boleto/core/components/buttons/pill_button.dart';
+import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 
 class BillSectionButtonRow extends StatelessWidget {
   const BillSectionButtonRow({
     super.key,
-    required this.pageCtrl,
     this.isNotFirstSection = true,
     this.isLastSection = false,
-    this.isEditionFlow = false,
+    required this.isEditionFlow,
+    required this.onNavigate,
   });
-  final PageController pageCtrl;
+  final VoidCallback onNavigate;
   final bool isNotFirstSection;
   final bool isLastSection;
   final bool isEditionFlow;
@@ -22,27 +23,16 @@ class BillSectionButtonRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          if (isNotFirstSection)
-            PillButton(
-              child: const Text('Anterior'),
-              onTap: () => pageCtrl.previousPage(
-                  duration: const Duration(milliseconds: 400),
-                  curve: Curves.bounceIn),
-            ),
           if (isEditionFlow)
             PillButton(
               child: const Text('Pronto'),
-              onTap: () => pageCtrl.animateToPage(6,
-                  duration: const Duration(milliseconds: 400),
-                  curve: Curves.bounceIn),
+              onTap: () => context.navigateTo(Routes.billCheck),
             )
-          else
-            PillButton(
-              child: const Text('Próximo'),
-              onTap: () => pageCtrl.nextPage(
-                  duration: const Duration(milliseconds: 400),
-                  curve: Curves.bounceIn),
-            ),
+          else ...[
+            if (isNotFirstSection)
+              PillButton(child: const Text('Anterior'), onTap: context.pop),
+            PillButton(child: const Text('Próximo'), onTap: onNavigate),
+          ]
         ],
       ),
     );

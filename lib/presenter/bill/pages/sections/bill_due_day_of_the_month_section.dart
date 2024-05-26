@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/constants/app_constants.dart';
+import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
@@ -10,9 +11,12 @@ import 'package:so_boleto/presenter/bill/widgets/bill_section_top_icon.dart';
 import 'package:so_boleto/presenter/home/cubit/bill_cubit.dart';
 
 class BillDueDayOfTheMonthSection extends StatelessWidget {
-  const BillDueDayOfTheMonthSection(this.pageCtrl, {super.key});
+  const BillDueDayOfTheMonthSection({
+    super.key,
+    this.isEditionFlow = false,
+  });
 
-  final PageController pageCtrl;
+  final bool isEditionFlow;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +45,10 @@ class BillDueDayOfTheMonthSection extends StatelessWidget {
                   .onBillDueeDayOfTheMonthChange(newValue),
             ),
             const Expanded(child: AppThemeValues.spaceVerticalHuge),
-            BillSectionButtonRow(pageCtrl: pageCtrl),
+            BillSectionButtonRow(
+              onNavigate: () => context.navigateTo(Routes.billCategory),
+              isEditionFlow: isEditionFlow,
+            ),
           ],
         );
       },

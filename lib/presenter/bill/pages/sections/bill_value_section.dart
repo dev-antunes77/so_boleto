@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/helpers/currency_ptbr_input_formatter.dart';
+import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_section_button_row.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_section_top_icon.dart';
@@ -9,9 +10,12 @@ import 'package:so_boleto/presenter/bill/widgets/bill_text_field.dart';
 import 'package:so_boleto/presenter/home/cubit/bill_cubit.dart';
 
 class BillValueSection extends StatefulWidget {
-  const BillValueSection(this.pageCtrl, {super.key});
+  const BillValueSection({
+    super.key,
+    this.isEditionFlow = false,
+  });
 
-  final PageController pageCtrl;
+  final bool isEditionFlow;
 
   @override
   State<BillValueSection> createState() => _BillValueSectionState();
@@ -39,7 +43,10 @@ class _BillValueSectionState extends State<BillValueSection> {
                 CurrencyPtBrInputFormatter()
               ],
             ),
-            BillSectionButtonRow(pageCtrl: widget.pageCtrl),
+            BillSectionButtonRow(
+              onNavigate: () => context.navigateTo(Routes.billDueDay),
+              isEditionFlow: widget.isEditionFlow,
+            ),
           ],
         );
       },

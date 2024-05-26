@@ -4,7 +4,17 @@ export 'routes_extensions.dart';
 class Routes {
   static const app = '/';
   static const home = '/home';
-  static const bill = '/bill';
+
+  static const billName = '/bill-name';
+  static const billDescription = '/bill-name/bill-description';
+  static const billParcel = '/bill-name/bill-description/bill-parcel';
+  static const billValue =
+      '/bill-name/bill-description/bill-parcel/bill-parcel';
+  static const billDueDay =
+      '/bill-name/bill-description/bill-parcel/bill-parcel/bill-due-day';
+  static const billCategory =
+      '/bill-name/bill-description/bill-parcel/bill-parcel/bill-due-day/bill-category';
+  static const billCheck = '/bill-check';
   static const expenses = '/expenses';
   static const profile = '/profile';
 
@@ -35,7 +45,16 @@ class RelativePaths {
   static const home = '/home';
   static const profile = '/profile';
   static const expenses = '/expenses';
-  static const bill = '/bill';
+  static const billName = '/bill-name';
+  static const billDescription = '/bill-name/bill-description';
+  static const billParcel = '/bill-name/bill-description/bill-parcel';
+  static const billValue =
+      '/bill-name/bill-description/bill-parcel/bill-parcel';
+  static const billDueDay =
+      '/bill-name/bill-description/bill-parcel/bill-parcel/bill-due-day';
+  static const billCategory =
+      '/bill-name/bill-description/bill-parcel/bill-parcel/bill-due-day/bill-category';
+  static const billCheck = '/bill-check';
 
 /////////////////////////
 
