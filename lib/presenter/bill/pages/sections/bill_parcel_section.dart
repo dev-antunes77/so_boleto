@@ -1,66 +1,68 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/expanded_section/expanded_section.dart';
-import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
+import 'package:so_boleto/core/constants/app_constants.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
-import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
+import 'package:so_boleto/presenter/bill/widgets/bill_dropdown_menu.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_section_button_row.dart';
-import 'package:so_boleto/presenter/bill/widgets/bill_text_field.dart';
+import 'package:so_boleto/presenter/bill/widgets/bill_parcel_switch_row.dart';
 import 'package:so_boleto/presenter/home/cubit/bill_cubit.dart';
 
 class BillParcelSection extends StatefulWidget {
-  const BillParcelSection(this.navigateSection, {super.key});
+  const BillParcelSection(this.pageCtrl, {super.key});
 
-  final Function(bool) navigateSection;
+  final PageController pageCtrl;
 
   @override
   State<BillParcelSection> createState() => _BillParcelSectionState();
 }
 
 class _BillParcelSectionState extends State<BillParcelSection> {
-  bool choice = false;
-  final TextEditingController billParcelController = TextEditingController();
+  bool parcelChoice = false;
+  bool monthlyChoice = false;
+  bool uniqueChoice = false;
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         AppThemeValues.spaceVerticalImense,
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Essa conta foi parcelada?',
-              style: context.textRobotoSubtitleMedium,
-            ),
-            AppThemeValues.spaceHorizontalLarge,
-            Switch(
-              value: choice,
-              onChanged: (value) => setState(() => choice = value),
-            ),
-          ],
+        BillParcelSwitchRow(
+          label: 'Essa é uma conta mensal?',
+          choice: monthlyChoice,
+          onChanged: (value) => setState(() {
+            monthlyChoice = value;
+            parcelChoice = false;
+            uniqueChoice = false;
+            context.read<BillCubit>().onBillMonthlyChange(value);
+          }),
         ),
-        if (choice == false) ...[
-          Padding(
-            padding: const EdgeInsets.only(top: AppThemeValues.spaceEnormous),
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                  border: Border.all(color: AppColors.primary, width: 0.5)),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppThemeValues.spaceMedium,
-                  vertical: AppThemeValues.spaceSmall,
-                ),
-                child: Text('Não', style: context.textRobotoSubtitleMedium),
-              ),
-            ),
-          ),
-          const Expanded(child: AppThemeValues.spaceVerticalEnormous),
-        ] else ...[
+        BillParcelSwitchRow(
+          label: 'Uma conta única?',
+          choice: uniqueChoice,
+          onChanged: (value) => setState(() {
+            uniqueChoice = value;
+            parcelChoice = false;
+            monthlyChoice = false;
+            context.read<BillCubit>().onBillParcelsChange(1);
+          }),
+        ),
+        BillParcelSwitchRow(
+          label: 'Ou uma conta parcelada?',
+          choice: parcelChoice,
+          onChanged: (value) => setState(() {
+            parcelChoice = value;
+            uniqueChoice = false;
+            monthlyChoice = false;
+            context.read<BillCubit>().onBillParcelsChange(2);
+          }),
+        ),
+        if (parcelChoice)
           ExpandedSection(
-            expand: choice,
+            expand: parcelChoice,
             child: Padding(
-              padding: const EdgeInsets.all(AppThemeValues.spaceEnormous),
+              padding: const EdgeInsets.only(top: AppThemeValues.spaceSmall),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -68,22 +70,31 @@ class _BillParcelSectionState extends State<BillParcelSection> {
                     'Quantas parcelas?',
                     style: context.textRobotoSubtitleMedium,
                   ),
-                  BillTextField(
-                    hitText: '',
-                    textInputType: TextInputType.number,
-                    width: context.width * 0.15,
-                    controller: billParcelController,
-                    onChanged: (value) =>
-                        context.read<BillCubit>().onBillParcelsChange(value),
+                  AppThemeValues.spaceHorizontalLarge,
+                  BlocBuilder<BillCubit, BillState>(
+                    builder: (context, state) {
+                      return BillDropdownMenu(
+                          list: AppConstants.parcelsLength,
+                          dueDayOfTheMonth: state.newBill.totalParcels,
+                          onChanged: (value) => _onSelectingParcels(value));
+                    },
                   ),
                 ],
               ),
             ),
           ),
-          const Expanded(child: AppThemeValues.spaceVerticalEnormous),
-        ],
-        BillSectionButtonRow(navigateSection: widget.navigateSection),
+        const Expanded(child: AppThemeValues.spaceVerticalEnormous),
+        BillSectionButtonRow(pageCtrl: widget.pageCtrl),
       ],
     );
+  }
+
+  void _onSelectingParcels(int value) {
+    if (value == 1) {
+      parcelChoice = false;
+      uniqueChoice = true;
+      setState(() {});
+    }
+    context.read<BillCubit>().onBillParcelsChange(value);
   }
 }

@@ -32,34 +32,40 @@ class BillCubit extends Cubit<BillState> with BaseCubit {
   }
 
   void onBillNameChange(String billName) {
-    emit(state.copyWith(
-        // status: BaseStateStatus.loading,
-        newBill: state.newBill.copyWith(name: billName)));
-    // emit(state.copyWith(status: BaseStateStatus.success));
+    emit(state.copyWith(newBill: state.newBill.copyWith(name: billName)));
   }
 
   void onBillDescriptionChange(String billDescription) {
     emit(state.copyWith(
-        // status: BaseStateStatus.loading,
         newBill: state.newBill.copyWith(description: billDescription)));
-    // emit(state.copyWith(status: BaseStateStatus.success));
   }
 
   void onBillValueChange(String billValue) {
-    final numValue = int.parse(billValue);
+    emit(state.copyWith(status: BaseStateStatus.loading));
+
+    RegExp regex = RegExp(r'[^0-9]');
+    String result = billValue.replaceAll(regex, '');
+    if (result.isEmpty) return;
+    final numValue = int.parse(result);
     emit(state.copyWith(
-        // status: BaseStateStatus.loading,
+        status: BaseStateStatus.success,
         newBill: state.newBill.copyWith(value: numValue)));
-    // emit(state.copyWith(status: BaseStateStatus.success));
   }
 
-  void onBillParcelsChange(String? billParcels) {
-    final numValue = int.parse(billParcels ?? '1');
-
+  /// Sets parcels back to one
+  void onBillMonthlyChange(bool dueEveryMonth) {
+    emit(state.copyWith(status: BaseStateStatus.loading));
     emit(state.copyWith(
-        // status: BaseStateStatus.loading,
-        newBill: state.newBill.copyWith(totalParcels: numValue)));
-    // emit(state.copyWith(status: BaseStateStatus.success));
+        status: BaseStateStatus.success,
+        newBill: state.newBill
+            .copyWith(totalParcels: 1, dueEveryMonth: dueEveryMonth)));
+  }
+
+  void onBillParcelsChange(int billParcels) {
+    emit(state.copyWith(status: BaseStateStatus.loading));
+    emit(state.copyWith(
+        status: BaseStateStatus.success,
+        newBill: state.newBill.copyWith(totalParcels: billParcels)));
   }
 
   void onBillCategoryChange(Category billCategory) {

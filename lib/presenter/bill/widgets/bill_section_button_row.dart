@@ -5,12 +5,15 @@ import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 class BillSectionButtonRow extends StatelessWidget {
   const BillSectionButtonRow({
     super.key,
-    required this.navigateSection,
+    required this.pageCtrl,
     this.isNotFirstSection = true,
+    this.isLastSection = false,
+    this.isEditionFlow = false,
   });
-
-  final Function(bool p1) navigateSection;
+  final PageController pageCtrl;
   final bool isNotFirstSection;
+  final bool isLastSection;
+  final bool isEditionFlow;
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +25,24 @@ class BillSectionButtonRow extends StatelessWidget {
           if (isNotFirstSection)
             PillButton(
               child: const Text('Anterior'),
-              onTap: () => navigateSection(false),
+              onTap: () => pageCtrl.previousPage(
+                  duration: const Duration(milliseconds: 400),
+                  curve: Curves.bounceIn),
             ),
-          PillButton(
-            child: const Text('Próximo'),
-            onTap: () => navigateSection(true),
-          ),
+          if (isEditionFlow)
+            PillButton(
+              child: const Text('Pronto'),
+              onTap: () => pageCtrl.animateToPage(6,
+                  duration: const Duration(milliseconds: 400),
+                  curve: Curves.bounceIn),
+            )
+          else
+            PillButton(
+              child: const Text('Próximo'),
+              onTap: () => pageCtrl.nextPage(
+                  duration: const Duration(milliseconds: 400),
+                  curve: Curves.bounceIn),
+            ),
         ],
       ),
     );

@@ -7,20 +7,24 @@ class CustomPopScope extends StatelessWidget {
   const CustomPopScope({
     super.key,
     required this.child,
-    this.doesLeaveTheApp = false,
+    this.leaveTheApp = false,
+    this.leaveBillCreation = false,
     this.route,
   });
 
   final Widget child;
-  final bool doesLeaveTheApp;
+  final bool leaveTheApp;
+  final bool leaveBillCreation;
   final String? route;
 
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      onPopInvoked: (didPop) => doesLeaveTheApp
+      onPopInvoked: (didPop) => leaveTheApp
           ? _leaveAppDialog(context)
-          : context.navigateTo(route ?? Routes.home),
+          : leaveBillCreation
+              ? _leaveBillCreationDialog(context)
+              : context.navigateTo(route ?? Routes.home),
       canPop: false,
       child: child,
     );
@@ -31,5 +35,12 @@ class CustomPopScope extends StatelessWidget {
         title: 'Sair do app?',
         description: 'Tem certeza que deseja\nsair do app?',
         onAcept: () => SystemNavigator.pop(),
+      );
+
+  void _leaveBillCreationDialog(BuildContext context) => showBaseDialog(
+        context: context,
+        title: 'Tem certeza?',
+        description: 'Se sair,\na criação dessa conta será perdida.',
+        onAcept: () => context.navigateTo(Routes.home),
       );
 }

@@ -9,11 +9,11 @@ import 'package:so_boleto/presenter/home/cubit/bill_cubit.dart';
 
 class BillNameSection extends StatefulWidget {
   const BillNameSection(
-    this.navigateSection, {
+    this.pageCtrl, {
     super.key,
   });
 
-  final Function(bool) navigateSection;
+  final PageController pageCtrl;
 
   @override
   State<BillNameSection> createState() => _BillNameSectionState();
@@ -37,7 +37,7 @@ class _BillNameSectionState extends State<BillNameSection> {
                   context.read<BillCubit>().onBillNameChange(value),
             ),
             BillSectionButtonRow(
-              navigateSection: widget.navigateSection,
+              pageCtrl: widget.pageCtrl,
               isNotFirstSection: false,
             ),
             AppThemeValues.spaceVerticalLarge

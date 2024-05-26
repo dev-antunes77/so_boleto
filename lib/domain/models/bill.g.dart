@@ -15,6 +15,7 @@ BillModel _$BillModelFromJson(Map<String, dynamic> json) => BillModel(
       payedParcels: (json['payedParcels'] as num?)?.toInt() ?? 0,
       hiveIndex: (json['hiveIndex'] as num?)?.toInt() ?? 0,
       dueDayOfTheMonth: (json['dueDayOfTheMonth'] as num?)?.toInt() ?? 1,
+      dueEveryMonth: json['dueEveryMonth'] as bool? ?? false,
       category: $enumDecodeNullable(_$CategoryEnumMap, json['category']),
       billState: $enumDecodeNullable(_$BillStateEnumMap, json['billState']),
       createdAt: json['createdAt'] == null
@@ -31,6 +32,7 @@ Map<String, dynamic> _$BillModelToJson(BillModel instance) => <String, dynamic>{
       'createdAt': instance.createdAt.toIso8601String(),
       'dueDayOfTheMonth': instance.dueDayOfTheMonth,
       'billState': _$BillStateEnumMap[instance.billState]!,
+      'dueEveryMonth': instance.dueEveryMonth,
       'totalParcels': instance.totalParcels,
       'payedParcels': instance.payedParcels,
       'hiveIndex': instance.hiveIndex,

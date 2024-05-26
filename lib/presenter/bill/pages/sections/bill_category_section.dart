@@ -12,11 +12,11 @@ import 'package:so_boleto/presenter/home/cubit/bill_cubit.dart';
 
 class BillCategorySection extends StatelessWidget {
   const BillCategorySection(
-    this.navigateSection, {
+    this.pageCtrl, {
     super.key,
   });
 
-  final Function(bool) navigateSection;
+  final PageController pageCtrl;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +57,7 @@ class BillCategorySection extends StatelessWidget {
               ),
             ),
             const Expanded(child: AppThemeValues.spaceHorizontalXTiny),
-            BillSectionButtonRow(navigateSection: navigateSection),
+            BillSectionButtonRow(pageCtrl: pageCtrl),
           ],
         );
       },

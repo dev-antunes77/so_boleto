@@ -27,7 +27,7 @@ class _AppShellState extends State<AppShell> {
       buildWhen: (previous, current) =>
           previous.currentPage != current.currentPage,
       builder: (context, state) => CustomPopScope(
-        doesLeaveTheApp: true,
+        leaveTheApp: true,
         child: Scaffold(
           appBar: customAppBar(
             context: context,

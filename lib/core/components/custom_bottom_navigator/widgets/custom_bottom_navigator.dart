@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/custom_bottom_navigator/widgets/bottom_navigator_item.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
-import 'package:so_boleto/presenter/home/cubit/bill_cubit.dart';
 
 class CustomBottomNavigator extends StatelessWidget {
   const CustomBottomNavigator({
@@ -22,16 +20,7 @@ class CustomBottomNavigator extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        BlocBuilder<BillCubit, BillState>(
-          buildWhen: (previous, current) => true,
-          builder: (context, state) {
-            return const SizedBox.shrink();
-            //Visibility(
-            //   visible: state.radio.id != 0,
-            //   child: const BottomPlayer(),
-            // );
-          },
-        ),
+        const SizedBox.shrink(),
         DecoratedBox(
           decoration: const BoxDecoration(
             boxShadow: [

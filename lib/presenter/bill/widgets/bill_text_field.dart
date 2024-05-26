@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
@@ -13,54 +14,49 @@ class BillTextField extends StatelessWidget {
     this.icon,
     this.textInputType,
     this.width,
+    this.helperText,
     this.textAlign,
-    this.hasBorder = true,
+    this.formatters,
   });
 
   final TextEditingController controller;
   final Function(String) onChanged;
   final String hitText;
+  final String? helperText;
   final String? icon;
   final TextInputType? textInputType;
   final double? width;
   final TextAlign? textAlign;
-  final bool hasBorder;
+  final List<TextInputFormatter>? formatters;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.only(bottom: AppThemeValues.spaceMedium),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: width ?? context.width * 0.6,
-              child: TextField(
-                keyboardType: textInputType ?? TextInputType.text,
-                textAlign: textAlign ?? TextAlign.center,
-                style: context.textRobotoSubtitleSmall,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.zero,
-                  hintText: hitText,
-                  enabledBorder: hasBorder
-                      ? const UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey,
-                          ),
-                        )
-                      : InputBorder.none,
-                  focusedBorder: hasBorder
-                      ? const UnderlineInputBorder(
-                          borderSide: BorderSide(color: AppColors.primary),
-                        )
-                      : InputBorder.none,
+        child: SizedBox(
+          width: width ?? context.width * 0.6,
+          child: TextField(
+            keyboardType: textInputType ?? TextInputType.name,
+            textAlign: textAlign ?? TextAlign.center,
+            style: context.textRobotoSubtitleSmall,
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.zero,
+              hintText: hitText,
+              helperText: helperText,
+              enabledBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.grey,
                 ),
-                controller: controller,
-                onChanged: onChanged,
+              ),
+              focusedBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(color: AppColors.primary),
               ),
             ),
-          ],
+            controller: controller,
+            onChanged: onChanged,
+            inputFormatters: formatters,
+          ),
         ),
       ),
     );

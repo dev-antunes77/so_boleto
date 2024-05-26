@@ -34,7 +34,7 @@ abstract class RoutesConfig {
           GoRoute(
             path: RelativePaths.bill,
             parentNavigatorKey: _billKey,
-            builder: (_, state) => BillPage(),
+            builder: (_, state) => const BillPage(),
           ),
         ],
       ),
@@ -63,7 +63,7 @@ abstract class RoutesConfig {
           GoRoute(
             path: RelativePaths.home,
             parentNavigatorKey: _shellKey,
-            pageBuilder: (_, state) => _fadeTransition(
+            pageBuilder: (_, state) => _getTransitionPage(
               state,
               const HomePage(),
             ),
@@ -71,7 +71,7 @@ abstract class RoutesConfig {
           GoRoute(
             path: RelativePaths.expenses,
             parentNavigatorKey: _shellKey,
-            pageBuilder: (_, state) => _fadeTransition(
+            pageBuilder: (_, state) => _getTransitionPage(
               state,
               const ExpensesPage(),
             ),
@@ -79,8 +79,10 @@ abstract class RoutesConfig {
           GoRoute(
             path: RelativePaths.profile,
             parentNavigatorKey: _shellKey,
-            pageBuilder: (_, state) =>
-                _fadeTransition(state, const ProfilePage()),
+            pageBuilder: (_, state) => _getTransitionPage(
+              state,
+              const ProfilePage(),
+            ),
           ),
           // GoRoute(
           //   path: RelativePaths.profile,
@@ -131,24 +133,49 @@ abstract class RoutesConfig {
     ],
   );
 
-  static CustomTransitionPage<Widget> _fadeTransition(
-    GoRouterState state,
-    Widget child,
-  ) {
-    final tween = Tween(begin: 0.0, end: 1.0).chain(
-      CurveTween(curve: Curves.ease),
-    );
+//   static CustomTransitionPage<Widget> _fadeTransition(
+//     GoRouterState state,
+//     Widget child,
+//   ) {
+//     final tween = Tween(begin: 0.0, end: 1.0).chain(
+//       CurveTween(curve: Curves.ease),
+//     );
 
+//     return CustomTransitionPage(
+//       key: state.pageKey,
+//       child: child,
+//       transitionDuration: const Duration(milliseconds: 200),
+//       transitionsBuilder: (context, animation, secondaryAnimation, child) {
+//         return FadeTransition(
+//           opacity: animation.drive(tween),
+//           child: child,
+//         );
+//       },
+//     );
+//   }
+// }
+
+  static CustomTransitionPage _getTransitionPage(
+    GoRouterState state,
+    Widget child, {
+    String type = 'fade',
+  }) {
     return CustomTransitionPage(
-      key: state.pageKey,
-      child: child,
-      transitionDuration: const Duration(milliseconds: 200),
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        return FadeTransition(
-          opacity: animation.drive(tween),
-          child: child,
-        );
-      },
-    );
+        key: state.pageKey,
+        child: child,
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          switch (type) {
+            case 'fade':
+              return FadeTransition(opacity: animation, child: child);
+            case 'rotation':
+              return RotationTransition(turns: animation, child: child);
+            case 'size':
+              return SizeTransition(sizeFactor: animation, child: child);
+            case 'scale':
+              return ScaleTransition(scale: animation, child: child);
+            default:
+              return FadeTransition(opacity: animation, child: child);
+          }
+        });
   }
 }

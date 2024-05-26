@@ -16,6 +16,7 @@ class BillModel extends Equatable {
     this.payedParcels = 0,
     this.hiveIndex = 0,
     this.dueDayOfTheMonth = 1,
+    this.dueEveryMonth = false,
     Category? category,
     BillState? billState,
     DateTime? createdAt,
@@ -36,6 +37,7 @@ class BillModel extends Equatable {
   final DateTime createdAt;
   final int dueDayOfTheMonth;
   final BillState billState;
+  final bool dueEveryMonth;
   final int totalParcels;
   final int payedParcels;
   final int hiveIndex;
@@ -54,6 +56,7 @@ class BillModel extends Equatable {
         dueDayOfTheMonth,
         totalParcels,
         payedParcels,
+        dueEveryMonth,
         hiveIndex,
       ];
 
@@ -68,6 +71,7 @@ class BillModel extends Equatable {
     int? dueDayOfTheMonth,
     int? totalParcels,
     int? payedParcels,
+    bool? dueEveryMonth,
     int? hiveIndex,
   }) {
     return BillModel(
@@ -81,6 +85,7 @@ class BillModel extends Equatable {
       dueDayOfTheMonth: dueDayOfTheMonth ?? this.dueDayOfTheMonth,
       totalParcels: totalParcels ?? this.totalParcels,
       payedParcels: payedParcels ?? this.payedParcels,
+      dueEveryMonth: dueEveryMonth ?? this.dueEveryMonth,
       hiveIndex: hiveIndex ?? this.hiveIndex,
     );
   }
