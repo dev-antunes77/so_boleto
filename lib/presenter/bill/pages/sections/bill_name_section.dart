@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:so_boleto/core/components/expanded_space/expanded_space.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
@@ -23,6 +24,12 @@ class _BillNameSectionState extends State<BillNameSection> {
   final TextEditingController billNameController = TextEditingController();
 
   @override
+  void initState() {
+    billNameController.text = context.read<BillCubit>().state.bill.name;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<BillCubit, BillState>(
       buildWhen: (previous, current) => previous.status != current.status,
@@ -36,11 +43,12 @@ class _BillNameSectionState extends State<BillNameSection> {
               onChanged: (value) =>
                   context.read<BillCubit>().onBillNameChange(value),
             ),
+            const ExpandedSpace(),
             BillSectionButtonRow(
               pageCtrl: widget.pageCtrl,
               isNotFirstSection: false,
             ),
-            AppThemeValues.spaceVerticalLarge
+            AppThemeValues.spaceVerticalLarge,
           ],
         );
       },

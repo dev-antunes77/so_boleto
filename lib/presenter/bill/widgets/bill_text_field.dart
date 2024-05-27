@@ -31,32 +31,30 @@ class BillTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: AppThemeValues.spaceMedium),
-        child: SizedBox(
-          width: width ?? context.width * 0.6,
-          child: TextField(
-            keyboardType: textInputType ?? TextInputType.name,
-            textAlign: textAlign ?? TextAlign.center,
-            style: context.textRobotoSubtitleSmall,
-            decoration: InputDecoration(
-              contentPadding: EdgeInsets.zero,
-              hintText: hitText,
-              helperText: helperText,
-              enabledBorder: const UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.grey,
-                ),
-              ),
-              focusedBorder: const UnderlineInputBorder(
-                borderSide: BorderSide(color: AppColors.primary),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: AppThemeValues.spaceMedium),
+      child: SizedBox(
+        width: width ?? context.width * 0.6,
+        child: TextField(
+          keyboardType: textInputType ?? TextInputType.name,
+          textAlign: textAlign ?? TextAlign.center,
+          style: context.textRobotoSubtitleSmall,
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.zero,
+            hintText: hitText,
+            helperText: helperText,
+            enabledBorder: const UnderlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.grey,
               ),
             ),
-            controller: controller,
-            onChanged: onChanged,
-            inputFormatters: formatters,
+            focusedBorder: const UnderlineInputBorder(
+              borderSide: BorderSide(color: AppColors.primary),
+            ),
           ),
+          controller: controller,
+          onChanged: onChanged,
+          inputFormatters: formatters,
         ),
       ),
     );

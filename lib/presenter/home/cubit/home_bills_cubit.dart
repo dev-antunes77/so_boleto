@@ -31,5 +31,19 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
     return [];
   }
 
-  Future<void> createBill(BillModel bill) async {}
+  Future<void> createBill(BillModel bill) async {
+    try {
+      final updatedBills = state.bills + [bill];
+      emit(state.copyWith(status: BaseStateStatus.loading));
+      emit(
+          state.copyWith(status: BaseStateStatus.success, bills: updatedBills));
+    } on AppError catch (error) {
+      onAppError(error);
+      emit(
+        state.copyWith(
+          status: BaseStateStatus.error,
+        ),
+      );
+    }
+  }
 }

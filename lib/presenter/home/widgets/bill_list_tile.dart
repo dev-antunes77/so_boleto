@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
+import 'package:so_boleto/core/extensions/enum_extension.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
-import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/domain/models/bill.dart';
 
@@ -22,28 +22,28 @@ class BillListTile extends StatelessWidget {
           contentPadding: const EdgeInsets.symmetric(
             horizontal: AppThemeValues.spaceSmall,
           ),
-          leading: const CircleAvatar(
-            radius: 25,
+          leading: CircleAvatar(
+            radius: 28,
             backgroundColor: AppColors.greyLight,
             child: SvgAsset(
-              svg: AppIcons.payment,
-              height: 28,
+              svg: bill.category.enumToIcon(),
+              height: 32,
               color: AppColors.primary,
             ),
           ),
           title: Text(
-            'Alimentação',
+            bill.name,
             style: context.textRobotoSubtitleMedium,
           ),
           subtitle: Text(
-            'vence em 10 dias',
+            bill.dueDayOfTheMonth.toString(),
             style: context.textRobotoSubtitleTiny,
           ),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                '2 de 5',
+                bill.totalParcels.toString(),
                 textAlign: TextAlign.center,
                 style: context.textRobotoSubtitleTiny,
               ),

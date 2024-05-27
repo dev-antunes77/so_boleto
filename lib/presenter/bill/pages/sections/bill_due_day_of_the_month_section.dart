@@ -24,7 +24,6 @@ class BillDueDayOfTheMonthSection extends StatelessWidget {
             const BillSectionTopIcon(AppIcons.calendar),
             Padding(
               padding: const EdgeInsets.only(
-                top: AppThemeValues.spaceLarge,
                 bottom: AppThemeValues.spaceMedium,
               ),
               child: Text(

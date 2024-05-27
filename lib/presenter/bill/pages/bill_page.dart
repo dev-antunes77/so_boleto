@@ -17,11 +17,10 @@ class BillPage extends StatefulWidget {
 
 class _BillPageState extends State<BillPage> with TickerProviderStateMixin {
   PageController pageCtrl = PageController();
-
   @override
   Widget build(BuildContext context) {
     return BillBackgroundCard(
-      height: context.height * 0.45,
+      height: context.height * 0.5,
       child: PageView.builder(
         controller: pageCtrl,
         physics: const NeverScrollableScrollPhysics(),

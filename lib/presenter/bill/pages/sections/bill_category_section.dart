@@ -26,7 +26,7 @@ class BillCategorySection extends StatelessWidget {
         return Column(
           children: [
             BillSectionTopIcon(state.bill.category.enumToIcon()),
-            AppThemeValues.spaceVerticalHuge,
+            AppThemeValues.spaceVerticalLarge,
             SizedBox(
               width: context.width * 0.5,
               child: DecoratedBox(

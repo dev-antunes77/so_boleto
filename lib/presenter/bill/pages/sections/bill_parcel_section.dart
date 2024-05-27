@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/expanded_section/expanded_section.dart';
+import 'package:so_boleto/core/components/expanded_space/expanded_space.dart';
 import 'package:so_boleto/core/constants/app_constants.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
@@ -83,8 +84,9 @@ class _BillParcelSectionState extends State<BillParcelSection> {
               ),
             ),
           ),
-        const Expanded(child: AppThemeValues.spaceVerticalEnormous),
+        const ExpandedSpace(),
         BillSectionButtonRow(pageCtrl: widget.pageCtrl),
+        AppThemeValues.spaceVerticalLarge,
       ],
     );
   }
