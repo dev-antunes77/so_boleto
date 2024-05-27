@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/expanded_space/expanded_space.dart';
 import 'package:so_boleto/core/extensions/num_extensions.dart';
 import 'package:so_boleto/core/helpers/currency_ptbr_input_formatter.dart';
+import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
@@ -12,9 +13,7 @@ import 'package:so_boleto/presenter/bill/widgets/bill_section_top_icon.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_text_field.dart';
 
 class BillValueSection extends StatefulWidget {
-  const BillValueSection(this.pageCtrl, {super.key});
-
-  final PageController pageCtrl;
+  const BillValueSection({super.key});
 
   @override
   State<BillValueSection> createState() => _BillValueSectionState();
@@ -50,7 +49,7 @@ class _BillValueSectionState extends State<BillValueSection> {
               ],
             ),
             const ExpandedSpace(),
-            BillSectionButtonRow(pageCtrl: widget.pageCtrl),
+            const BillSectionButtonRow(Routes.billDueDay),
             AppThemeValues.spaceVerticalLarge,
           ],
         );

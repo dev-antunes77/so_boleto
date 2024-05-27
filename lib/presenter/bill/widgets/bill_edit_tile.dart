@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
-import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 
 class BillEditTile extends StatelessWidget {
@@ -31,17 +30,15 @@ class BillEditTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(label, style: context.textSmall),
-                Text(value, style: context.textRobotoSubtitleMedium),
+                GestureDetector(
+                    onTap: onPressed,
+                    child: Row(
+                      children: [
+                        Text(value, style: context.textMedium),
+                        Icon(Icons.edit_outlined, size: 16)
+                      ],
+                    )),
               ],
-            ),
-            CircleAvatar(
-              child: IconButton(
-                  onPressed: onPressed,
-                  icon: const Icon(
-                    Icons.mode_edit_outline_outlined,
-                    color: AppColors.primary,
-                    size: 18,
-                  )),
             ),
           ],
         ),

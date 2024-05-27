@@ -4,7 +4,13 @@ export 'routes_extensions.dart';
 class Routes {
   static const app = '/';
   static const home = '/home';
-  static const bill = '/bill';
+  static const billCategory = '/bill-category';
+  static const billCheck = '/bill-check';
+  static const billDescription = '/bill-description';
+  static const billDueDay = '/bill-due-day';
+  static const billName = '/bill-name';
+  static const billParcels = '/bill-parcels';
+  static const billValue = '/bill-value';
   static const expenses = '/expenses';
   static const profile = '/profile';
 
@@ -35,7 +41,13 @@ class RelativePaths {
   static const home = '/home';
   static const profile = '/profile';
   static const expenses = '/expenses';
-  static const bill = '/bill';
+  static const billCategory = '/bill-category';
+  static const billCheck = '/bill-check';
+  static const billDescription = '/bill-description';
+  static const billDueDay = '/bill-due-day';
+  static const billName = '/bill-name';
+  static const billParcels = '/bill-parcels';
+  static const billValue = '/bill-value';
 
 /////////////////////////
 

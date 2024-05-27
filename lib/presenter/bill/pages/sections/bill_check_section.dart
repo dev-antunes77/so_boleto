@@ -5,14 +5,14 @@ import 'package:so_boleto/core/components/expanded_space/expanded_space.dart';
 import 'package:so_boleto/core/extensions/enum_extension.dart';
 import 'package:so_boleto/core/extensions/num_extensions.dart';
 import 'package:so_boleto/core/routes/routes.dart';
+import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_edit_tile.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 
 class BillCheckSection extends StatefulWidget {
-  const BillCheckSection(this.pageCtrl, {super.key});
-  final PageController pageCtrl;
+  const BillCheckSection({super.key});
   @override
   State<BillCheckSection> createState() => _BillCheckSectionState();
 }
@@ -47,12 +47,13 @@ class _BillCheckSectionState extends State<BillCheckSection> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               BillEditTile(
-                label: 'Valor:',
-                value: bill.value.toDouble().formatCurrency(),
-                onPressed: () => _moveToPage(3),
+                label: 'Parcelas:',
+                value: bill.totalParcels.toString(),
+                onPressed: () => _moveToPage(2),
               ),
               BillEditTile(
                 label: 'Vencimento:',
+                width: context.width * 0.4,
                 value: bill.dueDayOfTheMonth.addLeadingZero(),
                 onPressed: () => _moveToPage(4),
               ),
@@ -62,12 +63,13 @@ class _BillCheckSectionState extends State<BillCheckSection> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               BillEditTile(
-                label: 'Parcelas:',
-                value: bill.totalParcels.toString(),
-                onPressed: () => _moveToPage(2),
+                label: 'Valor:',
+                value: bill.value.toDouble().formatCurrency(),
+                onPressed: () => _moveToPage(3),
               ),
               BillEditTile(
                 label: 'Categoria:',
+                width: context.width * 0.4,
                 value: bill.category.enumToText(),
                 onPressed: () => _moveToPage(5),
               ),
@@ -89,6 +91,5 @@ class _BillCheckSectionState extends State<BillCheckSection> {
     );
   }
 
-  void _moveToPage(int page) => widget.pageCtrl.animateToPage(page,
-      duration: const Duration(milliseconds: 400), curve: Curves.bounceIn);
+  void _moveToPage(_) {}
 }

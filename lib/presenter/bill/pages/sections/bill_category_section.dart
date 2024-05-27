@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/extensions/enum_extension.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
+import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
@@ -11,12 +12,9 @@ import 'package:so_boleto/presenter/bill/widgets/bill_section_button_row.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_section_top_icon.dart';
 
 class BillCategorySection extends StatelessWidget {
-  const BillCategorySection(
-    this.pageCtrl, {
+  const BillCategorySection({
     super.key,
   });
-
-  final PageController pageCtrl;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +55,11 @@ class BillCategorySection extends StatelessWidget {
               ),
             ),
             const Expanded(child: AppThemeValues.spaceHorizontalXTiny),
-            BillSectionButtonRow(pageCtrl: pageCtrl),
+            const BillSectionButtonRow(
+              Routes.billCheck,
+              navigateToBillCheck: true,
+            ),
+            AppThemeValues.spaceVerticalLarge
           ],
         );
       },

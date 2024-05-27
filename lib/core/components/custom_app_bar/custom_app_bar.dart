@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+
 import 'package:so_boleto/core/routes/routes.dart';
 
 PreferredSizeWidget customAppBar({
   required BuildContext context,
   required String title,
   List<Widget>? actions,
-  bool hasBackButton = false,
+  Widget? leadingBackButton,
   String route = Routes.home,
 }) =>
     PreferredSize(
@@ -14,11 +15,6 @@ PreferredSizeWidget customAppBar({
         title: Text(title),
         centerTitle: true,
         actions: actions,
-        leading: hasBackButton
-            ? IconButton(
-                onPressed: () => context.navigateTo(route),
-                icon: const Icon(Icons.arrow_back),
-              )
-            : const SizedBox.shrink(),
+        leading: leadingBackButton,
       ),
     );

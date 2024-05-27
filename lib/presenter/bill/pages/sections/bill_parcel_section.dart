@@ -3,17 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/expanded_section/expanded_section.dart';
 import 'package:so_boleto/core/components/expanded_space/expanded_space.dart';
 import 'package:so_boleto/core/constants/app_constants.dart';
+import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_dropdown_menu.dart';
-import 'package:so_boleto/presenter/bill/widgets/bill_section_button_row.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_parcel_switch_row.dart';
+import 'package:so_boleto/presenter/bill/widgets/bill_section_button_row.dart';
 
 class BillParcelSection extends StatefulWidget {
-  const BillParcelSection(this.pageCtrl, {super.key});
-
-  final PageController pageCtrl;
+  const BillParcelSection({super.key});
 
   @override
   State<BillParcelSection> createState() => _BillParcelSectionState();
@@ -85,7 +84,7 @@ class _BillParcelSectionState extends State<BillParcelSection> {
             ),
           ),
         const ExpandedSpace(),
-        BillSectionButtonRow(pageCtrl: widget.pageCtrl),
+        const BillSectionButtonRow(Routes.billValue),
         AppThemeValues.spaceVerticalLarge,
       ],
     );

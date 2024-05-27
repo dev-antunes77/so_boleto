@@ -61,13 +61,13 @@ class ChoiceDialog extends StatelessWidget {
                         PillButton(
                           backgroundColor: AppColors.primary,
                           onTap: context.pop,
-                          child: const Text('não'),
+                          child: const Text('Não'),
                         ),
                         PillButton(
                           backgroundColor: AppColors.background,
                           onTap: onAcept,
                           child: Text(
-                            'sim',
+                            'Sim',
                             style: context.textRobotoMedium
                                 .copyWith(color: Colors.black),
                           ),

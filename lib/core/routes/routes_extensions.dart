@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:so_boleto/core/utils/dialog_utils.dart';
 import 'package:so_boleto/core/utils/log_utils.dart';
 
 extension RoutesExtensions on BuildContext {
@@ -37,16 +38,18 @@ extension RoutesExtensions on BuildContext {
     double? width,
     required String title,
     required String description,
+    required VoidCallback onAcept,
   }) {
     Log.navigation('''Showing dialog: 
     child: $title : $description,
     ''');
-    // showBaseDialog(
-    //   context: this,
-    //   width: width,
-    //   title: title,
-    //   description: description,
-    // );
+    showBaseDialog(
+      context: this,
+      onAcept: onAcept,
+      width: width,
+      title: title,
+      description: description,
+    );
   }
 
   // Future<T?> showBottomSheet<T>({

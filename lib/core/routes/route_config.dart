@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:so_boleto/presenter/bill/pages/bill_page.dart';
+import 'package:so_boleto/presenter/bill/pages/sections/bill_category_section.dart';
+import 'package:so_boleto/presenter/bill/pages/sections/bill_check_section.dart';
+import 'package:so_boleto/presenter/bill/pages/sections/bill_description_section.dart';
+import 'package:so_boleto/presenter/bill/pages/sections/bill_due_day_of_the_month_section.dart';
+import 'package:so_boleto/presenter/bill/pages/sections/bill_name_section.dart';
+import 'package:so_boleto/presenter/bill/pages/sections/bill_parcel_section.dart';
+import 'package:so_boleto/presenter/bill/pages/sections/bill_value_section.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_shell.dart';
 import 'package:so_boleto/presenter/expenses/pages/expenses_page.dart';
 import 'package:so_boleto/presenter/home/pages/home_page.dart';
@@ -32,9 +38,67 @@ abstract class RoutesConfig {
         ),
         routes: [
           GoRoute(
-            path: RelativePaths.bill,
+            path: RelativePaths.billName,
             parentNavigatorKey: _billKey,
-            builder: (_, state) => const BillPage(),
+            pageBuilder: (_, state) => _getTransitionPage(
+              state,
+              const BillNameSection(),
+              type: 'rotation',
+            ),
+          ),
+          GoRoute(
+            path: RelativePaths.billDescription,
+            parentNavigatorKey: _billKey,
+            pageBuilder: (_, state) => _getTransitionPage(
+              state,
+              const BillDescriptionSection(),
+              type: 'rotation',
+            ),
+          ),
+          GoRoute(
+            path: RelativePaths.billParcels,
+            parentNavigatorKey: _billKey,
+            pageBuilder: (_, state) => _getTransitionPage(
+              state,
+              const BillParcelSection(),
+              type: 'rotation',
+            ),
+          ),
+          GoRoute(
+            path: RelativePaths.billValue,
+            parentNavigatorKey: _billKey,
+            pageBuilder: (_, state) => _getTransitionPage(
+              state,
+              const BillValueSection(),
+              type: 'rotation',
+            ),
+          ),
+          GoRoute(
+            path: RelativePaths.billDueDay,
+            parentNavigatorKey: _billKey,
+            pageBuilder: (_, state) => _getTransitionPage(
+              state,
+              const BillDueDayOfTheMonthSection(),
+              type: 'rotation',
+            ),
+          ),
+          GoRoute(
+            path: RelativePaths.billCategory,
+            parentNavigatorKey: _billKey,
+            pageBuilder: (_, state) => _getTransitionPage(
+              state,
+              const BillCategorySection(),
+              type: 'rotation',
+            ),
+          ),
+          GoRoute(
+            path: RelativePaths.billCheck,
+            parentNavigatorKey: _billKey,
+            pageBuilder: (_, state) => _getTransitionPage(
+              state,
+              const BillCheckSection(),
+              type: 'rotation',
+            ),
           ),
         ],
       ),
@@ -162,6 +226,7 @@ abstract class RoutesConfig {
   }) {
     return CustomTransitionPage(
         key: state.pageKey,
+        transitionDuration: const Duration(milliseconds: 600),
         child: child,
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           switch (type) {
@@ -173,6 +238,7 @@ abstract class RoutesConfig {
               return SizeTransition(sizeFactor: animation, child: child);
             case 'scale':
               return ScaleTransition(scale: animation, child: child);
+
             default:
               return FadeTransition(opacity: animation, child: child);
           }

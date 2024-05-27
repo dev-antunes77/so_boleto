@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:so_boleto/core/components/buttons/pill_button.dart';
 import 'package:so_boleto/core/components/expanded_space/expanded_space.dart';
+import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
-import 'package:so_boleto/presenter/bill/widgets/bill_section_button_row.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_section_top_icon.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_text_field.dart';
 
 class BillNameSection extends StatefulWidget {
-  const BillNameSection(
-    this.pageCtrl, {
-    super.key,
-  });
-
-  final PageController pageCtrl;
+  const BillNameSection({super.key});
 
   @override
   State<BillNameSection> createState() => _BillNameSectionState();
@@ -44,9 +40,9 @@ class _BillNameSectionState extends State<BillNameSection> {
                   context.read<BillCubit>().onBillNameChange(value),
             ),
             const ExpandedSpace(),
-            BillSectionButtonRow(
-              pageCtrl: widget.pageCtrl,
-              isNotFirstSection: false,
+            PillButton(
+              child: const Text('Próximo'),
+              onTap: () => context.pushTo(Routes.billDescription),
             ),
             AppThemeValues.spaceVerticalLarge,
           ],

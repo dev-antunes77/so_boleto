@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/constants/app_constants.dart';
+import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
@@ -10,9 +11,7 @@ import 'package:so_boleto/presenter/bill/widgets/bill_section_button_row.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_section_top_icon.dart';
 
 class BillDueDayOfTheMonthSection extends StatelessWidget {
-  const BillDueDayOfTheMonthSection(this.pageCtrl, {super.key});
-
-  final PageController pageCtrl;
+  const BillDueDayOfTheMonthSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +39,8 @@ class BillDueDayOfTheMonthSection extends StatelessWidget {
                   .onBillDueeDayOfTheMonthChange(newValue),
             ),
             const Expanded(child: AppThemeValues.spaceVerticalHuge),
-            BillSectionButtonRow(pageCtrl: pageCtrl),
+            const BillSectionButtonRow(Routes.billCategory),
+            AppThemeValues.spaceVerticalLarge,
           ],
         );
       },

@@ -34,7 +34,7 @@ class _AppShellState extends State<AppShell> {
             title: 'Example',
             actions: [
               IconButton(
-                onPressed: () => context.navigateTo(Routes.bill),
+                onPressed: () => context.navigateTo(Routes.billName),
                 color: AppColors.primary,
                 icon: const Icon(Icons.add),
               ),

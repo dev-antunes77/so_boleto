@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/expanded_space/expanded_space.dart';
+import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
@@ -9,9 +10,7 @@ import 'package:so_boleto/presenter/bill/widgets/bill_section_top_icon.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_text_field.dart';
 
 class BillDescriptionSection extends StatefulWidget {
-  const BillDescriptionSection(this.pageCtrl, {super.key});
-
-  final PageController pageCtrl;
+  const BillDescriptionSection({super.key});
 
   @override
   State<BillDescriptionSection> createState() => _BillDescriptionSectionState();
@@ -44,7 +43,7 @@ class _BillDescriptionSectionState extends State<BillDescriptionSection> {
                   context.read<BillCubit>().onBillDescriptionChange(value),
             ),
             const ExpandedSpace(),
-            BillSectionButtonRow(pageCtrl: widget.pageCtrl),
+            const BillSectionButtonRow(Routes.billParcels),
             AppThemeValues.spaceVerticalLarge
           ],
         );
