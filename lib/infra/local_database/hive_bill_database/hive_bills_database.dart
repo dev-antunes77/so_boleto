@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 import 'package:so_boleto/domain/database/hive_bills.dart';
 import 'package:so_boleto/domain/database/open_box_mixin.dart';
 import 'package:so_boleto/domain/models/bill.dart';
-import 'package:so_boleto/infra/local_database/hive_database/hive_bill_model.dart';
+import 'package:so_boleto/infra/local_database/hive_bill_database/hive_bill_model.dart';
 
 final class HiveBillsDatabase with OpneBoxMixin implements HiveBills {
   static const String _boxLabel = 'bills';
@@ -11,7 +11,12 @@ final class HiveBillsDatabase with OpneBoxMixin implements HiveBills {
   @override
   Future<List<BillModel>> getBills() async {
     final itemBox = await openBox(_box, _boxLabel);
-    return itemBox.values.toList() as List<BillModel>;
+    final list = itemBox.values.toList();
+    List<BillModel> billList = [];
+    for (HiveBillModel bill in list) {
+      billList.add(BillModel.fromHiveBillModel(bill));
+    }
+    return billList;
   }
 
   @override

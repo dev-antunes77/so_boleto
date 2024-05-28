@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
 import 'package:so_boleto/core/extensions/enum_extension.dart';
+import 'package:so_boleto/core/extensions/num_extensions.dart';
+import 'package:so_boleto/core/extensions/string_extensions.dart';
+import 'package:so_boleto/core/helpers/app_formatters.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
@@ -31,21 +34,41 @@ class BillListTile extends StatelessWidget {
               color: AppColors.primary,
             ),
           ),
-          title: Text(
-            bill.name,
-            style: context.textRobotoSubtitleMedium,
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                bill.name.capitalize(),
+                style: context.textRobotoSubtitleMedium,
+              ),
+              if (bill.description.isNotEmpty)
+                Text(
+                  bill.description.capitalize(),
+                  style: context.textRobotoXSmall,
+                ),
+            ],
           ),
           subtitle: Text(
-            bill.dueDayOfTheMonth.toString(),
+            bill.dueDayOfTheMonth.properDueDay(),
             style: context.textRobotoSubtitleTiny,
           ),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                bill.totalParcels.toString(),
-                textAlign: TextAlign.center,
-                style: context.textRobotoSubtitleTiny,
+              Column(
+                children: [
+                  Text(
+                    bill.value.toDouble().formatCurrency(),
+                    style: context.textSubtitleSmall,
+                  ),
+                  Text(
+                    AppFormatters.parcelRelationFormatter(bill.dueEveryMonth,
+                        bill.totalParcels, bill.payedParcels),
+                    textAlign: TextAlign.center,
+                    style: context.textRobotoSubtitleTiny,
+                  ),
+                ],
               ),
               const Padding(
                 padding: EdgeInsets.all(AppThemeValues.spaceSmall),

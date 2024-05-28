@@ -5,6 +5,18 @@ extension IntExtensions on int {
     }
     return toString().padLeft(2, '0');
   }
+
+  String properDueDay() {
+    final now = DateTime.now();
+    final days =
+        (this - now.day) == 1 || (this - now.day) == -1 ? 'dia' : 'dias';
+    if (now.day < this) {
+      return 'Vence em ${this - now.day} $days';
+    } else if (now.day > this) {
+      return 'Vencida há ${now.day - this} $days';
+    }
+    return 'Vence hoje';
+  }
 }
 
 extension DoubleExtensions on double {
@@ -18,8 +30,8 @@ extension DoubleExtensions on double {
 
     if (parts.length > 1) {
       parts[1] = parts[1].padRight(2, '0');
-      return '\$${parts[0]}.${parts[1]}';
+      return 'R\$${parts[0]}.${parts[1]}';
     }
-    return '\$${parts[0]}.00';
+    return 'R\$${parts[0]},00';
   }
 }

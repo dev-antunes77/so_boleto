@@ -1,7 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/domain/models/enums/bill_state.dart';
 import 'package:so_boleto/domain/models/enums/category.dart';
+import 'package:so_boleto/infra/local_database/hive_bill_database/hive_bill_model.dart';
 
 part 'bill.g.dart';
 
@@ -28,6 +30,19 @@ class BillModel extends Equatable {
       _$BillModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$BillModelToJson(this);
+
+  factory BillModel.fromHiveBillModel(HiveBillModel bill) => BillModel(
+        id: bill.id,
+        name: bill.name,
+        description: bill.description,
+        category: bill.category.textToEnum(),
+        totalParcels: bill.totalParcels,
+        payedParcels: bill.payedParcels,
+        value: bill.value,
+        dueDayOfTheMonth: bill.dueDayOfTheMonth,
+        createdAt: bill.createdAt,
+        hiveIndex: bill.hiveIndex,
+      );
 
   final String id;
   final String name;

@@ -6,11 +6,17 @@ import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
+import 'package:so_boleto/presenter/bill/widgets/bill_background_card.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_section_top_icon.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_text_field.dart';
 
 class BillNameSection extends StatefulWidget {
-  const BillNameSection({super.key});
+  const BillNameSection({
+    super.key,
+    this.isEditingFlow = false,
+  });
+
+  final bool isEditingFlow;
 
   @override
   State<BillNameSection> createState() => _BillNameSectionState();
@@ -27,27 +33,35 @@ class _BillNameSectionState extends State<BillNameSection> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BillCubit, BillState>(
-      buildWhen: (previous, current) => previous.status != current.status,
-      builder: (context, state) {
-        return Column(
-          children: [
-            const BillSectionTopIcon(AppIcons.description),
-            BillTextField(
-              hitText: 'Nome da conta',
-              controller: billNameController,
-              onChanged: (value) =>
-                  context.read<BillCubit>().onBillNameChange(value),
-            ),
-            const ExpandedSpace(),
-            PillButton(
-              child: const Text('Próximo'),
-              onTap: () => context.pushTo(Routes.billDescription),
-            ),
-            AppThemeValues.spaceVerticalLarge,
-          ],
-        );
-      },
+    return BillBackgroundCard(
+      child: BlocBuilder<BillCubit, BillState>(
+        buildWhen: (previous, current) => previous.status != current.status,
+        builder: (context, state) {
+          return Column(
+            children: [
+              const BillSectionTopIcon(AppIcons.description),
+              BillTextField(
+                hitText: 'Nome da conta',
+                controller: billNameController,
+                onChanged: (value) =>
+                    context.read<BillCubit>().onBillNameChange(value),
+              ),
+              const ExpandedSpace(),
+              if (widget.isEditingFlow)
+                PillButton(
+                  child: const Text('Pronto'),
+                  onTap: () => context.pushTo(Routes.billCheck),
+                )
+              else
+                PillButton(
+                  child: const Text('Próximo'),
+                  onTap: () => context.pushTo(Routes.billDescription),
+                ),
+              AppThemeValues.spaceVerticalLarge,
+            ],
+          );
+        },
+      ),
     );
   }
 }

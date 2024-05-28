@@ -19,6 +19,15 @@ extension RoutesExtensions on BuildContext {
     GoRouter.of(this).pop();
   }
 
+  String get currentRoute {
+    final RouteMatch lastMatch =
+        GoRouter.of(this).routerDelegate.currentConfiguration.last;
+    final RouteMatchList matchList = lastMatch is ImperativeRouteMatch
+        ? lastMatch.matches
+        : GoRouter.of(this).routerDelegate.currentConfiguration;
+    return matchList.uri.toString();
+  }
+
   void showSnackBar(
     String title, {
     bool hasBottomPlayer = true,

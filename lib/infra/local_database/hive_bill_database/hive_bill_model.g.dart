@@ -20,12 +20,12 @@ class HiveBillModelAdapter extends TypeAdapter<HiveBillModel> {
       id: fields[1] as String,
       name: fields[2] as String,
       description: fields[3] as String,
-      category: fields[4] as Category?,
+      category: fields[4] as String,
       totalParcels: fields[6] as int,
       payedParcels: fields[7] as int,
       value: fields[8] as int,
       dueDayOfTheMonth: fields[9] as int,
-      createdAt: fields[10] as DateTime?,
+      createdAt: fields[10] as DateTime,
       hiveIndex: fields[11] as int,
     );
   }

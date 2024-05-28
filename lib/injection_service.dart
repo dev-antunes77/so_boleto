@@ -4,8 +4,8 @@ import 'package:so_boleto/domain/database/hive_bills.dart';
 import 'package:so_boleto/domain/usecases/create_bill_usecase.dart';
 import 'package:so_boleto/domain/usecases/delete_bill_usecase.dart';
 import 'package:so_boleto/domain/usecases/get_bills_usecase.dart';
-import 'package:so_boleto/infra/local_database/hive_database/hive_bill_model.dart';
-import 'package:so_boleto/infra/local_database/hive_database/hive_bills_database.dart';
+import 'package:so_boleto/infra/local_database/hive_bill_database/hive_bill_model.dart';
+import 'package:so_boleto/infra/local_database/hive_bill_database/hive_bills_database.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
@@ -162,6 +162,7 @@ abstract class InjectionService {
     _i.registerFactory(
       () => HomeBillsCubit(
         _i.get<GetBillsUseCase>(),
+        _i.get<CreateBillUseCase>(),
       ),
     );
 

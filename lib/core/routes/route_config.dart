@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:so_boleto/presenter/bill/pages/sections/bill_category_section.dart';
@@ -38,66 +40,90 @@ abstract class RoutesConfig {
         ),
         routes: [
           GoRoute(
-            path: RelativePaths.billName,
-            parentNavigatorKey: _billKey,
-            pageBuilder: (_, state) => _getTransitionPage(
-              state,
-              const BillNameSection(),
-              type: 'rotation',
-            ),
-          ),
+              path: RelativePaths.billName,
+              parentNavigatorKey: _billKey,
+              pageBuilder: (_, state) {
+                final isEditionFlow = state.extra == null ? false : true;
+                return _getTransitionPage(
+                  state,
+                  BillNameSection(
+                    isEditingFlow: isEditionFlow,
+                  ),
+                  type: 'scale',
+                );
+              }),
           GoRoute(
-            path: RelativePaths.billDescription,
-            parentNavigatorKey: _billKey,
-            pageBuilder: (_, state) => _getTransitionPage(
-              state,
-              const BillDescriptionSection(),
-              type: 'rotation',
-            ),
-          ),
+              path: RelativePaths.billDescription,
+              parentNavigatorKey: _billKey,
+              pageBuilder: (_, state) {
+                final isEditionFlow = state.extra == null ? false : true;
+                return _getTransitionPage(
+                  state,
+                  BillDescriptionSection(
+                    isEditingFlow: isEditionFlow,
+                  ),
+                  type: 'scale',
+                );
+              }),
           GoRoute(
-            path: RelativePaths.billParcels,
-            parentNavigatorKey: _billKey,
-            pageBuilder: (_, state) => _getTransitionPage(
-              state,
-              const BillParcelSection(),
-              type: 'rotation',
-            ),
-          ),
+              path: RelativePaths.billParcels,
+              parentNavigatorKey: _billKey,
+              pageBuilder: (_, state) {
+                final isEditionFlow = state.extra == null ? false : true;
+                return _getTransitionPage(
+                  state,
+                  BillParcelSection(
+                    isEditingFlow: isEditionFlow,
+                  ),
+                  type: 'scale',
+                );
+              }),
           GoRoute(
-            path: RelativePaths.billValue,
-            parentNavigatorKey: _billKey,
-            pageBuilder: (_, state) => _getTransitionPage(
-              state,
-              const BillValueSection(),
-              type: 'rotation',
-            ),
-          ),
+              path: RelativePaths.billValue,
+              parentNavigatorKey: _billKey,
+              pageBuilder: (_, state) {
+                final isEditionFlow = state.extra == null ? false : true;
+                return _getTransitionPage(
+                  state,
+                  BillValueSection(
+                    isEditingFlow: isEditionFlow,
+                  ),
+                  type: 'scale',
+                );
+              }),
           GoRoute(
-            path: RelativePaths.billDueDay,
-            parentNavigatorKey: _billKey,
-            pageBuilder: (_, state) => _getTransitionPage(
-              state,
-              const BillDueDayOfTheMonthSection(),
-              type: 'rotation',
-            ),
-          ),
+              path: RelativePaths.billDueDay,
+              parentNavigatorKey: _billKey,
+              pageBuilder: (_, state) {
+                final isEditionFlow = state.extra == null ? false : true;
+                return _getTransitionPage(
+                  state,
+                  BillDueDayOfTheMonthSection(
+                    isEditingFlow: isEditionFlow,
+                  ),
+                  type: 'scale',
+                );
+              }),
           GoRoute(
-            path: RelativePaths.billCategory,
-            parentNavigatorKey: _billKey,
-            pageBuilder: (_, state) => _getTransitionPage(
-              state,
-              const BillCategorySection(),
-              type: 'rotation',
-            ),
-          ),
+              path: RelativePaths.billCategory,
+              parentNavigatorKey: _billKey,
+              pageBuilder: (_, state) {
+                final isEditionFlow = state.extra == null ? false : true;
+                return _getTransitionPage(
+                  state,
+                  BillCategorySection(
+                    isEditingFlow: isEditionFlow,
+                  ),
+                  type: 'scale',
+                );
+              }),
           GoRoute(
             path: RelativePaths.billCheck,
             parentNavigatorKey: _billKey,
             pageBuilder: (_, state) => _getTransitionPage(
               state,
               const BillCheckSection(),
-              type: 'rotation',
+              type: 'scale',
             ),
           ),
         ],
@@ -227,6 +253,7 @@ abstract class RoutesConfig {
     return CustomTransitionPage(
         key: state.pageKey,
         transitionDuration: const Duration(milliseconds: 600),
+        reverseTransitionDuration: const Duration(milliseconds: 600),
         child: child,
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           switch (type) {
@@ -234,14 +261,26 @@ abstract class RoutesConfig {
               return FadeTransition(opacity: animation, child: child);
             case 'rotation':
               return RotationTransition(turns: animation, child: child);
-            case 'size':
-              return SizeTransition(sizeFactor: animation, child: child);
             case 'scale':
               return ScaleTransition(scale: animation, child: child);
-
+            case 'slide':
+              return SlideTransition(
+                  position: _onSlie(animation), child: child);
+            case 'matrix':
+              return MatrixTransition(
+                  onTransform: _onTransform,
+                  animation: animation,
+                  child: child);
             default:
               return FadeTransition(opacity: animation, child: child);
           }
         });
   }
+
+  static Matrix4 _onTransform(double value) => Matrix4.identity()
+    ..setEntry(3, 2, 0.0004)
+    ..rotateY(pi * 2.0 * value);
+
+  static Animation<Offset> _onSlie(Animation<double> animation) =>
+      animation.drive(Tween(begin: const Offset(1.0, 0.0), end: Offset.zero));
 }

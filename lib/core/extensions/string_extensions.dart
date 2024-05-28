@@ -15,4 +15,7 @@ extension StringExtensions on String {
   Category textToEnum() => categoryMap.entries
       .firstWhere((element) => element.value['string'] == this)
       .key;
+
+  String capitalize() =>
+      isNotEmpty ? this[0].toUpperCase() + substring(1).toLowerCase() : this;
 }

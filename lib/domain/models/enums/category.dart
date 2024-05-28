@@ -6,9 +6,11 @@ enum Category {
   creditCard,
   debt,
   education,
+  electronics,
   entertainment,
   groceries,
   healthCare,
+  houseExpenses,
   insurance,
   investment,
   miscellaneous,
@@ -17,22 +19,13 @@ enum Category {
   travel,
 }
 
-List<String> categoryList = [
-  'Automobile',
-  'Communication',
-  'Credit card',
-  'Debt',
-  'Education',
-  'Entertainment',
-  'Groceries',
-  'Health care',
-  'Insurance',
-  'Investment',
-  'Miscellaneous',
-  'Rent',
-  'Transportation',
-  'Travel',
-];
+List<String> get categoryList {
+  List<String> list = [];
+  for (var element in categoryMap.entries) {
+    list.add(element.value['string']);
+  }
+  return list;
+}
 
 Map<Category, dynamic> categoryMap = {
   Category.automobile: {
@@ -55,6 +48,10 @@ Map<Category, dynamic> categoryMap = {
     'string': 'Education',
     'icon': AppIcons.education,
   },
+  Category.electronics: {
+    'string': 'Electronics',
+    'icon': AppIcons.electronics,
+  },
   Category.entertainment: {
     'string': 'Entertainment',
     'icon': AppIcons.entertainment,
@@ -66,6 +63,10 @@ Map<Category, dynamic> categoryMap = {
   Category.healthCare: {
     'string': 'Health care',
     'icon': AppIcons.healthCare,
+  },
+  Category.houseExpenses: {
+    'string': 'House expenses',
+    'icon': AppIcons.houseExpenses,
   },
   Category.insurance: {
     'string': 'Insurance',
