@@ -26,7 +26,7 @@ class BillModel extends Equatable {
   })  : id = id ?? _generateRandomNumericId(),
         createdAt = createdAt ?? DateTime.now(),
         category = category ?? Category.miscellaneous,
-        billState = BillState.open;
+        billState = billState ?? BillState.open;
 
   static String _generateRandomNumericId() =>
       '${DateTime.now().millisecondsSinceEpoch.toString()}${(Random().nextInt(90000) + 10000)}';

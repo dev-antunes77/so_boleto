@@ -62,30 +62,35 @@ class BillListTile extends StatelessWidget {
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              bill.dueDayOfTheMonth.properDueDay(),
-              style: context.textRobotoSubtitleTiny,
-            ),
+            if (bill.billState != BillState.payed)
+              Text(
+                bill.dueDayOfTheMonth.properDueDay(),
+                style: context.textRobotoSubtitleTiny,
+              ),
             Stack(
               alignment: Alignment.center,
               children: [
                 Container(
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(20),
                       bottomRight: Radius.circular(20),
                     ),
-                    color: AppColors.black,
+                    color: bill.billState == BillState.payed
+                        ? AppColors.primary
+                        : AppColors.background,
                   ),
-                  height: 8,
+                  height: 10,
                   width: double.infinity,
                 ),
                 Text(
                   bill.billState.billStateToText(),
                   style: context.textXSmall.copyWith(
-                      color: bill.billState == BillState.payed
-                          ? AppColors.primary
-                          : AppColors.background),
+                    color: AppColors.background,
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 2,
+                  ),
                 )
               ],
             )

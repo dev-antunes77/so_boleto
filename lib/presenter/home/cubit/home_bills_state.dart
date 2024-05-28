@@ -16,6 +16,12 @@ class HomeBillsState extends BaseState with EquatableMixin {
         bills,
       ];
 
+  List<BillModel> get payedBills =>
+      bills.where((element) => element.billState == BillState.payed).toList();
+
+  List<BillModel> get delayeddBills =>
+      bills.where((element) => element.billState == BillState.delayed).toList();
+
   @override
   HomeBillsState copyWith({
     BaseStateStatus? status,

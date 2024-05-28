@@ -8,6 +8,7 @@ import 'package:so_boleto/core/components/custom_pop_scope/custom_pop_scope.dart
 import 'package:so_boleto/core/components/status_page/widgets/shimmer.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
+import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
 
 class AppShell extends StatefulWidget {
@@ -36,11 +37,18 @@ class _AppShellState extends State<AppShell> {
               IconButton(
                 onPressed: () => context.navigateTo(Routes.billName),
                 color: AppColors.primary,
-                icon: const Icon(Icons.add),
+                icon: const Icon(
+                  Icons.add,
+                  size: 32,
+                ),
               ),
             ],
           ),
-          body: Shimmer(child: widget.child),
+          body: Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: AppThemeValues.spaceXXSmall),
+            child: Shimmer(child: widget.child),
+          ),
           extendBody: true,
           resizeToAvoidBottomInset: false,
           bottomNavigationBar: BlocBuilder<InitialCubit, InitialState>(
