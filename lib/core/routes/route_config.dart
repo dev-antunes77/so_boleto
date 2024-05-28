@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:so_boleto/presenter/bill/pages/sections/bill_category_section.dart';
 import 'package:so_boleto/presenter/bill/pages/sections/bill_check_section.dart';
-import 'package:so_boleto/presenter/bill/pages/sections/bill_description_section.dart';
 import 'package:so_boleto/presenter/bill/pages/sections/bill_due_day_of_the_month_section.dart';
 import 'package:so_boleto/presenter/bill/pages/sections/bill_name_section.dart';
 import 'package:so_boleto/presenter/bill/pages/sections/bill_parcel_section.dart';
@@ -52,19 +51,19 @@ abstract class RoutesConfig {
                   type: 'scale',
                 );
               }),
-          GoRoute(
-              path: RelativePaths.billDescription,
-              parentNavigatorKey: _billKey,
-              pageBuilder: (_, state) {
-                final isEditionFlow = state.extra == null ? false : true;
-                return _getTransitionPage(
-                  state,
-                  BillDescriptionSection(
-                    isEditingFlow: isEditionFlow,
-                  ),
-                  type: 'scale',
-                );
-              }),
+          // GoRoute(
+          //     path: RelativePaths.billDescription,
+          //     parentNavigatorKey: _billKey,
+          //     pageBuilder: (_, state) {
+          //       final isEditionFlow = state.extra == null ? false : true;
+          //       return _getTransitionPage(
+          //         state,
+          //         BillDescriptionSection(
+          //           isEditingFlow: isEditionFlow,
+          //         ),
+          //         type: 'scale',
+          //       );
+          //     }),
           GoRoute(
               path: RelativePaths.billParcels,
               parentNavigatorKey: _billKey,

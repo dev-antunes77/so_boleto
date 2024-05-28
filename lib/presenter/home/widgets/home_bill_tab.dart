@@ -5,12 +5,10 @@ import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/presenter/home/widgets/bill_list_tile.dart';
 
 class HomeBillTab extends StatelessWidget {
-  const HomeBillTab(
-    this.bills, {
-    super.key,
-  });
+  const HomeBillTab(this.bills, {super.key, required this.onBillSet});
 
   final List<BillModel> bills;
+  final Function() onBillSet;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +24,7 @@ class HomeBillTab extends StatelessWidget {
       separatorBuilder: (context, index) => const HorizontalThinLineSeparator(),
       itemBuilder: (context, index) {
         final bill = bills[index];
-        return BillListTile(bill);
+        return BillListTile(bill, onBillSet: () => onBillSet());
       },
     );
   }

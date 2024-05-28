@@ -36,22 +36,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 const EdgeInsets.symmetric(vertical: AppThemeValues.spaceSmall),
             child: TabBar(
               controller: _tabController,
-              // labelStyle: context.textMedium.copyWith(
-              //   fontWeight: FontWeight.bold,
-              //   color: AppColors.backgroundDark.withOpacity(0.4),
-              // ),
-              // overlayColor:
-              //     const WidgetStatePropertyAll<Color>(Colors.transparent),
-              // indicator: BoxDecoration(
-              //   color: AppColors.primary.withOpacity(0.2),
-              //   borderRadius: const BorderRadius.all(Radius.circular(25)),
-              // ),
-              // indicatorPadding: EdgeInsets.zero,
-              // dividerColor: Colors.transparent,
-              // // indicatorColor: Colors.transparent,
-              // labelPadding: const EdgeInsets.symmetric(
-              //     horizontal: AppThemeValues.spaceSmall),
-              // unselectedLabelStyle: context.textSmall,
               tabs: const [
                 TabIndicator('Todas'),
                 TabIndicator('Pagas'),
@@ -70,9 +54,18 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 return TabBarView(
                   controller: _tabController,
                   children: [
-                    HomeBillTab(state.bills),
-                    HomeBillTab(state.payedBills),
-                    HomeBillTab(state.delayeddBills),
+                    HomeBillTab(
+                      state.bills,
+                      onBillSet: () => _tabController.animateTo(1),
+                    ),
+                    HomeBillTab(
+                      state.payedBills,
+                      onBillSet: () => _tabController.animateTo(1),
+                    ),
+                    HomeBillTab(
+                      state.delayeddBills,
+                      onBillSet: () => _tabController.animateTo(1),
+                    ),
                   ],
                 );
               },

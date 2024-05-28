@@ -6,7 +6,6 @@ class Routes {
   static const home = '/home';
   static const billCategory = '/bill-category';
   static const billCheck = '/bill-check';
-  static const billDescription = '/bill-description';
   static const billDueDay = '/bill-due-day';
   static const billName = '/bill-name';
   static const billParcels = '/bill-parcels';
@@ -43,7 +42,6 @@ class RelativePaths {
   static const expenses = '/expenses';
   static const billCategory = '/bill-category';
   static const billCheck = '/bill-check';
-  static const billDescription = '/bill-description';
   static const billDueDay = '/bill-due-day';
   static const billName = '/bill-name';
   static const billParcels = '/bill-parcels';

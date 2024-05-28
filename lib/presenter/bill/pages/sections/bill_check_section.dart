@@ -44,8 +44,7 @@ class _BillCheckSectionState extends State<BillCheckSection> {
               icon: AppIcons.description,
               label: 'Descrição:',
               value: bill.description.capitalize(),
-              onPressed: () =>
-                  context.pushTo(Routes.billDescription, params: true),
+              onPressed: () => context.pushTo(Routes.billName, params: true),
             ),
             const HorizontalThinLineSeparator(horizontalPadding: 0),
             BillEditTile(

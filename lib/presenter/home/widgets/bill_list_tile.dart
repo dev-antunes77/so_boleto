@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/dialogs/app_dialogs.dart';
@@ -8,19 +6,20 @@ import 'package:so_boleto/core/extensions/enum_extension.dart';
 import 'package:so_boleto/core/extensions/num_extensions.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/helpers/app_formatters.dart';
-import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/domain/models/enums/bill_state.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
+import 'package:so_boleto/presenter/home/widgets/bill_paid_tag.dart';
 import 'package:so_boleto/presenter/home/widgets/dismissable_background.dart';
 
 class BillListTile extends StatelessWidget {
-  const BillListTile(this.bill, {super.key});
+  const BillListTile(this.bill, {super.key, required this.onBillSet});
 
   final BillModel bill;
+  final Function() onBillSet;
 
   @override
   Widget build(BuildContext context) {
@@ -101,30 +100,7 @@ class BillListTile extends StatelessWidget {
               ],
             ),
           ),
-          if (bill.billState == BillState.payed)
-            Positioned(
-              top: 0,
-              left: context.width * 0.5,
-              child: Transform.rotate(
-                angle: pi / 6.0,
-                child: Transform.translate(
-                  offset: const Offset(0, 15),
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(12)),
-                      border:
-                          Border.all(color: AppColors.primaryLight, width: 2),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text('Paga',
-                          style: context.textStamper
-                              .copyWith(color: AppColors.primaryLight)),
-                    ),
-                  ),
-                ),
-              ),
-            )
+          BillPaidTag(bill.billState == BillState.payed)
         ],
       ),
     );
@@ -134,7 +110,10 @@ class BillListTile extends StatelessWidget {
           DismissDirection direction, BuildContext context) =>
       direction == DismissDirection.endToStart
           ? AppDialogs.confirmDeleteBill(context, bill)
-          : context.read<HomeBillsCubit>().setBillAsPaid(bill);
+          : context
+              .read<HomeBillsCubit>()
+              .setBillAsPaid(bill)
+              .then((_) => onBillSet());
 }
 
 class UnderlineStatusLabel extends StatelessWidget {
