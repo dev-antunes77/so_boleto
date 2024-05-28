@@ -32,30 +32,29 @@ class PillButton extends StatelessWidget {
         size ?? (fillWidth ? const Size.fromHeight(48) : const Size(107, 48));
 
     final ButtonStyle buttonStyle = ButtonStyle(
-      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+      shape: WidgetStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
       ),
-      side: MaterialStateProperty.all(
+      side: WidgetStateProperty.all(
         outlinedButton
             ? BorderSide(
                 color: borderColor ?? AppColors.background,
               )
             : BorderSide.none,
       ),
-      minimumSize: MaterialStateProperty.all<Size>(minimunSize),
-      backgroundColor: MaterialStateProperty.resolveWith<Color>(
-        (Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
+      minimumSize: WidgetStateProperty.all<Size>(minimunSize),
+      backgroundColor: WidgetStateProperty.resolveWith<Color>(
+        (Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
             return Colors.grey;
           }
           return backgroundColor ?? AppColors.primary;
         },
       ),
-      foregroundColor: MaterialStateProperty.all<Color>(
+      foregroundColor: WidgetStateProperty.all<Color>(
         foregroundColor ?? AppColors.background,
       ),
-      textStyle:
-          MaterialStateProperty.all<TextStyle>(context.textSubtitleSmall),
+      textStyle: WidgetStateProperty.all<TextStyle>(context.textSubtitleSmall),
     );
 
     return outlinedButton

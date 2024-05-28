@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/custom_safe_area/custom_safe_area.dart';
 import 'package:so_boleto/core/components/status_page/pages/loading_page.dart';
-import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
-import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
@@ -38,21 +36,22 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 const EdgeInsets.symmetric(vertical: AppThemeValues.spaceSmall),
             child: TabBar(
               controller: _tabController,
-              labelStyle: context.textLarge.copyWith(
-                fontWeight: FontWeight.bold,
-                color: AppColors.backgroundDark.withOpacity(0.4),
-              ),
-              overlayColor:
-                  const WidgetStatePropertyAll<Color>(Colors.transparent),
-              indicator: BoxDecoration(
-                color: AppColors.primary.withOpacity(0.3),
-                borderRadius: const BorderRadius.all(Radius.circular(25)),
-              ),
-              dividerColor: Colors.transparent,
-              // indicatorColor: Colors.transparent,
-              labelPadding: EdgeInsets.zero,
-              indicatorWeight: 3,
-              unselectedLabelStyle: context.textMedium,
+              // labelStyle: context.textMedium.copyWith(
+              //   fontWeight: FontWeight.bold,
+              //   color: AppColors.backgroundDark.withOpacity(0.4),
+              // ),
+              // overlayColor:
+              //     const WidgetStatePropertyAll<Color>(Colors.transparent),
+              // indicator: BoxDecoration(
+              //   color: AppColors.primary.withOpacity(0.2),
+              //   borderRadius: const BorderRadius.all(Radius.circular(25)),
+              // ),
+              // indicatorPadding: EdgeInsets.zero,
+              // dividerColor: Colors.transparent,
+              // // indicatorColor: Colors.transparent,
+              // labelPadding: const EdgeInsets.symmetric(
+              //     horizontal: AppThemeValues.spaceSmall),
+              // unselectedLabelStyle: context.textSmall,
               tabs: const [
                 TabIndicator('Todas'),
                 TabIndicator('Pagas'),
@@ -92,7 +91,7 @@ class TabIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: AppThemeValues.spaceMassive,
+      height: AppThemeValues.spaceXLarge,
       width: double.infinity,
       child: Align(
         alignment: Alignment.bottomCenter,

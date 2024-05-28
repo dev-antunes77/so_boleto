@@ -8,6 +8,7 @@ abstract class AppColors {
   static const backgroundDark = overlay;
 
   static const primary = Color(0xFFFF1493);
+  static const primaryLight = Color.fromARGB(255, 254, 149, 205);
   static const error = Color.fromARGB(255, 145, 22, 13);
   static const white = Color(0xFFFFFFFF);
   static const black = Color(0xFF1F1D1D);

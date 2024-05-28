@@ -20,7 +20,9 @@ class HorizontalThinLineSeparator extends StatelessWidget {
         horizontal: horizontalPadding,
       ),
       child: Container(
-          height: 1, color: AppColors.greyLight, width: double.infinity),
+          height: 0.5,
+          color: AppColors.grey.withOpacity(0.5),
+          width: double.infinity),
     );
   }
 }

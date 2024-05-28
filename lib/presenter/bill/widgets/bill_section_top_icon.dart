@@ -16,7 +16,7 @@ class BillSectionTopIcon extends StatelessWidget {
       child: SvgAsset(
         svg: icon,
         height: 70,
-        color: AppColors.primary,
+        color: AppColors.primaryLight,
       ),
     );
   }

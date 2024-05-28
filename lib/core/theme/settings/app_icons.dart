@@ -3,6 +3,7 @@ abstract class AppIcons {
   static const coins = 'assets/svgs/coins.svg';
   static const communication = 'assets/svgs/communication.svg';
   static const calendar = 'assets/svgs/calendar.svg';
+  static const circle = 'assets/svgs/circle.svg';
   static const close = 'assets/svgs/close.svg';
   static const creditCard = 'assets/svgs/credit_card.svg';
   static const debt = 'assets/svgs/debt.svg';

@@ -57,7 +57,11 @@ flutter:
         - asset: assets/fonts/AMX-Medium.ttf
         - asset: assets/fonts/AMX-MediumItalic.ttf
         - asset: assets/fonts/AMX-Regular.ttf
-
+    
+    - family: Old-Stamper
+      fonts:
+        - asset: assets/fonts/Old-Stamper.ttf
+    
     - family: roboto
       fonts:
         - asset: assets/fonts/roboto-Black.ttf

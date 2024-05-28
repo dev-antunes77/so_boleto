@@ -9,6 +9,13 @@ const _defaultTextStyle = TextStyle(
   color: AppColors.text,
 );
 
+const _oldStamperTextStyle = TextStyle(
+  fontFamily: 'Old-Stamper',
+  fontSize: AppThemeValues.fontSizeMedium,
+  fontWeight: AppThemeValues.fontWeightRegular,
+  color: AppColors.text,
+);
+
 const _robotoTextStyle = TextStyle(
   fontFamily: 'roboto',
   fontSize: AppThemeValues.fontSizeMedium,
@@ -17,6 +24,12 @@ const _robotoTextStyle = TextStyle(
 );
 
 extension TypographyExtension on BuildContext {
+  /// Size 26, Font 500
+  TextStyle get textStamper => _oldStamperTextStyle.copyWith(
+        fontSize: AppThemeValues.fontSizeLarge,
+        fontWeight: AppThemeValues.fontWeightBold,
+      );
+
   /// Size 16, Font 500
   TextStyle get textRobotoSubtitleMedium => _robotoTextStyle.copyWith(
         fontSize: AppThemeValues.fontSizeMedium,

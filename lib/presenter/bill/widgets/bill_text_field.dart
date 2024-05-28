@@ -49,7 +49,7 @@ class BillTextField extends StatelessWidget {
               ),
             ),
             focusedBorder: const UnderlineInputBorder(
-              borderSide: BorderSide(color: AppColors.primary),
+              borderSide: BorderSide(color: AppColors.primaryLight),
             ),
           ),
           controller: controller,
