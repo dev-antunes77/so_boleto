@@ -1,3 +1,4 @@
+import 'package:so_boleto/domain/models/enums/bill_state.dart';
 import 'package:so_boleto/domain/models/enums/category.dart';
 
 extension StringExtensions on String {
@@ -12,7 +13,11 @@ extension StringExtensions on String {
     return characters.join();
   }
 
-  Category textToEnum() => categoryMap.entries
+  Category categoryToEnum() => categoryMap.entries
+      .firstWhere((element) => element.value['string'] == this)
+      .key;
+
+  BillState billStateToEnum() => billStateMap.entries
       .firstWhere((element) => element.value['string'] == this)
       .key;
 

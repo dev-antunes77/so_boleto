@@ -4,6 +4,7 @@ import 'package:so_boleto/domain/database/hive_bills.dart';
 import 'package:so_boleto/domain/usecases/create_bill_usecase.dart';
 import 'package:so_boleto/domain/usecases/delete_bill_usecase.dart';
 import 'package:so_boleto/domain/usecases/get_bills_usecase.dart';
+import 'package:so_boleto/domain/usecases/set_bill_as_paid_usecase.dart';
 import 'package:so_boleto/infra/local_database/hive_bill_database/hive_bill_model.dart';
 import 'package:so_boleto/infra/local_database/hive_bill_database/hive_bills_database.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
@@ -81,6 +82,9 @@ abstract class InjectionService {
     );
     _i.registerFactory(
       () => CreateBillUseCase(_i.get<HiveBillsDatabase>()),
+    );
+    _i.registerFactory(
+      () => SetBillAsPaidUseCase(_i.get<HiveBillsDatabase>()),
     );
     _i.registerFactory(
       () => DeleteBillUseCase(_i.get<HiveBillsDatabase>()),
@@ -163,6 +167,8 @@ abstract class InjectionService {
       () => HomeBillsCubit(
         _i.get<GetBillsUseCase>(),
         _i.get<CreateBillUseCase>(),
+        _i.get<SetBillAsPaidUseCase>(),
+        _i.get<DeleteBillUseCase>(),
       ),
     );
 

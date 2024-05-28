@@ -7,25 +7,25 @@ import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 
-class ChoiceDialog extends StatelessWidget {
-  const ChoiceDialog({
+class BaseDialog extends StatelessWidget {
+  const BaseDialog({
     super.key,
-    this.width,
     required this.title,
     required this.description,
     required this.onAcept,
+    this.onDeny,
   });
 
   final String title;
   final String description;
-  final double? width;
   final VoidCallback onAcept;
+  final VoidCallback? onDeny;
 
   @override
   Widget build(BuildContext context) {
     return Dialog(
       insetPadding:
-          const EdgeInsets.symmetric(horizontal: AppThemeValues.spaceMedium),
+          const EdgeInsets.symmetric(horizontal: AppThemeValues.spaceHuge),
       child: Padding(
         padding: const EdgeInsets.all(AppThemeValues.spaceMedium),
         child: Column(
@@ -42,25 +42,28 @@ class ChoiceDialog extends StatelessWidget {
                         const EdgeInsets.only(left: AppThemeValues.spaceMedium),
                     child: SvgButton(
                       svg: AppIcons.close,
-                      onTap: context.pop,
+                      onTap: () => context.pop(true),
                     ),
                   ),
                 ),
                 Column(
                   children: [
-                    Text(title, style: context.textSubtitleMedium),
-                    AppThemeValues.spaceVerticalXLarge,
-                    Text(
-                      description,
-                      textAlign: TextAlign.center,
-                    ),
                     AppThemeValues.spaceVerticalLarge,
+                    Text(title, style: context.textSubtitleMedium),
+                    if (description.isNotEmpty) ...[
+                      AppThemeValues.spaceVerticalXLarge,
+                      Text(
+                        description,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                    AppThemeValues.spaceVerticalXLarge,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         PillButton(
                           backgroundColor: AppColors.primary,
-                          onTap: context.pop,
+                          onTap: () => context.pop(true),
                           child: const Text('Não'),
                         ),
                         PillButton(

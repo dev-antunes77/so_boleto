@@ -74,7 +74,7 @@ class _BillCheckSectionState extends State<BillCheckSection> {
             BillEditTile(
               icon: bill.category.enumToIcon(),
               label: 'Categoria:',
-              value: bill.category.enumToText(),
+              value: bill.category.categoryToText(),
               onPressed: () =>
                   context.pushTo(Routes.billCategory, params: true),
             ),

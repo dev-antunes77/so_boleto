@@ -16,28 +16,27 @@ final class HiveBillsDatabase with OpneBoxMixin implements HiveBills {
     for (HiveBillModel bill in list) {
       billList.add(BillModel.fromHiveBillModel(bill));
     }
-    return billList;
+    return billList.reversed.toList();
   }
 
   @override
   Future<void> createBill(BillModel bill) async {
     final itemBox = await openBox(_box, _boxLabel);
-    return itemBox.put(bill.hiveIndex, HiveBillModel.fromBillModel(bill));
+    return itemBox.put(bill.id, HiveBillModel.fromBillModel(bill));
   }
 
   @override
   Future<void> updateBill(BillModel bill) async {
     final itemBox = await openBox(_box, _boxLabel);
     final hiveList = itemBox.values.toList();
-    final hiveItem =
-        hiveList.firstWhere((element) => element.hiveIndex == bill.hiveIndex);
+    final hiveItem = hiveList.firstWhere((element) => element.id == bill.id);
     final hiveItemIndex = itemBox.values.toList().indexOf(hiveItem);
     return itemBox.putAt(hiveItemIndex, HiveBillModel.fromBillModel(bill));
   }
 
   @override
-  Future<void> removeBill(int hiveIndex) async {
+  Future<void> deleteBill(String id) async {
     final itemBox = await openBox(_box, _boxLabel);
-    return itemBox.delete(hiveIndex);
+    return itemBox.delete(id);
   }
 }

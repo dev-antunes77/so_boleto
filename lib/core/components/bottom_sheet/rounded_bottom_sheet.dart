@@ -48,7 +48,7 @@ class RoundedBottomSheet extends StatelessWidget {
                   foregroundColor: AppColors.black,
                   borderColor: AppColors.black,
                   outlinedButton: true,
-                  onTap: context.pop,
+                  onTap: () => context.pop(true),
                   child: Text(denyText),
                 ),
               ),

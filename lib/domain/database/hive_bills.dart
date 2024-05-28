@@ -4,5 +4,5 @@ abstract interface class HiveBills {
   Future<List<BillModel>> getBills();
   Future<void> createBill(BillModel bill);
   Future<void> updateBill(BillModel bill);
-  Future<void> removeBill(int hiveIndex);
+  Future<void> deleteBill(String id);
 }

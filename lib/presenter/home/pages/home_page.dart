@@ -17,7 +17,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
-    context.read<HomeBillsCubit>().getBills();
+    final cubit = context.read<HomeBillsCubit>();
+    if (cubit.state.bills.isEmpty) {
+      cubit.getBills();
+    }
     super.initState();
   }
 

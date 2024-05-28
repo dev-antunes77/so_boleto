@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/buttons/svg_button.dart';
 import 'package:so_boleto/core/components/custom_safe_area/custom_safe_area.dart';
@@ -42,7 +41,7 @@ class LoginShell extends StatelessWidget {
                         alignment: Alignment.topLeft,
                         child: SvgButton(
                           svg: AppIcons.money,
-                          onTap: context.pop,
+                          onTap: () => context.pop,
                         ),
                       ),
                     Expanded(child: child),

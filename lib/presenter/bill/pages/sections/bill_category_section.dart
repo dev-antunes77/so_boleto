@@ -47,7 +47,7 @@ class BillCategorySection extends StatelessWidget {
                       underline: const SizedBox(),
                       hint: const Text('Categpries'),
                       menuMaxHeight: context.height * 0.4,
-                      value: state.bill.category.enumToText(),
+                      value: state.bill.category.categoryToText(),
                       items: categoryList
                           .map(
                             (e) => DropdownMenuItem(value: e, child: Text(e)),
@@ -55,7 +55,7 @@ class BillCategorySection extends StatelessWidget {
                           .toList(),
                       onChanged: (newValue) =>
                           context.read<BillCubit>().onBillCategoryChange(
-                                newValue!.textToEnum(),
+                                newValue!.categoryToEnum(),
                               ),
                     ),
                   ),

@@ -18,7 +18,7 @@ class BillSectionButtonRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         PillButton(
-          onTap: context.pop,
+          onTap: () => context.pop(true),
           child: const Text('Anterior'),
         ),
         PillButton(

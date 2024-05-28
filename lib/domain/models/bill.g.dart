@@ -7,15 +7,14 @@ part of 'bill.dart';
 // **************************************************************************
 
 BillModel _$BillModelFromJson(Map<String, dynamic> json) => BillModel(
-      id: json['id'] as String? ?? '',
       name: json['name'] as String? ?? '',
       description: json['description'] as String? ?? '',
       totalParcels: (json['totalParcels'] as num?)?.toInt() ?? 1,
       value: (json['value'] as num?)?.toInt() ?? 1,
       payedParcels: (json['payedParcels'] as num?)?.toInt() ?? 0,
-      hiveIndex: (json['hiveIndex'] as num?)?.toInt() ?? 0,
       dueDayOfTheMonth: (json['dueDayOfTheMonth'] as num?)?.toInt() ?? 1,
       dueEveryMonth: json['dueEveryMonth'] as bool? ?? false,
+      id: json['id'] as String?,
       category: $enumDecodeNullable(_$CategoryEnumMap, json['category']),
       billState: $enumDecodeNullable(_$BillStateEnumMap, json['billState']),
       createdAt: json['createdAt'] == null
@@ -32,10 +31,9 @@ Map<String, dynamic> _$BillModelToJson(BillModel instance) => <String, dynamic>{
       'createdAt': instance.createdAt.toIso8601String(),
       'dueDayOfTheMonth': instance.dueDayOfTheMonth,
       'billState': _$BillStateEnumMap[instance.billState]!,
-      'dueEveryMonth': instance.dueEveryMonth,
       'totalParcels': instance.totalParcels,
       'payedParcels': instance.payedParcels,
-      'hiveIndex': instance.hiveIndex,
+      'dueEveryMonth': instance.dueEveryMonth,
     };
 
 const _$CategoryEnumMap = {

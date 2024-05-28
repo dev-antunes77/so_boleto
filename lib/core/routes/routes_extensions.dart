@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:so_boleto/core/components/custom_snack_bar/custom_snack_bar.dart';
 import 'package:so_boleto/core/utils/dialog_utils.dart';
 import 'package:so_boleto/core/utils/log_utils.dart';
 
@@ -14,7 +15,7 @@ extension RoutesExtensions on BuildContext {
     push(route, extra: params);
   }
 
-  void pop() {
+  void pop(bool bool) {
     Log.navigation('Route poped');
     GoRouter.of(this).pop();
   }
@@ -30,32 +31,27 @@ extension RoutesExtensions on BuildContext {
 
   void showSnackBar(
     String title, {
-    bool hasBottomPlayer = true,
+    VoidCallback? action,
   }) {
     Log.navigation('''Showing snack bar: 
     title: $title,
-    hasBottomPlayer: $hasBottomPlayer,
     ''');
-    // getCustomSnackBar(
-    //   this,
-    //   title: title,
-    //   hasBottomPlayer: hasBottomPlayer,
-    // );
+    getCustomSnackBar(this, title: title, action: action);
   }
 
-  void showDialog({
-    double? width,
+  Future<dynamic> showDialog({
     required String title,
     required String description,
     required VoidCallback onAcept,
+    VoidCallback? onDeny,
   }) {
     Log.navigation('''Showing dialog: 
     child: $title : $description,
     ''');
-    showBaseDialog(
+    return showBaseDialog<dynamic>(
       context: this,
       onAcept: onAcept,
-      width: width,
+      onDeny: onDeny,
       title: title,
       description: description,
     );

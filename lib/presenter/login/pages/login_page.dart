@@ -22,7 +22,7 @@ class LoginPage extends StatelessWidget {
         if (state.status == BaseStateStatus.success) {
           context.navigateTo(Routes.radios);
         } else if (state.status == BaseStateStatus.error) {
-          context.showSnackBar(state.callbackMessage, hasBottomPlayer: false);
+          context.showSnackBar(state.callbackMessage);
         }
       },
       builder: (context, state) => state.when(
@@ -33,7 +33,7 @@ class LoginPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SvgAsset(svg: AppIcons.money),
+              const SvgAsset(svg: AppIcons.money),
               Column(
                 children: [
                   Text(
