@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/custom_safe_area/custom_safe_area.dart';
+import 'package:so_boleto/core/components/custom_state_handler/custom_state_handler.dart';
 import 'package:so_boleto/core/components/status_page/pages/loading_page.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
@@ -51,6 +52,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               builder: (context, state) {
                 if (state.status == BaseStateStatus.loading) {
                   return const LoadingPage();
+                }
+                if (state.status == BaseStateStatus.error) {
+                  return const CustomStateHandler();
                 }
                 return TabBarView(
                   controller: _tabController,

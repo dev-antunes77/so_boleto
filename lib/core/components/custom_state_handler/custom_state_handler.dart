@@ -6,13 +6,13 @@ import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/domain/models/enums/bill_state.dart';
 
-class EmptyBillList extends StatelessWidget {
-  const EmptyBillList({
+class CustomStateHandler extends StatelessWidget {
+  const CustomStateHandler({
     super.key,
-    required this.bill,
+    this.bill,
   });
 
-  final BillState bill;
+  final BillState? bill;
 
   @override
   Widget build(BuildContext context) {
@@ -20,21 +20,26 @@ class EmptyBillList extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SvgAsset(
-          svg: bill == BillState.payed
-              ? AppIcons.worried1
-              : bill == BillState.delayed
-                  ? AppIcons.happy
-                  : AppIcons.sad1,
+          svg: bill == null
+              ? AppIcons.error
+              : bill == BillState.payed
+                  ? AppIcons.worried1
+                  : bill == BillState.delayed
+                      ? AppIcons.happy
+                      : AppIcons.sad1,
           height: 140,
           color: AppColors.grey,
         ),
         AppThemeValues.spaceVerticalLarge,
         Text(
-          bill == BillState.payed
-              ? 'Você não tem conta paga.'
-              : bill == BillState.delayed
-                  ? 'Você não tem conta atrasada.'
-                  : 'Você não tem conta cadastrada.',
+          bill == null
+              ? 'Ops!\nAlgo deu errado.'
+              : bill == BillState.payed
+                  ? 'Você não tem contas pagas.'
+                  : bill == BillState.delayed
+                      ? 'Você não tem contas atrasadas.'
+                      : 'Você não tem contas cadastradas.',
+          textAlign: TextAlign.center,
           style: context.textLarge.copyWith(
             color: AppColors.grey,
           ),

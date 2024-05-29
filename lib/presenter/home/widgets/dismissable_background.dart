@@ -18,8 +18,8 @@ class DismissableBackGround extends StatelessWidget {
     final style =
         context.textSubtitleLarge.copyWith(color: AppColors.background);
     return DecoratedBox(
-      decoration:
-          BoxDecoration(color: payDragging ? AppColors.primary : AppColors.red),
+      decoration: BoxDecoration(
+          color: payDragging ? AppColors.primary : AppColors.darkRed),
       child: Padding(
         padding:
             const EdgeInsets.symmetric(horizontal: AppThemeValues.spaceLarge),
@@ -32,20 +32,17 @@ class DismissableBackGround extends StatelessWidget {
               AppThemeValues.spaceHorizontalLarge,
               const SvgAsset(
                 svg: AppIcons.money,
-                height: 36,
+                height: 46,
                 color: AppColors.background,
               ),
             ] else ...[
-              const Align(
-                alignment: Alignment.center,
-                child: SvgAsset(
-                  svg: AppIcons.delete,
-                  height: 30,
-                  color: AppColors.background,
-                ),
-              ),
-              AppThemeValues.spaceHorizontalSmall,
               Text('Deletando...', style: style),
+              AppThemeValues.spaceHorizontalSmall,
+              const SvgAsset(
+                svg: AppIcons.delete,
+                height: 30,
+                color: AppColors.background,
+              ),
             ]
           ],
         ),

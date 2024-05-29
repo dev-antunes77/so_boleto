@@ -37,7 +37,7 @@ class _AppShellState extends State<AppShell> {
             title: 'Example',
             actions: [
               IconButton(
-                onPressed: () => context.navigateTo(Routes.billName),
+                onPressed: () {},
                 icon: const SvgAsset(
                   svg: AppIcons.search,
                   height: 32,
@@ -45,7 +45,7 @@ class _AppShellState extends State<AppShell> {
                 ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () => context.navigateTo(Routes.billName),
                 icon: const SvgAsset(
                   svg: AppIcons.add,
                   height: 32,

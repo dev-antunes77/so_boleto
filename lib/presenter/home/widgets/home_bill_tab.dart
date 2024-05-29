@@ -1,10 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:so_boleto/core/components/custom_state_handler/custom_state_handler.dart';
 import 'package:so_boleto/core/components/thin_line_separator/horizontal_thin_line_separator.dart';
 import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/domain/models/enums/bill_state.dart';
 import 'package:so_boleto/presenter/home/widgets/bill_list_tile.dart';
-import 'package:so_boleto/presenter/home/widgets/empty_bill_list.dart';
 
 class HomeBillTab extends StatelessWidget {
   const HomeBillTab(
@@ -21,7 +21,7 @@ class HomeBillTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (bills.isEmpty) {
-      return EmptyBillList(bill: billState);
+      return CustomStateHandler(bill: billState);
     }
     return ListView.separated(
       itemCount: bills.length,
