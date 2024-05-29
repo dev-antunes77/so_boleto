@@ -21,12 +21,12 @@ class BillModel extends Equatable {
     this.dueEveryMonth = false,
     String? id,
     Category? category,
-    BillState? billState,
+    BillStatus? billStatus,
     DateTime? createdAt,
   })  : id = id ?? _generateRandomNumericId(),
         createdAt = createdAt ?? DateTime.now(),
         category = category ?? Category.miscellaneous,
-        billState = billState ?? BillState.open;
+        billStatus = billStatus ?? BillStatus.open;
 
   static String _generateRandomNumericId() =>
       '${DateTime.now().millisecondsSinceEpoch.toString()}${(Random().nextInt(90000) + 10000)}';
@@ -41,7 +41,7 @@ class BillModel extends Equatable {
         name: bill.name,
         description: bill.description,
         category: bill.category.categoryToEnum(),
-        billState: bill.billState.billStateToEnum(),
+        billStatus: bill.billStatus.billStatusToEnum(),
         dueEveryMonth: bill.dueEveryMonth,
         totalParcels: bill.totalParcels,
         payedParcels: bill.payedParcels,
@@ -57,7 +57,7 @@ class BillModel extends Equatable {
   final int value;
   final DateTime createdAt;
   final int dueDayOfTheMonth;
-  final BillState billState;
+  final BillStatus billStatus;
   final int totalParcels;
   final int payedParcels;
   final bool dueEveryMonth;
@@ -73,7 +73,7 @@ class BillModel extends Equatable {
         value,
         createdAt,
         dueDayOfTheMonth,
-        billState,
+        billStatus,
         totalParcels,
         payedParcels,
         dueEveryMonth,
@@ -86,7 +86,7 @@ class BillModel extends Equatable {
     Category? category,
     int? value,
     DateTime? createdAt,
-    BillState? billState,
+    BillStatus? billStatus,
     int? dueDayOfTheMonth,
     int? totalParcels,
     int? payedParcels,
@@ -99,7 +99,7 @@ class BillModel extends Equatable {
       category: category ?? this.category,
       value: value ?? this.value,
       createdAt: createdAt ?? this.createdAt,
-      billState: billState ?? this.billState,
+      billStatus: billStatus ?? billStatus,
       dueDayOfTheMonth: dueDayOfTheMonth ?? this.dueDayOfTheMonth,
       totalParcels: totalParcels ?? this.totalParcels,
       payedParcels: payedParcels ?? this.payedParcels,

@@ -10,21 +10,16 @@ import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/domain/models/enums/category.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
-import 'package:so_boleto/presenter/bill/widgets/bill_background_card.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_section_button_row.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_section_top_icon.dart';
+import 'package:so_boleto/presenter/bill/widgets/bill_shell.dart';
 
 class BillCategorySection extends StatelessWidget {
-  const BillCategorySection({
-    super.key,
-    this.isEditingFlow = false,
-  });
-
-  final bool isEditingFlow;
+  const BillCategorySection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BillBackgroundCard(
+    return BillShell(
       child: BlocBuilder<BillCubit, BillState>(
         buildWhen: (previous, current) => previous.status != current.status,
         builder: (context, state) {
@@ -50,7 +45,10 @@ class BillCategorySection extends StatelessWidget {
                       value: state.bill.category.categoryToText(),
                       items: categoryList
                           .map(
-                            (e) => DropdownMenuItem(value: e, child: Text(e)),
+                            (e) => DropdownMenuItem(
+                              value: e,
+                              child: Text(e),
+                            ),
                           )
                           .toList(),
                       onChanged: (newValue) =>
@@ -62,15 +60,14 @@ class BillCategorySection extends StatelessWidget {
                 ),
               ),
               const ExpandedSpace(),
-              if (isEditingFlow)
+              if (state.isEditionFlow)
                 PillButton(
                   child: const Text('Pronto'),
                   onTap: () => context.pushTo(Routes.billCheck),
                 )
               else
-                const BillSectionButtonRow(
-                  Routes.billCheck,
-                  navigateToBillCheck: true,
+                BillSectionDoubleButtonRow(
+                  onTap: () => context.pushTo(Routes.billCheck),
                 ),
               AppThemeValues.spaceVerticalLarge
             ],

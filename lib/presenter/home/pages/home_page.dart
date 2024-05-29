@@ -65,12 +65,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     ),
                     HomeBillTab(
                       state.payedBills,
-                      billState: BillState.payed,
+                      billStatus: BillStatus.payed,
                       onBillSet: () => _tabController.animateTo(1),
                     ),
                     HomeBillTab(
                       state.delayeddBills,
-                      billState: BillState.delayed,
+                      billStatus: BillStatus.delayed,
                       onBillSet: () => _tabController.animateTo(1),
                     ),
                   ],

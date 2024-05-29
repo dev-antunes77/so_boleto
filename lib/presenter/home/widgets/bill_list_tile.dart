@@ -6,102 +6,116 @@ import 'package:so_boleto/core/extensions/enum_extension.dart';
 import 'package:so_boleto/core/extensions/num_extensions.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/helpers/app_formatters.dart';
+import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/domain/models/enums/bill_state.dart';
+import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 import 'package:so_boleto/presenter/home/widgets/bill_paid_tag.dart';
 import 'package:so_boleto/presenter/home/widgets/dismissable_background.dart';
 
 class BillListTile extends StatelessWidget {
-  const BillListTile(this.bill, {super.key, required this.onBillSet});
+  const BillListTile(
+    this.bill, {
+    super.key,
+    required this.onBillSet,
+  });
 
   final BillModel bill;
   final Function() onBillSet;
 
   @override
   Widget build(BuildContext context) {
-    return Dismissible(
-      key: Key(bill.id),
-      direction: bill.billState == BillState.payed
-          ? DismissDirection.endToStart
-          : DismissDirection.horizontal,
-      confirmDismiss: (direction) => _confirmDismiss(direction, context),
-      background: const DismissableBackGround(
-        payDragging: true,
-      ),
-      secondaryBackground: const DismissableBackGround(),
-      child: Stack(
-        children: [
-          ListTile(
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: AppThemeValues.spaceSmall,
-            ),
-            leading: CircleAvatar(
-              radius: 28,
-              backgroundColor: AppColors.greyLight,
-              child: SvgAsset(
-                svg: bill.category.enumToIcon(),
-                height: 32,
-                color: AppColors.primaryLight,
+    return GestureDetector(
+      onTap: () {
+        context.read<BillCubit>().initiateEditionFlow(bill);
+        context.pushTo(Routes.billCheck);
+      },
+      child: Dismissible(
+        key: Key(bill.id),
+        direction: bill.billStatus == BillStatus.payed
+            ? DismissDirection.endToStart
+            : DismissDirection.horizontal,
+        confirmDismiss: (direction) => _confirmDismiss(direction, context),
+        background: const DismissableBackGround(
+          payDragging: true,
+        ),
+        secondaryBackground: const DismissableBackGround(),
+        child: Stack(
+          children: [
+            ListTile(
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: AppThemeValues.spaceSmall,
               ),
-            ),
-            title: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  bill.name.capitalize(),
-                  style: context.textRobotoSubtitleMedium,
+              leading: CircleAvatar(
+                radius: 28,
+                backgroundColor: AppColors.greyLight,
+                child: SvgAsset(
+                  svg: bill.category.enumToIcon(),
+                  height: 32,
+                  color: AppColors.primaryLight,
                 ),
-                if (bill.description.isNotEmpty)
+              ),
+              title: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
                   Text(
-                    bill.description.capitalize(),
-                    style: context.textRobotoXSmall,
+                    bill.name.capitalize(),
+                    style: context.textRobotoSubtitleMedium,
                   ),
-              ],
-            ),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (bill.billState != BillState.payed)
-                  Text(
-                    bill.dueDayOfTheMonth.properDueDay(),
-                    style: context.textRobotoSubtitleTiny,
-                  ),
-              ],
-            ),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Column(
-                  children: [
+                  if (bill.description.isNotEmpty)
                     Text(
-                      bill.value.toDouble().formatCurrency(),
-                      style: context.textSubtitleSmall,
+                      bill.description.capitalize(),
+                      style: context.textRobotoXSmall,
                     ),
+                ],
+              ),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (bill.billStatus != BillStatus.payed)
                     Text(
-                      AppFormatters.parcelRelationFormatter(bill.dueEveryMonth,
-                          bill.totalParcels, bill.payedParcels),
-                      textAlign: TextAlign.center,
+                      bill.dueDayOfTheMonth.properDueDay(),
                       style: context.textRobotoSubtitleTiny,
                     ),
-                  ],
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(AppThemeValues.spaceSmall),
-                  child: Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    size: 16,
+                ],
+              ),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Column(
+                    children: [
+                      Text(
+                        bill.value.toDouble().formatCurrency(),
+                        style: context.textSubtitleSmall,
+                      ),
+                      Text(
+                        AppFormatters.parcelRelationFormatter(
+                            bill.dueEveryMonth,
+                            bill.totalParcels,
+                            bill.payedParcels),
+                        textAlign: TextAlign.center,
+                        style: context.textRobotoSubtitleTiny,
+                      ),
+                    ],
                   ),
-                )
-              ],
+                  const Padding(
+                    padding: EdgeInsets.all(AppThemeValues.spaceSmall),
+                    child: Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: 16,
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
-          BillPaidTag(bill.billState == BillState.payed)
-        ],
+            BillPaidTag(bill.billStatus == BillStatus.payed)
+          ],
+        ),
       ),
     );
   }
@@ -135,7 +149,7 @@ class UnderlineStatusLabel extends StatelessWidget {
               bottomLeft: Radius.circular(20),
               bottomRight: Radius.circular(20),
             ),
-            color: bill.billState == BillState.payed
+            color: bill.billStatus == BillStatus.payed
                 ? AppColors.primary
                 : AppColors.background,
           ),
@@ -143,7 +157,7 @@ class UnderlineStatusLabel extends StatelessWidget {
           width: double.infinity,
         ),
         Text(
-          bill.billState.billStateToText(),
+          bill.billStatus.billStatusToText(),
           style: context.textXSmall.copyWith(
             color: AppColors.background,
             fontSize: 11,

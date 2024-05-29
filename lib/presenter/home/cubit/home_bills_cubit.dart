@@ -8,6 +8,7 @@ import 'package:so_boleto/domain/models/enums/bill_state.dart';
 import 'package:so_boleto/domain/models/user.dart';
 import 'package:so_boleto/domain/usecases/create_bill_usecase.dart';
 import 'package:so_boleto/domain/usecases/delete_bill_usecase.dart';
+import 'package:so_boleto/domain/usecases/edit_bill_usecase.dart';
 import 'package:so_boleto/domain/usecases/get_bills_usecase.dart';
 import 'package:so_boleto/domain/usecases/set_bill_as_paid_usecase.dart';
 
@@ -19,12 +20,14 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
     this._createBillUseCase,
     this._setBillAsPaidUseCase,
     this._deleteBillUseCase,
+    this._editBillUseCase,
   ) : super(HomeBillsState(
             status: BaseStateStatus.initial, bills: List.empty()));
 
   final GetBillsUseCase _getBillsUseCase;
   final CreateBillUseCase _createBillUseCase;
   final DeleteBillUseCase _deleteBillUseCase;
+  final EditBillUseCase _editBillUseCase;
   final SetBillAsPaidUseCase _setBillAsPaidUseCase;
 
   Future<void> getBills() async {
@@ -58,9 +61,24 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
     }
   }
 
+  Future<void> editBill(BillModel bill) async {
+    try {
+      emit(state.copyWith(status: BaseStateStatus.loading));
+      await _editBillUseCase(bill);
+      await getBills();
+    } on AppError catch (error) {
+      onAppError(error);
+      emit(
+        state.copyWith(
+          status: BaseStateStatus.error,
+        ),
+      );
+    }
+  }
+
   Future<bool> setBillAsPaid(BillModel bill) async {
     try {
-      if (bill.billState == BillState.payed) return false;
+      if (bill.billStatus == BillStatus.payed) return false;
       emit(state.copyWith(status: BaseStateStatus.loading));
       await _setBillAsPaidUseCase(bill);
       await getBills();

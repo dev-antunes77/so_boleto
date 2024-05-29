@@ -12,7 +12,7 @@ class CustomStateHandler extends StatelessWidget {
     this.bill,
   });
 
-  final BillState? bill;
+  final BillStatus? bill;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +22,9 @@ class CustomStateHandler extends StatelessWidget {
         SvgAsset(
           svg: bill == null
               ? AppIcons.error
-              : bill == BillState.payed
+              : bill == BillStatus.payed
                   ? AppIcons.worried1
-                  : bill == BillState.delayed
+                  : bill == BillStatus.delayed
                       ? AppIcons.happy
                       : AppIcons.sad1,
           height: 140,
@@ -34,9 +34,9 @@ class CustomStateHandler extends StatelessWidget {
         Text(
           bill == null
               ? 'Ops!\nAlgo deu errado.'
-              : bill == BillState.payed
+              : bill == BillStatus.payed
                   ? 'Você não tem contas pagas.'
-                  : bill == BillState.delayed
+                  : bill == BillStatus.delayed
                       ? 'Você não tem contas atrasadas.'
                       : 'Você não tem contas cadastradas.',
           textAlign: TextAlign.center,

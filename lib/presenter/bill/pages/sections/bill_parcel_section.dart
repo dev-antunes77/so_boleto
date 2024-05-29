@@ -8,18 +8,13 @@ import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
-import 'package:so_boleto/presenter/bill/widgets/bill_background_card.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_dropdown_menu.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_parcel_switch_row.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_section_button_row.dart';
+import 'package:so_boleto/presenter/bill/widgets/bill_shell.dart';
 
 class BillParcelSection extends StatefulWidget {
-  const BillParcelSection({
-    super.key,
-    this.isEditingFlow = false,
-  });
-
-  final bool isEditingFlow;
+  const BillParcelSection({super.key});
 
   @override
   State<BillParcelSection> createState() => _BillParcelSectionState();
@@ -32,7 +27,7 @@ class _BillParcelSectionState extends State<BillParcelSection> {
 
   @override
   Widget build(BuildContext context) {
-    return BillBackgroundCard(
+    return BillShell(
       child: Column(
         children: [
           AppThemeValues.spaceVerticalImense,
@@ -92,14 +87,14 @@ class _BillParcelSectionState extends State<BillParcelSection> {
               ),
             ),
           const ExpandedSpace(),
-          if (widget.isEditingFlow)
+          if (context.read<BillCubit>().state.isEditionFlow)
             PillButton(
               child: const Text('Pronto'),
               onTap: () => context.pushTo(Routes.billCheck),
             )
           else
-            BillSectionButtonRow(
-              Routes.billValue,
+            BillSectionDoubleButtonRow(
+              onTap: () => context.pushTo(Routes.billValue),
               isDisabled: _disableButton(),
             ),
           AppThemeValues.spaceVerticalLarge,

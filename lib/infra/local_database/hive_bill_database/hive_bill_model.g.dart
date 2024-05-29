@@ -21,7 +21,7 @@ class HiveBillModelAdapter extends TypeAdapter<HiveBillModel> {
       name: fields[2] as String,
       description: fields[3] as String,
       category: fields[4] as String,
-      billState: fields[5] as String,
+      billStatus: fields[5] as String,
       dueEveryMonth: fields[6] as bool,
       totalParcels: fields[7] as int,
       payedParcels: fields[8] as int,
@@ -44,7 +44,7 @@ class HiveBillModelAdapter extends TypeAdapter<HiveBillModel> {
       ..writeByte(4)
       ..write(obj.category)
       ..writeByte(5)
-      ..write(obj.billState)
+      ..write(obj.billStatus)
       ..writeByte(6)
       ..write(obj.dueEveryMonth)
       ..writeByte(7)

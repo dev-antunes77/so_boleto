@@ -10,13 +10,13 @@ BillModel _$BillModelFromJson(Map<String, dynamic> json) => BillModel(
       name: json['name'] as String? ?? '',
       description: json['description'] as String? ?? '',
       totalParcels: (json['totalParcels'] as num?)?.toInt() ?? 1,
-      value: (json['value'] as num?)?.toInt() ?? 1,
+      value: (json['value'] as num?)?.toInt() ?? 0,
       payedParcels: (json['payedParcels'] as num?)?.toInt() ?? 0,
       dueDayOfTheMonth: (json['dueDayOfTheMonth'] as num?)?.toInt() ?? 1,
       dueEveryMonth: json['dueEveryMonth'] as bool? ?? false,
       id: json['id'] as String?,
       category: $enumDecodeNullable(_$CategoryEnumMap, json['category']),
-      billState: $enumDecodeNullable(_$BillStateEnumMap, json['billState']),
+      billStatus: $enumDecodeNullable(_$BillStatusEnumMap, json['billStatus']),
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),
@@ -30,7 +30,7 @@ Map<String, dynamic> _$BillModelToJson(BillModel instance) => <String, dynamic>{
       'value': instance.value,
       'createdAt': instance.createdAt.toIso8601String(),
       'dueDayOfTheMonth': instance.dueDayOfTheMonth,
-      'billState': _$BillStateEnumMap[instance.billState]!,
+      'billStatus': _$BillStatusEnumMap[instance.billStatus]!,
       'totalParcels': instance.totalParcels,
       'payedParcels': instance.payedParcels,
       'dueEveryMonth': instance.dueEveryMonth,
@@ -55,8 +55,8 @@ const _$CategoryEnumMap = {
   Category.travel: 'travel',
 };
 
-const _$BillStateEnumMap = {
-  BillState.open: 'open',
-  BillState.payed: 'payed',
-  BillState.delayed: 'delayed',
+const _$BillStatusEnumMap = {
+  BillStatus.open: 'open',
+  BillStatus.payed: 'payed',
+  BillStatus.delayed: 'delayed',
 };

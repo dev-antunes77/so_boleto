@@ -2,16 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:so_boleto/core/components/buttons/pill_button.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 
-class BillSectionButtonRow extends StatelessWidget {
-  const BillSectionButtonRow(
-    this.nextRoute, {
+class BillSectionDoubleButtonRow extends StatelessWidget {
+  const BillSectionDoubleButtonRow({
+    required this.onTap,
     super.key,
-    this.navigateToBillCheck = false,
     this.isDisabled = false,
   });
 
-  final String nextRoute;
-  final bool navigateToBillCheck;
+  final VoidCallback onTap;
   final bool isDisabled;
 
   @override
@@ -24,9 +22,7 @@ class BillSectionButtonRow extends StatelessWidget {
           child: const Text('Anterior'),
         ),
         PillButton(
-          onTap: () => navigateToBillCheck
-              ? context.navigateTo(Routes.billCheck)
-              : context.pushTo(nextRoute),
+          onTap: onTap,
           isDisabled: isDisabled,
           child: const Text('Próximo'),
         ),

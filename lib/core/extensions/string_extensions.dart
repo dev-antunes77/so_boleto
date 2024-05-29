@@ -17,7 +17,7 @@ extension StringExtensions on String {
       .firstWhere((element) => element.value['string'] == this)
       .key;
 
-  BillState billStateToEnum() => billStateMap.entries
+  BillStatus billStatusToEnum() => billStatusMap.entries
       .firstWhere((element) => element.value['string'] == this)
       .key;
 

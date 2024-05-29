@@ -11,87 +11,99 @@ import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
+import 'package:so_boleto/core/utils/base_state.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
-import 'package:so_boleto/presenter/bill/widgets/bill_background_card.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_edit_tile.dart';
+import 'package:so_boleto/presenter/bill/widgets/bill_shell.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 
-class BillCheckSection extends StatefulWidget {
+class BillCheckSection extends StatelessWidget {
   const BillCheckSection({super.key});
-  @override
-  State<BillCheckSection> createState() => _BillCheckSectionState();
-}
 
-class _BillCheckSectionState extends State<BillCheckSection> {
   @override
   Widget build(BuildContext context) {
-    final bill = context.read<BillCubit>().state.bill;
-    return BillBackgroundCard(
+    return BillShell(
       height: context.height * 0.75,
       child: Padding(
         padding: const EdgeInsets.all(AppThemeValues.spaceMedium),
-        child: Column(
-          children: [
-            BillEditTile(
-              icon: AppIcons.description,
-              label: 'Nome:',
-              value: bill.name.capitalize(),
-              width: double.infinity,
-              onPressed: () => context.pushTo(Routes.billName, params: true),
-            ),
-            const HorizontalThinLineSeparator(horizontalPadding: 0),
-            BillEditTile(
-              icon: AppIcons.description,
-              label: 'Descrição:',
-              value: bill.description.capitalize(),
-              onPressed: () => context.pushTo(Routes.billName, params: true),
-            ),
-            const HorizontalThinLineSeparator(horizontalPadding: 0),
-            BillEditTile(
-              icon: AppIcons.parcels,
-              label: AppFormatters.parcelLabelFormatter(
-                  bill.dueEveryMonth, bill.totalParcels),
-              value: AppFormatters.parcelInfoFormatter(
-                  bill.dueEveryMonth, bill.totalParcels),
-              onPressed: () => context.pushTo(Routes.billParcels, params: true),
-            ),
-            const HorizontalThinLineSeparator(horizontalPadding: 0),
-            BillEditTile(
-              icon: AppIcons.calendar,
-              label: 'Vencimento:',
-              value: bill.dueDayOfTheMonth.addLeadingZero(),
-              onPressed: () => context.pushTo(Routes.billDueDay, params: true),
-            ),
-            const HorizontalThinLineSeparator(horizontalPadding: 0),
-            BillEditTile(
-              icon: AppIcons.value,
-              label: 'Valor:',
-              value: bill.value.toDouble().formatCurrency(),
-              onPressed: () => context.pushTo(Routes.billValue, params: true),
-            ),
-            const HorizontalThinLineSeparator(horizontalPadding: 0),
-            BillEditTile(
-              icon: bill.category.enumToIcon(),
-              label: 'Categoria:',
-              value: bill.category.categoryToText(),
-              onPressed: () =>
-                  context.pushTo(Routes.billCategory, params: true),
-            ),
-            const ExpandedSpace(),
-            Center(
-              child: PillButton(
-                onTap: () {
-                  context.read<HomeBillsCubit>().createBill(bill);
-                  context.read<BillCubit>().resetBill();
-                  context.navigateTo(Routes.home);
-                },
-                child: const Text('Salvar'),
-              ),
-            ),
-            AppThemeValues.spaceVerticalLarge
-          ],
+        child: BlocBuilder<BillCubit, BillState>(
+          builder: (context, state) {
+            return Column(
+              children: [
+                BillEditTile(
+                  icon: AppIcons.description,
+                  label: 'Nome:',
+                  value: state.bill.name.capitalize(),
+                  width: double.infinity,
+                  onPressed: () => context.pushTo(Routes.billName),
+                ),
+                const HorizontalThinLineSeparator(horizontalPadding: 0),
+                BillEditTile(
+                  icon: AppIcons.description,
+                  label: 'Descrição:',
+                  value: state.bill.description.capitalize(),
+                  onPressed: () => context.pushTo(Routes.billName),
+                ),
+                const HorizontalThinLineSeparator(horizontalPadding: 0),
+                BillEditTile(
+                  icon: AppIcons.parcels,
+                  label: AppFormatters.parcelLabelFormatter(
+                    state.bill.dueEveryMonth,
+                    state.bill.totalParcels,
+                  ),
+                  value: AppFormatters.parcelInfoFormatter(
+                    state.bill.dueEveryMonth,
+                    state.bill.totalParcels,
+                  ),
+                  onPressed: () => context.pushTo(Routes.billParcels),
+                ),
+                const HorizontalThinLineSeparator(horizontalPadding: 0),
+                BillEditTile(
+                  icon: AppIcons.calendar,
+                  label: 'Vencimento:',
+                  value: state.bill.dueDayOfTheMonth.addLeadingZero(),
+                  onPressed: () => context.pushTo(Routes.billDueDay),
+                ),
+                const HorizontalThinLineSeparator(horizontalPadding: 0),
+                BillEditTile(
+                  icon: AppIcons.value,
+                  label: 'Valor:',
+                  value: state.bill.value.toDouble().formatCurrency(),
+                  onPressed: () => context.pushTo(Routes.billValue),
+                ),
+                const HorizontalThinLineSeparator(horizontalPadding: 0),
+                BillEditTile(
+                  icon: state.bill.category.enumToIcon(),
+                  label: 'Categoria:',
+                  value: state.bill.category.categoryToText(),
+                  onPressed: () => context.pushTo(Routes.billCategory),
+                ),
+                const ExpandedSpace(),
+                if (state.status == BaseStateStatus.loading)
+                  const CircularProgressIndicator()
+                else
+                  PillButton(
+                    onTap: () {
+                      state.isEditionFlow
+                          ? context.read<HomeBillsCubit>().editBill(state.bill)
+                          : context
+                              .read<HomeBillsCubit>()
+                              .createBill(state.bill);
+                      _onEditionOrCreationEnd(context);
+                    },
+                    child: const Text('Pronto'),
+                  ),
+                AppThemeValues.spaceVerticalLarge
+              ],
+            );
+          },
         ),
       ),
     );
+  }
+
+  void _onEditionOrCreationEnd(BuildContext context) {
+    context.read<BillCubit>().resetBill();
+    context.navigateTo(Routes.home);
   }
 }

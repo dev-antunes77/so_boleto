@@ -13,7 +13,7 @@ final class HiveBillModel with HiveObjectMixin {
     required this.name,
     required this.description,
     required this.category,
-    required this.billState,
+    required this.billStatus,
     required this.dueEveryMonth,
     required this.totalParcels,
     required this.payedParcels,
@@ -27,7 +27,7 @@ final class HiveBillModel with HiveObjectMixin {
         name: bill.name,
         description: bill.description,
         category: bill.category.categoryToText(),
-        billState: bill.billState.billStateToText(),
+        billStatus: bill.billStatus.billStatusToText(),
         dueEveryMonth: bill.dueEveryMonth,
         totalParcels: bill.totalParcels,
         payedParcels: bill.payedParcels,
@@ -49,7 +49,7 @@ final class HiveBillModel with HiveObjectMixin {
   String category;
 
   @HiveField(5)
-  String billState;
+  String billStatus;
 
   @HiveField(6)
   bool dueEveryMonth;

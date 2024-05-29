@@ -10,18 +10,14 @@ import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
-import 'package:so_boleto/presenter/bill/widgets/bill_background_card.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_section_button_row.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_section_top_icon.dart';
+import 'package:so_boleto/presenter/bill/widgets/bill_shell.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_text_field.dart';
 
 class BillValueSection extends StatefulWidget {
-  const BillValueSection({
-    super.key,
-    this.isEditingFlow = false,
-  });
+  const BillValueSection({super.key});
 
-  final bool isEditingFlow;
   @override
   State<BillValueSection> createState() => _BillValueSectionState();
 }
@@ -38,7 +34,7 @@ class _BillValueSectionState extends State<BillValueSection> {
 
   @override
   Widget build(BuildContext context) {
-    return BillBackgroundCard(
+    return BillShell(
       child: BlocBuilder<BillCubit, BillState>(
         buildWhen: (previous, current) =>
             previous.bill.value != current.bill.value,
@@ -60,14 +56,14 @@ class _BillValueSectionState extends State<BillValueSection> {
                     state.bill.totalParcels > 1 ? '(Valor da parcela)' : null,
               ),
               const ExpandedSpace(),
-              if (widget.isEditingFlow)
+              if (state.isEditionFlow)
                 PillButton(
                   child: const Text('Pronto'),
                   onTap: () => context.pushTo(Routes.billCheck),
                 )
               else
-                BillSectionButtonRow(
-                  Routes.billDueDay,
+                BillSectionDoubleButtonRow(
+                  onTap: () => context.pushTo(Routes.billDueDay),
                   isDisabled: _disableButton(state.bill.value),
                 ),
               AppThemeValues.spaceVerticalLarge,

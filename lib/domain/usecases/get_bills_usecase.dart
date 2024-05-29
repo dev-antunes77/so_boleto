@@ -28,7 +28,7 @@ final class GetBillsUseCase {
     final today = DateTime.now().day;
     for (var bill in bills) {
       if (bill.dueDayOfTheMonth < today) {
-        final updatedBill = bill.copyWith(billState: BillState.delayed);
+        final updatedBill = bill.copyWith(billStatus: BillStatus.delayed);
         bills.insert(bills.indexOf(bill), updatedBill);
         bills.remove(bill);
       }

@@ -18,7 +18,9 @@ class AppShell extends StatefulWidget {
     super.key,
     required this.child,
   });
+
   final Widget child;
+
   @override
   State<AppShell> createState() => _AppShellState();
 }
@@ -32,27 +34,42 @@ class _AppShellState extends State<AppShell> {
       builder: (context, state) => CustomPopScope(
         leaveTheApp: true,
         child: Scaffold(
+          backgroundColor: AppColors.primaryBackground,
           appBar: customAppBar(
             context: context,
             title: 'Example',
-            actions: [
-              IconButton(
-                onPressed: () {},
-                icon: const SvgAsset(
-                  svg: AppIcons.search,
-                  height: 32,
-                  color: AppColors.primary,
-                ),
-              ),
-              IconButton(
-                onPressed: () => context.navigateTo(Routes.billName),
-                icon: const SvgAsset(
-                  svg: AppIcons.add,
-                  height: 32,
-                  color: AppColors.primary,
-                ),
-              ),
-            ],
+            leadingBackButton: _showBottomNavAndHomeButtons()
+                ? const SizedBox.shrink()
+                : IconButton(
+                    onPressed: () => context.pop(true),
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      size: 25,
+                      color: AppColors.grey,
+                    ),
+                  ),
+            actions: _showBottomNavAndHomeButtons()
+                ? [
+                    IconButton(
+                      onPressed: () {},
+                      icon: const SvgAsset(
+                        svg: AppIcons.search,
+                        height: 32,
+                        color: AppColors.primary,
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        context.pushTo(Routes.billName);
+                      },
+                      icon: const SvgAsset(
+                        svg: AppIcons.add,
+                        height: 32,
+                        color: AppColors.primary,
+                      ),
+                    ),
+                  ]
+                : [],
           ),
           body: Padding(
             padding: const EdgeInsets.symmetric(
@@ -61,18 +78,25 @@ class _AppShellState extends State<AppShell> {
           ),
           extendBody: true,
           resizeToAvoidBottomInset: false,
-          bottomNavigationBar: BlocBuilder<InitialCubit, InitialState>(
-            builder: (context, state) => Shimmer(
-              child: CustomBottomNavigator(
-                currentScreen: state.currentPage.value,
-                onChangePage: _onChangePage,
-              ),
-            ),
-          ),
+          bottomNavigationBar: _showBottomNavAndHomeButtons()
+              ? BlocBuilder<InitialCubit, InitialState>(
+                  builder: (context, state) => Shimmer(
+                    child: CustomBottomNavigator(
+                      currentScreen: state.currentPage.value,
+                      onChangePage: _onChangePage,
+                    ),
+                  ),
+                )
+              : const SizedBox.shrink(),
         ),
       ),
     );
   }
+
+  bool _showBottomNavAndHomeButtons() =>
+      context.currentRoute == Routes.home ||
+      context.currentRoute == Routes.profile ||
+      context.currentRoute == Routes.expenses;
 
   void _onChangePage(int index) {
     final cubit = context.read<InitialCubit>();

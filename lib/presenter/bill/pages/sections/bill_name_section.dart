@@ -7,17 +7,12 @@ import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
-import 'package:so_boleto/presenter/bill/widgets/bill_background_card.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_section_top_icon.dart';
+import 'package:so_boleto/presenter/bill/widgets/bill_shell.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_text_field.dart';
 
 class BillNameSection extends StatefulWidget {
-  const BillNameSection({
-    super.key,
-    this.isEditingFlow = false,
-  });
-
-  final bool isEditingFlow;
+  const BillNameSection({super.key});
 
   @override
   State<BillNameSection> createState() => _BillNameSectionState();
@@ -38,8 +33,8 @@ class _BillNameSectionState extends State<BillNameSection> {
 
   @override
   Widget build(BuildContext context) {
-    return BillBackgroundCard(
-      height: context.height * 0.5,
+    return BillShell(
+      height: context.height * 0.52,
       child: BlocBuilder<BillCubit, BillState>(
         buildWhen: (previous, current) => previous.bill != current.bill,
         builder: (context, state) {
@@ -70,7 +65,7 @@ class _BillNameSectionState extends State<BillNameSection> {
                     _onSubmitted(state.bill.name, state.bill.description),
               ),
               const ExpandedSpace(),
-              if (widget.isEditingFlow)
+              if (state.isEditionFlow)
                 PillButton(
                   child: const Text('Pronto'),
                   onTap: () => context.pushTo(Routes.billCheck),

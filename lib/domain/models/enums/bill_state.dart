@@ -1,19 +1,19 @@
-enum BillState {
+enum BillStatus {
   open,
   payed,
   delayed,
 }
 
-List<String> get billStateList {
+List<String> get billStatusList {
   List<String> list = [];
-  for (var element in billStateMap.entries) {
+  for (var element in billStatusMap.entries) {
     list.add(element.value['string']);
   }
   return list;
 }
 
-Map<BillState, dynamic> billStateMap = {
-  BillState.open: {'string': 'Open'},
-  BillState.payed: {'string': 'Payed'},
-  BillState.delayed: {'string': 'Delayed'}
+Map<BillStatus, dynamic> billStatusMap = {
+  BillStatus.open: {'string': 'Open'},
+  BillStatus.payed: {'string': 'Payed'},
+  BillStatus.delayed: {'string': 'Delayed'}
 };

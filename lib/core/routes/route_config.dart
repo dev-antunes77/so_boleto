@@ -8,7 +8,6 @@ import 'package:so_boleto/presenter/bill/pages/sections/bill_due_day_of_the_mont
 import 'package:so_boleto/presenter/bill/pages/sections/bill_name_section.dart';
 import 'package:so_boleto/presenter/bill/pages/sections/bill_parcel_section.dart';
 import 'package:so_boleto/presenter/bill/pages/sections/bill_value_section.dart';
-import 'package:so_boleto/presenter/bill/widgets/bill_shell.dart';
 import 'package:so_boleto/presenter/expenses/pages/expenses_page.dart';
 import 'package:so_boleto/presenter/home/pages/home_page.dart';
 import 'package:so_boleto/presenter/initial/app_shell.dart';
@@ -20,7 +19,10 @@ import 'routes.dart';
 abstract class RoutesConfig {
   static final _rootKey = GlobalKey<NavigatorState>(debugLabel: 'Root Key');
   static final _shellKey = GlobalKey<NavigatorState>(debugLabel: 'Shell Key');
-  static final _billKey = GlobalKey<NavigatorState>(debugLabel: 'Bill Key');
+
+  static const Duration duration300 = Duration(milliseconds: 300);
+  static const Duration duration400 = Duration(milliseconds: 400);
+  static const Duration duration600 = Duration(milliseconds: 600);
 
   static final router = GoRouter(
     initialLocation: RelativePaths.app,
@@ -32,101 +34,6 @@ abstract class RoutesConfig {
         builder: (_, __) => const SplashPage(),
       ),
 
-      ShellRoute(
-        navigatorKey: _billKey,
-        builder: (context, state, child) => BillShell(
-          child: child,
-        ),
-        routes: [
-          GoRoute(
-              path: RelativePaths.billName,
-              parentNavigatorKey: _billKey,
-              pageBuilder: (_, state) {
-                final isEditionFlow = state.extra == null ? false : true;
-                return _getTransitionPage(
-                  state,
-                  BillNameSection(
-                    isEditingFlow: isEditionFlow,
-                  ),
-                  type: 'scale',
-                );
-              }),
-          // GoRoute(
-          //     path: RelativePaths.billDescription,
-          //     parentNavigatorKey: _billKey,
-          //     pageBuilder: (_, state) {
-          //       final isEditionFlow = state.extra == null ? false : true;
-          //       return _getTransitionPage(
-          //         state,
-          //         BillDescriptionSection(
-          //           isEditingFlow: isEditionFlow,
-          //         ),
-          //         type: 'scale',
-          //       );
-          //     }),
-          GoRoute(
-              path: RelativePaths.billParcels,
-              parentNavigatorKey: _billKey,
-              pageBuilder: (_, state) {
-                final isEditionFlow = state.extra == null ? false : true;
-                return _getTransitionPage(
-                  state,
-                  BillParcelSection(
-                    isEditingFlow: isEditionFlow,
-                  ),
-                  type: 'scale',
-                );
-              }),
-          GoRoute(
-              path: RelativePaths.billValue,
-              parentNavigatorKey: _billKey,
-              pageBuilder: (_, state) {
-                final isEditionFlow = state.extra == null ? false : true;
-                return _getTransitionPage(
-                  state,
-                  BillValueSection(
-                    isEditingFlow: isEditionFlow,
-                  ),
-                  type: 'scale',
-                );
-              }),
-          GoRoute(
-              path: RelativePaths.billDueDay,
-              parentNavigatorKey: _billKey,
-              pageBuilder: (_, state) {
-                final isEditionFlow = state.extra == null ? false : true;
-                return _getTransitionPage(
-                  state,
-                  BillDueDayOfTheMonthSection(
-                    isEditingFlow: isEditionFlow,
-                  ),
-                  type: 'scale',
-                );
-              }),
-          GoRoute(
-              path: RelativePaths.billCategory,
-              parentNavigatorKey: _billKey,
-              pageBuilder: (_, state) {
-                final isEditionFlow = state.extra == null ? false : true;
-                return _getTransitionPage(
-                  state,
-                  BillCategorySection(
-                    isEditingFlow: isEditionFlow,
-                  ),
-                  type: 'scale',
-                );
-              }),
-          GoRoute(
-            path: RelativePaths.billCheck,
-            parentNavigatorKey: _billKey,
-            pageBuilder: (_, state) => _getTransitionPage(
-              state,
-              const BillCheckSection(),
-              type: 'scale',
-            ),
-          ),
-        ],
-      ),
       //     GoRoute(
       //       path: RelativePaths.msisdn,
       //       parentNavigatorKey: _loginKey,
@@ -173,6 +80,66 @@ abstract class RoutesConfig {
               const ProfilePage(),
             ),
           ),
+          // ShellRoute(
+          //   builder: (context, state, child) => BillShell(child: child),
+          //   navigatorKey: _shellKey,
+          //   routes: [
+          GoRoute(
+            path: RelativePaths.billName,
+            parentNavigatorKey: _shellKey,
+            pageBuilder: (_, state) => _getTransitionPage(
+              state,
+              const BillNameSection(),
+              type: 'matrix',
+            ),
+          ),
+          GoRoute(
+            path: RelativePaths.billParcels,
+            parentNavigatorKey: _shellKey,
+            pageBuilder: (_, state) => _getTransitionPage(
+              state,
+              const BillParcelSection(),
+              type: 'matrix',
+            ),
+          ),
+          GoRoute(
+            path: RelativePaths.billValue,
+            parentNavigatorKey: _shellKey,
+            pageBuilder: (_, state) => _getTransitionPage(
+              state,
+              const BillValueSection(),
+              type: 'matrix',
+            ),
+          ),
+          GoRoute(
+            path: RelativePaths.billDueDay,
+            parentNavigatorKey: _shellKey,
+            pageBuilder: (_, state) => _getTransitionPage(
+              state,
+              const BillDueDayOfTheMonthSection(),
+              type: 'matrix',
+            ),
+          ),
+          GoRoute(
+            path: RelativePaths.billCategory,
+            parentNavigatorKey: _shellKey,
+            pageBuilder: (_, state) => _getTransitionPage(
+              state,
+              const BillCategorySection(),
+              type: 'matrix',
+            ),
+          ),
+          GoRoute(
+            path: RelativePaths.billCheck,
+            parentNavigatorKey: _shellKey,
+            pageBuilder: (_, state) => _getTransitionPage(
+              state,
+              const BillCheckSection(),
+              type: 'matrix',
+            ),
+          ),
+          // ],
+          // ),
           // GoRoute(
           //   path: RelativePaths.profile,
           //   parentNavigatorKey: _shellKey,

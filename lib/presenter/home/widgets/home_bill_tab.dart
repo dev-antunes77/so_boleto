@@ -11,17 +11,17 @@ class HomeBillTab extends StatelessWidget {
     this.bills, {
     super.key,
     required this.onBillSet,
-    this.billState = BillState.open,
+    this.billStatus = BillStatus.open,
   });
 
   final List<BillModel> bills;
   final Function() onBillSet;
-  final BillState billState;
+  final BillStatus billStatus;
 
   @override
   Widget build(BuildContext context) {
     if (bills.isEmpty) {
-      return CustomStateHandler(bill: billState);
+      return CustomStateHandler(bill: billStatus);
     }
     return ListView.separated(
       itemCount: bills.length,

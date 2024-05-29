@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-
 import 'package:equatable/equatable.dart';
 import 'package:so_boleto/core/components/custom_bottom_navigator/bottom_navigator_page.dart';
 import 'package:so_boleto/core/utils/base_cubit.dart';

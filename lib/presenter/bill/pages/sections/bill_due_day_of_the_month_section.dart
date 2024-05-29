@@ -8,22 +8,17 @@ import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
-import 'package:so_boleto/presenter/bill/widgets/bill_background_card.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_dropdown_menu.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_section_button_row.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_section_top_icon.dart';
+import 'package:so_boleto/presenter/bill/widgets/bill_shell.dart';
 
 class BillDueDayOfTheMonthSection extends StatelessWidget {
-  const BillDueDayOfTheMonthSection({
-    super.key,
-    this.isEditingFlow = false,
-  });
-
-  final bool isEditingFlow;
+  const BillDueDayOfTheMonthSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BillBackgroundCard(
+    return BillShell(
       child: BlocBuilder<BillCubit, BillState>(
         buildWhen: (previous, current) => previous.status != current.status,
         builder: (context, state) {
@@ -48,13 +43,15 @@ class BillDueDayOfTheMonthSection extends StatelessWidget {
                     .onBillDueeDayOfTheMonthChange(newValue),
               ),
               const ExpandedSpace(),
-              if (isEditingFlow)
+              if (state.isEditionFlow)
                 PillButton(
                   child: const Text('Pronto'),
                   onTap: () => context.pushTo(Routes.billCheck),
                 )
               else
-                const BillSectionButtonRow(Routes.billCategory),
+                BillSectionDoubleButtonRow(
+                  onTap: () => context.pushTo(Routes.billCategory),
+                ),
               AppThemeValues.spaceVerticalLarge,
             ],
           );

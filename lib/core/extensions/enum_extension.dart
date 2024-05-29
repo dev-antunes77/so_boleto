@@ -6,7 +6,7 @@ extension EnumExtensions on Enum {
       .firstWhere((element) => element.key == this)
       .value['string'];
 
-  String billStateToText() => billStateMap.entries
+  String billStatusToText() => billStatusMap.entries
       .firstWhere((element) => element.key == this)
       .value['string'];
 
