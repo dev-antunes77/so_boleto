@@ -40,7 +40,8 @@ class _BillValueSectionState extends State<BillValueSection> {
   Widget build(BuildContext context) {
     return BillBackgroundCard(
       child: BlocBuilder<BillCubit, BillState>(
-        buildWhen: (previous, current) => previous.status != current.status,
+        buildWhen: (previous, current) =>
+            previous.bill.value != current.bill.value,
         builder: (context, state) {
           return Column(
             children: [
@@ -65,7 +66,10 @@ class _BillValueSectionState extends State<BillValueSection> {
                   onTap: () => context.pushTo(Routes.billCheck),
                 )
               else
-                const BillSectionButtonRow(Routes.billDueDay),
+                BillSectionButtonRow(
+                  Routes.billDueDay,
+                  isDisabled: _disableButton(state.bill.value),
+                ),
               AppThemeValues.spaceVerticalLarge,
             ],
           );
@@ -73,4 +77,6 @@ class _BillValueSectionState extends State<BillValueSection> {
       ),
     );
   }
+
+  bool _disableButton(int value) => value < 1;
 }

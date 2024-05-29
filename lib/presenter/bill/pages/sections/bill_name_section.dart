@@ -41,7 +41,7 @@ class _BillNameSectionState extends State<BillNameSection> {
     return BillBackgroundCard(
       height: context.height * 0.5,
       child: BlocBuilder<BillCubit, BillState>(
-        buildWhen: (previous, current) => previous.status != current.status,
+        buildWhen: (previous, current) => previous.bill != current.bill,
         builder: (context, state) {
           return Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -50,15 +50,24 @@ class _BillNameSectionState extends State<BillNameSection> {
               BillTextField(
                 hitText: 'Nome da conta',
                 controller: billNameController,
-                onChanged: (value) =>
-                    context.read<BillCubit>().onBillNameChange(value),
+                onChanged: (value) {
+                  context.read<BillCubit>().onBillNameChange(value);
+                },
+                textInputAction: _getTextInputAction(
+                    state.bill.name, state.bill.description),
+                onSubmitted: (_) =>
+                    _onSubmitted(state.bill.name, state.bill.description),
               ),
               BillTextField(
                 hitText: 'Descrição da conta',
                 controller: billNameController,
-                helperText: '(Optional)',
+                helperText: '(Opcional)',
                 onChanged: (value) =>
                     context.read<BillCubit>().onBillDescriptionChange(value),
+                textInputAction: _getTextInputAction(
+                    state.bill.name, state.bill.description),
+                onSubmitted: (_) =>
+                    _onSubmitted(state.bill.name, state.bill.description),
               ),
               const ExpandedSpace(),
               if (widget.isEditingFlow)
@@ -68,8 +77,9 @@ class _BillNameSectionState extends State<BillNameSection> {
                 )
               else
                 PillButton(
-                  child: const Text('Próximo'),
                   onTap: () => context.pushTo(Routes.billParcels),
+                  isDisabled: _disableteButton(state.bill.name),
+                  child: const Text('Próximo'),
                 ),
               AppThemeValues.spaceVerticalLarge,
             ],
@@ -78,4 +88,19 @@ class _BillNameSectionState extends State<BillNameSection> {
       ),
     );
   }
+
+  TextInputAction _getTextInputAction(String name, String description) {
+    if (name.isNotEmpty && description.isNotEmpty) {
+      return TextInputAction.done;
+    }
+    return TextInputAction.next;
+  }
+
+  _onSubmitted(String name, String description) {
+    if (name.isNotEmpty && description.isNotEmpty) {
+      context.pushTo(Routes.billParcels);
+    }
+  }
+
+  bool _disableteButton(String name) => name.length < 3 ? true : false;
 }

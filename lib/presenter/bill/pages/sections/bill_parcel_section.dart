@@ -98,7 +98,10 @@ class _BillParcelSectionState extends State<BillParcelSection> {
               onTap: () => context.pushTo(Routes.billCheck),
             )
           else
-            const BillSectionButtonRow(Routes.billValue),
+            BillSectionButtonRow(
+              Routes.billValue,
+              isDisabled: _disableButton(),
+            ),
           AppThemeValues.spaceVerticalLarge,
         ],
       ),
@@ -106,11 +109,14 @@ class _BillParcelSectionState extends State<BillParcelSection> {
   }
 
   void _onSelectingParcels(int value) {
-    if (value == 1) {
-      parcelChoice = false;
-      uniqueChoice = true;
-      setState(() {});
-    }
-    context.read<BillCubit>().onBillParcelsChange(value);
+    setState(() {
+      if (value == 1) {
+        parcelChoice = false;
+        uniqueChoice = true;
+      }
+      context.read<BillCubit>().onBillParcelsChange(value);
+    });
   }
+
+  bool _disableButton() => !parcelChoice && !uniqueChoice && !monthlyChoice;
 }

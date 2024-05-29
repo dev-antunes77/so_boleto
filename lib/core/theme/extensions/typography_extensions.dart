@@ -26,7 +26,7 @@ const _robotoTextStyle = TextStyle(
 extension TypographyExtension on BuildContext {
   /// Size 26, Font 500
   TextStyle get textStamper => _oldStamperTextStyle.copyWith(
-        fontSize: AppThemeValues.fontSizeLarge,
+        fontSize: AppThemeValues.fontSizeMedium,
         fontWeight: AppThemeValues.fontWeightBold,
       );
 

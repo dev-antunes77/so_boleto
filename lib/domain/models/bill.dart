@@ -15,7 +15,7 @@ class BillModel extends Equatable {
     this.name = '',
     this.description = '',
     this.totalParcels = 1,
-    this.value = 1,
+    this.value = 0,
     this.payedParcels = 0,
     this.dueDayOfTheMonth = 1,
     this.dueEveryMonth = false,

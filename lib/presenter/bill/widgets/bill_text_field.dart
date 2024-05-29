@@ -10,9 +10,11 @@ class BillTextField extends StatelessWidget {
     super.key,
     required this.controller,
     required this.onChanged,
+    this.onSubmitted,
     required this.hitText,
     this.icon,
     this.textInputType,
+    this.textInputAction,
     this.width,
     this.helperText,
     this.textAlign,
@@ -21,10 +23,12 @@ class BillTextField extends StatelessWidget {
 
   final TextEditingController controller;
   final Function(String) onChanged;
+  final Function(String)? onSubmitted;
   final String hitText;
   final String? helperText;
   final String? icon;
   final TextInputType? textInputType;
+  final TextInputAction? textInputAction;
   final double? width;
   final TextAlign? textAlign;
   final List<TextInputFormatter>? formatters;
@@ -32,7 +36,7 @@ class BillTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: AppThemeValues.spaceMedium),
+      padding: const EdgeInsets.only(bottom: AppThemeValues.spaceLarge),
       child: SizedBox(
         width: width ?? context.width * 0.6,
         child: TextField(
@@ -42,7 +46,14 @@ class BillTextField extends StatelessWidget {
           decoration: InputDecoration(
             contentPadding: EdgeInsets.zero,
             hintText: hitText,
-            helperText: helperText,
+            helper: helperText == null
+                ? const SizedBox.shrink()
+                : Center(
+                    child: Text(
+                      helperText!,
+                      style: context.textRobotoSubtitleXSmall,
+                    ),
+                  ),
             enabledBorder: const UnderlineInputBorder(
               borderSide: BorderSide(
                 color: Colors.grey,
@@ -52,7 +63,8 @@ class BillTextField extends StatelessWidget {
               borderSide: BorderSide(color: AppColors.primaryLight),
             ),
           ),
-          controller: controller,
+          textInputAction: textInputAction,
+          onSubmitted: onSubmitted,
           onChanged: onChanged,
           inputFormatters: formatters,
         ),

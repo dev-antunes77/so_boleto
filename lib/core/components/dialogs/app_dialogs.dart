@@ -4,14 +4,17 @@ import 'package:go_router/go_router.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/utils/system_overlay_utils.dart';
 import 'package:so_boleto/domain/models/bill.dart';
+import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 
 abstract class AppDialogs {
   static void leaveBillCreation(BuildContext context) => context.showDialog(
-        title: 'Tem certeza?',
-        description: 'Se sair,\na criação dessa conta será perdida.',
-        onAcept: () => context.navigateTo(Routes.home),
-      );
+      title: 'Tem certeza?',
+      description: 'Se sair,\na criação dessa conta será perdida.',
+      onAcept: () {
+        context.read<BillCubit>().resetBill();
+        context.navigateTo(Routes.home);
+      });
 
   static void leaveApp(BuildContext context) => context.showDialog(
         title: 'Sair do app?',

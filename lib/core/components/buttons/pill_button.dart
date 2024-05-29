@@ -45,7 +45,7 @@ class PillButton extends StatelessWidget {
       minimumSize: WidgetStateProperty.all<Size>(minimunSize),
       backgroundColor: WidgetStateProperty.resolveWith<Color>(
         (Set<WidgetState> states) {
-          if (states.contains(WidgetState.disabled)) {
+          if (states.contains(WidgetState.disabled) || isDisabled) {
             return Colors.grey;
           }
           return backgroundColor ?? AppColors.primary;

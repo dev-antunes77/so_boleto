@@ -7,10 +7,12 @@ class BillSectionButtonRow extends StatelessWidget {
     this.nextRoute, {
     super.key,
     this.navigateToBillCheck = false,
+    this.isDisabled = false,
   });
 
   final String nextRoute;
   final bool navigateToBillCheck;
+  final bool isDisabled;
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +24,11 @@ class BillSectionButtonRow extends StatelessWidget {
           child: const Text('Anterior'),
         ),
         PillButton(
-          child: const Text('Próximo'),
           onTap: () => navigateToBillCheck
               ? context.navigateTo(Routes.billCheck)
               : context.pushTo(nextRoute),
+          isDisabled: isDisabled,
+          child: const Text('Próximo'),
         ),
       ],
     );
