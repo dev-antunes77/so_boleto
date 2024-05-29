@@ -2,20 +2,26 @@
 import 'package:flutter/material.dart';
 import 'package:so_boleto/core/components/thin_line_separator/horizontal_thin_line_separator.dart';
 import 'package:so_boleto/domain/models/bill.dart';
+import 'package:so_boleto/domain/models/enums/bill_state.dart';
 import 'package:so_boleto/presenter/home/widgets/bill_list_tile.dart';
+import 'package:so_boleto/presenter/home/widgets/empty_bill_list.dart';
 
 class HomeBillTab extends StatelessWidget {
-  const HomeBillTab(this.bills, {super.key, required this.onBillSet});
+  const HomeBillTab(
+    this.bills, {
+    super.key,
+    required this.onBillSet,
+    this.billState = BillState.open,
+  });
 
   final List<BillModel> bills;
   final Function() onBillSet;
+  final BillState billState;
 
   @override
   Widget build(BuildContext context) {
     if (bills.isEmpty) {
-      return const Center(
-        child: Text('Lista vazia'),
-      );
+      return EmptyBillList(bill: billState);
     }
     return ListView.separated(
       itemCount: bills.length,

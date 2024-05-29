@@ -6,8 +6,10 @@ import 'package:so_boleto/core/components/custom_bottom_navigator/bottom_navigat
 import 'package:so_boleto/core/components/custom_bottom_navigator/widgets/custom_bottom_navigator.dart';
 import 'package:so_boleto/core/components/custom_pop_scope/custom_pop_scope.dart';
 import 'package:so_boleto/core/components/status_page/widgets/shimmer.dart';
+import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
+import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
 
@@ -36,10 +38,18 @@ class _AppShellState extends State<AppShell> {
             actions: [
               IconButton(
                 onPressed: () => context.navigateTo(Routes.billName),
-                color: AppColors.primary,
-                icon: const Icon(
-                  Icons.add,
-                  size: 32,
+                icon: const SvgAsset(
+                  svg: AppIcons.search,
+                  height: 32,
+                  color: AppColors.primary,
+                ),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: const SvgAsset(
+                  svg: AppIcons.add,
+                  height: 32,
+                  color: AppColors.primary,
                 ),
               ),
             ],
