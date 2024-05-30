@@ -27,7 +27,8 @@ final class GetBillsUseCase {
   void _setDelayedBill(List<BillModel> bills) {
     final today = DateTime.now().day;
     for (var bill in bills) {
-      if (bill.dueDayOfTheMonth < today) {
+      if (bill.dueDayOfTheMonth < today &&
+          bill.billStatus != BillStatus.payed) {
         final updatedBill = bill.copyWith(billStatus: BillStatus.delayed);
         bills.insert(bills.indexOf(bill), updatedBill);
         bills.remove(bill);

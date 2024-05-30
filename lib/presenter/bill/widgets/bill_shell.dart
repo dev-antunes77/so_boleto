@@ -17,7 +17,7 @@ class BillShell extends StatelessWidget {
       child: ConstrainedBox(
         constraints: BoxConstraints(
           minHeight:
-              context.height * 0.9 - MediaQuery.of(context).viewInsets.bottom,
+              context.height * 0.85 - MediaQuery.of(context).viewInsets.bottom,
         ),
         child: IntrinsicHeight(
           child: Padding(

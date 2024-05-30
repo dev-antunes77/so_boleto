@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/dialogs/app_dialogs.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
+import 'package:so_boleto/core/constants/app_constants.dart';
 import 'package:so_boleto/core/extensions/enum_extension.dart';
 import 'package:so_boleto/core/extensions/num_extensions.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
@@ -12,27 +13,24 @@ import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/domain/models/enums/bill_state.dart';
+import 'package:so_boleto/domain/models/enums/category.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 import 'package:so_boleto/presenter/home/widgets/bill_paid_tag.dart';
 import 'package:so_boleto/presenter/home/widgets/dismissable_background.dart';
+import 'package:so_boleto/presenter/home/widgets/left_line_status_bar.dart';
 
 class BillListTile extends StatelessWidget {
-  const BillListTile(
-    this.bill, {
-    super.key,
-    required this.onBillSet,
-  });
+  const BillListTile(this.bill, {super.key});
 
   final BillModel bill;
-  final Function() onBillSet;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         context.read<BillCubit>().initiateEditionFlow(bill);
-        context.pushTo(Routes.billCheck);
+        context.pushTo(Routes.billCheck, params: AppConstants.transitionScale);
       },
       child: Dismissible(
         key: Key(bill.id),
@@ -50,14 +48,20 @@ class BillListTile extends StatelessWidget {
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: AppThemeValues.spaceSmall,
               ),
-              leading: CircleAvatar(
-                radius: 28,
-                backgroundColor: AppColors.greyLight,
-                child: SvgAsset(
-                  svg: bill.category.enumToIcon(),
-                  height: 32,
-                  color: AppColors.primaryLight,
-                ),
+              leading: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  LeftLineStatusBar(billStatus: bill.billStatus),
+                  CircleAvatar(
+                    radius: 25,
+                    backgroundColor: AppColors.grey,
+                    child: SvgAsset(
+                      svg: bill.category.enumToIcon(categoryMap),
+                      height: 30,
+                      color: AppColors.primaryLight,
+                    ),
+                  ),
+                ],
               ),
               title: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +69,7 @@ class BillListTile extends StatelessWidget {
                 children: [
                   Text(
                     bill.name.capitalize(),
-                    style: context.textRobotoSubtitleMedium,
+                    style: context.textRobotoSubtitleSmall,
                   ),
                   if (bill.description.isNotEmpty)
                     Text(
@@ -91,7 +95,7 @@ class BillListTile extends StatelessWidget {
                     children: [
                       Text(
                         bill.value.toDouble().formatCurrency(),
-                        style: context.textSubtitleSmall,
+                        style: context.textRobotoSubtitleSmall,
                       ),
                       Text(
                         AppFormatters.parcelRelationFormatter(
@@ -124,48 +128,5 @@ class BillListTile extends StatelessWidget {
           DismissDirection direction, BuildContext context) =>
       direction == DismissDirection.endToStart
           ? AppDialogs.confirmDeleteBill(context, bill)
-          : context
-              .read<HomeBillsCubit>()
-              .setBillAsPaid(bill)
-              .then((_) => onBillSet());
-}
-
-class UnderlineStatusLabel extends StatelessWidget {
-  const UnderlineStatusLabel({
-    super.key,
-    required this.bill,
-  });
-
-  final BillModel bill;
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(20),
-              bottomRight: Radius.circular(20),
-            ),
-            color: bill.billStatus == BillStatus.payed
-                ? AppColors.primary
-                : AppColors.background,
-          ),
-          height: 10,
-          width: double.infinity,
-        ),
-        Text(
-          bill.billStatus.billStatusToText(),
-          style: context.textXSmall.copyWith(
-            color: AppColors.background,
-            fontSize: 11,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 2,
-          ),
-        )
-      ],
-    );
-  }
+          : context.read<HomeBillsCubit>().setBillAsPaid(bill);
 }

@@ -25,7 +25,7 @@ class BillCategorySection extends StatelessWidget {
         builder: (context, state) {
           return Column(
             children: [
-              BillSectionTopIcon(state.bill.category.enumToIcon()),
+              BillSectionTopIcon(state.bill.category.enumToIcon(categoryMap)),
               AppThemeValues.spaceVerticalLarge,
               SizedBox(
                 width: context.width * 0.5,
@@ -42,7 +42,7 @@ class BillCategorySection extends StatelessWidget {
                       underline: const SizedBox(),
                       hint: const Text('Categpries'),
                       menuMaxHeight: context.height * 0.4,
-                      value: state.bill.category.categoryToText(),
+                      value: state.bill.category.enumToText(categoryMap),
                       items: categoryList
                           .map(
                             (e) => DropdownMenuItem(

@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:so_boleto/core/constants/app_constants.dart';
 import 'package:so_boleto/presenter/bill/pages/sections/bill_category_section.dart';
 import 'package:so_boleto/presenter/bill/pages/sections/bill_check_section.dart';
 import 'package:so_boleto/presenter/bill/pages/sections/bill_due_day_of_the_month_section.dart';
@@ -62,6 +63,7 @@ abstract class RoutesConfig {
             pageBuilder: (_, state) => _getTransitionPage(
               state,
               const HomePage(),
+              duration: duration300,
             ),
           ),
           GoRoute(
@@ -70,6 +72,7 @@ abstract class RoutesConfig {
             pageBuilder: (_, state) => _getTransitionPage(
               state,
               const ExpensesPage(),
+              duration: duration300,
             ),
           ),
           GoRoute(
@@ -78,6 +81,7 @@ abstract class RoutesConfig {
             pageBuilder: (_, state) => _getTransitionPage(
               state,
               const ProfilePage(),
+              duration: duration300,
             ),
           ),
           // ShellRoute(
@@ -85,21 +89,25 @@ abstract class RoutesConfig {
           //   navigatorKey: _shellKey,
           //   routes: [
           GoRoute(
-            path: RelativePaths.billName,
-            parentNavigatorKey: _shellKey,
-            pageBuilder: (_, state) => _getTransitionPage(
-              state,
-              const BillNameSection(),
-              type: 'matrix',
-            ),
-          ),
+              path: RelativePaths.billName,
+              parentNavigatorKey: _shellKey,
+              pageBuilder: (_, state) {
+                final type = state.extra != null
+                    ? state.extra as String
+                    : AppConstants.transitionMatrix;
+                return _getTransitionPage(
+                  state,
+                  const BillNameSection(),
+                  type: type,
+                );
+              }),
           GoRoute(
             path: RelativePaths.billParcels,
             parentNavigatorKey: _shellKey,
             pageBuilder: (_, state) => _getTransitionPage(
               state,
               const BillParcelSection(),
-              type: 'matrix',
+              type: AppConstants.transitionMatrix,
             ),
           ),
           GoRoute(
@@ -108,7 +116,7 @@ abstract class RoutesConfig {
             pageBuilder: (_, state) => _getTransitionPage(
               state,
               const BillValueSection(),
-              type: 'matrix',
+              type: AppConstants.transitionMatrix,
             ),
           ),
           GoRoute(
@@ -117,7 +125,7 @@ abstract class RoutesConfig {
             pageBuilder: (_, state) => _getTransitionPage(
               state,
               const BillDueDayOfTheMonthSection(),
-              type: 'matrix',
+              type: AppConstants.transitionMatrix,
             ),
           ),
           GoRoute(
@@ -126,18 +134,22 @@ abstract class RoutesConfig {
             pageBuilder: (_, state) => _getTransitionPage(
               state,
               const BillCategorySection(),
-              type: 'matrix',
+              type: AppConstants.transitionMatrix,
             ),
           ),
           GoRoute(
-            path: RelativePaths.billCheck,
-            parentNavigatorKey: _shellKey,
-            pageBuilder: (_, state) => _getTransitionPage(
-              state,
-              const BillCheckSection(),
-              type: 'matrix',
-            ),
-          ),
+              path: RelativePaths.billCheck,
+              parentNavigatorKey: _shellKey,
+              pageBuilder: (_, state) {
+                final type = state.extra != null
+                    ? state.extra as String
+                    : AppConstants.transitionMatrix;
+                return _getTransitionPage(
+                  state,
+                  const BillCheckSection(),
+                  type: type,
+                );
+              }),
           // ],
           // ),
           // GoRoute(
@@ -214,33 +226,32 @@ abstract class RoutesConfig {
   static CustomTransitionPage _getTransitionPage(
     GoRouterState state,
     Widget child, {
-    String type = 'fade',
+    String type = AppConstants.transitionFade,
+    Duration duration = duration600,
   }) {
     return CustomTransitionPage(
-        key: state.pageKey,
-        transitionDuration: const Duration(milliseconds: 600),
-        reverseTransitionDuration: const Duration(milliseconds: 600),
-        child: child,
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          switch (type) {
-            case 'fade':
-              return FadeTransition(opacity: animation, child: child);
-            case 'rotation':
-              return RotationTransition(turns: animation, child: child);
-            case 'scale':
-              return ScaleTransition(scale: animation, child: child);
-            case 'slide':
-              return SlideTransition(
-                  position: _onSlie(animation), child: child);
-            case 'matrix':
-              return MatrixTransition(
-                  onTransform: _onTransform,
-                  animation: animation,
-                  child: child);
-            default:
-              return FadeTransition(opacity: animation, child: child);
-          }
-        });
+      key: state.pageKey,
+      transitionDuration: duration,
+      reverseTransitionDuration: duration,
+      child: child,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        switch (type) {
+          case AppConstants.transitionFade:
+            return FadeTransition(opacity: animation, child: child);
+          case AppConstants.transitionRotation:
+            return RotationTransition(turns: animation, child: child);
+          case AppConstants.transitionScale:
+            return ScaleTransition(scale: animation, child: child);
+          case AppConstants.transitionSlide:
+            return SlideTransition(position: _onSlie(animation), child: child);
+          case AppConstants.transitionMatrix:
+            return MatrixTransition(
+                onTransform: _onTransform, animation: animation, child: child);
+          default:
+            return FadeTransition(opacity: animation, child: child);
+        }
+      },
+    );
   }
 
   static Matrix4 _onTransform(double value) => Matrix4.identity()

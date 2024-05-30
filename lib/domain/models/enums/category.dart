@@ -5,18 +5,20 @@ enum Category {
   communication,
   creditCard,
   debt,
+  devices,
   education,
-  electronics,
+  electricity,
   entertainment,
   groceries,
   healthCare,
-  houseExpenses,
   insurance,
   investment,
+  internet,
   miscellaneous,
   rent,
   transportation,
   travel,
+  water,
 }
 
 List<String> get categoryList {
@@ -34,7 +36,7 @@ Map<Category, dynamic> categoryMap = {
   },
   Category.communication: {
     'string': 'Communication',
-    'icon': AppIcons.communication,
+    'icon': AppIcons.phone,
   },
   Category.creditCard: {
     'string': 'Credit card',
@@ -44,13 +46,17 @@ Map<Category, dynamic> categoryMap = {
     'string': 'Debt',
     'icon': AppIcons.debt,
   },
+  Category.devices: {
+    'string': 'Devices',
+    'icon': AppIcons.devices,
+  },
   Category.education: {
     'string': 'Education',
     'icon': AppIcons.education,
   },
-  Category.electronics: {
-    'string': 'Electronics',
-    'icon': AppIcons.electronics,
+  Category.electricity: {
+    'string': 'Electricity',
+    'icon': AppIcons.electricity,
   },
   Category.entertainment: {
     'string': 'Entertainment',
@@ -64,9 +70,9 @@ Map<Category, dynamic> categoryMap = {
     'string': 'Health care',
     'icon': AppIcons.healthCare,
   },
-  Category.houseExpenses: {
-    'string': 'House expenses',
-    'icon': AppIcons.houseExpenses,
+  Category.internet: {
+    'string': 'Internet',
+    'icon': AppIcons.internet,
   },
   Category.insurance: {
     'string': 'Insurance',
@@ -89,8 +95,11 @@ Map<Category, dynamic> categoryMap = {
     'icon': AppIcons.transportation,
   },
   Category.travel: {
-    'enum': Category.travel,
     'string': 'Travel',
     'icon': AppIcons.travel,
+  },
+  Category.water: {
+    'string': 'Water',
+    'icon': AppIcons.water,
   },
 };

@@ -40,7 +40,7 @@ class CustomBottomNavigator extends StatelessWidget {
             items: [
               buildBottomNavigationBarItem(
                 'Your bills',
-                AppIcons.coins,
+                AppIcons.yourBills,
               ),
               buildBottomNavigationBarItem(
                 'Gastos',

@@ -3,6 +3,8 @@
 import 'package:hive/hive.dart';
 import 'package:so_boleto/core/extensions/enum_extension.dart';
 import 'package:so_boleto/domain/models/bill.dart';
+import 'package:so_boleto/domain/models/enums/bill_state.dart';
+import 'package:so_boleto/domain/models/enums/category.dart';
 
 part 'hive_bill_model.g.dart';
 
@@ -26,8 +28,8 @@ final class HiveBillModel with HiveObjectMixin {
         id: bill.id,
         name: bill.name,
         description: bill.description,
-        category: bill.category.categoryToText(),
-        billStatus: bill.billStatus.billStatusToText(),
+        category: bill.category.enumToText(categoryMap),
+        billStatus: bill.billStatus.enumToText(billStatusMap),
         dueEveryMonth: bill.dueEveryMonth,
         totalParcels: bill.totalParcels,
         payedParcels: bill.payedParcels,

@@ -41,18 +41,20 @@ const _$CategoryEnumMap = {
   Category.communication: 'communication',
   Category.creditCard: 'creditCard',
   Category.debt: 'debt',
+  Category.devices: 'devices',
   Category.education: 'education',
-  Category.electronics: 'electronics',
+  Category.electricity: 'electricity',
   Category.entertainment: 'entertainment',
   Category.groceries: 'groceries',
   Category.healthCare: 'healthCare',
-  Category.houseExpenses: 'houseExpenses',
   Category.insurance: 'insurance',
   Category.investment: 'investment',
+  Category.internet: 'internet',
   Category.miscellaneous: 'miscellaneous',
   Category.rent: 'rent',
   Category.transportation: 'transportation',
   Category.travel: 'travel',
+  Category.water: 'water',
 };
 
 const _$BillStatusEnumMap = {

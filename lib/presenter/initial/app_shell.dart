@@ -1,16 +1,17 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:so_boleto/core/components/buttons/back_button.dart';
 import 'package:so_boleto/core/components/custom_app_bar/custom_app_bar.dart';
 import 'package:so_boleto/core/components/custom_bottom_navigator/bottom_navigator_page.dart';
 import 'package:so_boleto/core/components/custom_bottom_navigator/widgets/custom_bottom_navigator.dart';
 import 'package:so_boleto/core/components/custom_pop_scope/custom_pop_scope.dart';
 import 'package:so_boleto/core/components/status_page/widgets/shimmer.dart';
-import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
-import 'package:so_boleto/core/theme/settings/app_icons.dart';
-import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
+import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
+import 'package:so_boleto/presenter/home/widgets/bill_search_bar.dart';
+import 'package:so_boleto/presenter/home/widgets/create_new_bill_button.dart';
 import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
 
 class AppShell extends StatefulWidget {
@@ -35,50 +36,24 @@ class _AppShellState extends State<AppShell> {
         leaveTheApp: true,
         child: Scaffold(
           backgroundColor: AppColors.primaryBackground,
-          appBar: customAppBar(
-            context: context,
-            title: 'Example',
-            leadingBackButton: _showBottomNavAndHomeButtons()
-                ? const SizedBox.shrink()
-                : IconButton(
-                    onPressed: () => context.pop(true),
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      size: 25,
-                      color: AppColors.grey,
-                    ),
-                  ),
-            actions: _showBottomNavAndHomeButtons()
-                ? [
-                    IconButton(
-                      onPressed: () {},
-                      icon: const SvgAsset(
-                        svg: AppIcons.search,
-                        height: 32,
-                        color: AppColors.primary,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        context.pushTo(Routes.billName);
-                      },
-                      icon: const SvgAsset(
-                        svg: AppIcons.add,
-                        height: 32,
-                        color: AppColors.primary,
-                      ),
-                    ),
-                  ]
-                : [],
+          appBar: PreferredSize(
+            preferredSize: const Size(double.infinity, 40),
+            child: CustomAppBar(
+              title: 'Suas contas',
+              leadingBackButton:
+                  _showBottomNav() ? null : const CustomBackButton(),
+              actions: context.currentRoute == Routes.home
+                  ? [
+                      const BillSearchBar(),
+                      const CreateNewBillButoon(),
+                    ]
+                  : [],
+            ),
           ),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: AppThemeValues.spaceXXSmall),
-            child: Shimmer(child: widget.child),
-          ),
+          body: Shimmer(child: widget.child),
           extendBody: true,
           resizeToAvoidBottomInset: false,
-          bottomNavigationBar: _showBottomNavAndHomeButtons()
+          bottomNavigationBar: _showBottomNav()
               ? BlocBuilder<InitialCubit, InitialState>(
                   builder: (context, state) => Shimmer(
                     child: CustomBottomNavigator(
@@ -93,7 +68,7 @@ class _AppShellState extends State<AppShell> {
     );
   }
 
-  bool _showBottomNavAndHomeButtons() =>
+  bool _showBottomNav() =>
       context.currentRoute == Routes.home ||
       context.currentRoute == Routes.profile ||
       context.currentRoute == Routes.expenses;
@@ -101,6 +76,7 @@ class _AppShellState extends State<AppShell> {
   void _onChangePage(int index) {
     final cubit = context.read<InitialCubit>();
     cubit.onChangePage(BottomNavigatorPage.fromIndex(index));
+    context.read<HomeBillsCubit>().onFilterForBill('');
     context.navigateTo(BottomNavigatorPage.getRoute(cubit.state.currentPage));
   }
 }

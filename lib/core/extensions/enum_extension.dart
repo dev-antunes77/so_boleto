@@ -1,16 +1,15 @@
-import 'package:so_boleto/domain/models/enums/bill_state.dart';
-import 'package:so_boleto/domain/models/enums/category.dart';
-
 extension EnumExtensions on Enum {
-  String categoryToText() => categoryMap.entries
-      .firstWhere((element) => element.key == this)
-      .value['string'];
+  // String categoryToText() => categoryMap.entries
+  //     .firstWhere((element) => element.key == this)
+  //     .value['string'];
 
-  String billStatusToText() => billStatusMap.entries
-      .firstWhere((element) => element.key == this)
-      .value['string'];
+  // String billStatusToText() => billStatusMap.entries
+  //     .firstWhere((element) => element.key == this)
+  //     .value['string'];
 
-  String enumToIcon() => categoryMap.entries
-      .firstWhere((element) => element.key == this)
-      .value['icon'];
+  String enumToText(Map map) =>
+      map.entries.firstWhere((element) => element.key == this).value['string'];
+
+  String enumToIcon(Map map) =>
+      map.entries.firstWhere((element) => element.key == this).value['icon'];
 }

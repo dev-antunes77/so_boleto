@@ -12,6 +12,7 @@ import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
+import 'package:so_boleto/domain/models/enums/category.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_edit_tile.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_shell.dart';
@@ -73,9 +74,9 @@ class BillCheckSection extends StatelessWidget {
                 ),
                 const HorizontalThinLineSeparator(horizontalPadding: 0),
                 BillEditTile(
-                  icon: state.bill.category.enumToIcon(),
+                  icon: state.bill.category.enumToIcon(categoryMap),
                   label: 'Categoria:',
-                  value: state.bill.category.categoryToText(),
+                  value: state.bill.category.enumToText(categoryMap),
                   onPressed: () => context.pushTo(Routes.billCategory),
                 ),
                 const ExpandedSpace(),
@@ -89,21 +90,16 @@ class BillCheckSection extends StatelessWidget {
                           : context
                               .read<HomeBillsCubit>()
                               .createBill(state.bill);
-                      _onEditionOrCreationEnd(context);
+                      context.navigateTo(Routes.home);
                     },
                     child: const Text('Pronto'),
                   ),
-                AppThemeValues.spaceVerticalLarge
+                AppThemeValues.spaceVerticalLarge,
               ],
             );
           },
         ),
       ),
     );
-  }
-
-  void _onEditionOrCreationEnd(BuildContext context) {
-    context.read<BillCubit>().resetBill();
-    context.navigateTo(Routes.home);
   }
 }

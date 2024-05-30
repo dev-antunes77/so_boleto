@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:so_boleto/core/errors/app_errors.dart';
+import 'package:so_boleto/core/extensions/list_extensions.dart';
 import 'package:so_boleto/core/utils/base_cubit.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
 import 'package:so_boleto/domain/models/bill.dart';
@@ -21,8 +22,13 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
     this._setBillAsPaidUseCase,
     this._deleteBillUseCase,
     this._editBillUseCase,
-  ) : super(HomeBillsState(
-            status: BaseStateStatus.initial, bills: List.empty()));
+  ) : super(
+          HomeBillsState(
+            status: BaseStateStatus.initial,
+            bills: List.empty(),
+            querySearch: '',
+          ),
+        );
 
   final GetBillsUseCase _getBillsUseCase;
   final CreateBillUseCase _createBillUseCase;
@@ -82,7 +88,7 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
       emit(state.copyWith(status: BaseStateStatus.loading));
       await _setBillAsPaidUseCase(bill);
       await getBills();
-      return true;
+      return false;
     } on AppError catch (error) {
       onAppError(error);
       emit(
@@ -107,5 +113,10 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
         ),
       );
     }
+  }
+
+  void onFilterForBill(String query) {
+    emit(state.copyWith(status: BaseStateStatus.loading));
+    emit(state.copyWith(querySearch: query, status: BaseStateStatus.success));
   }
 }

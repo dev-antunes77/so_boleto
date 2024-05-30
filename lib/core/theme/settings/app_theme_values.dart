@@ -38,6 +38,9 @@ abstract class AppThemeValues {
   ///4px
   static const spaceTiny = 4.0;
 
+  ///6px
+  static const spaceXXXSmall = 6.0;
+
   ///8px
   static const spaceXXSmall = 8.0;
 
@@ -82,6 +85,9 @@ abstract class AppThemeValues {
   ///4px
   static const spaceVerticalTiny = SizedBox(height: spaceTiny);
 
+  ///6px
+  static const spaceVerticalXXXSmall = SizedBox(height: spaceXXXSmall);
+
   ///8px
   static const spaceVerticalXXSmall = SizedBox(height: spaceXXSmall);
 
@@ -125,6 +131,9 @@ abstract class AppThemeValues {
 
   ///4px
   static const spaceHorizontalTiny = SizedBox(width: spaceTiny);
+
+  ///6px
+  static const spaceHorizontalXXXSmall = SizedBox(width: spaceXXXSmall);
 
   ///8px
   static const spaceHorizontalXXSmall = SizedBox(width: spaceXXSmall);

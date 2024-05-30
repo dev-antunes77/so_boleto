@@ -26,7 +26,7 @@ class BillPaidTag extends StatelessWidget {
                       Radius.circular(12),
                     ),
                     border: Border.all(
-                      color: AppColors.primaryLight.withOpacity(0.6),
+                      color: AppColors.grey,
                       width: 2,
                     ),
                   ),
@@ -35,7 +35,7 @@ class BillPaidTag extends StatelessWidget {
                     child: Text(
                       'Paga',
                       style: context.textStamper.copyWith(
-                        color: AppColors.primaryLight.withOpacity(0.6),
+                        color: AppColors.grey,
                       ),
                     ),
                   ),

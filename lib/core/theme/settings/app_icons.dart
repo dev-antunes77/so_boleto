@@ -2,7 +2,6 @@ abstract class AppIcons {
   static const add = 'assets/svgs/add.svg';
   static const automobile = 'assets/svgs/automobile.svg';
   static const coins = 'assets/svgs/coins.svg';
-  static const communication = 'assets/svgs/communication.svg';
   static const calendar = 'assets/svgs/calendar.svg';
   static const circle = 'assets/svgs/circle.svg';
   static const close = 'assets/svgs/close.svg';
@@ -10,21 +9,24 @@ abstract class AppIcons {
   static const debt = 'assets/svgs/debt.svg';
   static const delete = 'assets/svgs/delete.svg';
   static const description = 'assets/svgs/description.svg';
+  static const disappointed1 = 'assets/svgs/disappointed1.svg';
   static const education = 'assets/svgs/education.svg';
-  static const electronics = 'assets/svgs/electronics.svg';
+  static const electricity = 'assets/svgs/electricity.svg';
+  static const devices = 'assets/svgs/devices.svg';
   static const entertainment = 'assets/svgs/entertainment.svg';
   static const error = 'assets/svgs/error.svg';
   static const expense = 'assets/svgs/expense.svg';
   static const groceries = 'assets/svgs/groceries.svg';
   static const happy = 'assets/svgs/happy.svg';
   static const healthCare = 'assets/svgs/health_care.svg';
-  static const houseExpenses = 'assets/svgs/house.svg';
   static const insurance = 'assets/svgs/insurance.svg';
   static const investment = 'assets/svgs/investment.svg';
+  static const internet = 'assets/svgs/internet.svg';
   static const miscellaneous = 'assets/svgs/miscellaneous.svg';
   static const money = 'assets/svgs/money.svg';
   static const parcels = 'assets/svgs/parcels.svg';
   static const payment = 'assets/svgs/payment.svg';
+  static const phone = 'assets/svgs/communication.svg';
   static const profile = 'assets/svgs/profile.svg';
   static const rent = 'assets/svgs/rent.svg';
   static const sad1 = 'assets/svgs/sad1.svg';
@@ -33,6 +35,8 @@ abstract class AppIcons {
   static const transportation = 'assets/svgs/transportation.svg';
   static const travel = 'assets/svgs/travel.svg';
   static const value = 'assets/svgs/value.svg';
+  static const water = 'assets/svgs/water.svg';
   static const worried1 = 'assets/svgs/worried1.svg';
   static const worried2 = 'assets/svgs/worried2.svg';
+  static const yourBills = 'assets/svgs/your_bills.svg';
 }

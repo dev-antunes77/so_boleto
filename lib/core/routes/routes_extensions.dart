@@ -57,24 +57,24 @@ extension RoutesExtensions on BuildContext {
     );
   }
 
-  // Future<T?> showBottomSheet<T>({
-  //   required String title,
-  //   required String description,
-  //   required String confirmText,
-  //   required String denyText,
-  //   required VoidCallback onConfirm,
-  // }) {
-  //   Log.navigation('''Showing bottom sheet:
-  //   title: $title,
-  //   description: $description,
-  //   ''');
-  //   return showCustomBottomSheet<T>(
-  //     context: this,
-  //     title: title,
-  //     description: description,
-  //     confirmText: confirmText,
-  //     denyText: denyText,
-  //     onConfirm: onConfirm,
-  //   );
-  // }
+  Future<T?> showBottomSheet<T>({
+    required String title,
+    required String description,
+    required String confirmText,
+    required String denyText,
+    required VoidCallback onConfirm,
+  }) {
+    Log.navigation('''Showing bottom sheet:
+    title: $title,
+    description: $description,
+    ''');
+    return showCustomBottomSheet<T>(
+      context: this,
+      title: title,
+      description: description,
+      confirmText: confirmText,
+      denyText: denyText,
+      onConfirm: onConfirm,
+    );
+  }
 }
