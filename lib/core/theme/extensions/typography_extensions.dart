@@ -30,6 +30,12 @@ extension TypographyExtension on BuildContext {
         fontWeight: AppThemeValues.fontWeightBold,
       );
 
+  /// Size 18, Font 500
+  TextStyle get textRobotoSubtitleMediumToLarge => _robotoTextStyle.copyWith(
+        fontSize: AppThemeValues.fontSizeMediumToLarge,
+        fontWeight: AppThemeValues.fontWeightMedium,
+      );
+
   /// Size 16, Font 500
   TextStyle get textRobotoSubtitleMedium => _robotoTextStyle.copyWith(
         fontSize: AppThemeValues.fontSizeMedium,
@@ -52,6 +58,11 @@ extension TypographyExtension on BuildContext {
   TextStyle get textRobotoSubtitleTiny => _robotoTextStyle.copyWith(
         fontSize: AppThemeValues.fontSizeTiny,
         fontWeight: AppThemeValues.fontWeightMedium,
+      );
+
+  /// Size 18, Font 400
+  TextStyle get textRobotoMediumToLarge => _robotoTextStyle.copyWith(
+        fontSize: AppThemeValues.fontSizeMedium,
       );
 
   /// Size 16, Font 400

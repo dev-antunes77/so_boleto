@@ -12,8 +12,8 @@ import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/domain/models/bill.dart';
+import 'package:so_boleto/domain/models/enums/bill_category.dart';
 import 'package:so_boleto/domain/models/enums/bill_state.dart';
-import 'package:so_boleto/domain/models/enums/category.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 import 'package:so_boleto/presenter/home/widgets/bill_paid_tag.dart';
@@ -29,7 +29,7 @@ class BillListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.read<BillCubit>().initiateEditionFlow(bill);
+        context.read<BillCubit>().initiateEditionFlow(bill: bill);
         context.pushTo(Routes.billCheck, params: AppConstants.transitionScale);
       },
       child: Dismissible(

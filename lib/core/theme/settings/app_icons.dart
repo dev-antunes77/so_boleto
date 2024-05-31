@@ -16,6 +16,7 @@ abstract class AppIcons {
   static const entertainment = 'assets/svgs/entertainment.svg';
   static const error = 'assets/svgs/error.svg';
   static const expense = 'assets/svgs/expense.svg';
+  static const filter = 'assets/svgs/filter.svg';
   static const groceries = 'assets/svgs/groceries.svg';
   static const happy = 'assets/svgs/happy.svg';
   static const healthCare = 'assets/svgs/health_care.svg';

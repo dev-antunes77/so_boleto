@@ -12,7 +12,7 @@ import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
-import 'package:so_boleto/domain/models/enums/category.dart';
+import 'package:so_boleto/domain/models/enums/bill_category.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_edit_tile.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_shell.dart';
@@ -36,14 +36,14 @@ class BillCheckSection extends StatelessWidget {
                   label: 'Nome:',
                   value: state.bill.name.capitalize(),
                   width: double.infinity,
-                  onPressed: () => context.pushTo(Routes.billName),
+                  onPressed: () => _pushToEditionFlow(context, Routes.billName),
                 ),
                 const HorizontalThinLineSeparator(horizontalPadding: 0),
                 BillEditTile(
                   icon: AppIcons.description,
                   label: 'Descrição:',
                   value: state.bill.description.capitalize(),
-                  onPressed: () => context.pushTo(Routes.billName),
+                  onPressed: () => _pushToEditionFlow(context, Routes.billName),
                 ),
                 const HorizontalThinLineSeparator(horizontalPadding: 0),
                 BillEditTile(
@@ -56,28 +56,32 @@ class BillCheckSection extends StatelessWidget {
                     state.bill.dueEveryMonth,
                     state.bill.totalParcels,
                   ),
-                  onPressed: () => context.pushTo(Routes.billParcels),
+                  onPressed: () =>
+                      _pushToEditionFlow(context, Routes.billParcels),
                 ),
                 const HorizontalThinLineSeparator(horizontalPadding: 0),
                 BillEditTile(
                   icon: AppIcons.calendar,
                   label: 'Vencimento:',
                   value: state.bill.dueDayOfTheMonth.addLeadingZero(),
-                  onPressed: () => context.pushTo(Routes.billDueDay),
+                  onPressed: () =>
+                      _pushToEditionFlow(context, Routes.billDueDay),
                 ),
                 const HorizontalThinLineSeparator(horizontalPadding: 0),
                 BillEditTile(
                   icon: AppIcons.value,
                   label: 'Valor:',
                   value: state.bill.value.toDouble().formatCurrency(),
-                  onPressed: () => context.pushTo(Routes.billValue),
+                  onPressed: () =>
+                      _pushToEditionFlow(context, Routes.billValue),
                 ),
                 const HorizontalThinLineSeparator(horizontalPadding: 0),
                 BillEditTile(
                   icon: state.bill.category.enumToIcon(categoryMap),
                   label: 'Categoria:',
                   value: state.bill.category.enumToText(categoryMap),
-                  onPressed: () => context.pushTo(Routes.billCategory),
+                  onPressed: () =>
+                      _pushToEditionFlow(context, Routes.billCategory),
                 ),
                 const ExpandedSpace(),
                 if (state.status == BaseStateStatus.loading)
@@ -101,5 +105,10 @@ class BillCheckSection extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _pushToEditionFlow(BuildContext context, String route) {
+    context.navigateTo(route);
+    context.read<BillCubit>().initiateEditionFlow();
   }
 }

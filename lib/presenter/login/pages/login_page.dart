@@ -20,7 +20,7 @@ class LoginPage extends StatelessWidget {
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state.status == BaseStateStatus.success) {
-          context.navigateTo(Routes.radios);
+          context.navigateTo(Routes.home);
         } else if (state.status == BaseStateStatus.error) {
           context.showSnackBar(state.callbackMessage);
         }

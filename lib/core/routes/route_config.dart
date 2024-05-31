@@ -10,6 +10,7 @@ import 'package:so_boleto/presenter/bill/pages/sections/bill_name_section.dart';
 import 'package:so_boleto/presenter/bill/pages/sections/bill_parcel_section.dart';
 import 'package:so_boleto/presenter/bill/pages/sections/bill_value_section.dart';
 import 'package:so_boleto/presenter/expenses/pages/expenses_page.dart';
+import 'package:so_boleto/presenter/filter/pages/filter_page.dart';
 import 'package:so_boleto/presenter/home/pages/home_page.dart';
 import 'package:so_boleto/presenter/initial/app_shell.dart';
 import 'package:so_boleto/presenter/initial/pages/splash_page.dart';
@@ -34,7 +35,6 @@ abstract class RoutesConfig {
         parentNavigatorKey: _rootKey,
         builder: (_, __) => const SplashPage(),
       ),
-
       //     GoRoute(
       //       path: RelativePaths.msisdn,
       //       parentNavigatorKey: _loginKey,
@@ -84,10 +84,7 @@ abstract class RoutesConfig {
               duration: duration300,
             ),
           ),
-          // ShellRoute(
-          //   builder: (context, state, child) => BillShell(child: child),
-          //   navigatorKey: _shellKey,
-          //   routes: [
+
           GoRoute(
               path: RelativePaths.billName,
               parentNavigatorKey: _shellKey,
@@ -138,18 +135,28 @@ abstract class RoutesConfig {
             ),
           ),
           GoRoute(
-              path: RelativePaths.billCheck,
-              parentNavigatorKey: _shellKey,
-              pageBuilder: (_, state) {
-                final type = state.extra != null
-                    ? state.extra as String
-                    : AppConstants.transitionMatrix;
-                return _getTransitionPage(
-                  state,
-                  const BillCheckSection(),
-                  type: type,
-                );
-              }),
+            path: RelativePaths.billCheck,
+            parentNavigatorKey: _shellKey,
+            pageBuilder: (_, state) {
+              final type = state.extra != null
+                  ? state.extra as String
+                  : AppConstants.transitionMatrix;
+              return _getTransitionPage(
+                state,
+                const BillCheckSection(),
+                type: type,
+              );
+            },
+          ),
+          GoRoute(
+            path: RelativePaths.filter,
+            parentNavigatorKey: _shellKey,
+            pageBuilder: (_, state) => _getTransitionPage(
+              state,
+              const FilterPage(),
+              type: AppConstants.transitionScale,
+            ),
+          ),
           // ],
           // ),
           // GoRoute(

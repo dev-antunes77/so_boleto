@@ -54,12 +54,13 @@ class _BillValueSectionState extends State<BillValueSection> {
                 ],
                 helperText:
                     state.bill.totalParcels > 1 ? '(Valor da parcela)' : null,
+                onSubmitted: (p0) => _onSubmitted(state.bill.value),
               ),
               const ExpandedSpace(),
               if (state.isEditionFlow)
                 PillButton(
                   child: const Text('Pronto'),
-                  onTap: () => context.pushTo(Routes.billCheck),
+                  onTap: () => context.navigateTo(Routes.billCheck),
                 )
               else
                 BillSectionDoubleButtonRow(
@@ -75,4 +76,10 @@ class _BillValueSectionState extends State<BillValueSection> {
   }
 
   bool _disableButton(int value) => value < 1;
+
+  _onSubmitted(int value) {
+    if (!_disableButton(value)) {
+      context.pushTo(Routes.billDueDay);
+    }
+  }
 }

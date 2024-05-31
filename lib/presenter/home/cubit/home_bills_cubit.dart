@@ -115,7 +115,8 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
     }
   }
 
-  void onFilterForBill(String query) {
+  /// setting value to empty closes search by name flow
+  void setSearchByNameValue(String query) {
     emit(state.copyWith(status: BaseStateStatus.loading));
     emit(state.copyWith(querySearch: query, status: BaseStateStatus.success));
   }

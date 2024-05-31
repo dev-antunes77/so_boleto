@@ -55,7 +55,7 @@ class _BillNameSectionState extends State<BillNameSection> {
               ),
               BillTextField(
                 hitText: 'Descrição da conta',
-                controller: billNameController,
+                controller: billDescriptionController,
                 helperText: '(Opcional)',
                 onChanged: (value) =>
                     context.read<BillCubit>().onBillDescriptionChange(value),
@@ -68,7 +68,7 @@ class _BillNameSectionState extends State<BillNameSection> {
               if (state.isEditionFlow)
                 PillButton(
                   child: const Text('Pronto'),
-                  onTap: () => context.pushTo(Routes.billCheck),
+                  onTap: () => context.navigateTo(Routes.billCheck),
                 )
               else
                 PillButton(

@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:so_boleto/core/utils/base_cubit.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
 import 'package:so_boleto/domain/models/bill.dart';
-import 'package:so_boleto/domain/models/enums/category.dart';
+import 'package:so_boleto/domain/models/enums/bill_category.dart';
 
 part 'bill_state.dart';
 
@@ -47,7 +47,7 @@ class BillCubit extends Cubit<BillState> with BaseCubit {
         bill: state.bill.copyWith(totalParcels: billParcels)));
   }
 
-  void onBillCategoryChange(Category billCategory) {
+  void onBillCategoryChange(BillCategory billCategory) {
     emit(state.copyWith(
         status: BaseStateStatus.loading,
         bill: state.bill.copyWith(category: billCategory)));
@@ -61,7 +61,7 @@ class BillCubit extends Cubit<BillState> with BaseCubit {
     emit(state.copyWith(status: BaseStateStatus.success));
   }
 
-  void initiateEditionFlow(BillModel bill) =>
+  void initiateEditionFlow({BillModel? bill}) =>
       emit(state.copyWith(bill: bill, isEditionFlow: true));
 
   void initiateCreationFlow() =>

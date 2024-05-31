@@ -14,6 +14,7 @@ abstract class AppThemeValues {
   static const fontSizeXSmall = 12.0;
   static const fontSizeSmall = 14.0;
   static const fontSizeMedium = 16.0;
+  static const fontSizeMediumToLarge = 18.0;
   static const fontSizeLarge = 20.0;
   static const fontSizeXLarge = 24.0;
   static const fontSizeHuge = 28.0;

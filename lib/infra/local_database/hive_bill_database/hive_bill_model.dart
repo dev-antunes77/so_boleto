@@ -3,8 +3,8 @@
 import 'package:hive/hive.dart';
 import 'package:so_boleto/core/extensions/enum_extension.dart';
 import 'package:so_boleto/domain/models/bill.dart';
+import 'package:so_boleto/domain/models/enums/bill_category.dart';
 import 'package:so_boleto/domain/models/enums/bill_state.dart';
-import 'package:so_boleto/domain/models/enums/category.dart';
 
 part 'hive_bill_model.g.dart';
 

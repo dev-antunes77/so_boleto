@@ -46,7 +46,7 @@ class BillDueDayOfTheMonthSection extends StatelessWidget {
               if (state.isEditionFlow)
                 PillButton(
                   child: const Text('Pronto'),
-                  onTap: () => context.pushTo(Routes.billCheck),
+                  onTap: () => context.navigateTo(Routes.billCheck),
                 )
               else
                 BillSectionDoubleButtonRow(

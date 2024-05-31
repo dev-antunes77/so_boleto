@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -11,7 +10,7 @@ class CustomAppBar extends StatelessWidget {
     this.route,
   });
 
-  final String title;
+  final Widget title;
   final List<Widget>? actions;
   final Widget? leadingBackButton;
   final String? route;
@@ -21,8 +20,7 @@ class CustomAppBar extends StatelessWidget {
     return AppBar(
       backgroundColor: AppColors.primaryBackground,
       elevation: 12,
-      title: Align(alignment: Alignment.centerLeft, child: Text(title)),
-      titleTextStyle: context.textRobotoSubtitleMedium,
+      title: title,
       actions: actions,
       leading: leadingBackButton,
     );

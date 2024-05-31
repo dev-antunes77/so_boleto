@@ -10,7 +10,10 @@ abstract class AppDialogs {
   static void leaveBillCreation(BuildContext context) => context.showDialog(
       title: 'Tem certeza?',
       description: 'Se sair,\na criação dessa conta será perdida.',
-      onAcept: () => context.navigateTo(Routes.home));
+      onAcept: () {
+        GoRouter.of(context).pop(true);
+        context.navigateTo(Routes.home);
+      });
 
   static void leaveApp(BuildContext context) => context.showDialog(
         title: 'Sair do app?',

@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
+import 'package:so_boleto/domain/models/enums/bill_category.dart';
 import 'package:so_boleto/domain/models/enums/bill_state.dart';
-import 'package:so_boleto/domain/models/enums/category.dart';
 import 'package:so_boleto/infra/local_database/hive_bill_database/hive_bill_model.dart';
 
 part 'bill.g.dart';
@@ -20,12 +20,12 @@ class BillModel extends Equatable {
     this.dueDayOfTheMonth = 1,
     this.dueEveryMonth = false,
     String? id,
-    Category? category,
+    BillCategory? category,
     BillStatus? billStatus,
     DateTime? createdAt,
   })  : id = id ?? _generateRandomNumericId(),
         createdAt = createdAt ?? DateTime.now(),
-        category = category ?? Category.miscellaneous,
+        category = category ?? BillCategory.miscellaneous,
         billStatus = billStatus ?? BillStatus.open;
 
   static String _generateRandomNumericId() =>
@@ -53,7 +53,7 @@ class BillModel extends Equatable {
   final String id;
   final String name;
   final String description;
-  final Category category;
+  final BillCategory category;
   final int value;
   final DateTime createdAt;
   final int dueDayOfTheMonth;
@@ -83,7 +83,7 @@ class BillModel extends Equatable {
     String? id,
     String? name,
     String? description,
-    Category? category,
+    BillCategory? category,
     int? value,
     DateTime? createdAt,
     BillStatus? billStatus,

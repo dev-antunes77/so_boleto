@@ -43,7 +43,7 @@ class _SearchBarAnimationState extends State<BillSearchBar> {
           suffixIcon: isExpanded
               ? GestureDetector(
                   onTap: () {
-                    context.read<HomeBillsCubit>().onFilterForBill('');
+                    context.read<HomeBillsCubit>().setSearchByNameValue('');
                     FocusScope.of(context).unfocus();
                     controller.text = '';
                     isExpanded = false;
@@ -80,7 +80,7 @@ class _SearchBarAnimationState extends State<BillSearchBar> {
         ),
         controller: controller,
         onChanged: (value) =>
-            context.read<HomeBillsCubit>().onFilterForBill(value),
+            context.read<HomeBillsCubit>().setSearchByNameValue(value),
       ),
     );
   }

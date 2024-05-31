@@ -1,6 +1,6 @@
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 
-enum Category {
+enum BillCategory {
   automobile,
   communication,
   creditCard,
@@ -29,76 +29,76 @@ List<String> get categoryList {
   return list;
 }
 
-Map<Category, dynamic> categoryMap = {
-  Category.automobile: {
+Map<BillCategory, dynamic> categoryMap = {
+  BillCategory.automobile: {
     'string': 'Automobile',
     'icon': AppIcons.automobile,
   },
-  Category.communication: {
+  BillCategory.communication: {
     'string': 'Communication',
     'icon': AppIcons.phone,
   },
-  Category.creditCard: {
+  BillCategory.creditCard: {
     'string': 'Credit card',
     'icon': AppIcons.creditCard,
   },
-  Category.debt: {
+  BillCategory.debt: {
     'string': 'Debt',
     'icon': AppIcons.debt,
   },
-  Category.devices: {
+  BillCategory.devices: {
     'string': 'Devices',
     'icon': AppIcons.devices,
   },
-  Category.education: {
+  BillCategory.education: {
     'string': 'Education',
     'icon': AppIcons.education,
   },
-  Category.electricity: {
+  BillCategory.electricity: {
     'string': 'Electricity',
     'icon': AppIcons.electricity,
   },
-  Category.entertainment: {
+  BillCategory.entertainment: {
     'string': 'Entertainment',
     'icon': AppIcons.entertainment,
   },
-  Category.groceries: {
+  BillCategory.groceries: {
     'string': 'Groceries',
     'icon': AppIcons.groceries,
   },
-  Category.healthCare: {
+  BillCategory.healthCare: {
     'string': 'Health care',
     'icon': AppIcons.healthCare,
   },
-  Category.internet: {
+  BillCategory.internet: {
     'string': 'Internet',
     'icon': AppIcons.internet,
   },
-  Category.insurance: {
+  BillCategory.insurance: {
     'string': 'Insurance',
     'icon': AppIcons.insurance,
   },
-  Category.investment: {
+  BillCategory.investment: {
     'string': 'Investment',
     'icon': AppIcons.investment,
   },
-  Category.miscellaneous: {
+  BillCategory.miscellaneous: {
     'string': 'Miscellaneous',
     'icon': AppIcons.miscellaneous,
   },
-  Category.rent: {
+  BillCategory.rent: {
     'string': 'Rent',
     'icon': AppIcons.rent,
   },
-  Category.transportation: {
+  BillCategory.transportation: {
     'string': 'Transportation',
     'icon': AppIcons.transportation,
   },
-  Category.travel: {
+  BillCategory.travel: {
     'string': 'Travel',
     'icon': AppIcons.travel,
   },
-  Category.water: {
+  BillCategory.water: {
     'string': 'Water',
     'icon': AppIcons.water,
   },

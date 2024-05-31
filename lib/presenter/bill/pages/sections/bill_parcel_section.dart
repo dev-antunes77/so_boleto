@@ -90,7 +90,7 @@ class _BillParcelSectionState extends State<BillParcelSection> {
           if (context.read<BillCubit>().state.isEditionFlow)
             PillButton(
               child: const Text('Pronto'),
-              onTap: () => context.pushTo(Routes.billCheck),
+              onTap: () => context.navigateTo(Routes.billCheck),
             )
           else
             BillSectionDoubleButtonRow(

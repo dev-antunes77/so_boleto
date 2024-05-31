@@ -8,7 +8,7 @@ import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
-import 'package:so_boleto/domain/models/enums/category.dart';
+import 'package:so_boleto/domain/models/enums/bill_category.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_section_button_row.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_section_top_icon.dart';
@@ -63,11 +63,11 @@ class BillCategorySection extends StatelessWidget {
               if (state.isEditionFlow)
                 PillButton(
                   child: const Text('Pronto'),
-                  onTap: () => context.pushTo(Routes.billCheck),
+                  onTap: () => context.navigateTo(Routes.billCheck),
                 )
               else
                 BillSectionDoubleButtonRow(
-                  onTap: () => context.pushTo(Routes.billCheck),
+                  onTap: () => context.navigateTo(Routes.billCheck),
                 ),
               AppThemeValues.spaceVerticalLarge
             ],

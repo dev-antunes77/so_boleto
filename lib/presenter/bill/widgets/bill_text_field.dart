@@ -67,6 +67,7 @@ class BillTextField extends StatelessWidget {
           onSubmitted: onSubmitted,
           onChanged: onChanged,
           inputFormatters: formatters,
+          controller: controller,
         ),
       ),
     );

@@ -1,5 +1,5 @@
+import 'package:so_boleto/domain/models/enums/bill_category.dart';
 import 'package:so_boleto/domain/models/enums/bill_state.dart';
-import 'package:so_boleto/domain/models/enums/category.dart';
 
 extension StringExtensions on String {
   String replaceCharAt(String newChar, int position) {
@@ -13,7 +13,7 @@ extension StringExtensions on String {
     return characters.join();
   }
 
-  Category categoryToEnum() => categoryMap.entries
+  BillCategory categoryToEnum() => categoryMap.entries
       .firstWhere((element) => element.value['string'] == this)
       .key;
 

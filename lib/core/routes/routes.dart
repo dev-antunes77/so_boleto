@@ -11,25 +11,8 @@ class Routes {
   static const billParcels = '/bill-parcels';
   static const billValue = '/bill-value';
   static const expenses = '/expenses';
+  static const filter = '/filter';
   static const profile = '/profile';
-
-///////////////////////
-
-  static const radios = '/radios';
-  static const favorites = '/favorites';
-
-  static const account = '/profile/account';
-  static const about = '/profile/about';
-  static const editorial = '/profile/editorial';
-  static const help = '/profile/help';
-  static const policies = '/profile/policies';
-  static const requestData = '/profile/request-data';
-
-  static const login = '/login';
-  static const loginMsisdn = '/login/msisdn';
-  static const loginPinCode = '/login/pincode';
-  static const onboarding = '/onboarding';
-  static const update = '/update';
 }
 
 ///Represents the routes with relative paths
@@ -38,29 +21,13 @@ class Routes {
 class RelativePaths {
   static const app = '/';
   static const home = '/home';
-  static const profile = '/profile';
-  static const expenses = '/expenses';
   static const billCategory = '/bill-category';
   static const billCheck = '/bill-check';
   static const billDueDay = '/bill-due-day';
   static const billName = '/bill-name';
   static const billParcels = '/bill-parcels';
   static const billValue = '/bill-value';
-
-/////////////////////////
-
-  static const radios = '/radios';
-  static const favorites = '/favorites';
-  static const login = '/login';
-  static const msisdn = '/login/msisdn';
-  static const pinCode = '/login/pincode';
-  static const onboarding = '/onboarding';
-  static const update = '/update';
-
-  static const about = 'about';
-  static const account = 'account';
-  static const editorial = 'editorial';
-  static const help = 'help';
-  static const policies = 'policies';
-  static const requestData = 'request-data';
+  static const expenses = '/expenses';
+  static const filter = '/filter';
+  static const profile = '/profile';
 }
