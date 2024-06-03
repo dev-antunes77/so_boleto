@@ -6,19 +6,15 @@ class FilterState extends BaseState with EquatableMixin {
     required super.status,
     super.callbackMessage,
     FilterParams? params,
-    List<BillCategory>? categoryFilters,
-  })  : params = params ?? FilterParams(),
-        categoryFilters = categoryFilters ?? [];
+  }) : params = params ?? FilterParams();
 
   final FilterParams params;
-  final List<BillCategory> categoryFilters;
 
   @override
   List<Object?> get props => [
         status,
         callbackMessage,
         params,
-        categoryFilters,
       ];
 
   @override
@@ -26,12 +22,10 @@ class FilterState extends BaseState with EquatableMixin {
     BaseStateStatus? status,
     String? callbackMessage,
     FilterParams? params,
-    List<BillCategory>? categoryFilters,
   }) =>
       FilterState(
         status: status ?? this.status,
         callbackMessage: callbackMessage ?? this.callbackMessage,
         params: params ?? this.params,
-        categoryFilters: categoryFilters ?? this.categoryFilters,
       );
 }

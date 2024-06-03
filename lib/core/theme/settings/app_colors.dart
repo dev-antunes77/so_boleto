@@ -5,11 +5,12 @@ abstract class AppColors {
   static const textLight = grey;
   static const textLighter = greyLight;
   static const background = white;
-  static const backgroundDark = overlay;
 
   static const primary = Color.fromARGB(255, 4, 135, 58);
-  static const primaryBackground = Color.fromARGB(255, 237, 250, 238);
+  static const primaryDark = Color.fromARGB(66, 4, 135, 59);
   static const primaryLight = Color.fromARGB(255, 149, 254, 209);
+  static const primaryBackground = Color.fromARGB(255, 233, 244, 235);
+
   static const error = Color.fromARGB(255, 145, 22, 13);
   static const white = Color(0xFFFFFFFF);
   static const black = Color(0xFF1F1D1D);

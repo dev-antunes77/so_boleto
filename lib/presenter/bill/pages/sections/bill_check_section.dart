@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/buttons/pill_button.dart';
 import 'package:so_boleto/core/components/expanded_space/expanded_space.dart';
 import 'package:so_boleto/core/components/thin_line_separator/horizontal_thin_line_separator.dart';
-import 'package:so_boleto/core/extensions/enum_extension.dart';
 import 'package:so_boleto/core/extensions/num_extensions.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/helpers/app_formatters.dart';
@@ -12,7 +11,6 @@ import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
-import 'package:so_boleto/domain/models/enums/bill_category.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_edit_tile.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_shell.dart';
@@ -38,14 +36,14 @@ class BillCheckSection extends StatelessWidget {
                   width: double.infinity,
                   onPressed: () => _pushToEditionFlow(context, Routes.billName),
                 ),
-                const HorizontalThinLineSeparator(horizontalPadding: 0),
+                LineSeparator.infiniteHorizon(),
                 BillEditTile(
                   icon: AppIcons.description,
                   label: 'Descrição:',
                   value: state.bill.description.capitalize(),
                   onPressed: () => _pushToEditionFlow(context, Routes.billName),
                 ),
-                const HorizontalThinLineSeparator(horizontalPadding: 0),
+                LineSeparator.infiniteHorizon(),
                 BillEditTile(
                   icon: AppIcons.parcels,
                   label: AppFormatters.parcelLabelFormatter(
@@ -59,7 +57,7 @@ class BillCheckSection extends StatelessWidget {
                   onPressed: () =>
                       _pushToEditionFlow(context, Routes.billParcels),
                 ),
-                const HorizontalThinLineSeparator(horizontalPadding: 0),
+                LineSeparator.infiniteHorizon(),
                 BillEditTile(
                   icon: AppIcons.calendar,
                   label: 'Vencimento:',
@@ -67,7 +65,7 @@ class BillCheckSection extends StatelessWidget {
                   onPressed: () =>
                       _pushToEditionFlow(context, Routes.billDueDay),
                 ),
-                const HorizontalThinLineSeparator(horizontalPadding: 0),
+                LineSeparator.infiniteHorizon(),
                 BillEditTile(
                   icon: AppIcons.value,
                   label: 'Valor:',
@@ -75,11 +73,11 @@ class BillCheckSection extends StatelessWidget {
                   onPressed: () =>
                       _pushToEditionFlow(context, Routes.billValue),
                 ),
-                const HorizontalThinLineSeparator(horizontalPadding: 0),
+                LineSeparator.infiniteHorizon(),
                 BillEditTile(
-                  icon: state.bill.category.enumToIcon(categoryMap),
+                  icon: state.bill.category.value['icon'],
                   label: 'Categoria:',
-                  value: state.bill.category.enumToText(categoryMap),
+                  value: state.bill.category.value['text'],
                   onPressed: () =>
                       _pushToEditionFlow(context, Routes.billCategory),
                 ),

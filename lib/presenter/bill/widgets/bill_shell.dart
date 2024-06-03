@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
+import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 
 class BillShell extends StatelessWidget {
   const BillShell({
@@ -16,13 +17,17 @@ class BillShell extends StatelessWidget {
     return SingleChildScrollView(
       child: ConstrainedBox(
         constraints: BoxConstraints(
-          minHeight:
-              context.height * 0.85 - MediaQuery.of(context).viewInsets.bottom,
+          minHeight: context.height - MediaQuery.of(context).viewInsets.bottom,
         ),
         child: IntrinsicHeight(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 22),
-            child: Center(
+            padding: const EdgeInsets.only(
+              left: AppThemeValues.spaceXLarge,
+              right: AppThemeValues.spaceXLarge,
+              top: AppThemeValues.spaceXLarge,
+            ),
+            child: Align(
+              alignment: Alignment.topCenter,
               child: Card(
                 elevation: 6,
                 shape: const RoundedRectangleBorder(

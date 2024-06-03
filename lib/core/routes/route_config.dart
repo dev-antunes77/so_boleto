@@ -154,7 +154,8 @@ abstract class RoutesConfig {
             pageBuilder: (_, state) => _getTransitionPage(
               state,
               const FilterPage(),
-              type: AppConstants.transitionScale,
+              type: AppConstants.transitionFade,
+              duration: duration300,
             ),
           ),
           // ],

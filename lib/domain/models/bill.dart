@@ -41,7 +41,7 @@ class BillModel extends Equatable {
         name: bill.name,
         description: bill.description,
         category: bill.category.categoryToEnum(),
-        billStatus: bill.billStatus.billStatusToEnum(),
+        billStatus: bill.billStatus.billStatuToEnum(),
         dueEveryMonth: bill.dueEveryMonth,
         totalParcels: bill.totalParcels,
         payedParcels: bill.payedParcels,

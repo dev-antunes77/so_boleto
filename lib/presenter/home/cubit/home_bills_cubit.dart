@@ -6,10 +6,12 @@ import 'package:so_boleto/core/utils/base_cubit.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
 import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/domain/models/enums/bill_state.dart';
+import 'package:so_boleto/domain/models/filter_params.dart';
 import 'package:so_boleto/domain/models/user.dart';
 import 'package:so_boleto/domain/usecases/create_bill_usecase.dart';
 import 'package:so_boleto/domain/usecases/delete_bill_usecase.dart';
 import 'package:so_boleto/domain/usecases/edit_bill_usecase.dart';
+import 'package:so_boleto/domain/usecases/filter_bills_by_params.dart';
 import 'package:so_boleto/domain/usecases/get_bills_usecase.dart';
 import 'package:so_boleto/domain/usecases/set_bill_as_paid_usecase.dart';
 
@@ -22,11 +24,10 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
     this._setBillAsPaidUseCase,
     this._deleteBillUseCase,
     this._editBillUseCase,
+    this._filterBillsByParamsUseCase,
   ) : super(
           HomeBillsState(
             status: BaseStateStatus.initial,
-            bills: List.empty(),
-            querySearch: '',
           ),
         );
 
@@ -35,6 +36,7 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
   final DeleteBillUseCase _deleteBillUseCase;
   final EditBillUseCase _editBillUseCase;
   final SetBillAsPaidUseCase _setBillAsPaidUseCase;
+  final FilterBillsByParamsUseCase _filterBillsByParamsUseCase;
 
   Future<void> getBills() async {
     try {
@@ -119,5 +121,28 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
   void setSearchByNameValue(String query) {
     emit(state.copyWith(status: BaseStateStatus.loading));
     emit(state.copyWith(querySearch: query, status: BaseStateStatus.success));
+  }
+
+  void setFilterParams(FilterParams params) {
+    emit(state.copyWith(status: BaseStateStatus.loading));
+    final filteredBills = _filterBillsByParamsUseCase(state.bills, params);
+    emit(
+      state.copyWith(
+        filteredByParams: filteredBills,
+        paramsApplied: true,
+        status: BaseStateStatus.success,
+      ),
+    );
+
+    void removeFilterParams() {
+      emit(state.copyWith(status: BaseStateStatus.loading));
+      emit(
+        state.copyWith(
+          filteredByParams: [],
+          paramsApplied: false,
+          status: BaseStateStatus.success,
+        ),
+      );
+    }
   }
 }

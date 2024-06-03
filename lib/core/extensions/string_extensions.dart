@@ -13,13 +13,11 @@ extension StringExtensions on String {
     return characters.join();
   }
 
-  BillCategory categoryToEnum() => categoryMap.entries
-      .firstWhere((element) => element.value['string'] == this)
-      .key;
+  BillCategory categoryToEnum() => BillCategory.values
+      .firstWhere((element) => element.value['text'] == this);
 
-  BillStatus billStatusToEnum() => billStatusMap.entries
-      .firstWhere((element) => element.value['string'] == this)
-      .key;
+  BillStatus billStatuToEnum() =>
+      BillStatus.values.firstWhere((element) => element.value == this);
 
   String capitalize() =>
       isNotEmpty ? this[0].toUpperCase() + substring(1).toLowerCase() : this;

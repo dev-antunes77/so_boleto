@@ -12,6 +12,7 @@ import 'package:so_boleto/core/constants/app_constants.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
+import 'package:so_boleto/core/utils/bottom_sheet_utils.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 import 'package:so_boleto/presenter/home/widgets/bill_search_bar.dart';
@@ -54,9 +55,15 @@ class _AppShellState extends State<AppShell> {
                         icon: AppIcons.add,
                         onTap: () => _onCreateBillPressed(),
                       ),
-                      ActionButton(
-                        icon: AppIcons.filter,
-                        onTap: () => _onFilterPressed(),
+                      BlocBuilder<HomeBillsCubit, HomeBillsState>(
+                        builder: (context, state) {
+                          return ActionButton(
+                            icon: state.paramsApplied
+                                ? AppIcons.filterApplied
+                                : AppIcons.filter,
+                            onTap: () => _onFilterPressed(context),
+                          );
+                        },
                       )
                     ]
                   : [],
@@ -86,7 +93,9 @@ class _AppShellState extends State<AppShell> {
       context.currentRoute == Routes.expenses;
 
   bool _hidBackButton() =>
-      _showBottomNav() || context.currentRoute != Routes.billName;
+      _showBottomNav() ||
+      context.currentRoute != Routes.billName ||
+      context.currentRoute != Routes.filter;
 
   void _onChangePage(int index) {
     final cubit = context.read<InitialCubit>();
@@ -104,8 +113,8 @@ class _AppShellState extends State<AppShell> {
     context.read<BillCubit>().initiateCreationFlow();
   }
 
-  void _onFilterPressed() {
-    context.pushTo(Routes.filter);
+  void _onFilterPressed(BuildContext context) {
+    showFilterBottomSheet(context);
     context.read<HomeBillsCubit>().setSearchByNameValue('');
   }
 }

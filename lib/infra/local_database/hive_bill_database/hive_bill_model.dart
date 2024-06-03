@@ -1,10 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:hive/hive.dart';
-import 'package:so_boleto/core/extensions/enum_extension.dart';
 import 'package:so_boleto/domain/models/bill.dart';
-import 'package:so_boleto/domain/models/enums/bill_category.dart';
-import 'package:so_boleto/domain/models/enums/bill_state.dart';
 
 part 'hive_bill_model.g.dart';
 
@@ -28,8 +25,8 @@ final class HiveBillModel with HiveObjectMixin {
         id: bill.id,
         name: bill.name,
         description: bill.description,
-        category: bill.category.enumToText(categoryMap),
-        billStatus: bill.billStatus.enumToText(billStatusMap),
+        category: bill.category.value['text'],
+        billStatus: bill.billStatus.value,
         dueEveryMonth: bill.dueEveryMonth,
         totalParcels: bill.totalParcels,
         payedParcels: bill.payedParcels,

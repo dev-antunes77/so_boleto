@@ -12,11 +12,11 @@ class BillSectionTopIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
-          top: AppThemeValues.spaceImense, bottom: AppThemeValues.spaceMassive),
+          top: AppThemeValues.spaceMassive, bottom: AppThemeValues.spaceXLarge),
       child: SvgAsset(
         svg: icon,
         height: 70,
-        color: AppColors.primaryLight,
+        color: AppColors.primary,
       ),
     );
   }

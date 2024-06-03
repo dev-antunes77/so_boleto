@@ -26,7 +26,11 @@ class BillEditTile extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: AppThemeValues.spaceTiny),
       child: Row(
         children: [
-          SvgAsset(svg: icon, height: 32, color: AppColors.primaryLight),
+          SvgAsset(
+            svg: icon,
+            height: 32,
+            color: AppColors.primary,
+          ),
           AppThemeValues.spaceHorizontalXLarge,
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

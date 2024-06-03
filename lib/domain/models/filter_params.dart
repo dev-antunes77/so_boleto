@@ -3,38 +3,30 @@ import 'package:so_boleto/domain/models/enums/bill_category.dart';
 class FilterParams {
   FilterParams({
     List<BillCategory>? categoryList,
-    int? value,
-    bool? dueEveryMonth,
-    int? dueDay,
-    int? parcelsLeft,
-    int? totalParcels,
+    List<int>? priceRange,
+    List<int>? dueDayRange,
+    List<int>? parcelRange,
   })  : categoryList = categoryList ?? [],
-        value = value ?? 1,
-        dueEveryMonth = dueEveryMonth ?? false,
-        dueDay = dueDay ?? DateTime.now().day,
-        parcelsLeft = parcelsLeft ?? 0,
-        totalParcels = totalParcels ?? 0;
+        priceRange = priceRange ?? [],
+        dueDayRange = dueDayRange ?? [],
+        parcelRange = parcelRange ?? [];
 
   final List<BillCategory> categoryList;
-  final int value;
-  final bool dueEveryMonth;
-  final int parcelsLeft;
-  final int dueDay;
-  final int totalParcels;
+  final List<int> priceRange;
+  final List<int> dueDayRange;
+  final List<int> parcelRange;
 
   FilterParams copyWith({
     List<BillCategory>? categoryList,
-    int? value,
-    bool? dueEveryMonth,
-    int? parcelsLeft,
-    int? totalParcels,
+    List<int>? priceRange,
+    List<int>? dueDayRange,
+    List<int>? parcelRange,
   }) {
     return FilterParams(
       categoryList: categoryList ?? this.categoryList,
-      value: value ?? this.value,
-      dueEveryMonth: dueEveryMonth ?? this.dueEveryMonth,
-      parcelsLeft: parcelsLeft ?? this.parcelsLeft,
-      totalParcels: totalParcels ?? this.totalParcels,
+      priceRange: priceRange ?? this.priceRange,
+      dueDayRange: dueDayRange ?? this.dueDayRange,
+      parcelRange: parcelRange ?? this.parcelRange,
     );
   }
 }

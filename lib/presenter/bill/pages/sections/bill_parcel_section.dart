@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/buttons/pill_button.dart';
+import 'package:so_boleto/core/components/custom_dropdown_menu/custom_dropdown_menu.dart';
 import 'package:so_boleto/core/components/expanded_section/expanded_section.dart';
 import 'package:so_boleto/core/components/expanded_space/expanded_space.dart';
 import 'package:so_boleto/core/constants/app_constants.dart';
+import 'package:so_boleto/core/extensions/num_extensions.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
-import 'package:so_boleto/presenter/bill/widgets/bill_dropdown_menu.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_parcel_switch_row.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_section_button_row.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_shell.dart';
@@ -76,10 +77,20 @@ class _BillParcelSectionState extends State<BillParcelSection> {
                     AppThemeValues.spaceHorizontalLarge,
                     BlocBuilder<BillCubit, BillState>(
                       builder: (context, state) {
-                        return BillDropdownMenu(
-                            list: AppConstants.parcelsLength,
-                            dueDayOfTheMonth: state.bill.totalParcels,
-                            onChanged: (value) => _onSelectingParcels(value));
+                        return CustomDropdownMenu(
+                          value: state.bill.totalParcels,
+                          items: AppConstants.parcelsLength
+                              .map(
+                                (e) => DropdownMenuItem<int>(
+                                  value: e,
+                                  child: Text(
+                                    e.addLeadingZero(),
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                          onChanged: (value) => _onSelectingParcels(value),
+                        );
                       },
                     ),
                   ],

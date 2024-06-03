@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/dialogs/app_dialogs.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
 import 'package:so_boleto/core/constants/app_constants.dart';
-import 'package:so_boleto/core/extensions/enum_extension.dart';
 import 'package:so_boleto/core/extensions/num_extensions.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/helpers/app_formatters.dart';
@@ -12,7 +11,6 @@ import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/domain/models/bill.dart';
-import 'package:so_boleto/domain/models/enums/bill_category.dart';
 import 'package:so_boleto/domain/models/enums/bill_state.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
@@ -56,7 +54,7 @@ class BillListTile extends StatelessWidget {
                     radius: 25,
                     backgroundColor: AppColors.grey,
                     child: SvgAsset(
-                      svg: bill.category.enumToIcon(categoryMap),
+                      svg: bill.category.value['icon'],
                       height: 30,
                       color: AppColors.primaryLight,
                     ),
@@ -92,10 +90,11 @@ class BillListTile extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
                         bill.value.toDouble().formatCurrency(),
-                        style: context.textRobotoSubtitleSmall,
+                        style: context.textRobotoSubtitleXSmall,
                       ),
                       Text(
                         AppFormatters.parcelRelationFormatter(

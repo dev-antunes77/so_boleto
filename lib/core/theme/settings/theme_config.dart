@@ -15,7 +15,7 @@ abstract class ThemeSettings {
       dividerTheme: _dividerTheme(),
       inputDecorationTheme: _inputDecorationTheme(colors),
       dialogTheme: _dialogTheme(colors),
-      scaffoldBackgroundColor: colors.background,
+      scaffoldBackgroundColor: colors.surface,
     );
   }
 
@@ -30,7 +30,7 @@ abstract class ThemeSettings {
       floatingActionButtonTheme: _floatingActionButtonTheme(colors),
       dividerTheme: _dividerTheme(),
       inputDecorationTheme: _inputDecorationTheme(colors),
-      scaffoldBackgroundColor: colors.background,
+      scaffoldBackgroundColor: colors.surface,
     );
   }
 
@@ -39,7 +39,6 @@ abstract class ThemeSettings {
         brightness: brightness,
         seedColor: AppColors.primary,
         primary: AppColors.primary,
-        background: AppColors.background,
         surface: AppColors.background,
         onSurface: AppColors.text,
         error: AppColors.error,
@@ -61,7 +60,7 @@ abstract class ThemeSettings {
           ColorScheme colors) =>
       BottomNavigationBarThemeData(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: colors.background,
+        backgroundColor: colors.surface,
         showSelectedLabels: true,
         showUnselectedLabels: true,
         elevation: 0,

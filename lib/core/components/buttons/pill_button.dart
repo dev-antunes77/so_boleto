@@ -59,12 +59,12 @@ class PillButton extends StatelessWidget {
 
     return outlinedButton
         ? OutlinedButton(
-            onPressed: onTap,
+            onPressed: isDisabled ? () {} : onTap,
             style: buttonStyle,
             child: child,
           )
         : ElevatedButton(
-            onPressed: onTap,
+            onPressed: isDisabled ? () {} : onTap,
             style: buttonStyle,
             child: child,
           );

@@ -10,6 +10,7 @@ abstract class AppIcons {
   static const delete = 'assets/svgs/delete.svg';
   static const description = 'assets/svgs/description.svg';
   static const disappointed1 = 'assets/svgs/disappointed1.svg';
+  static const disappointed2 = 'assets/svgs/disappointed2.svg';
   static const education = 'assets/svgs/education.svg';
   static const electricity = 'assets/svgs/electricity.svg';
   static const devices = 'assets/svgs/devices.svg';
@@ -17,6 +18,7 @@ abstract class AppIcons {
   static const error = 'assets/svgs/error.svg';
   static const expense = 'assets/svgs/expense.svg';
   static const filter = 'assets/svgs/filter.svg';
+  static const filterApplied = 'assets/svgs/filter_applied.svg';
   static const groceries = 'assets/svgs/groceries.svg';
   static const happy = 'assets/svgs/happy.svg';
   static const healthCare = 'assets/svgs/health_care.svg';
