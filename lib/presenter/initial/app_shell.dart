@@ -7,6 +7,7 @@ import 'package:so_boleto/core/components/custom_pop_scope/custom_pop_scope.dart
 import 'package:so_boleto/core/components/status_page/widgets/shimmer.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
+import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_flow_app_bar.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 import 'package:so_boleto/presenter/home/widgets/home_app_bar.dart';
@@ -36,7 +37,8 @@ class _AppShellState extends State<AppShell> {
         child: Scaffold(
           backgroundColor: AppColors.primaryBackground,
           appBar: PreferredSize(
-            preferredSize: const Size(double.infinity, 40),
+            preferredSize:
+                const Size(double.infinity, AppThemeValues.spaceEnormous),
             child: context.currentRoute == Routes.home
                 ? const HomeAppBar()
                 : context.currentRoute.contains('bill')

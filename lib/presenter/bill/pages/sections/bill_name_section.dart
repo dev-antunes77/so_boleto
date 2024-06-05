@@ -52,6 +52,7 @@ class _BillNameSectionState extends State<BillNameSection> {
                     state.bill.name, state.bill.description),
                 onSubmitted: (_) =>
                     _onSubmitted(state.bill.name, state.bill.description),
+                onTapOutside: (p0) => FocusScope.of(context).unfocus(),
               ),
               BillTextField(
                 hitText: 'Descrição da conta',
@@ -63,6 +64,7 @@ class _BillNameSectionState extends State<BillNameSection> {
                     state.bill.name, state.bill.description),
                 onSubmitted: (_) =>
                     _onSubmitted(state.bill.name, state.bill.description),
+                onTapOutside: (p0) => FocusScope.of(context).unfocus(),
               ),
               const ExpandedSpace(),
               if (state.isEditionFlow)

@@ -74,7 +74,10 @@ class _FilterPageState extends State<FilterPage> {
                       padding: const EdgeInsets.only(
                           right: AppThemeValues.spaceXSmall),
                       child: GestureDetector(
-                        onTap: () => context.pop(true),
+                        onTap: () {
+                          context.pop(true);
+                          FocusScope.of(context).unfocus();
+                        },
                         child: const CircleAvatar(
                           radius: AppThemeValues.spaceMedium,
                           backgroundColor: AppColors.greyLight,
@@ -137,20 +140,16 @@ class _FilterPageState extends State<FilterPage> {
                 ),
                 LineSeparator.infiniteHorizon(),
                 const ExpandedSpace(),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    right: AppThemeValues.spaceSmall,
-                  ),
-                  child: RectangularButton(
-                    label: 'Aplicar',
-                    isValid: cubit.areFiltersValid(),
-                    onTap: () {
-                      context.read<HomeBillsCubit>().setFilterParams(
-                            cubit.createFilterParams(),
-                          );
-                      context.pop(true);
-                    },
-                  ),
+                RectangularButton(
+                  label: 'Aplicar',
+                  isValid: cubit.areFiltersValid(),
+                  onTap: () {
+                    context.read<HomeBillsCubit>().setFilterParams(
+                          cubit.createFilterParams(),
+                        );
+                    context.pop(true);
+                    FocusScope.of(context).unfocus();
+                  },
                 ),
                 AppThemeValues.spaceVerticalMedium
               ],

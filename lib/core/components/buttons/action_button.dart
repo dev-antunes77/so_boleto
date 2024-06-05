@@ -7,22 +7,25 @@ class ActionButton extends StatelessWidget {
   const ActionButton({
     super.key,
     required this.icon,
+    this.height,
     required this.onTap,
   });
 
   final String icon;
+  final double? height;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:
-          const EdgeInsets.symmetric(horizontal: AppThemeValues.spaceXSmall),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppThemeValues.spaceXSmall,
+      ),
       child: GestureDetector(
         onTap: onTap,
         child: SvgAsset(
           svg: icon,
-          height: 23,
+          height: height ?? 26,
           color: AppColors.primary,
         ),
       ),

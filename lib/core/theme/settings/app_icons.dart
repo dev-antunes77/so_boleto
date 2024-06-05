@@ -1,5 +1,9 @@
 abstract class AppIcons {
   static const add = 'assets/svgs/add.svg';
+  static const addReady = 'assets/svgs/add_ready.svg';
+  static const addReady2 = 'assets/svgs/add_ready2.svg';
+  static const addReady3 = 'assets/svgs/add_ready3.svg';
+  static const addReady4 = 'assets/svgs/add_ready4.svg';
   static const automobile = 'assets/svgs/automobile.svg';
   static const coins = 'assets/svgs/coins.svg';
   static const calendar = 'assets/svgs/calendar.svg';
@@ -27,6 +31,7 @@ abstract class AppIcons {
   static const internet = 'assets/svgs/internet.svg';
   static const miscellaneous = 'assets/svgs/miscellaneous.svg';
   static const money = 'assets/svgs/money.svg';
+  static const more = 'assets/svgs/more.svg';
   static const parcels = 'assets/svgs/parcels.svg';
   static const payment = 'assets/svgs/payment.svg';
   static const phone = 'assets/svgs/communication.svg';

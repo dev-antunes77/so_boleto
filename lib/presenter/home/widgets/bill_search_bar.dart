@@ -24,21 +24,19 @@ class _SearchBarAnimationState extends State<BillSearchBar> {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 500),
       width: isExpanded ? context.width * 0.65 : 36,
-      height: 36,
+      height: 42,
       child: TextField(
         onTap: () => setState(() => isExpanded = true),
-        cursorHeight: 20,
+        cursorHeight: 25,
         maxLines: 1,
+        style: context.textMedium,
         decoration: InputDecoration(
           contentPadding:
               const EdgeInsets.only(bottom: AppThemeValues.spaceXSmall),
-          prefixIcon: const Padding(
-            padding:
-                EdgeInsets.symmetric(horizontal: AppThemeValues.spaceXXXSmall),
-            child: SvgAsset(
-              svg: AppIcons.search,
-              color: AppColors.primary,
-            ),
+          prefixIcon: const SvgAsset(
+            svg: AppIcons.search,
+            height: 30,
+            color: AppColors.primary,
           ),
           suffixIcon: isExpanded
               ? GestureDetector(

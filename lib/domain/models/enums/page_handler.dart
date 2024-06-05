@@ -23,11 +23,7 @@ enum PageResponseHandler {
   }),
   noneWithThisName({
     'icon': AppIcons.disappointed1,
-    'text': 'Nenhuma conta encontrada.',
-  }),
-  noneWithinThisDates({
-    'icon': '',
-    'text': '',
+    'text': 'Nenhuma conta com esse nome.',
   });
 
   const PageResponseHandler(this.value);

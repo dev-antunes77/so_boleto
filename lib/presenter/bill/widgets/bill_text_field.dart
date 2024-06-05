@@ -11,6 +11,7 @@ class BillTextField extends StatelessWidget {
     required this.controller,
     required this.onChanged,
     this.onSubmitted,
+    this.onTapOutside,
     required this.hitText,
     this.icon,
     this.textInputType,
@@ -24,6 +25,7 @@ class BillTextField extends StatelessWidget {
   final TextEditingController controller;
   final Function(String) onChanged;
   final Function(String)? onSubmitted;
+  final Function(PointerDownEvent)? onTapOutside;
   final String hitText;
   final String? helperText;
   final String? icon;
@@ -66,6 +68,7 @@ class BillTextField extends StatelessWidget {
           textInputAction: textInputAction,
           onSubmitted: onSubmitted,
           onChanged: onChanged,
+          onTapOutside: onTapOutside,
           inputFormatters: formatters,
           controller: controller,
         ),
