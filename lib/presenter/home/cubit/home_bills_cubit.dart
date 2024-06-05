@@ -133,16 +133,16 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
         status: BaseStateStatus.success,
       ),
     );
+  }
 
-    void removeFilterParams() {
-      emit(state.copyWith(status: BaseStateStatus.loading));
-      emit(
-        state.copyWith(
-          filteredByParams: [],
-          paramsApplied: false,
-          status: BaseStateStatus.success,
-        ),
-      );
-    }
+  void removeFilterParams() {
+    emit(state.copyWith(status: BaseStateStatus.loading));
+    emit(
+      state.copyWith(
+        filteredByParams: [],
+        paramsApplied: false,
+        status: BaseStateStatus.success,
+      ),
+    );
   }
 }
