@@ -16,16 +16,20 @@ class PromptBillsAppBar extends StatelessWidget {
       actions: [
         BlocBuilder<PromptBillsCubit, PromptBillsState>(
           builder: (context, state) {
-            return AppBarButton(
-              label: state.allSelected ? 'Remover todas' : 'Selecionar todas',
-              onTap: state.allSelected
-                  ? () => context
-                      .read<PromptBillsCubit>()
-                      .handleAllBillsAtOnce(select: false)
-                  : () => context
-                      .read<PromptBillsCubit>()
-                      .handleAllBillsAtOnce(select: true),
-            );
+            return state.promptBills.isEmpty
+                ? const SizedBox.shrink()
+                : AppBarButton(
+                    label: state.allSelected
+                        ? 'Remover todas'
+                        : 'Selecionar todas',
+                    onTap: state.allSelected
+                        ? () => context
+                            .read<PromptBillsCubit>()
+                            .handleAllBillsAtOnce(select: false)
+                        : () => context
+                            .read<PromptBillsCubit>()
+                            .handleAllBillsAtOnce(select: true),
+                  );
           },
         ),
       ],

@@ -71,18 +71,24 @@ abstract final class PromptBillData {
     ),
     PromptBill(
       id: '00000000012',
-      name: 'Remédios',
+      name: 'Plano de saúde',
       category: BillCategory.healthCare,
       isSelected: false,
     ),
     PromptBill(
       id: '00000000013',
+      name: 'Remédios',
+      category: BillCategory.healthCare,
+      isSelected: false,
+    ),
+    PromptBill(
+      id: '00000000014',
       name: 'Telefone',
       category: BillCategory.communication,
       isSelected: false,
     ),
     PromptBill(
-      id: '00000000014',
+      id: '00000000015',
       name: 'Transporte',
       category: BillCategory.transportation,
       isSelected: false,

@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:so_boleto/domain/database/hive_bills.dart';
+import 'package:so_boleto/domain/usecases/add_prompt_bills_usecase.dart';
 import 'package:so_boleto/domain/usecases/create_bill_usecase.dart';
 import 'package:so_boleto/domain/usecases/delete_bill_usecase.dart';
 import 'package:so_boleto/domain/usecases/edit_bill_usecase.dart';
@@ -99,6 +100,9 @@ abstract class InjectionService {
     _i.registerFactory(
       () => FilterBillsByParamsUseCase(),
     );
+    _i.registerFactory(
+      () => AddPromptBillsUsecase(_i.get<HiveBillsDatabase>()),
+    );
     // _i.registerFactory(
     //   () => SignUpUseCase(
     //     _i.get<AuthService>(),
@@ -181,6 +185,7 @@ abstract class InjectionService {
         _i.get<DeleteBillUseCase>(),
         _i.get<EditBillUseCase>(),
         _i.get<FilterBillsByParamsUseCase>(),
+        _i.get<AddPromptBillsUsecase>(),
       ),
     );
 

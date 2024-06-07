@@ -1,3 +1,4 @@
+import 'package:so_boleto/core/extensions/map_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 
 enum BillCategory {
@@ -88,7 +89,7 @@ enum BillCategory {
   static List<String> get categoryList {
     List<String> list = [];
     for (var element in BillCategory.values) {
-      list.add(element.value['text']);
+      list.add(element.value.mapToText());
     }
     return list;
   }

@@ -14,6 +14,7 @@ BottomNavigationBarItem buildBottomNavigationBarItem(
         child: SvgAsset(
           height: 30,
           svg: icon,
+          color: AppColors.greyMediumLight,
         ),
       ),
       activeIcon: Padding(

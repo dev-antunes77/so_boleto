@@ -1,5 +1,5 @@
 enum DueDayOrParcelRanges {
-  upToThree([0, 100]),
+  upToThree([0, 3]),
   fourToSeven([4, 7]),
   eightToTwelve([8, 12]),
   thirteenToEighteen([13, 18]),

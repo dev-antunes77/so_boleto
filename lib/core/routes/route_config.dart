@@ -167,6 +167,7 @@ abstract class RoutesConfig {
               state,
               const PromptBillsPage(),
               type: PageTransitions.transitionScale,
+              duration: duration300,
             ),
           ),
           // GoRoute(

@@ -5,6 +5,10 @@ enum PageResponseHandler {
     'icon': AppIcons.error,
     'text': 'Ops!\nAlgo deu errado.',
   }),
+  noMorePromptBills({
+    'icon': AppIcons.happy2,
+    'text': 'Você já utilizou todas as contas prontas disponíveis.',
+  }),
   noneAdded({
     'icon': AppIcons.sad2,
     'text': 'Você não tem contas cadastradas.',

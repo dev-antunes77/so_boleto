@@ -16,17 +16,18 @@ final class FilterBillsByParamsUseCase {
           .toList();
       final billsByParecels = bills
           .where(
-            (element) => params.parcelRange.contains(element.totalParcels),
+            (element) => _filterMatch(element.totalParcels, params.parcelRange),
           )
           .toList();
       final billByDueDay = bills
           .where(
-            (element) => params.dueDayRange.contains(element.dueDayOfTheMonth),
+            (element) =>
+                _filterMatch(element.dueDayOfTheMonth, params.dueDayRange),
           )
           .toList();
       final billByPriceRange = bills
           .where(
-            (element) => params.priceRange.contains(element.value),
+            (element) => _filterMatch(element.value, params.priceRange),
           )
           .toList();
       return billByCategory + billsByParecels + billByDueDay + billByPriceRange;
@@ -38,4 +39,7 @@ final class FilterBillsByParamsUseCase {
       throw ClientError(AppLocalizations.current.errorUnknowError);
     }
   }
+
+  bool _filterMatch(int value, List<int> range) =>
+      value > range.first && value <= range.last;
 }

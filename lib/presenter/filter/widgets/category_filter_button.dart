@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:so_boleto/core/extensions/map_extensions.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
@@ -51,7 +52,7 @@ class CategoryFilterButton extends StatelessWidget {
                 ),
                 AppThemeValues.spaceHorizontalTiny,
                 Text(
-                  pill.category.value['text'],
+                  pill.category.value.mapToText(),
                   style: context.textRobotoXSmall,
                 ),
               ],

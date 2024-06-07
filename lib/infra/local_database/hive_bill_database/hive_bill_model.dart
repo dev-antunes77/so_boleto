@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:hive/hive.dart';
+import 'package:so_boleto/core/extensions/map_extensions.dart';
 import 'package:so_boleto/domain/models/bill.dart';
 
 part 'hive_bill_model.g.dart';
@@ -25,7 +26,7 @@ final class HiveBillModel with HiveObjectMixin {
         id: bill.id,
         name: bill.name,
         description: bill.description,
-        category: bill.category.value['text'],
+        category: bill.category.value.mapToText(),
         billStatus: bill.billStatus.value,
         dueEveryMonth: bill.dueEveryMonth,
         totalParcels: bill.totalParcels,

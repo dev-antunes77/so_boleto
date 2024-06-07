@@ -23,6 +23,8 @@ abstract class AppIcons {
   static const groceries = 'assets/svgs/groceries.svg';
   static const gas = 'assets/svgs/gas.svg';
   static const happy = 'assets/svgs/happy.svg';
+  static const happy2 = 'assets/svgs/happy2.svg';
+  static const happy3 = 'assets/svgs/happy3.svg';
   static const healthCare = 'assets/svgs/health_care.svg';
   static const insurance = 'assets/svgs/insurance.svg';
   static const investment = 'assets/svgs/investment.svg';

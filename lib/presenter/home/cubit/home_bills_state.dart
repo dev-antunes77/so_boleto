@@ -28,7 +28,15 @@ class HomeBillsState extends BaseState with EquatableMixin {
         paramsApplied,
       ];
 
-  List<BillModel> get allBills => paramsApplied ? filteredByParams : bills;
+  List<BillModel> get allBills => paramsApplied
+      ? bills
+          .where(
+            (element) => filteredByParams.any(
+              (filtered) => filtered.id == element.id,
+            ),
+          )
+          .toList()
+      : bills;
 
   List<BillModel> get payedBills => allBills
       .where((element) => element.billStatus == BillStatus.payed)

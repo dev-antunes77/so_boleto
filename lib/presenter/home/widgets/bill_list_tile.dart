@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/dialogs/app_dialogs.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
+import 'package:so_boleto/core/extensions/map_extensions.dart';
 import 'package:so_boleto/core/extensions/num_extensions.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/helpers/app_formatters.dart';
@@ -55,7 +56,7 @@ class BillListTile extends StatelessWidget {
                     radius: 25,
                     backgroundColor: AppColors.grey,
                     child: SvgAsset(
-                      svg: bill.category.value['icon'],
+                      svg: bill.category.value.mapToIcon(),
                       height: 30,
                       color: AppColors.primaryLight,
                     ),
@@ -94,14 +95,20 @@ class BillListTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        bill.value.toDouble().formatCurrency(),
-                        style: context.textRobotoSubtitleXSmall,
+                        bill.value <= 0
+                            ? 'Valor não\ninformado'
+                            : bill.value.toDouble().formatCurrency(),
+                        style: bill.value <= 0
+                            ? context.textRobotoSubtitleTiny
+                            : context.textRobotoSubtitleXSmall,
+                        textAlign: TextAlign.right,
                       ),
                       Text(
                         AppFormatters.parcelRelationFormatter(
-                            bill.dueEveryMonth,
-                            bill.totalParcels,
-                            bill.payedParcels),
+                          bill.dueEveryMonth,
+                          bill.totalParcels,
+                          bill.payedParcels,
+                        ),
                         textAlign: TextAlign.center,
                         style: context.textRobotoSubtitleTiny,
                       ),

@@ -22,7 +22,7 @@ class AppBarButton extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Card(
-          color: AppColors.primary,
+          color: AppColors.primary.withOpacity(0.6),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
               AppThemeValues.spaceSmall,

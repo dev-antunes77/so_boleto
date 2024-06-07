@@ -7,7 +7,9 @@ import 'package:so_boleto/core/utils/base_state.dart';
 import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/domain/models/enums/bill_state.dart';
 import 'package:so_boleto/domain/models/filter_params.dart';
+import 'package:so_boleto/domain/models/prompt_bill.dart';
 import 'package:so_boleto/domain/models/user.dart';
+import 'package:so_boleto/domain/usecases/add_prompt_bills_usecase.dart';
 import 'package:so_boleto/domain/usecases/create_bill_usecase.dart';
 import 'package:so_boleto/domain/usecases/delete_bill_usecase.dart';
 import 'package:so_boleto/domain/usecases/edit_bill_usecase.dart';
@@ -25,11 +27,8 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
     this._deleteBillUseCase,
     this._editBillUseCase,
     this._filterBillsByParamsUseCase,
-  ) : super(
-          HomeBillsState(
-            status: BaseStateStatus.initial,
-          ),
-        );
+    this._addPromptBillsUsecase,
+  ) : super(HomeBillsState(status: BaseStateStatus.initial));
 
   final GetBillsUseCase _getBillsUseCase;
   final CreateBillUseCase _createBillUseCase;
@@ -37,6 +36,7 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
   final EditBillUseCase _editBillUseCase;
   final SetBillAsPaidUseCase _setBillAsPaidUseCase;
   final FilterBillsByParamsUseCase _filterBillsByParamsUseCase;
+  final AddPromptBillsUsecase _addPromptBillsUsecase;
 
   Future<void> getBills() async {
     try {
@@ -144,5 +144,21 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
         status: BaseStateStatus.success,
       ),
     );
+  }
+
+  void addPrompBills(List<PromptBill> promptBills) async {
+    try {
+      emit(state.copyWith(status: BaseStateStatus.loading));
+      await _addPromptBillsUsecase(promptBills);
+      await getBills();
+      emit(state.copyWith(status: BaseStateStatus.success));
+    } on AppError catch (error) {
+      onAppError(error);
+      emit(
+        state.copyWith(
+          status: BaseStateStatus.error,
+        ),
+      );
+    }
   }
 }

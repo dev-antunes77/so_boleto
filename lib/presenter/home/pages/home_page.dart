@@ -5,7 +5,7 @@ import 'package:so_boleto/core/components/custom_state_handler/custom_state_hand
 import 'package:so_boleto/core/components/status_page/pages/loading_page.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
-import 'package:so_boleto/domain/models/enums/page_handler.dart';
+import 'package:so_boleto/domain/models/enums/page_response_handler.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 import 'package:so_boleto/presenter/home/widgets/home_bill_tab.dart';
 import 'package:so_boleto/presenter/home/widgets/tab_indicator.dart';

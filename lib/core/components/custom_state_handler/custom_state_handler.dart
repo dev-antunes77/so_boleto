@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
+import 'package:so_boleto/core/extensions/map_extensions.dart';
 import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
-import 'package:so_boleto/domain/models/enums/page_handler.dart';
+import 'package:so_boleto/domain/models/enums/page_response_handler.dart';
 
 class CustomStateHandler extends StatelessWidget {
   const CustomStateHandler(
@@ -27,16 +28,21 @@ class CustomStateHandler extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SvgAsset(
-                svg: message.value['icon'],
+                svg: message.value.mapToIcon(),
                 height: 100,
                 color: AppColors.grey,
               ),
               AppThemeValues.spaceVerticalLarge,
-              Text(
-                message.value['text'],
-                textAlign: TextAlign.center,
-                style: context.textLarge.copyWith(
-                  color: AppColors.grey,
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppThemeValues.spaceXLarge,
+                ),
+                child: Text(
+                  message.value.mapToText(),
+                  textAlign: TextAlign.center,
+                  style: context.textLarge.copyWith(
+                    color: AppColors.grey,
+                  ),
                 ),
               )
             ],
