@@ -1,9 +1,6 @@
 abstract class AppIcons {
   static const add = 'assets/svgs/add.svg';
   static const addReady = 'assets/svgs/add_ready.svg';
-  static const addReady2 = 'assets/svgs/add_ready2.svg';
-  static const addReady3 = 'assets/svgs/add_ready3.svg';
-  static const addReady4 = 'assets/svgs/add_ready4.svg';
   static const automobile = 'assets/svgs/automobile.svg';
   static const coins = 'assets/svgs/coins.svg';
   static const calendar = 'assets/svgs/calendar.svg';
@@ -24,6 +21,7 @@ abstract class AppIcons {
   static const filter = 'assets/svgs/filter.svg';
   static const filterApplied = 'assets/svgs/filter_applied.svg';
   static const groceries = 'assets/svgs/groceries.svg';
+  static const gas = 'assets/svgs/gas.svg';
   static const happy = 'assets/svgs/happy.svg';
   static const healthCare = 'assets/svgs/health_care.svg';
   static const insurance = 'assets/svgs/insurance.svg';
@@ -34,6 +32,7 @@ abstract class AppIcons {
   static const more = 'assets/svgs/more.svg';
   static const parcels = 'assets/svgs/parcels.svg';
   static const payment = 'assets/svgs/payment.svg';
+  static const petShop = 'assets/svgs/pet_shop.svg';
   static const phone = 'assets/svgs/communication.svg';
   static const profile = 'assets/svgs/profile.svg';
   static const rent = 'assets/svgs/rent.svg';

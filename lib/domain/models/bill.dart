@@ -5,6 +5,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/domain/models/enums/bill_category.dart';
 import 'package:so_boleto/domain/models/enums/bill_state.dart';
+import 'package:so_boleto/domain/models/prompt_bill.dart';
 import 'package:so_boleto/infra/local_database/hive_bill_database/hive_bill_model.dart';
 
 part 'bill.g.dart';
@@ -48,6 +49,20 @@ class BillModel extends Equatable {
         value: bill.value,
         dueDayOfTheMonth: bill.dueDayOfTheMonth,
         createdAt: bill.createdAt,
+      );
+
+  factory BillModel.fromPromptToBill(PromptBill promptBill) => BillModel(
+        id: promptBill.id,
+        name: promptBill.name,
+        description: '',
+        category: promptBill.category,
+        billStatus: BillStatus.open,
+        dueEveryMonth: true,
+        totalParcels: 0,
+        payedParcels: 0,
+        value: 0,
+        dueDayOfTheMonth: 0,
+        createdAt: DateTime.now(),
       );
 
   final String id;

@@ -1,11 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:so_boleto/core/constants/app_constants.dart';
 import 'package:so_boleto/core/utils/base_cubit.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
 import 'package:so_boleto/domain/models/enums/bill_category.dart';
+import 'package:so_boleto/domain/models/enums/due_day_and_parcel_ranges.dart';
+import 'package:so_boleto/domain/models/enums/price_ranges.dart';
 import 'package:so_boleto/domain/models/filter_params.dart';
-import 'package:so_boleto/presenter/filter/models/filter_pill.dart';
+import 'package:so_boleto/domain/models/filter_pill.dart';
 
 part 'filter_state.dart';
 
@@ -27,7 +28,7 @@ class FilterCubit extends Cubit<FilterState> with BaseCubit {
       state.copyWith(
         status: BaseStateStatus.updateRequired,
         parcelFilter:
-            value ?? false ? AppConstants.parcelOrDueDayRanges.first : parcels,
+            value ?? false ? DueDayOrParcelRanges.upToThree.value : parcels,
         parcelSelected: value,
       ),
     );
@@ -38,7 +39,7 @@ class FilterCubit extends Cubit<FilterState> with BaseCubit {
       state.copyWith(
         status: BaseStateStatus.updateRequired,
         priceFilter:
-            value ?? false ? AppConstants.priceRanges.first : priceRange,
+            value ?? false ? PriceRanges.upToHundred.value : priceRange,
         priceSelected: value,
       ),
     );
@@ -47,9 +48,8 @@ class FilterCubit extends Cubit<FilterState> with BaseCubit {
   void onDueDaySelected({List<int>? dueDayRange, bool? value}) {
     emit(
       state.copyWith(
-        dueDayFilter: value ?? false
-            ? AppConstants.parcelOrDueDayRanges.first
-            : dueDayRange,
+        dueDayFilter:
+            value ?? false ? DueDayOrParcelRanges.upToThree.value : dueDayRange,
         dueDaySelected: value,
       ),
     );
@@ -74,13 +74,13 @@ class FilterCubit extends Cubit<FilterState> with BaseCubit {
       categoryList: categories,
       dueDayRange: state.dueDaySelected
           ? state.dueDayFilter
-          : AppConstants.parcelOrDueDayRanges.first,
+          : DueDayOrParcelRanges.upToThree.value,
       priceRange: state.priceSelected
           ? state.priceFilter
-          : AppConstants.priceRanges.first,
+          : PriceRanges.upToHundred.value,
       parcelRange: state.parcelSelected
           ? state.parcelFilter
-          : AppConstants.parcelOrDueDayRanges.first,
+          : DueDayOrParcelRanges.upToThree.value,
     );
   }
 
@@ -90,9 +90,9 @@ class FilterCubit extends Cubit<FilterState> with BaseCubit {
     }
     emit(state.copyWith(
       status: BaseStateStatus.success,
-      parcelFilter: AppConstants.parcelOrDueDayRanges.first,
-      dueDayFilter: AppConstants.parcelOrDueDayRanges.first,
-      priceFilter: AppConstants.priceRanges.first,
+      parcelFilter: DueDayOrParcelRanges.upToThree.value,
+      dueDayFilter: DueDayOrParcelRanges.upToThree.value,
+      priceFilter: PriceRanges.upToHundred.value,
     ));
   }
 }

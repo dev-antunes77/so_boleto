@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/custom_app_bar/custom_app_bar.dart';
 import 'package:so_boleto/core/components/custom_menu_anchor/custom_menu_anchor.dart';
-import 'package:so_boleto/core/constants/app_constants.dart';
 import 'package:so_boleto/core/routes/routes.dart';
-import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
+import 'package:so_boleto/domain/models/enums/page_transitions.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
 import 'package:so_boleto/presenter/filter/widgets/home_filter_icon_button.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
@@ -18,23 +17,20 @@ class HomeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomAppBar(
-      title: Text(
-        'Suas contas',
-        style: context.textRobotoSubtitleMediumToLarge,
-      ),
+      title: 'Suas contas',
       actions: [
         const BillSearchBar(),
         AppThemeValues.spaceHorizontalXXXSmall,
         const HomeFilterIconButton(),
         CustomMenuAnchor(
           mainIcon: AppIcons.more,
-          mainIconHeight: 32,
+          mainIconHeight: 30,
           firstChildIcon: AppIcons.add,
           firstChildLabel: 'Adicionar conta nova',
           onfirstChildPressed: () => _onCreateBillPressed(context),
-          secondChildIcon: AppIcons.addReady3,
+          secondChildIcon: AppIcons.addReady,
           secondChildLabel: 'Adicionar contas prontas',
-          onsecondChildPressed: () {},
+          onsecondChildPressed: () => context.pushTo(Routes.promptBills),
         ),
       ],
     );
@@ -43,7 +39,7 @@ class HomeAppBar extends StatelessWidget {
   void _onCreateBillPressed(BuildContext context) {
     context.pushTo(
       Routes.billName,
-      params: AppConstants.transitionScale,
+      params: PageTransitions.transitionScale,
     );
     context.read<HomeBillsCubit>().setSearchByNameValue('');
     context.read<BillCubit>().initiateCreationFlow();

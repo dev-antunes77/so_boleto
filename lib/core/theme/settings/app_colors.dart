@@ -19,6 +19,7 @@ abstract class AppColors {
   static const transparent = Color(0x00000000);
 
   static const grey = Color(0xFF525252);
+  static const greyMediumLight = Color.fromARGB(255, 166, 166, 166);
   static const greyLight = Color.fromARGB(255, 224, 230, 242);
 
   static const orange = Color(0xFFF7691E);

@@ -8,10 +8,9 @@ import 'package:so_boleto/core/components/status_page/widgets/shimmer.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
-import 'package:so_boleto/presenter/bill/widgets/bill_flow_app_bar.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
-import 'package:so_boleto/presenter/home/widgets/home_app_bar.dart';
 import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
+import 'package:so_boleto/presenter/initial/widgets/appbar_handler.dart';
 
 class AppShell extends StatefulWidget {
   const AppShell({
@@ -33,17 +32,12 @@ class _AppShellState extends State<AppShell> {
           previous.currentPage != current.currentPage,
       builder: (context, state) => CustomPopScope(
         leaveTheApp: _showBottomNav(),
-        leaveBillCreation: context.currentRoute.contains('bill'),
         child: Scaffold(
           backgroundColor: AppColors.primaryBackground,
           appBar: PreferredSize(
             preferredSize:
                 const Size(double.infinity, AppThemeValues.spaceEnormous),
-            child: context.currentRoute == Routes.home
-                ? const HomeAppBar()
-                : context.currentRoute.contains('bill')
-                    ? const BillFlowAppBar()
-                    : const SizedBox.shrink(),
+            child: AppBarHandler(context.currentRoute),
           ),
           body: Shimmer(child: widget.child),
           extendBody: true,

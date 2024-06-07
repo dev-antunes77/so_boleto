@@ -13,6 +13,7 @@ import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
 import 'package:so_boleto/presenter/filter/cubit/filter_cubit.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
+import 'package:so_boleto/presenter/prompt_bills/cubit/prompt_bills_cubit.dart';
 
 abstract class InjectionService {
   static final _i = GetIt.instance;
@@ -189,6 +190,10 @@ abstract class InjectionService {
 
     _i.registerFactory(
       () => FilterCubit(),
+    );
+
+    _i.registerFactory(
+      () => PromptBillsCubit(),
     );
 
     // _i.registerFactory(

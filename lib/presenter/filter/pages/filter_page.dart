@@ -5,7 +5,6 @@ import 'package:so_boleto/core/components/buttons/rectangular_button.dart';
 import 'package:so_boleto/core/components/expanded_space/expanded_space.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
 import 'package:so_boleto/core/components/thin_line_separator/horizontal_thin_line_separator.dart';
-import 'package:so_boleto/core/constants/app_constants.dart';
 import 'package:so_boleto/core/routes/routes_extensions.dart';
 import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
@@ -13,6 +12,8 @@ import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
+import 'package:so_boleto/domain/models/enums/due_day_and_parcel_ranges.dart';
+import 'package:so_boleto/domain/models/enums/price_ranges.dart';
 import 'package:so_boleto/presenter/filter/cubit/filter_cubit.dart';
 import 'package:so_boleto/presenter/filter/widgets/category_filter_button.dart';
 import 'package:so_boleto/presenter/filter/widgets/filter_dropdown_action.dart';
@@ -110,7 +111,7 @@ class _FilterPageState extends State<FilterPage> {
                 FilterDropdownAction(
                   filterName: 'Parcelas',
                   switchValue: state.parcelSelected,
-                  dropdownListValues: AppConstants.parcelOrDueDayRanges,
+                  dropdownListValues: DueDayOrParcelRanges.dueDayOrParcelRanges,
                   dropdownValue: state.parcelFilter,
                   onSwitched: (value) => cubit.onParcelsSelected(value: value),
                   onDropdownSelected: (parcels) =>
@@ -120,7 +121,7 @@ class _FilterPageState extends State<FilterPage> {
                 FilterDropdownAction(
                   filterName: 'Valor',
                   switchValue: state.priceSelected,
-                  dropdownListValues: AppConstants.priceRanges,
+                  dropdownListValues: PriceRanges.priceRanges,
                   dropdownValue: state.priceFilter,
                   onSwitched: (value) => cubit.onPricelsSelected(value: value),
                   onDropdownSelected: (priceRange) =>
@@ -131,7 +132,7 @@ class _FilterPageState extends State<FilterPage> {
                 FilterDropdownAction(
                   filterName: 'Vencimento',
                   switchValue: state.dueDaySelected,
-                  dropdownListValues: AppConstants.parcelOrDueDayRanges,
+                  dropdownListValues: DueDayOrParcelRanges.dueDayOrParcelRanges,
                   dropdownValue: state.dueDayFilter,
                   onSwitched: (value) => cubit.onDueDaySelected(value: value),
                   onDropdownSelected: (dueDayRange) =>

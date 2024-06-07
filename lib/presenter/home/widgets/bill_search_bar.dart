@@ -35,7 +35,7 @@ class _SearchBarAnimationState extends State<BillSearchBar> {
               const EdgeInsets.only(bottom: AppThemeValues.spaceXSmall),
           prefixIcon: const SvgAsset(
             svg: AppIcons.search,
-            height: 30,
+            height: 28,
             color: AppColors.primary,
           ),
           suffixIcon: isExpanded

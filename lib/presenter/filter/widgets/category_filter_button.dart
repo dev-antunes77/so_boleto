@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
-import 'package:so_boleto/presenter/filter/models/filter_pill.dart';
+import 'package:so_boleto/domain/models/filter_pill.dart';
 
 class CategoryFilterButton extends StatelessWidget {
   const CategoryFilterButton({

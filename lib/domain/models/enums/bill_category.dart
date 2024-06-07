@@ -37,6 +37,10 @@ enum BillCategory {
     'text': 'Groceries',
     'icon': AppIcons.groceries,
   }),
+  gas({
+    'text': 'Gas',
+    'icon': AppIcons.gas,
+  }),
   healthCare({
     'text': 'Health care',
     'icon': AppIcons.healthCare,
@@ -60,6 +64,10 @@ enum BillCategory {
   rent({
     'text': 'Rent',
     'icon': AppIcons.rent,
+  }),
+  petShop({
+    'text': 'Pet shop',
+    'icon': AppIcons.petShop,
   }),
   transportation({
     'text': 'Transportation',

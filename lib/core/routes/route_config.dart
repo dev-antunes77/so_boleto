@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:so_boleto/core/constants/app_constants.dart';
+import 'package:so_boleto/domain/models/enums/page_transitions.dart';
 import 'package:so_boleto/presenter/bill/pages/sections/bill_category_section.dart';
 import 'package:so_boleto/presenter/bill/pages/sections/bill_check_section.dart';
 import 'package:so_boleto/presenter/bill/pages/sections/bill_due_day_of_the_month_section.dart';
@@ -15,6 +15,7 @@ import 'package:so_boleto/presenter/home/pages/home_page.dart';
 import 'package:so_boleto/presenter/initial/app_shell.dart';
 import 'package:so_boleto/presenter/initial/pages/splash_page.dart';
 import 'package:so_boleto/presenter/profile/pages/profile_page.dart';
+import 'package:so_boleto/presenter/prompt_bills/pages/prompt_bills_page.dart';
 
 import 'routes.dart';
 
@@ -86,25 +87,26 @@ abstract class RoutesConfig {
           ),
 
           GoRoute(
-              path: RelativePaths.billName,
-              parentNavigatorKey: _shellKey,
-              pageBuilder: (_, state) {
-                final type = state.extra != null
-                    ? state.extra as String
-                    : AppConstants.transitionMatrix;
-                return _getTransitionPage(
-                  state,
-                  const BillNameSection(),
-                  type: type,
-                );
-              }),
+            path: RelativePaths.billName,
+            parentNavigatorKey: _shellKey,
+            pageBuilder: (_, state) {
+              final type = state.extra != null
+                  ? state.extra as PageTransitions
+                  : PageTransitions.transitionMatrix;
+              return _getTransitionPage(
+                state,
+                const BillNameSection(),
+                type: type,
+              );
+            },
+          ),
           GoRoute(
             path: RelativePaths.billParcels,
             parentNavigatorKey: _shellKey,
             pageBuilder: (_, state) => _getTransitionPage(
               state,
               const BillParcelSection(),
-              type: AppConstants.transitionMatrix,
+              type: PageTransitions.transitionMatrix,
             ),
           ),
           GoRoute(
@@ -113,7 +115,7 @@ abstract class RoutesConfig {
             pageBuilder: (_, state) => _getTransitionPage(
               state,
               const BillValueSection(),
-              type: AppConstants.transitionMatrix,
+              type: PageTransitions.transitionMatrix,
             ),
           ),
           GoRoute(
@@ -122,7 +124,7 @@ abstract class RoutesConfig {
             pageBuilder: (_, state) => _getTransitionPage(
               state,
               const BillDueDayOfTheMonthSection(),
-              type: AppConstants.transitionMatrix,
+              type: PageTransitions.transitionMatrix,
             ),
           ),
           GoRoute(
@@ -131,7 +133,7 @@ abstract class RoutesConfig {
             pageBuilder: (_, state) => _getTransitionPage(
               state,
               const BillCategorySection(),
-              type: AppConstants.transitionMatrix,
+              type: PageTransitions.transitionMatrix,
             ),
           ),
           GoRoute(
@@ -139,8 +141,8 @@ abstract class RoutesConfig {
             parentNavigatorKey: _shellKey,
             pageBuilder: (_, state) {
               final type = state.extra != null
-                  ? state.extra as String
-                  : AppConstants.transitionMatrix;
+                  ? state.extra as PageTransitions
+                  : PageTransitions.transitionMatrix;
               return _getTransitionPage(
                 state,
                 const BillCheckSection(),
@@ -154,12 +156,19 @@ abstract class RoutesConfig {
             pageBuilder: (_, state) => _getTransitionPage(
               state,
               const FilterPage(),
-              type: AppConstants.transitionFade,
+              type: PageTransitions.transitionFade,
               duration: duration300,
             ),
           ),
-          // ],
-          // ),
+          GoRoute(
+            path: RelativePaths.promptBills,
+            parentNavigatorKey: _shellKey,
+            pageBuilder: (_, state) => _getTransitionPage(
+              state,
+              const PromptBillsPage(),
+              type: PageTransitions.transitionScale,
+            ),
+          ),
           // GoRoute(
           //   path: RelativePaths.profile,
           //   parentNavigatorKey: _shellKey,
@@ -234,7 +243,7 @@ abstract class RoutesConfig {
   static CustomTransitionPage _getTransitionPage(
     GoRouterState state,
     Widget child, {
-    String type = AppConstants.transitionFade,
+    PageTransitions type = PageTransitions.transitionFade,
     Duration duration = duration600,
   }) {
     return CustomTransitionPage(
@@ -244,15 +253,15 @@ abstract class RoutesConfig {
       child: child,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         switch (type) {
-          case AppConstants.transitionFade:
+          case PageTransitions.transitionFade:
             return FadeTransition(opacity: animation, child: child);
-          case AppConstants.transitionRotation:
+          case PageTransitions.transitionRotation:
             return RotationTransition(turns: animation, child: child);
-          case AppConstants.transitionScale:
+          case PageTransitions.transitionScale:
             return ScaleTransition(scale: animation, child: child);
-          case AppConstants.transitionSlide:
+          case PageTransitions.transitionSlide:
             return SlideTransition(position: _onSlie(animation), child: child);
-          case AppConstants.transitionMatrix:
+          case PageTransitions.transitionMatrix:
             return MatrixTransition(
                 onTransform: _onTransform, animation: animation, child: child);
           default:

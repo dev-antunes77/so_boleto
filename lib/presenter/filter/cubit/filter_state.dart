@@ -13,9 +13,9 @@ class FilterState extends BaseState with EquatableMixin {
     bool? priceSelected,
     bool? dueDaySelected,
   })  : pills = pills ?? FilterPill.filterList,
-        parcelFilter = parcelFilter ?? AppConstants.parcelOrDueDayRanges.first,
-        dueDayFilter = dueDayFilter ?? AppConstants.parcelOrDueDayRanges.first,
-        priceFilter = priceFilter ?? AppConstants.priceRanges.first,
+        parcelFilter = parcelFilter ?? DueDayOrParcelRanges.upToThree.value,
+        dueDayFilter = dueDayFilter ?? DueDayOrParcelRanges.upToThree.value,
+        priceFilter = priceFilter ?? PriceRanges.upToHundred.value,
         parcelSelected = parcelSelected ?? false,
         priceSelected = priceSelected ?? false,
         dueDaySelected = dueDaySelected ?? false;
