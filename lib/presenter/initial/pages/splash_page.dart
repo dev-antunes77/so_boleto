@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
@@ -37,7 +38,7 @@ class _SplashPageState extends State<SplashPage> {
                 alignment: Alignment.bottomLeft,
                 children: [
                   Text(
-                    'Só',
+                    AppLocalizations.current.appNameHalf1,
                     style: context.textSubtitleLarge
                         .copyWith(color: AppColors.white),
                   ),
@@ -52,7 +53,7 @@ class _SplashPageState extends State<SplashPage> {
                 ],
               ),
               Text(
-                'Boleto',
+                AppLocalizations.current.appNameHalf2,
                 style:
                     context.textSubtitleHuge.copyWith(color: AppColors.white),
               ),

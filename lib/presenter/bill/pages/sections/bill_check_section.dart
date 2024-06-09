@@ -7,6 +7,7 @@ import 'package:so_boleto/core/extensions/map_extensions.dart';
 import 'package:so_boleto/core/extensions/num_extensions.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/helpers/app_formatters.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
@@ -32,7 +33,7 @@ class BillCheckSection extends StatelessWidget {
               children: [
                 BillEditTile(
                   icon: AppIcons.description,
-                  label: 'Nome:',
+                  label: AppLocalizations.current.billFlowCheckName,
                   value: state.bill.name.capitalize(),
                   width: double.infinity,
                   onPressed: () => _pushToEditionFlow(context, Routes.billName),
@@ -40,7 +41,7 @@ class BillCheckSection extends StatelessWidget {
                 LineSeparator.infiniteHorizon(),
                 BillEditTile(
                   icon: AppIcons.description,
-                  label: 'Descrição:',
+                  label: AppLocalizations.current.billFlowCheckDescription,
                   value: state.bill.description.capitalize(),
                   onPressed: () => _pushToEditionFlow(context, Routes.billName),
                 ),
@@ -61,7 +62,7 @@ class BillCheckSection extends StatelessWidget {
                 LineSeparator.infiniteHorizon(),
                 BillEditTile(
                   icon: AppIcons.calendar,
-                  label: 'Vencimento:',
+                  label: AppLocalizations.current.billFlowCheckDueDay,
                   value: state.bill.dueDayOfTheMonth.addLeadingZero(),
                   onPressed: () =>
                       _pushToEditionFlow(context, Routes.billDueDay),
@@ -69,7 +70,7 @@ class BillCheckSection extends StatelessWidget {
                 LineSeparator.infiniteHorizon(),
                 BillEditTile(
                   icon: AppIcons.value,
-                  label: 'Valor:',
+                  label: AppLocalizations.current.billFlowCheckValue,
                   value: state.bill.value.toDouble().formatCurrency(),
                   onPressed: () =>
                       _pushToEditionFlow(context, Routes.billValue),
@@ -77,7 +78,7 @@ class BillCheckSection extends StatelessWidget {
                 LineSeparator.infiniteHorizon(),
                 BillEditTile(
                   icon: state.bill.category.value.mapToIcon(),
-                  label: 'Categoria:',
+                  label: AppLocalizations.current.billFlowCheckCategory,
                   value: state.bill.category.value.mapToText(),
                   onPressed: () =>
                       _pushToEditionFlow(context, Routes.billCategory),
@@ -95,7 +96,7 @@ class BillCheckSection extends StatelessWidget {
                               .createBill(state.bill);
                       context.navigateTo(Routes.home);
                     },
-                    child: const Text('Pronto'),
+                    child: Text(AppLocalizations.current.done),
                   ),
                 AppThemeValues.spaceVerticalLarge,
               ],

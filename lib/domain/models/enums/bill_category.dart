@@ -6,10 +6,6 @@ enum BillCategory {
     'text': 'Automobile',
     'icon': AppIcons.automobile,
   }),
-  communication({
-    'text': 'Communication',
-    'icon': AppIcons.phone,
-  }),
   creditCard({
     'text': 'Credit card',
     'icon': AppIcons.creditCard,
@@ -69,6 +65,10 @@ enum BillCategory {
   petShop({
     'text': 'Pet shop',
     'icon': AppIcons.petShop,
+  }),
+  telephone({
+    'text': 'Telefone',
+    'icon': AppIcons.telephone,
   }),
   transportation({
     'text': 'Transportation',

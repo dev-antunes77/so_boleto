@@ -7,6 +7,7 @@ import 'package:so_boleto/core/components/expanded_space/expanded_space.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
 import 'package:so_boleto/core/components/thin_line_separator/thin_line_separator.dart';
 import 'package:so_boleto/core/extensions/map_extensions.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
@@ -57,7 +58,7 @@ class _PromptBillsPageState extends State<PromptBillsPage> {
                     horizontal: AppThemeValues.spaceLarge,
                   ),
                   child: Text(
-                    'Selecione as contas que você deseja adicionar à sua lista.',
+                    AppLocalizations.current.promptBillTitle,
                     textAlign: TextAlign.center,
                     style: context.textMedium,
                   ),
@@ -164,7 +165,7 @@ class _PromptBillsPageState extends State<PromptBillsPage> {
                 PillButton(
                   onTap: () => context.pushTo(Routes.promptBillsEdition),
                   isDisabled: !state.hasAnySelected,
-                  child: const Text('Continuar'),
+                  child: Text(AppLocalizations.current.continueButton),
                 ),
                 AppThemeValues.spaceVerticalMedium,
               ],

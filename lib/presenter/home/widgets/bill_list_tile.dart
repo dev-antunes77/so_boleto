@@ -95,9 +95,7 @@ class BillListTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        bill.value <= 0
-                            ? 'Valor não\ninformado'
-                            : bill.value.toDouble().formatCurrency(),
+                        bill.value.toDouble().formatCurrency(),
                         style: bill.value <= 0
                             ? context.textRobotoSubtitleTiny
                             : context.textRobotoSubtitleXSmall,

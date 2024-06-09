@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/custom_safe_area/custom_safe_area.dart';
 import 'package:so_boleto/core/components/custom_state_handler/custom_state_handler.dart';
 import 'package:so_boleto/core/components/status_page/pages/loading_page.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
 import 'package:so_boleto/domain/models/enums/page_response_handler.dart';
@@ -39,10 +40,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 const EdgeInsets.symmetric(vertical: AppThemeValues.spaceSmall),
             child: TabBar(
               controller: _tabController,
-              tabs: const [
-                TabIndicator('Todas'),
-                TabIndicator('Pagas'),
-                TabIndicator('Atrasadas'),
+              tabs: [
+                TabIndicator(AppLocalizations.current.homeTabAll),
+                TabIndicator(AppLocalizations.current.homeTabPayed),
+                TabIndicator(AppLocalizations.current.homeTabDelayed),
               ],
             ),
           ),
@@ -64,7 +65,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       state.inFilteringCase(state.allBills),
                       message: state.paramsApplied
                           ? PageResponseHandler.noneForTheseFilters
-                          : PageResponseHandler.noneAdded,
+                          : PageResponseHandler.noneRegistered,
                     ),
                     HomeBillTab(
                       state.inFilteringCase(state.payedBills),

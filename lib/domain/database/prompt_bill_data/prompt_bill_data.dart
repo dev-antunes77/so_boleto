@@ -1,3 +1,4 @@
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/domain/models/enums/bill_category.dart';
 import 'package:so_boleto/domain/models/prompt_bill.dart';
 
@@ -5,91 +6,91 @@ abstract final class PromptBillData {
   static final List<PromptBill> promptBills = [
     PromptBill(
       id: '00000000001',
-      name: 'Água',
+      name: AppLocalizations.current.categoryWater,
       category: BillCategory.water,
       isSelected: false,
     ),
     PromptBill(
       id: '00000000002',
-      name: 'Aluguel',
+      name: AppLocalizations.current.categoryRent,
       category: BillCategory.rent,
       isSelected: false,
     ),
     PromptBill(
       id: '00000000003',
-      name: 'Carro',
+      name: AppLocalizations.current.categoryAutomobile,
       category: BillCategory.automobile,
       isSelected: false,
     ),
     PromptBill(
       id: '00000000004',
-      name: 'Cartão',
+      name: AppLocalizations.current.categoryCreditCard,
       category: BillCategory.creditCard,
       isSelected: false,
     ),
     PromptBill(
       id: '00000000005',
-      name: 'Escola',
+      name: AppLocalizations.current.prompBillSchool,
       category: BillCategory.education,
       isSelected: false,
     ),
     PromptBill(
       id: '00000000006',
-      name: 'Faculdade',
+      name: AppLocalizations.current.prompBillCollege,
       category: BillCategory.education,
       isSelected: false,
     ),
     PromptBill(
       id: '00000000007',
-      name: 'Gás',
+      name: AppLocalizations.current.categoryGas,
       category: BillCategory.gas,
       isSelected: false,
     ),
     PromptBill(
       id: '00000000008',
-      name: 'Internet',
+      name: AppLocalizations.current.categoryInternet,
       category: BillCategory.internet,
       isSelected: false,
     ),
     PromptBill(
       id: '00000000009',
-      name: 'Luz',
+      name: AppLocalizations.current.categoryElectricity,
       category: BillCategory.electricity,
       isSelected: false,
     ),
     PromptBill(
       id: '00000000010',
-      name: 'Mercado',
+      name: AppLocalizations.current.categoryGroceries,
       category: BillCategory.groceries,
       isSelected: false,
     ),
     PromptBill(
       id: '00000000011',
-      name: 'Pet shop',
+      name: AppLocalizations.current.categorypetShop,
       category: BillCategory.petShop,
       isSelected: false,
     ),
     PromptBill(
       id: '00000000012',
-      name: 'Plano de saúde',
+      name: AppLocalizations.current.categoryHealthCare,
       category: BillCategory.healthCare,
       isSelected: false,
     ),
     PromptBill(
       id: '00000000013',
-      name: 'Remédios',
+      name: AppLocalizations.current.prompBillMedicine,
       category: BillCategory.healthCare,
       isSelected: false,
     ),
     PromptBill(
       id: '00000000014',
-      name: 'Telefone',
-      category: BillCategory.communication,
+      name: AppLocalizations.current.categoryTelephone,
+      category: BillCategory.telephone,
       isSelected: false,
     ),
     PromptBill(
       id: '00000000015',
-      name: 'Transporte',
+      name: AppLocalizations.current.categoryTransportation,
       category: BillCategory.transportation,
       isSelected: false,
     ),

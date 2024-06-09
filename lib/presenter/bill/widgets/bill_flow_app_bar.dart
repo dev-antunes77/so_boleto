@@ -3,6 +3,7 @@ import 'package:so_boleto/core/components/buttons/app_bar_button.dart';
 import 'package:so_boleto/core/components/buttons/back_button.dart';
 import 'package:so_boleto/core/components/custom_app_bar/custom_app_bar.dart';
 import 'package:so_boleto/core/components/dialogs/app_dialogs.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 
 class BillFlowAppBar extends StatefulWidget {
   const BillFlowAppBar({super.key});
@@ -30,7 +31,7 @@ class _BillFlowAppBarState extends State<BillFlowAppBar> {
   @override
   Widget build(BuildContext context) {
     return CustomAppBar(
-      title: 'Nova conta',
+      title: AppLocalizations.current.billFlowNewBill,
       leadingBackButton: Visibility(
         visible: isReadyToDisplay,
         child: const CustomBackButton(),
@@ -39,7 +40,7 @@ class _BillFlowAppBarState extends State<BillFlowAppBar> {
         Visibility(
           visible: isReadyToDisplay,
           child: AppBarButton(
-            label: 'Encerrar',
+            label: AppLocalizations.current.close,
             onTap: () => AppDialogs.leaveBillCreation(context),
           ),
         )

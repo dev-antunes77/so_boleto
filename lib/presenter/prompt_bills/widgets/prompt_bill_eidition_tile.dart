@@ -7,6 +7,7 @@ import 'package:so_boleto/core/constants/app_constants.dart';
 import 'package:so_boleto/core/extensions/map_extensions.dart';
 import 'package:so_boleto/core/extensions/num_extensions.dart';
 import 'package:so_boleto/core/helpers/currency_ptbr_input_formatter.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
@@ -72,7 +73,7 @@ class PromptBillEditionTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                ' Vencimento',
+                AppLocalizations.current.prompBillEditionTileDueDay,
                 style: context.textRobotoXSmall,
               ),
               CustomDropdownMenu(
@@ -102,7 +103,7 @@ class PromptBillEditionTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                ' Valor',
+                AppLocalizations.current.prompBillEditionTileValue,
                 style: context.textRobotoXSmall,
               ),
               SizedBox(

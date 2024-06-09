@@ -12,7 +12,7 @@ class ErrorPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseStatusPage(
       onTap: onTap,
-      title: AppLocalizations.current.errorTryAgain,
+      title: AppLocalizations.current.tryAgain,
       icon: AppIcons.money,
     );
   }

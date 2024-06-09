@@ -1,3 +1,5 @@
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
+
 extension IntExtensions on int {
   String addLeadingZero() {
     if (this <= -10 && this >= 10) {
@@ -8,14 +10,15 @@ extension IntExtensions on int {
 
   String properDueDay() {
     final now = DateTime.now();
-    final days =
-        (this - now.day) == 1 || (this - now.day) == -1 ? 'dia' : 'dias';
+    final days = (this - now.day) == 1 || (this - now.day) == -1
+        ? AppLocalizations.current.dueDayExtensionsDay
+        : AppLocalizations.current.dueDayExtensionsDays;
     if (now.day < this) {
-      return 'Vence em ${this - now.day} $days';
+      return '${AppLocalizations.current.dueDayExtensionsDueIn} ${this - now.day} $days';
     } else if (now.day > this) {
-      return 'Vencida há ${now.day - this} $days';
+      return '${AppLocalizations.current.dueDayExtensionsDelayedSince} ${now.day - this} $days';
     }
-    return 'Vence hoje';
+    return AppLocalizations.current.dueDayExtensionsDueToday;
   }
 }
 

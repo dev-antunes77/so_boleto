@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:so_boleto/core/components/buttons/pill_button.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 
 class BillSectionDoubleButtonRow extends StatelessWidget {
@@ -19,12 +20,12 @@ class BillSectionDoubleButtonRow extends StatelessWidget {
       children: [
         PillButton(
           onTap: () => context.pop(true),
-          child: const Text('Anterior'),
+          child: Text(AppLocalizations.current.back),
         ),
         PillButton(
           onTap: onTap,
           isDisabled: isDisabled,
-          child: const Text('Próximo'),
+          child: Text(AppLocalizations.current.continueButton),
         ),
       ],
     );

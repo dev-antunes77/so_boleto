@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/buttons/pill_button.dart';
 import 'package:so_boleto/core/components/expanded_space/expanded_space.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
@@ -43,7 +44,7 @@ class _BillNameSectionState extends State<BillNameSection> {
             children: [
               const BillSectionTopIcon(AppIcons.description),
               BillTextField(
-                hitText: 'Nome da conta',
+                hitText: AppLocalizations.current.billFlowName,
                 controller: billNameController,
                 onChanged: (value) {
                   context.read<BillCubit>().onBillNameChange(value);
@@ -55,9 +56,9 @@ class _BillNameSectionState extends State<BillNameSection> {
                 onTapOutside: (p0) => FocusScope.of(context).unfocus(),
               ),
               BillTextField(
-                hitText: 'Descrição da conta',
+                hitText: AppLocalizations.current.billFlowDescription,
                 controller: billDescriptionController,
-                helperText: '(Opcional)',
+                helperText: AppLocalizations.current.billFlowOptional,
                 onChanged: (value) =>
                     context.read<BillCubit>().onBillDescriptionChange(value),
                 textInputAction: _getTextInputAction(
@@ -69,14 +70,14 @@ class _BillNameSectionState extends State<BillNameSection> {
               const ExpandedSpace(),
               if (state.isEditionFlow)
                 PillButton(
-                  child: const Text('Pronto'),
+                  child: Text(AppLocalizations.current.done),
                   onTap: () => context.navigateTo(Routes.billCheck),
                 )
               else
                 PillButton(
                   onTap: () => context.pushTo(Routes.billParcels),
                   isDisabled: _disableteButton(state.bill.name),
-                  child: const Text('Próximo'),
+                  child: Text(AppLocalizations.current.continueButton),
                 ),
               AppThemeValues.spaceVerticalLarge,
             ],

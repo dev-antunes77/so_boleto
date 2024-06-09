@@ -5,6 +5,7 @@ import 'package:so_boleto/core/components/custom_dropdown_menu/custom_dropdown_m
 import 'package:so_boleto/core/components/expanded_space/expanded_space.dart';
 import 'package:so_boleto/core/constants/app_constants.dart';
 import 'package:so_boleto/core/extensions/num_extensions.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
@@ -31,7 +32,7 @@ class BillDueDayOfTheMonthSection extends StatelessWidget {
                   bottom: AppThemeValues.spaceMedium,
                 ),
                 child: Text(
-                  'Dia do vencimento',
+                  AppLocalizations.current.billFlowDueDayTitle,
                   style: context.textRobotoMedium,
                   textAlign: TextAlign.center,
                 ),
@@ -55,7 +56,7 @@ class BillDueDayOfTheMonthSection extends StatelessWidget {
               const ExpandedSpace(),
               if (state.isEditionFlow)
                 PillButton(
-                  child: const Text('Pronto'),
+                  child: Text(AppLocalizations.current.done),
                   onTap: () => context.navigateTo(Routes.billCheck),
                 )
               else

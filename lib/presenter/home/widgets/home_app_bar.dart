@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/custom_app_bar/custom_app_bar.dart';
 import 'package:so_boleto/core/components/custom_menu_anchor/custom_menu_anchor.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
@@ -17,7 +18,7 @@ class HomeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomAppBar(
-      title: 'Suas contas',
+      title: AppLocalizations.current.homeAppBarTitle,
       actions: [
         const BillSearchBar(),
         AppThemeValues.spaceHorizontalXXXSmall,
@@ -26,10 +27,10 @@ class HomeAppBar extends StatelessWidget {
           mainIcon: AppIcons.more,
           mainIconHeight: 30,
           firstChildIcon: AppIcons.add,
-          firstChildLabel: 'Adicionar conta nova',
+          firstChildLabel: AppLocalizations.current.homeAppBarAddNewBill,
           onfirstChildPressed: () => _onCreateBillPressed(context),
           secondChildIcon: AppIcons.addReady,
-          secondChildLabel: 'Adicionar contas prontas',
+          secondChildLabel: AppLocalizations.current.homeAppBarAddPromptBills,
           onsecondChildPressed: () => context.pushTo(Routes.promptBills),
         ),
       ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
@@ -59,7 +60,7 @@ class _SearchBarAnimationState extends State<BillSearchBar> {
                         top: AppThemeValues.spaceXTiny,
                       ),
                       child: Text(
-                        'Encerrar',
+                        AppLocalizations.current.close,
                         style: context.textXSmall
                             .copyWith(color: AppColors.primaryBackground),
                       ),

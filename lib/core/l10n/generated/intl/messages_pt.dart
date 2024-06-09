@@ -22,31 +22,134 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "appNameHalf1": MessageLookupByLibrary.simpleMessage("Só"),
+        "appNameHalf2": MessageLookupByLibrary.simpleMessage("Boleto"),
+        "back": MessageLookupByLibrary.simpleMessage("Voltar"),
+        "billFlowCheckCategory":
+            MessageLookupByLibrary.simpleMessage("Categoria"),
+        "billFlowCheckDescription":
+            MessageLookupByLibrary.simpleMessage("Descrição:"),
+        "billFlowCheckDueDay":
+            MessageLookupByLibrary.simpleMessage("Vencimento:"),
+        "billFlowCheckName": MessageLookupByLibrary.simpleMessage("Name:"),
+        "billFlowCheckValue": MessageLookupByLibrary.simpleMessage("Valor:"),
+        "billFlowDescription":
+            MessageLookupByLibrary.simpleMessage("Descrição da conta"),
+        "billFlowDueDayTitle":
+            MessageLookupByLibrary.simpleMessage("Dia do vencimento"),
+        "billFlowFixedSwitch": MessageLookupByLibrary.simpleMessage(
+            "Essa é uma conta mensal fixa?"),
+        "billFlowHowManyParcels":
+            MessageLookupByLibrary.simpleMessage("Quantas parcelas?"),
+        "billFlowName": MessageLookupByLibrary.simpleMessage("Nome da conta"),
+        "billFlowNewBill": MessageLookupByLibrary.simpleMessage("Nova conta"),
+        "billFlowOptional": MessageLookupByLibrary.simpleMessage("(Opcional)"),
+        "billFlowParcelValue":
+            MessageLookupByLibrary.simpleMessage("(Valor da parcela)"),
+        "billFlowParceledSwitch": MessageLookupByLibrary.simpleMessage(
+            "Ou uma conta mensal parcelada?"),
+        "billFlowValueTitle":
+            MessageLookupByLibrary.simpleMessage("Valor da conta"),
+        "categoryAutomobile": MessageLookupByLibrary.simpleMessage("Automóvel"),
+        "categoryCreditCard":
+            MessageLookupByLibrary.simpleMessage("Cartão de crédito"),
+        "categoryDebt": MessageLookupByLibrary.simpleMessage("Dívida"),
+        "categoryDevices": MessageLookupByLibrary.simpleMessage("Aparelhos"),
+        "categoryEducation": MessageLookupByLibrary.simpleMessage("Educação"),
+        "categoryElectricity": MessageLookupByLibrary.simpleMessage("Luz"),
+        "categoryEntertainment":
+            MessageLookupByLibrary.simpleMessage("Entretenimento"),
+        "categoryGas": MessageLookupByLibrary.simpleMessage("Gás"),
+        "categoryGroceries": MessageLookupByLibrary.simpleMessage("Mercado"),
+        "categoryHealthCare": MessageLookupByLibrary.simpleMessage("Saúde"),
+        "categoryInsurance": MessageLookupByLibrary.simpleMessage("Seguro"),
+        "categoryInternet": MessageLookupByLibrary.simpleMessage("Internet"),
+        "categoryInvestment":
+            MessageLookupByLibrary.simpleMessage("Investimento"),
+        "categoryMiscellaneous":
+            MessageLookupByLibrary.simpleMessage("Diversos"),
+        "categoryRent": MessageLookupByLibrary.simpleMessage("Aluguel"),
+        "categoryTelephone": MessageLookupByLibrary.simpleMessage("telefone"),
+        "categoryTransportation":
+            MessageLookupByLibrary.simpleMessage("Transporte"),
+        "categoryTravel": MessageLookupByLibrary.simpleMessage("Viagem"),
+        "categoryWater": MessageLookupByLibrary.simpleMessage("Água"),
+        "categorypetShop": MessageLookupByLibrary.simpleMessage("pet shop"),
+        "close": MessageLookupByLibrary.simpleMessage("Encerrar"),
+        "continueButton": MessageLookupByLibrary.simpleMessage("Continuar"),
+        "done": MessageLookupByLibrary.simpleMessage("Pronto"),
+        "dueDayExtensionsDay": MessageLookupByLibrary.simpleMessage("dia"),
+        "dueDayExtensionsDays": MessageLookupByLibrary.simpleMessage("dias"),
+        "dueDayExtensionsDelayedSince":
+            MessageLookupByLibrary.simpleMessage("Vencida há"),
+        "dueDayExtensionsDueIn":
+            MessageLookupByLibrary.simpleMessage("Vence em"),
+        "dueDayExtensionsDueToday":
+            MessageLookupByLibrary.simpleMessage("Vence hoje"),
         "errorNoConnectionPage":
             MessageLookupByLibrary.simpleMessage("Sem conexão"),
-        "errorTryAgain":
-            MessageLookupByLibrary.simpleMessage("Tente novamente"),
         "errorUnknowError":
             MessageLookupByLibrary.simpleMessage("Tente novamente"),
-        "insertNumber": MessageLookupByLibrary.simpleMessage("Tente novamente"),
-        "loginPincodeInfo":
-            MessageLookupByLibrary.simpleMessage("Tente novamente"),
-        "loginPincodeInsert":
-            MessageLookupByLibrary.simpleMessage("Tente novamente"),
-        "loginSubtitle":
-            MessageLookupByLibrary.simpleMessage("Tente novamente"),
-        "loginTitle": MessageLookupByLibrary.simpleMessage("Tente novamente"),
+        "filter": MessageLookupByLibrary.simpleMessage("Filtros"),
+        "filterApply": MessageLookupByLibrary.simpleMessage("Aplicar"),
+        "filterByCategory":
+            MessageLookupByLibrary.simpleMessage("Por categoria"),
+        "filterDueDay": MessageLookupByLibrary.simpleMessage("Vencimento"),
+        "filterParcels": MessageLookupByLibrary.simpleMessage("Parcelas"),
+        "filterRemove": MessageLookupByLibrary.simpleMessage("Remover filtros"),
+        "filterSee": MessageLookupByLibrary.simpleMessage("Ver filtros"),
+        "filterValue": MessageLookupByLibrary.simpleMessage("Valor"),
+        "homeAppBarAddNewBill":
+            MessageLookupByLibrary.simpleMessage("Adicionar conta nova"),
+        "homeAppBarAddPromptBills":
+            MessageLookupByLibrary.simpleMessage("Adicionar contas prontas"),
+        "homeAppBarTitle": MessageLookupByLibrary.simpleMessage("Novas contas"),
+        "homeBillDeleting":
+            MessageLookupByLibrary.simpleMessage("Deletando..."),
+        "homeBillPayedTag": MessageLookupByLibrary.simpleMessage("Paga"),
+        "homeBillPaying": MessageLookupByLibrary.simpleMessage("Pagando..."),
+        "homeTabAll": MessageLookupByLibrary.simpleMessage("Todas"),
+        "homeTabDelayed": MessageLookupByLibrary.simpleMessage("Atrasadas"),
+        "homeTabPayed": MessageLookupByLibrary.simpleMessage("Pagas"),
+        "prompBillAppBar":
+            MessageLookupByLibrary.simpleMessage("Contas prontas"),
+        "prompBillAppBarRemoveAll":
+            MessageLookupByLibrary.simpleMessage("Remover todas"),
+        "prompBillAppBarSelectAll":
+            MessageLookupByLibrary.simpleMessage("Selecionar todas"),
+        "prompBillCollege": MessageLookupByLibrary.simpleMessage("Faculdade"),
+        "prompBillCourse": MessageLookupByLibrary.simpleMessage("Curso"),
+        "prompBillEditionAppBar":
+            MessageLookupByLibrary.simpleMessage("Edição de contas prontas"),
+        "prompBillEditionTileDueDay":
+            MessageLookupByLibrary.simpleMessage(" Vencimento"),
+        "prompBillEditionTileValue":
+            MessageLookupByLibrary.simpleMessage(" Valor"),
+        "prompBillMedicine": MessageLookupByLibrary.simpleMessage("Remédios"),
+        "prompBillSchool": MessageLookupByLibrary.simpleMessage("Escola"),
+        "promptBillEditionTitle": MessageLookupByLibrary.simpleMessage(
+            "Selecione um dia para o vencimento e um valor para as contas prontas selecionadas"),
+        "promptBillTitle": MessageLookupByLibrary.simpleMessage(
+            "Selecione as contas que você deseja adicionar à sua lista"),
+        "responseHandlerError":
+            MessageLookupByLibrary.simpleMessage("Ops!\nAlgo deu errado."),
+        "responseHandlerNoMorePromptBills":
+            MessageLookupByLibrary.simpleMessage(
+                "Você já utilizou todas as contas prontas disponíveis."),
+        "responseHandlerNoneDelayed": MessageLookupByLibrary.simpleMessage(
+            "Você não tem contas atrasadas."),
+        "responseHandlerNoneForTheseFilters":
+            MessageLookupByLibrary.simpleMessage(
+                "Nenhuma conta com esses filtros."),
+        "responseHandlerNonePayed": MessageLookupByLibrary.simpleMessage(
+            "Você não tem contas pagas.\'"),
+        "responseHandlerNoneRegistered": MessageLookupByLibrary.simpleMessage(
+            "Você não tem contas cadastradas."),
+        "responseHandlerNoneWithThisName": MessageLookupByLibrary.simpleMessage(
+            "Nenhuma conta com esse nome."),
         "signIn": MessageLookupByLibrary.simpleMessage("Cadastrar"),
-        "subscribeHintNumber":
-            MessageLookupByLibrary.simpleMessage("Tente novamente"),
-        "termsAndPolicies1":
-            MessageLookupByLibrary.simpleMessage("Tente novamente"),
-        "termsAndPolicies2":
-            MessageLookupByLibrary.simpleMessage("Tente novamente"),
-        "termsAndPolicies3":
-            MessageLookupByLibrary.simpleMessage("Tente novamente"),
         "tryAgain": MessageLookupByLibrary.simpleMessage("Tente novamente"),
         "validatorEmail":
-            MessageLookupByLibrary.simpleMessage("Tente novamente")
+            MessageLookupByLibrary.simpleMessage("Não é um email válido")
       };
 }

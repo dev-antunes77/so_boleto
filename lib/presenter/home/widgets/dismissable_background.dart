@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
@@ -28,7 +29,7 @@ class DismissableBackGround extends StatelessWidget {
               payDragging ? MainAxisAlignment.start : MainAxisAlignment.end,
           children: [
             if (payDragging) ...[
-              Text('Pagando...', style: style),
+              Text(AppLocalizations.current.homeBillPaying, style: style),
               AppThemeValues.spaceHorizontalLarge,
               const SvgAsset(
                 svg: AppIcons.money,
@@ -36,7 +37,7 @@ class DismissableBackGround extends StatelessWidget {
                 color: AppColors.background,
               ),
             ] else ...[
-              Text('Deletando...', style: style),
+              Text(AppLocalizations.current.homeBillDeleting, style: style),
               AppThemeValues.spaceHorizontalSmall,
               const SvgAsset(
                 svg: AppIcons.delete,

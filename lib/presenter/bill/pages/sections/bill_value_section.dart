@@ -6,6 +6,7 @@ import 'package:so_boleto/core/components/buttons/pill_button.dart';
 import 'package:so_boleto/core/components/expanded_space/expanded_space.dart';
 import 'package:so_boleto/core/extensions/num_extensions.dart';
 import 'package:so_boleto/core/helpers/currency_ptbr_input_formatter.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
@@ -43,7 +44,7 @@ class _BillValueSectionState extends State<BillValueSection> {
             children: [
               const BillSectionTopIcon(AppIcons.value),
               BillTextField(
-                hitText: 'Valor da conta',
+                hitText: AppLocalizations.current.billFlowValueTitle,
                 textInputType: TextInputType.number,
                 controller: billValueController,
                 onChanged: (value) =>
@@ -52,14 +53,15 @@ class _BillValueSectionState extends State<BillValueSection> {
                   FilteringTextInputFormatter.digitsOnly,
                   CurrencyPtBrInputFormatter()
                 ],
-                helperText:
-                    state.bill.totalParcels > 1 ? '(Valor da parcela)' : null,
+                helperText: state.bill.totalParcels > 1
+                    ? AppLocalizations.current.billFlowParcelValue
+                    : null,
                 onSubmitted: (p0) => _onSubmitted(state.bill.value),
               ),
               const ExpandedSpace(),
               if (state.isEditionFlow)
                 PillButton(
-                  child: const Text('Pronto'),
+                  child: Text(AppLocalizations.current.done),
                   onTap: () => context.navigateTo(Routes.billCheck),
                 )
               else

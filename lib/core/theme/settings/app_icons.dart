@@ -35,7 +35,7 @@ abstract class AppIcons {
   static const parcels = 'assets/svgs/parcels.svg';
   static const payment = 'assets/svgs/payment.svg';
   static const petShop = 'assets/svgs/pet_shop.svg';
-  static const phone = 'assets/svgs/communication.svg';
+  static const telephone = 'assets/svgs/telephone.svg';
   static const profile = 'assets/svgs/profile.svg';
   static const rent = 'assets/svgs/rent.svg';
   static const sad1 = 'assets/svgs/sad1.svg';

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/buttons/app_bar_button.dart';
 import 'package:so_boleto/core/components/buttons/back_button.dart';
 import 'package:so_boleto/core/components/custom_app_bar/custom_app_bar.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/presenter/prompt_bills/cubit/prompt_bills_cubit.dart';
 
 class PromptBillsAppBar extends StatelessWidget {
@@ -12,7 +13,7 @@ class PromptBillsAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomAppBar(
       leadingBackButton: const CustomBackButton(),
-      title: 'Contas prontas',
+      title: AppLocalizations.current.prompBillAppBar,
       actions: [
         BlocBuilder<PromptBillsCubit, PromptBillsState>(
           builder: (context, state) {
@@ -20,8 +21,8 @@ class PromptBillsAppBar extends StatelessWidget {
                 ? const SizedBox.shrink()
                 : AppBarButton(
                     label: state.allSelected
-                        ? 'Remover todas'
-                        : 'Selecionar todas',
+                        ? AppLocalizations.current.prompBillAppBarRemoveAll
+                        : AppLocalizations.current.prompBillAppBarSelectAll,
                     onTap: state.allSelected
                         ? () => context
                             .read<PromptBillsCubit>()

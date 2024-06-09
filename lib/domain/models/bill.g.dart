@@ -38,7 +38,7 @@ Map<String, dynamic> _$BillModelToJson(BillModel instance) => <String, dynamic>{
 
 const _$CategoryEnumMap = {
   BillCategory.automobile: 'automobile',
-  BillCategory.communication: 'communication',
+  BillCategory.telephone: 'communication',
   BillCategory.creditCard: 'creditCard',
   BillCategory.debt: 'debt',
   BillCategory.devices: 'devices',

@@ -5,6 +5,7 @@ import 'package:so_boleto/core/components/buttons/rectangular_button.dart';
 import 'package:so_boleto/core/components/expanded_space/expanded_space.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
 import 'package:so_boleto/core/components/thin_line_separator/thin_line_separator.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes_extensions.dart';
 import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
@@ -59,7 +60,7 @@ class _FilterPageState extends State<FilterPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Filtros',
+                          AppLocalizations.current.filter,
                           style: context.textRobotoSubtitleMediumToLarge,
                         ),
                         Container(
@@ -92,7 +93,7 @@ class _FilterPageState extends State<FilterPage> {
                 ),
                 AppThemeValues.spaceVerticalMedium,
                 Text(
-                  'Por categoria',
+                  AppLocalizations.current.filterByCategory,
                   style: context.textRobotoSubtitleMedium,
                 ),
                 LineSeparator.infiniteHorizon(),
@@ -109,7 +110,7 @@ class _FilterPageState extends State<FilterPage> {
                 ),
                 LineSeparator.infiniteHorizon(),
                 FilterDropdownAction(
-                  filterName: 'Parcelas',
+                  filterName: AppLocalizations.current.filterParcels,
                   switchValue: state.parcelSelected,
                   dropdownListValues: DueDayOrParcelRanges.dueDayOrParcelRanges,
                   dropdownValue: state.parcelFilter,
@@ -119,7 +120,7 @@ class _FilterPageState extends State<FilterPage> {
                 ),
                 LineSeparator.infiniteHorizon(),
                 FilterDropdownAction(
-                  filterName: 'Valor',
+                  filterName: AppLocalizations.current.filterValue,
                   switchValue: state.priceSelected,
                   dropdownListValues: PriceRanges.priceRanges,
                   dropdownValue: state.priceFilter,
@@ -130,7 +131,7 @@ class _FilterPageState extends State<FilterPage> {
                 ),
                 LineSeparator.infiniteHorizon(),
                 FilterDropdownAction(
-                  filterName: 'Vencimento',
+                  filterName: AppLocalizations.current.filterDueDay,
                   switchValue: state.dueDaySelected,
                   dropdownListValues: DueDayOrParcelRanges.dueDayOrParcelRanges,
                   dropdownValue: state.dueDayFilter,
@@ -142,7 +143,7 @@ class _FilterPageState extends State<FilterPage> {
                 LineSeparator.infiniteHorizon(),
                 const ExpandedSpace(),
                 RectangularButton(
-                  label: 'Aplicar',
+                  label: AppLocalizations.current.filterApply,
                   isValid: state.areFiltersValid,
                   onTap: () => _onApplyTapped(),
                 ),

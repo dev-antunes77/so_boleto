@@ -4,6 +4,7 @@ import 'package:so_boleto/core/components/buttons/pill_button.dart';
 import 'package:so_boleto/core/components/custom_safe_area/custom_safe_area.dart';
 import 'package:so_boleto/core/components/thin_line_separator/thin_line_separator.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
@@ -52,7 +53,7 @@ class _PromptBillsEditionPageState extends State<PromptBillsEditionPage> {
                   Padding(
                     padding: const EdgeInsets.all(AppThemeValues.spaceHuge),
                     child: Text(
-                      'Selecione um dia para o vencimento e um valor para as contas prontas selecionadas',
+                      AppLocalizations.current.promptBillEditionTitle,
                       style: context.textRobotoSubtitleMedium,
                       textAlign: TextAlign.center,
                     ),
@@ -86,7 +87,7 @@ class _PromptBillsEditionPageState extends State<PromptBillsEditionPage> {
                   PillButton(
                     onTap: () => _onAddTapped(state.selectedPromptBills),
                     isDisabled: state.editionNotValid,
-                    child: const Text('Pronto'),
+                    child: Text(AppLocalizations.current.done),
                   ),
                   AppThemeValues.spaceVerticalMassive,
                   SizedBox(

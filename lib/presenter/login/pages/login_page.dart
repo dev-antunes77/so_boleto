@@ -37,13 +37,13 @@ class LoginPage extends StatelessWidget {
               Column(
                 children: [
                   Text(
-                    AppLocalizations.current.loginTitle,
+                    '',
                     style: context.textSubtitleLarge,
                     textAlign: TextAlign.center,
                   ),
                   AppThemeValues.spaceVerticalMedium,
                   Text(
-                    AppLocalizations.current.loginSubtitle,
+                    '',
                     style: context.textSubtitleSmall,
                     textAlign: TextAlign.center,
                   ),

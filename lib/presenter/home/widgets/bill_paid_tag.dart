@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
@@ -15,7 +16,7 @@ class BillPaidTag extends StatelessWidget {
     return showTag
         ? Positioned(
             top: 0,
-            left: context.width * 0.5,
+            left: context.width * 0.55,
             child: Transform.rotate(
               angle: pi / 6.0,
               child: Transform.translate(
@@ -33,7 +34,7 @@ class BillPaidTag extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      'Paga',
+                      AppLocalizations.current.homeBillPayedTag,
                       style: context.textStamper.copyWith(
                         color: AppColors.grey,
                       ),

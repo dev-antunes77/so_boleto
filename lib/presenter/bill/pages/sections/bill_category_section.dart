@@ -5,6 +5,7 @@ import 'package:so_boleto/core/components/custom_dropdown_menu/custom_dropdown_m
 import 'package:so_boleto/core/components/expanded_space/expanded_space.dart';
 import 'package:so_boleto/core/extensions/map_extensions.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
@@ -41,20 +42,6 @@ class BillCategorySection extends StatelessWidget {
                         ),
                       )
                       .toList(),
-
-                  // DropdownButton(
-                  //   underline: const SizedBox(),
-                  //   hint: const Text('Categpries'),
-                  //   menuMaxHeight: context.height * 0.4,
-                  //   value: state.bill.category.value,
-                  //   items: BillCategory.categoryList
-                  //       .map(
-                  //         (e) => DropdownMenuItem<String>(
-                  //           value: e,
-                  //           child: Text(e),
-                  //         ),
-                  //       )
-                  //       .toList(),
                   onChanged: (newValue) =>
                       context.read<BillCubit>().onBillCategoryChange(
                             (newValue as String).categoryToEnum(),
@@ -64,7 +51,7 @@ class BillCategorySection extends StatelessWidget {
               const ExpandedSpace(),
               if (state.isEditionFlow)
                 PillButton(
-                  child: const Text('Pronto'),
+                  child: Text(AppLocalizations.current.done),
                   onTap: () => context.navigateTo(Routes.billCheck),
                 )
               else

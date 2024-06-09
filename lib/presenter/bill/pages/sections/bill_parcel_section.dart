@@ -6,6 +6,7 @@ import 'package:so_boleto/core/components/expanded_section/expanded_section.dart
 import 'package:so_boleto/core/components/expanded_space/expanded_space.dart';
 import 'package:so_boleto/core/constants/app_constants.dart';
 import 'package:so_boleto/core/extensions/num_extensions.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
@@ -24,7 +25,6 @@ class BillParcelSection extends StatefulWidget {
 class _BillParcelSectionState extends State<BillParcelSection> {
   bool parcelChoice = false;
   bool monthlyChoice = false;
-  bool uniqueChoice = false;
 
   @override
   Widget build(BuildContext context) {
@@ -38,18 +38,7 @@ class _BillParcelSectionState extends State<BillParcelSection> {
             onChanged: (value) => setState(() {
               monthlyChoice = value;
               parcelChoice = false;
-              uniqueChoice = false;
               context.read<BillCubit>().onBillMonthlyChange(value);
-            }),
-          ),
-          BillParcelSwitchRow(
-            label: 'Uma conta única?',
-            choice: uniqueChoice,
-            onChanged: (value) => setState(() {
-              uniqueChoice = value;
-              parcelChoice = false;
-              monthlyChoice = false;
-              context.read<BillCubit>().onBillParcelsChange(1);
             }),
           ),
           BillParcelSwitchRow(
@@ -57,7 +46,6 @@ class _BillParcelSectionState extends State<BillParcelSection> {
             choice: parcelChoice,
             onChanged: (value) => setState(() {
               parcelChoice = value;
-              uniqueChoice = false;
               monthlyChoice = false;
               context.read<BillCubit>().onBillParcelsChange(2);
             }),
@@ -71,7 +59,7 @@ class _BillParcelSectionState extends State<BillParcelSection> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Quantas parcelas?',
+                      AppLocalizations.current.billFlowHowManyParcels,
                       style: context.textRobotoSubtitleMedium,
                     ),
                     AppThemeValues.spaceHorizontalLarge,
@@ -100,7 +88,7 @@ class _BillParcelSectionState extends State<BillParcelSection> {
           const ExpandedSpace(),
           if (context.read<BillCubit>().state.isEditionFlow)
             PillButton(
-              child: const Text('Pronto'),
+              child: Text(AppLocalizations.current.done),
               onTap: () => context.navigateTo(Routes.billCheck),
             )
           else
@@ -118,11 +106,10 @@ class _BillParcelSectionState extends State<BillParcelSection> {
     setState(() {
       if (value == 1) {
         parcelChoice = false;
-        uniqueChoice = true;
       }
       context.read<BillCubit>().onBillParcelsChange(value);
     });
   }
 
-  bool _disableButton() => !parcelChoice && !uniqueChoice && !monthlyChoice;
+  bool _disableButton() => !parcelChoice && !monthlyChoice;
 }
