@@ -7,7 +7,7 @@ abstract class AppColors {
   static const background = white;
 
   static const primary = Color.fromARGB(255, 4, 135, 58);
-  static const primaryDark = Color.fromARGB(66, 4, 135, 59);
+  static const primaryDark = Color.fromARGB(166, 4, 135, 59);
   static const primaryLight = Color.fromARGB(255, 149, 254, 209);
   static const primaryBackground = Color.fromARGB(255, 233, 244, 235);
 

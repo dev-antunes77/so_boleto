@@ -15,32 +15,25 @@ class BillShell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: ConstrainedBox(
-        constraints: BoxConstraints(
-          minHeight: context.height - MediaQuery.of(context).viewInsets.bottom,
+      child: Padding(
+        padding: const EdgeInsets.only(
+          left: AppThemeValues.spaceXLarge,
+          right: AppThemeValues.spaceXLarge,
+          top: AppThemeValues.spaceXLarge,
         ),
-        child: IntrinsicHeight(
-          child: Padding(
-            padding: const EdgeInsets.only(
-              left: AppThemeValues.spaceXLarge,
-              right: AppThemeValues.spaceXLarge,
-              top: AppThemeValues.spaceXLarge,
-            ),
-            child: Align(
-              alignment: Alignment.topCenter,
-              child: Card(
-                elevation: 6,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(12),
-                  ),
-                ),
-                child: SizedBox(
-                  width: context.width * 0.95,
-                  height: height ?? context.height * 0.45,
-                  child: child,
-                ),
+        child: Align(
+          alignment: Alignment.topCenter,
+          child: Card(
+            elevation: 6,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(12),
               ),
+            ),
+            child: SizedBox(
+              width: context.width * 0.95,
+              height: height ?? context.height * 0.45,
+              child: child,
             ),
           ),
         ),

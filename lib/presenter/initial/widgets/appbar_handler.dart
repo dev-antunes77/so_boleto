@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_flow_app_bar.dart';
 import 'package:so_boleto/presenter/home/widgets/home_app_bar.dart';
+import 'package:so_boleto/presenter/prompt_bills/widgets/promot_bills_edition_app_bar.dart';
 import 'package:so_boleto/presenter/prompt_bills/widgets/prompt_bills_app_bar.dart';
 
 class AppBarHandler extends StatelessWidget {
@@ -16,6 +17,8 @@ class AppBarHandler extends StatelessWidget {
       return const SizedBox.shrink();
     } else if (route == Routes.promptBills) {
       return const PromptBillsAppBar();
+    } else if (route == Routes.promptBillsEdition) {
+      return const PromptBillsEditionAppBar();
     } else if (route.contains('bill')) {
       return const BillFlowAppBar();
     }

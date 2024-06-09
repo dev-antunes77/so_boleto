@@ -28,6 +28,14 @@ class FilterState extends BaseState with EquatableMixin {
   final bool priceSelected;
   final bool dueDaySelected;
 
+  bool get areFiltersValid =>
+      parcelSelected ||
+      dueDaySelected ||
+      priceSelected ||
+      pills.any(
+        (element) => element.isSelected,
+      );
+
   @override
   List<Object> get props {
     return [

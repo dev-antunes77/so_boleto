@@ -16,6 +16,12 @@ class PromptBillsState extends BaseState with EquatableMixin {
 
   bool get allSelected => promptBills.length == howManySelectd;
 
+  List<PromptBill> get selectedPromptBills =>
+      promptBills.where((element) => element.isSelected).toList();
+
+  bool get editionNotValid =>
+      selectedPromptBills.any((element) => element.value <= 0);
+
   @override
   List<Object?> get props => [
         status,

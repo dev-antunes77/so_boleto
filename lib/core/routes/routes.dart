@@ -10,7 +10,8 @@ class Routes {
   static const billName = '/bill-name';
   static const billParcels = '/bill-parcels';
   static const billValue = '/bill-value';
-  static const promptBills = '/prompt_bills';
+  static const promptBills = '/prompt-bills';
+  static const promptBillsEdition = '/prompt-bills-edition';
   static const expenses = '/expenses';
   static const filter = '/filter';
   static const profile = '/profile';
@@ -28,7 +29,8 @@ class RelativePaths {
   static const billName = '/bill-name';
   static const billParcels = '/bill-parcels';
   static const billValue = '/bill-value';
-  static const promptBills = '/prompt_bills';
+  static const promptBills = '/prompt-bills';
+  static const promptBillsEdition = '/prompt-bills-edition';
   static const expenses = '/expenses';
   static const filter = '/filter';
   static const profile = '/profile';

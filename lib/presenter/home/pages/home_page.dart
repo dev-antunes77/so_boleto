@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           : PageResponseHandler.nonePayed,
                     ),
                     HomeBillTab(
-                      state.inFilteringCase(state.delayeddBills),
+                      state.inFilteringCase(state.delayedBills),
                       message: state.paramsApplied
                           ? PageResponseHandler.noneForTheseFilters
                           : PageResponseHandler.noneDelayed,
@@ -82,7 +82,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 );
               },
             ),
-          )
+          ),
         ],
       ),
     );

@@ -61,6 +61,41 @@ class PromptBillsCubit extends Cubit<PromptBillsState> with BaseCubit {
     );
   }
 
-  List<PromptBill> onAddPrompBills() =>
+  List<PromptBill> onPrompBillsSelected() =>
       state.promptBills.where((element) => element.isSelected).toList();
+
+  void onEditionInit() {
+    for (var promptBill in state.selectedPromptBills) {
+      promptBill.dueDay = 1;
+      promptBill.value = 0;
+    }
+  }
+
+  void onValueEdition(String id, int value) {
+    for (var bill in state.selectedPromptBills) {
+      if (bill.id == id) {
+        bill.value = value;
+      }
+    }
+    emit(
+      state.copyWith(
+        status: BaseStateStatus.success,
+        promptBills: state.promptBills,
+      ),
+    );
+  }
+
+  void onDueDayEdition(String id, int dueDay) {
+    for (var bill in state.selectedPromptBills) {
+      if (bill.id == id) {
+        bill.dueDay = dueDay;
+      }
+    }
+    emit(
+      state.copyWith(
+        status: BaseStateStatus.success,
+        promptBills: state.promptBills,
+      ),
+    );
+  }
 }

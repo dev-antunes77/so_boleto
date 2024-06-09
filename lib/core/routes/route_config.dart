@@ -15,6 +15,7 @@ import 'package:so_boleto/presenter/home/pages/home_page.dart';
 import 'package:so_boleto/presenter/initial/app_shell.dart';
 import 'package:so_boleto/presenter/initial/pages/splash_page.dart';
 import 'package:so_boleto/presenter/profile/pages/profile_page.dart';
+import 'package:so_boleto/presenter/prompt_bills/pages/prompt_bills_edition_page.dart';
 import 'package:so_boleto/presenter/prompt_bills/pages/prompt_bills_page.dart';
 
 import 'routes.dart';
@@ -36,24 +37,6 @@ abstract class RoutesConfig {
         parentNavigatorKey: _rootKey,
         builder: (_, __) => const SplashPage(),
       ),
-      //     GoRoute(
-      //       path: RelativePaths.msisdn,
-      //       parentNavigatorKey: _loginKey,
-      //       pageBuilder: (_, state) =>
-      //           _fadeTransition(state, const LoginFormMsisdn()),
-      //     ),
-      //     GoRoute(
-      //       path: RelativePaths.pinCode,
-      //       parentNavigatorKey: _loginKey,
-      //       pageBuilder: (_, state) => _fadeTransition(
-      //         state,
-      //         LoginFormPinCode(
-      //           loginCubit: state.extra as LoginCubit,
-      //         ),
-      //       ),
-      //     ),
-      //   ],
-      // ),
       ShellRoute(
         builder: (context, state, child) => AppShell(child: child),
         navigatorKey: _shellKey,
@@ -168,6 +151,15 @@ abstract class RoutesConfig {
               const PromptBillsPage(),
               type: PageTransitions.transitionScale,
               duration: duration300,
+            ),
+          ),
+          GoRoute(
+            path: RelativePaths.promptBillsEdition,
+            parentNavigatorKey: _shellKey,
+            pageBuilder: (_, state) => _getTransitionPage(
+              state,
+              const PromptBillsEditionPage(),
+              duration: duration400,
             ),
           ),
           // GoRoute(

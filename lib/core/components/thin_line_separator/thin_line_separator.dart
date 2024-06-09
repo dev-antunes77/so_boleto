@@ -57,10 +57,10 @@ class LineSeparator extends StatelessWidget {
         width: double.infinity,
       );
 
-  factory LineSeparator.vertical() => LineSeparator(
+  factory LineSeparator.vertical({required double height}) => LineSeparator(
         verticalPadding: AppThemeValues.spaceXSmall,
         horizontalPadding: AppThemeValues.spaceXSmall,
-        height: double.infinity,
+        height: height,
         width: 0.5,
       );
 

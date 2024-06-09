@@ -6,17 +6,24 @@ final class PromptBill {
     required this.name,
     required this.category,
     required this.isSelected,
-  });
+    int? value,
+    int? dueDay,
+  })  : value = value ?? 0,
+        dueDay = dueDay ?? 0;
 
   final String id;
   final String name;
   final BillCategory category;
+  int value;
+  int dueDay;
   bool isSelected;
 
   PromptBill copyWith({
     String? id,
     String? name,
     BillCategory? category,
+    int? value,
+    int? dueDay,
     bool? isSelected,
   }) {
     return PromptBill(
@@ -24,6 +31,8 @@ final class PromptBill {
       name: name ?? this.name,
       category: category ?? this.category,
       isSelected: isSelected ?? this.isSelected,
+      dueDay: dueDay ?? this.dueDay,
+      value: value ?? this.value,
     );
   }
 }

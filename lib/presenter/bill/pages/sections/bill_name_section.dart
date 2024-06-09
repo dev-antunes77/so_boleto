@@ -34,7 +34,7 @@ class _BillNameSectionState extends State<BillNameSection> {
   @override
   Widget build(BuildContext context) {
     return BillShell(
-      height: context.height * 0.5,
+      height: context.height * 0.47,
       child: BlocBuilder<BillCubit, BillState>(
         buildWhen: (previous, current) => previous.bill != current.bill,
         builder: (context, state) {

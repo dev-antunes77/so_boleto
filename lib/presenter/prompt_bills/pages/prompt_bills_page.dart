@@ -162,9 +162,9 @@ class _PromptBillsPageState extends State<PromptBillsPage> {
                 LineSeparator.horizontal(),
                 const ExpandedSpace(),
                 PillButton(
-                  onTap: () => _onAddTapped(),
+                  onTap: () => context.pushTo(Routes.promptBillsEdition),
                   isDisabled: !state.hasAnySelected,
-                  child: const Text('Adicionar'),
+                  child: const Text('Continuar'),
                 ),
                 AppThemeValues.spaceVerticalMedium,
               ],
@@ -175,10 +175,10 @@ class _PromptBillsPageState extends State<PromptBillsPage> {
     );
   }
 
-  void _onAddTapped() {
-    context.read<HomeBillsCubit>().addPrompBills(
-          cubit.onAddPrompBills(),
-        );
-    context.navigateTo(Routes.home);
-  }
+  // void _onAddTapped() {
+  //   context.read<HomeBillsCubit>().addPrompBills(
+  //         cubit.onAddPrompBills(),
+  //       );
+  //   context.navigateTo(Routes.home);
+  // }
 }

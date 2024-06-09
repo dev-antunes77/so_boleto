@@ -12,11 +12,13 @@ class CustomDropdownMenu extends StatelessWidget {
     required this.onChanged,
     this.width,
     this.height,
+    this.color,
   });
 
   final dynamic value;
   final double? width;
   final double? height;
+  final Color? color;
   final List<DropdownMenuItem<Object>> items;
   final Function(dynamic) onChanged;
 
@@ -26,7 +28,7 @@ class CustomDropdownMenu extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(
           width: 1.5,
-          color: AppColors.primary.withOpacity(0.7),
+          color: color ?? AppColors.primary.withOpacity(0.7),
         ),
         borderRadius: BorderRadius.circular(
           AppThemeValues.spaceSmall,

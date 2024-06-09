@@ -55,14 +55,6 @@ class FilterCubit extends Cubit<FilterState> with BaseCubit {
     );
   }
 
-  bool areFiltersValid() =>
-      state.parcelSelected ||
-      state.dueDaySelected ||
-      state.priceSelected ||
-      state.pills.any(
-        (element) => element.isSelected,
-      );
-
   FilterParams createFilterParams() {
     List<BillCategory> categories = [];
     for (var pill in state.pills) {

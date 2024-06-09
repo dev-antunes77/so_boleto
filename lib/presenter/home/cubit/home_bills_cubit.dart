@@ -87,7 +87,7 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
   Future<bool> setBillAsPaid(BillModel bill) async {
     try {
       if (bill.billStatus == BillStatus.payed) return false;
-      emit(state.copyWith(status: BaseStateStatus.loading));
+      // emit(state.copyWith(status: BaseStateStatus.loading));
       await _setBillAsPaidUseCase(bill);
       await getBills();
       return false;
@@ -151,7 +151,6 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
       emit(state.copyWith(status: BaseStateStatus.loading));
       await _addPromptBillsUsecase(promptBills);
       await getBills();
-      emit(state.copyWith(status: BaseStateStatus.success));
     } on AppError catch (error) {
       onAppError(error);
       emit(

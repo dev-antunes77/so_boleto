@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/utils/base_cubit.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
 import 'package:so_boleto/domain/models/bill.dart';
@@ -22,10 +23,7 @@ class BillCubit extends Cubit<BillState> with BaseCubit {
   void onBillValueChange(String billValue) {
     emit(state.copyWith(status: BaseStateStatus.loading));
 
-    RegExp regex = RegExp(r'[^0-9]');
-    String result = billValue.replaceAll(regex, '');
-    if (result.isEmpty) return;
-    final numValue = int.parse(result);
+    final numValue = billValue.revertCurrencyFormat();
     emit(state.copyWith(
         status: BaseStateStatus.success,
         bill: state.bill.copyWith(value: numValue)));

@@ -60,8 +60,8 @@ class BillModel extends Equatable {
         dueEveryMonth: true,
         totalParcels: 0,
         payedParcels: 0,
-        value: 0,
-        dueDayOfTheMonth: 0,
+        value: promptBill.value,
+        dueDayOfTheMonth: promptBill.dueDay,
         createdAt: DateTime.now(),
       );
 

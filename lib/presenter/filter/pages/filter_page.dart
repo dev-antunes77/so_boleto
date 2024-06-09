@@ -65,7 +65,7 @@ class _FilterPageState extends State<FilterPage> {
                         Container(
                           height: AppThemeValues.spaceTiny,
                           width: context.width * 0.2,
-                          color: cubit.areFiltersValid()
+                          color: state.areFiltersValid
                               ? AppColors.primary
                               : AppColors.grey,
                         ),
@@ -143,14 +143,8 @@ class _FilterPageState extends State<FilterPage> {
                 const ExpandedSpace(),
                 RectangularButton(
                   label: 'Aplicar',
-                  isValid: cubit.areFiltersValid(),
-                  onTap: () {
-                    context.read<HomeBillsCubit>().setFilterParams(
-                          cubit.createFilterParams(),
-                        );
-                    context.pop(true);
-                    FocusScope.of(context).unfocus();
-                  },
+                  isValid: state.areFiltersValid,
+                  onTap: () => _onApplyTapped(),
                 ),
                 AppThemeValues.spaceVerticalMedium
               ],
@@ -159,5 +153,11 @@ class _FilterPageState extends State<FilterPage> {
         ),
       ),
     );
+  }
+
+  void _onApplyTapped() {
+    context.read<HomeBillsCubit>().setFilterParams(cubit.createFilterParams());
+    context.pop(true);
+    FocusScope.of(context).unfocus();
   }
 }
