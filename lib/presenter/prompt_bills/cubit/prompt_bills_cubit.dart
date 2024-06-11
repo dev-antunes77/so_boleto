@@ -72,6 +72,7 @@ class PromptBillsCubit extends Cubit<PromptBillsState> with BaseCubit {
   }
 
   void onValueEdition(String id, int value) {
+    emit(state.copyWith(status: BaseStateStatus.loading));
     for (var bill in state.selectedPromptBills) {
       if (bill.id == id) {
         bill.value = value;
@@ -86,6 +87,7 @@ class PromptBillsCubit extends Cubit<PromptBillsState> with BaseCubit {
   }
 
   void onDueDayEdition(String id, int dueDay) {
+    emit(state.copyWith(status: BaseStateStatus.loading));
     for (var bill in state.selectedPromptBills) {
       if (bill.id == id) {
         bill.dueDay = dueDay;

@@ -16,20 +16,19 @@ enum PageResponseHandler {
   String getTextResponse() {
     switch (this) {
       case error:
-        AppLocalizations.current.responseHandlerError;
+        return AppLocalizations.current.responseHandlerError;
       case noMorePromptBills:
-        AppLocalizations.current.responseHandlerNoMorePromptBills;
+        return AppLocalizations.current.responseHandlerNoMorePromptBills;
       case noneRegistered:
-        AppLocalizations.current.responseHandlerNoneRegistered;
+        return AppLocalizations.current.responseHandlerNoneRegistered;
       case noneDelayed:
-        AppLocalizations.current.responseHandlerNoneDelayed;
+        return AppLocalizations.current.responseHandlerNoneDelayed;
       case noneForTheseFilters:
-        AppLocalizations.current.responseHandlerNoneForTheseFilters;
+        return AppLocalizations.current.responseHandlerNoneForTheseFilters;
       case nonePayed:
-        AppLocalizations.current.responseHandlerNonePayed;
+        return AppLocalizations.current.responseHandlerNonePayed;
       case noneWithThisName:
-        AppLocalizations.current.responseHandlerNoneWithThisName;
+        return AppLocalizations.current.responseHandlerNoneWithThisName;
     }
-    return '';
   }
 }

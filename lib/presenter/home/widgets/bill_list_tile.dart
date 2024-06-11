@@ -48,6 +48,7 @@ class BillListTile extends StatelessWidget {
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: AppThemeValues.spaceSmall,
               ),
+              horizontalTitleGap: AppThemeValues.spaceXSmall,
               leading: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -107,7 +108,7 @@ class BillListTile extends StatelessWidget {
                           bill.totalParcels,
                           bill.payedParcels,
                         ),
-                        textAlign: TextAlign.center,
+                        textAlign: TextAlign.right,
                         style: context.textRobotoSubtitleTiny,
                       ),
                     ],

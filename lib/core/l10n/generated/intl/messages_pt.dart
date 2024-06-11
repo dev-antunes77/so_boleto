@@ -20,6 +20,22 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'pt';
 
+  static String m0(range) => "depois do dia ${range}";
+
+  static String m1(range) => "antes do dia ${range}";
+
+  static String m2(range1, range2) => "entre os dias ${range1} e ${range2}";
+
+  static String m3(fisrtRange, lastRange) => "de ${fisrtRange} a ${lastRange}";
+
+  static String m4(parcelNumber) => "mais de ${parcelNumber}";
+
+  static String m5(parcelNumber) => "${parcelNumber} ou menos";
+
+  static String m6(parcelNumber) => "${parcelNumber} parcelas";
+
+  static String m7(payedParcels, parcels) => "${payedParcels} de ${parcels}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "appNameHalf1": MessageLookupByLibrary.simpleMessage("Só"),
@@ -90,20 +106,32 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sem conexão"),
         "errorUnknowError":
             MessageLookupByLibrary.simpleMessage("Tente novamente"),
+        "expensesForThisMonth":
+            MessageLookupByLibrary.simpleMessage("Gastos deste mês"),
         "filter": MessageLookupByLibrary.simpleMessage("Filtros"),
         "filterApply": MessageLookupByLibrary.simpleMessage("Aplicar"),
         "filterByCategory":
             MessageLookupByLibrary.simpleMessage("Por categoria"),
         "filterDueDay": MessageLookupByLibrary.simpleMessage("Vencimento"),
-        "filterParcels": MessageLookupByLibrary.simpleMessage("Parcelas"),
         "filterRemove": MessageLookupByLibrary.simpleMessage("Remover filtros"),
         "filterSee": MessageLookupByLibrary.simpleMessage("Ver filtros"),
         "filterValue": MessageLookupByLibrary.simpleMessage("Valor"),
+        "formatterDayAfter": m0,
+        "formatterDayBefore": m1,
+        "formatterDayBetween": m2,
+        "formatterMonth": MessageLookupByLibrary.simpleMessage("Mensal fixa"),
+        "formatterMonthBill":
+            MessageLookupByLibrary.simpleMessage("Conta fixa"),
+        "formatterParcelsFromTo": m3,
+        "formatterParcelsMoreThan": m4,
+        "formatterParcelsOrLess": m5,
+        "formatterParcelsTimes": m6,
+        "formatterPayedParcelsOfParcels": m7,
         "homeAppBarAddNewBill":
             MessageLookupByLibrary.simpleMessage("Adicionar conta nova"),
         "homeAppBarAddPromptBills":
             MessageLookupByLibrary.simpleMessage("Adicionar contas prontas"),
-        "homeAppBarTitle": MessageLookupByLibrary.simpleMessage("Novas contas"),
+        "homeAppBarTitle": MessageLookupByLibrary.simpleMessage("Suas contas"),
         "homeBillDeleting":
             MessageLookupByLibrary.simpleMessage("Deletando..."),
         "homeBillPayedTag": MessageLookupByLibrary.simpleMessage("Paga"),
@@ -111,6 +139,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "homeTabAll": MessageLookupByLibrary.simpleMessage("Todas"),
         "homeTabDelayed": MessageLookupByLibrary.simpleMessage("Atrasadas"),
         "homeTabPayed": MessageLookupByLibrary.simpleMessage("Pagas"),
+        "parcels": MessageLookupByLibrary.simpleMessage("Parcelas"),
         "prompBillAppBar":
             MessageLookupByLibrary.simpleMessage("Contas prontas"),
         "prompBillAppBarRemoveAll":

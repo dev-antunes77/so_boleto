@@ -48,15 +48,91 @@
     "dueDayExtensionsDueToday":"Vence hoje",
     "dueDayExtensionsDueIn":"Vence em",
     "dueDayExtensionsDelayedSince":"Vencida há",
+    "expensesForThisMonth":"Gastos deste mês",
     "filter":"Filtros",
     "filterByCategory":"Por categoria",
-    "filterParcels":"Parcelas",
     "filterDueDay":"Vencimento",
     "filterValue":"Valor",
     "filterApply":"Aplicar",
     "filterSee":"Ver filtros",
     "filterRemove":"Remover filtros",
-    "homeAppBarTitle":"Novas contas",
+    "formatterMonthBill": "Conta fixa",
+    "formatterMonth": "Mensal fixa",
+    "formatterParcelsTimes": "{parcelNumber} parcelas",
+    "@formatterParcelsTimes" :{
+        "placeholders":{
+            "parcelNumber":{
+                "type": "int"
+            }
+        }
+    },
+    "formatterPayedParcelsOfParcels": "{payedParcels} de {parcels}",
+    "@formatterPayedParcelsOfParcels" :{
+        "placeholders":{
+            "payedParcels":{
+                "type": "int"
+            },
+            "parcels":{
+                "type": "int"
+            }
+        }
+    },
+    "formatterParcelsMoreThan": "mais de {parcelNumber}",
+    "@formatterParcelsMoreThan" :{
+        "placeholders":{
+            "parcelNumber":{
+                "type": "String"
+            }
+        }
+    },
+    "formatterParcelsOrLess": "{parcelNumber} ou menos",
+    "@formatterParcelsOrLess" :{
+        "placeholders":{
+            "parcelNumber":{
+                "type": "String"
+            }
+        }
+    },
+    "formatterParcelsFromTo": "de {fisrtRange} a {lastRange}",
+    "@formatterParcelsFromTo" :{
+        "placeholders":{
+            "fisrtRange":{
+                "type": "int"
+            },
+            "lastRange":{
+                "type": "int"
+            }
+        }
+    },
+    "formatterDayAfter": "depois do dia {range}",
+    "@formatterDayAfter" :{
+        "placeholders":{
+            "range":{
+                "type": "int"
+            }
+        }
+    },
+    "formatterDayBefore": "antes do dia {range}",
+    "@formatterDayBefore" :{
+        "placeholders":{
+            "range":{
+                "type": "int"
+            }
+        }
+    },
+    "formatterDayBetween": "entre os dias {range1} e {range2}",
+    "@formatterDayBetween" :{
+        "placeholders":{
+            "range1":{
+                "type": "int"
+            },
+            "range2":{
+                "type": "int"
+            }
+        }
+    },
+
+    "homeAppBarTitle":"Suas contas",
     "homeAppBarAddNewBill":"Adicionar conta nova",
     "homeAppBarAddPromptBills":"Adicionar contas prontas",
     "homeBillPayedTag":"Paga",
@@ -65,6 +141,7 @@
     "homeTabAll":"Todas",
     "homeTabPayed":"Pagas",
     "homeTabDelayed":"Atrasadas",
+    "parcels":"Parcelas",
     "prompBillAppBar":"Contas prontas",
     "prompBillEditionAppBar":"Edição de contas prontas",
     "prompBillEditionTileDueDay":" Vencimento",

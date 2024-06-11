@@ -49,6 +49,16 @@ class HomeBillsState extends BaseState with EquatableMixin {
   List<BillModel> inFilteringCase(List<BillModel> bills) =>
       querySearch.isNotEmpty ? bills.filterBills(querySearch) : bills;
 
+  int get totalExpenses {
+    int total = 0;
+    for (var bill in allBills) {
+      if (bill.billStatus == BillStatus.payed) {
+        total += bill.value;
+      }
+    }
+    return total;
+  }
+
   @override
   HomeBillsState copyWith({
     BaseStateStatus? status,

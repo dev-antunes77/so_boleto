@@ -110,7 +110,7 @@ class _FilterPageState extends State<FilterPage> {
                 ),
                 LineSeparator.infiniteHorizon(),
                 FilterDropdownAction(
-                  filterName: AppLocalizations.current.filterParcels,
+                  filterName: AppLocalizations.current.parcels,
                   switchValue: state.parcelSelected,
                   dropdownListValues: DueDayOrParcelRanges.dueDayOrParcelRanges,
                   dropdownValue: state.parcelFilter,

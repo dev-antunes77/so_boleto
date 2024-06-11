@@ -9,13 +9,13 @@ part of 'bill.dart';
 BillModel _$BillModelFromJson(Map<String, dynamic> json) => BillModel(
       name: json['name'] as String? ?? '',
       description: json['description'] as String? ?? '',
-      totalParcels: (json['totalParcels'] as num?)?.toInt() ?? 1,
+      totalParcels: (json['totalParcels'] as num?)?.toInt() ?? 0,
       value: (json['value'] as num?)?.toInt() ?? 0,
       payedParcels: (json['payedParcels'] as num?)?.toInt() ?? 0,
-      dueDayOfTheMonth: (json['dueDayOfTheMonth'] as num?)?.toInt() ?? 1,
+      dueDayOfTheMonth: (json['dueDayOfTheMonth'] as num?)?.toInt() ?? 0,
       dueEveryMonth: json['dueEveryMonth'] as bool? ?? false,
       id: json['id'] as String?,
-      category: $enumDecodeNullable(_$CategoryEnumMap, json['category']),
+      category: $enumDecodeNullable(_$BillCategoryEnumMap, json['category']),
       billStatus: $enumDecodeNullable(_$BillStatusEnumMap, json['billStatus']),
       createdAt: json['createdAt'] == null
           ? null
@@ -26,7 +26,7 @@ Map<String, dynamic> _$BillModelToJson(BillModel instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'description': instance.description,
-      'category': _$CategoryEnumMap[instance.category]!,
+      'category': _$BillCategoryEnumMap[instance.category]!,
       'value': instance.value,
       'createdAt': instance.createdAt.toIso8601String(),
       'dueDayOfTheMonth': instance.dueDayOfTheMonth,
@@ -36,9 +36,8 @@ Map<String, dynamic> _$BillModelToJson(BillModel instance) => <String, dynamic>{
       'dueEveryMonth': instance.dueEveryMonth,
     };
 
-const _$CategoryEnumMap = {
+const _$BillCategoryEnumMap = {
   BillCategory.automobile: 'automobile',
-  BillCategory.telephone: 'communication',
   BillCategory.creditCard: 'creditCard',
   BillCategory.debt: 'debt',
   BillCategory.devices: 'devices',
@@ -46,12 +45,15 @@ const _$CategoryEnumMap = {
   BillCategory.electricity: 'electricity',
   BillCategory.entertainment: 'entertainment',
   BillCategory.groceries: 'groceries',
+  BillCategory.gas: 'gas',
   BillCategory.healthCare: 'healthCare',
   BillCategory.insurance: 'insurance',
   BillCategory.investment: 'investment',
   BillCategory.internet: 'internet',
   BillCategory.miscellaneous: 'miscellaneous',
   BillCategory.rent: 'rent',
+  BillCategory.petShop: 'petShop',
+  BillCategory.telephone: 'telephone',
   BillCategory.transportation: 'transportation',
   BillCategory.travel: 'travel',
   BillCategory.water: 'water',

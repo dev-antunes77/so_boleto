@@ -540,6 +540,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Gastos deste mês`
+  String get expensesForThisMonth {
+    return Intl.message(
+      'Gastos deste mês',
+      name: 'expensesForThisMonth',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Filtros`
   String get filter {
     return Intl.message(
@@ -555,16 +565,6 @@ class AppLocalizations {
     return Intl.message(
       'Por categoria',
       name: 'filterByCategory',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Parcelas`
-  String get filterParcels {
-    return Intl.message(
-      'Parcelas',
-      name: 'filterParcels',
       desc: '',
       args: [],
     );
@@ -620,10 +620,110 @@ class AppLocalizations {
     );
   }
 
-  /// `Novas contas`
+  /// `Conta fixa`
+  String get formatterMonthBill {
+    return Intl.message(
+      'Conta fixa',
+      name: 'formatterMonthBill',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mensal fixa`
+  String get formatterMonth {
+    return Intl.message(
+      'Mensal fixa',
+      name: 'formatterMonth',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{parcelNumber} parcelas`
+  String formatterParcelsTimes(int parcelNumber) {
+    return Intl.message(
+      '$parcelNumber parcelas',
+      name: 'formatterParcelsTimes',
+      desc: '',
+      args: [parcelNumber],
+    );
+  }
+
+  /// `{payedParcels} de {parcels}`
+  String formatterPayedParcelsOfParcels(int payedParcels, int parcels) {
+    return Intl.message(
+      '$payedParcels de $parcels',
+      name: 'formatterPayedParcelsOfParcels',
+      desc: '',
+      args: [payedParcels, parcels],
+    );
+  }
+
+  /// `mais de {parcelNumber}`
+  String formatterParcelsMoreThan(String parcelNumber) {
+    return Intl.message(
+      'mais de $parcelNumber',
+      name: 'formatterParcelsMoreThan',
+      desc: '',
+      args: [parcelNumber],
+    );
+  }
+
+  /// `{parcelNumber} ou menos`
+  String formatterParcelsOrLess(String parcelNumber) {
+    return Intl.message(
+      '$parcelNumber ou menos',
+      name: 'formatterParcelsOrLess',
+      desc: '',
+      args: [parcelNumber],
+    );
+  }
+
+  /// `de {fisrtRange} a {lastRange}`
+  String formatterParcelsFromTo(int fisrtRange, int lastRange) {
+    return Intl.message(
+      'de $fisrtRange a $lastRange',
+      name: 'formatterParcelsFromTo',
+      desc: '',
+      args: [fisrtRange, lastRange],
+    );
+  }
+
+  /// `depois do dia {range}`
+  String formatterDayAfter(int range) {
+    return Intl.message(
+      'depois do dia $range',
+      name: 'formatterDayAfter',
+      desc: '',
+      args: [range],
+    );
+  }
+
+  /// `antes do dia {range}`
+  String formatterDayBefore(int range) {
+    return Intl.message(
+      'antes do dia $range',
+      name: 'formatterDayBefore',
+      desc: '',
+      args: [range],
+    );
+  }
+
+  /// `entre os dias {range1} e {range2}`
+  String formatterDayBetween(int range1, int range2) {
+    return Intl.message(
+      'entre os dias $range1 e $range2',
+      name: 'formatterDayBetween',
+      desc: '',
+      args: [range1, range2],
+    );
+  }
+
+  /// `Suas contas`
   String get homeAppBarTitle {
     return Intl.message(
-      'Novas contas',
+      'Suas contas',
       name: 'homeAppBarTitle',
       desc: '',
       args: [],
@@ -705,6 +805,16 @@ class AppLocalizations {
     return Intl.message(
       'Atrasadas',
       name: 'homeTabDelayed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Parcelas`
+  String get parcels {
+    return Intl.message(
+      'Parcelas',
+      name: 'parcels',
       desc: '',
       args: [],
     );

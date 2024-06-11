@@ -39,6 +39,8 @@ class FilterState extends BaseState with EquatableMixin {
   @override
   List<Object> get props {
     return [
+      status,
+      callbackMessage,
       pills,
       parcelFilter,
       dueDayFilter,
