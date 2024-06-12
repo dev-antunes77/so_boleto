@@ -8,7 +8,12 @@ part 'expenses_state.dart';
 class ExpensesCubit extends Cubit<ExpensesState> with BaseCubit {
   ExpensesCubit() : super(ExpensesState(status: BaseStateStatus.initial));
 
-  void onInit(int total) {
-    emit(state.copyWith(totalExpenses: total, status: BaseStateStatus.success));
+  void onInit(int thisMonth) {
+    emit(
+      state.copyWith(
+        totalExpenses: thisMonth,
+        status: BaseStateStatus.success,
+      ),
+    );
   }
 }

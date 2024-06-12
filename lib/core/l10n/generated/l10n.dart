@@ -540,11 +540,41 @@ class AppLocalizations {
     );
   }
 
+  /// `Gastos`
+  String get expenses {
+    return Intl.message(
+      'Gastos',
+      name: 'expenses',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Gastos deste mês`
   String get expensesForThisMonth {
     return Intl.message(
       'Gastos deste mês',
       name: 'expensesForThisMonth',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gastos dos últimos 3 meses`
+  String get expensesForThreeMonth {
+    return Intl.message(
+      'Gastos dos últimos 3 meses',
+      name: 'expensesForThreeMonth',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gastos dos últimos 6 meses`
+  String get expensesForSixMonth {
+    return Intl.message(
+      'Gastos dos últimos 6 meses',
+      name: 'expensesForSixMonth',
       desc: '',
       args: [],
     );

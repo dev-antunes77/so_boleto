@@ -6,9 +6,15 @@ class ExpensesState extends BaseState with EquatableMixin {
     required super.status,
     super.callbackMessage,
     int? totalExpenses,
-  }) : totalExpenses = totalExpenses ?? 0;
+    int? totalExpensesLast3Months,
+    int? totalExpensesLast6Months,
+  })  : totalExpenses = totalExpenses ?? 0,
+        totalExpensesLast3Months = totalExpensesLast3Months ?? 0,
+        totalExpensesLast6Months = totalExpensesLast6Months ?? 0;
 
   final int totalExpenses;
+  final int totalExpensesLast3Months;
+  final int totalExpensesLast6Months;
 
   @override
   List<Object> get props {
@@ -16,6 +22,8 @@ class ExpensesState extends BaseState with EquatableMixin {
       callbackMessage,
       status,
       totalExpenses,
+      totalExpensesLast3Months,
+      totalExpensesLast6Months,
     ];
   }
 
@@ -24,10 +32,16 @@ class ExpensesState extends BaseState with EquatableMixin {
     BaseStateStatus? status,
     String? callbackMessage,
     int? totalExpenses,
+    int? totalExpensesLast3Months,
+    int? totalExpensesLast6Months,
   }) =>
       ExpensesState(
         status: status ?? this.status,
         callbackMessage: callbackMessage ?? this.callbackMessage,
         totalExpenses: totalExpenses ?? this.totalExpenses,
+        totalExpensesLast3Months:
+            totalExpensesLast3Months ?? this.totalExpensesLast3Months,
+        totalExpensesLast6Months:
+            totalExpensesLast6Months ?? this.totalExpensesLast6Months,
       );
 }

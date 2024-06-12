@@ -49,10 +49,21 @@ class HomeBillsState extends BaseState with EquatableMixin {
   List<BillModel> inFilteringCase(List<BillModel> bills) =>
       querySearch.isNotEmpty ? bills.filterBills(querySearch) : bills;
 
-  int get totalExpenses {
+  int get totalExpensesPayed {
     int total = 0;
     for (var bill in allBills) {
       if (bill.billStatus == BillStatus.payed) {
+        total += bill.value;
+      }
+    }
+    return total;
+  }
+
+  int get totalExpensesUnpayed {
+    int total = 0;
+    for (var bill in allBills) {
+      if (bill.billStatus == BillStatus.open ||
+          bill.billStatus == BillStatus.delayed) {
         total += bill.value;
       }
     }

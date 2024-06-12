@@ -106,8 +106,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sem conexão"),
         "errorUnknowError":
             MessageLookupByLibrary.simpleMessage("Tente novamente"),
+        "expenses": MessageLookupByLibrary.simpleMessage("Gastos"),
+        "expensesForSixMonth":
+            MessageLookupByLibrary.simpleMessage("Gastos dos últimos 6 meses"),
         "expensesForThisMonth":
             MessageLookupByLibrary.simpleMessage("Gastos deste mês"),
+        "expensesForThreeMonth":
+            MessageLookupByLibrary.simpleMessage("Gastos dos últimos 3 meses"),
         "filter": MessageLookupByLibrary.simpleMessage("Filtros"),
         "filterApply": MessageLookupByLibrary.simpleMessage("Aplicar"),
         "filterByCategory":
