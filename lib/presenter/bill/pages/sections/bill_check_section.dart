@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/buttons/pill_button.dart';
 import 'package:so_boleto/core/components/expanded_space/expanded_space.dart';
 import 'package:so_boleto/core/components/thin_line_separator/thin_line_separator.dart';
-import 'package:so_boleto/core/extensions/map_extensions.dart';
 import 'package:so_boleto/core/extensions/num_extensions.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/helpers/app_formatters.dart';
@@ -77,9 +76,9 @@ class BillCheckSection extends StatelessWidget {
                 ),
                 LineSeparator.infiniteHorizon(),
                 BillEditTile(
-                  icon: state.bill.category.value.mapToIcon(),
+                  icon: state.bill.category.value,
                   label: AppLocalizations.current.billFlowCheckCategory,
-                  value: state.bill.category.value.mapToText(),
+                  value: state.bill.category.getTextResponse(),
                   onPressed: () =>
                       _pushToEditionFlow(context, Routes.billCategory),
                 ),

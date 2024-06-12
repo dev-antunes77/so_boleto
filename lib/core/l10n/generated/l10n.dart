@@ -270,6 +270,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Cartão de crédito`
+  String get categoryCreditCard {
+    return Intl.message(
+      'Cartão de crédito',
+      name: 'categoryCreditCard',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Dívida`
   String get categoryDebt {
     return Intl.message(
@@ -280,10 +290,10 @@ class AppLocalizations {
     );
   }
 
-  /// `Aparelhos`
+  /// `Eletrônicos`
   String get categoryDevices {
     return Intl.message(
-      'Aparelhos',
+      'Eletrônicos',
       name: 'categoryDevices',
       desc: '',
       args: [],
@@ -400,10 +410,10 @@ class AppLocalizations {
     );
   }
 
-  /// `pet shop`
+  /// `Pet shop`
   String get categorypetShop {
     return Intl.message(
-      'pet shop',
+      'Pet shop',
       name: 'categorypetShop',
       desc: '',
       args: [],

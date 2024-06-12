@@ -4,7 +4,6 @@ import 'package:so_boleto/core/components/custom_dropdown_menu/custom_dropdown_m
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
 import 'package:so_boleto/core/components/thin_line_separator/thin_line_separator.dart';
 import 'package:so_boleto/core/constants/app_constants.dart';
-import 'package:so_boleto/core/extensions/map_extensions.dart';
 import 'package:so_boleto/core/extensions/num_extensions.dart';
 import 'package:so_boleto/core/helpers/currency_ptbr_input_formatter.dart';
 import 'package:so_boleto/core/l10n/generated/l10n.dart';
@@ -46,7 +45,7 @@ class PromptBillEditionTile extends StatelessWidget {
             child: Column(
               children: [
                 SvgAsset(
-                  svg: promptBill.category.value.mapToIcon(),
+                  svg: promptBill.category.value,
                   height: 32,
                   color: promptBill.value > 0
                       ? AppColors.primaryDark

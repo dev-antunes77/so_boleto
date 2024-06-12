@@ -67,8 +67,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "billFlowValueTitle":
             MessageLookupByLibrary.simpleMessage("Valor da conta"),
         "categoryAutomobile": MessageLookupByLibrary.simpleMessage("Automóvel"),
+        "categoryCreditCard":
+            MessageLookupByLibrary.simpleMessage("Cartão de crédito"),
         "categoryDebt": MessageLookupByLibrary.simpleMessage("Dívida"),
-        "categoryDevices": MessageLookupByLibrary.simpleMessage("Aparelhos"),
+        "categoryDevices": MessageLookupByLibrary.simpleMessage("Eletrônicos"),
         "categoryEducation": MessageLookupByLibrary.simpleMessage("Educação"),
         "categoryElectricity": MessageLookupByLibrary.simpleMessage("Luz"),
         "categoryEntertainment":
@@ -88,7 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Transporte"),
         "categoryTravel": MessageLookupByLibrary.simpleMessage("Viagem"),
         "categoryWater": MessageLookupByLibrary.simpleMessage("Água"),
-        "categorypetShop": MessageLookupByLibrary.simpleMessage("pet shop"),
+        "categorypetShop": MessageLookupByLibrary.simpleMessage("Pet shop"),
         "close": MessageLookupByLibrary.simpleMessage("Encerrar"),
         "continueButton": MessageLookupByLibrary.simpleMessage("Continuar"),
         "done": MessageLookupByLibrary.simpleMessage("Pronto"),

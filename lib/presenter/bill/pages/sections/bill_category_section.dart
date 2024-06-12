@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/buttons/pill_button.dart';
 import 'package:so_boleto/core/components/custom_dropdown_menu/custom_dropdown_menu.dart';
 import 'package:so_boleto/core/components/expanded_space/expanded_space.dart';
-import 'package:so_boleto/core/extensions/map_extensions.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes.dart';
@@ -26,12 +25,12 @@ class BillCategorySection extends StatelessWidget {
         builder: (context, state) {
           return Column(
             children: [
-              BillSectionTopIcon(state.bill.category.value.mapToIcon()),
+              BillSectionTopIcon(state.bill.category.value),
               AppThemeValues.spaceVerticalLarge,
               Center(
                 child: CustomDropdownMenu(
                   width: context.width * 0.6,
-                  value: state.bill.category.value.mapToText(),
+                  value: state.bill.category.getTextResponse(),
                   items: BillCategory.categoryList
                       .map(
                         (e) => DropdownMenuItem<String>(

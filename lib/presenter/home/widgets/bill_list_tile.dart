@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/dialogs/app_dialogs.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
-import 'package:so_boleto/core/extensions/map_extensions.dart';
 import 'package:so_boleto/core/extensions/num_extensions.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/helpers/app_formatters.dart';
@@ -57,7 +56,7 @@ class BillListTile extends StatelessWidget {
                     radius: 25,
                     backgroundColor: AppColors.grey,
                     child: SvgAsset(
-                      svg: bill.category.value.mapToIcon(),
+                      svg: bill.category.value,
                       height: 30,
                       color: AppColors.primaryLight,
                     ),

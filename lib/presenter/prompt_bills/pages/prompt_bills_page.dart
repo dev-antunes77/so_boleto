@@ -6,7 +6,6 @@ import 'package:so_boleto/core/components/custom_state_handler/custom_state_hand
 import 'package:so_boleto/core/components/expanded_space/expanded_space.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
 import 'package:so_boleto/core/components/thin_line_separator/thin_line_separator.dart';
-import 'package:so_boleto/core/extensions/map_extensions.dart';
 import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
@@ -104,7 +103,7 @@ class _PromptBillsPageState extends State<PromptBillsPage> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         SvgAsset(
-                                          svg: bill.category.value.mapToIcon(),
+                                          svg: bill.category.value,
                                           height: bill.isSelected ? 40 : 32,
                                           color: bill.isSelected
                                               ? AppColors.primary

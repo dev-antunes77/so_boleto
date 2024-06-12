@@ -2,8 +2,8 @@ import 'package:so_boleto/domain/models/enums/bill_category.dart';
 import 'package:so_boleto/domain/models/enums/bill_state.dart';
 
 extension StringExtensions on String {
-  BillCategory categoryToEnum() => BillCategory.values
-      .firstWhere((element) => element.value['text'] == this);
+  BillCategory categoryToEnum() =>
+      BillCategory.values.firstWhere((element) => element.value == this);
 
   BillStatus billStatuToEnum() =>
       BillStatus.values.firstWhere((element) => element.value == this);
