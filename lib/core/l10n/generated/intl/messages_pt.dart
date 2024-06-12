@@ -67,8 +67,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "billFlowValueTitle":
             MessageLookupByLibrary.simpleMessage("Valor da conta"),
         "categoryAutomobile": MessageLookupByLibrary.simpleMessage("Automóvel"),
-        "categoryCreditCard":
-            MessageLookupByLibrary.simpleMessage("Cartão de crédito"),
         "categoryDebt": MessageLookupByLibrary.simpleMessage("Dívida"),
         "categoryDevices": MessageLookupByLibrary.simpleMessage("Aparelhos"),
         "categoryEducation": MessageLookupByLibrary.simpleMessage("Educação"),
@@ -159,6 +157,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(" Vencimento"),
         "prompBillEditionTileValue":
             MessageLookupByLibrary.simpleMessage(" Valor"),
+        "prompBillHelthInsurance":
+            MessageLookupByLibrary.simpleMessage("Plano de saúde"),
         "prompBillMedicine": MessageLookupByLibrary.simpleMessage("Remédios"),
         "prompBillSchool": MessageLookupByLibrary.simpleMessage("Escola"),
         "promptBillEditionTitle": MessageLookupByLibrary.simpleMessage(

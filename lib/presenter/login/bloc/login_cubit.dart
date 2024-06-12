@@ -1,12 +1,11 @@
 import 'package:bloc/bloc.dart';
-
 import 'package:equatable/equatable.dart';
 import 'package:so_boleto/core/errors/app_errors.dart';
 import 'package:so_boleto/core/utils/base_cubit.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
 import 'package:so_boleto/domain/models/user.dart';
-import 'package:so_boleto/domain/usecases/sign_in_usecase.dart';
-import 'package:so_boleto/domain/usecases/sign_up_usecase.dart';
+import 'package:so_boleto/domain/usecases/sign_in.dart';
+import 'package:so_boleto/domain/usecases/sign_up.dart';
 
 part 'login_state.dart';
 
@@ -14,8 +13,8 @@ class LoginCubit extends Cubit<LoginState> with BaseCubit {
   LoginCubit(this._signUp, this._signIn)
       : super(LoginState(status: BaseStateStatus.initial));
 
-  final SignUpUseCase _signUp;
-  final SignInUseCase _signIn;
+  final SignUp _signUp;
+  final SignIn _signIn;
 
   Future<void> onSignIn() async {
     try {

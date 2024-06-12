@@ -1,13 +1,13 @@
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:so_boleto/domain/database/hive_bills.dart';
-import 'package:so_boleto/domain/usecases/add_prompt_bills_usecase.dart';
-import 'package:so_boleto/domain/usecases/create_bill_usecase.dart';
-import 'package:so_boleto/domain/usecases/delete_bill_usecase.dart';
-import 'package:so_boleto/domain/usecases/edit_bill_usecase.dart';
+import 'package:so_boleto/domain/usecases/add_prompt_bills.dart';
+import 'package:so_boleto/domain/usecases/create_bill.dart';
+import 'package:so_boleto/domain/usecases/delete_bill.dart';
+import 'package:so_boleto/domain/usecases/edit_bill.dart';
 import 'package:so_boleto/domain/usecases/filter_bills_by_params.dart';
-import 'package:so_boleto/domain/usecases/get_bills_usecase.dart';
-import 'package:so_boleto/domain/usecases/set_bill_as_paid_usecase.dart';
+import 'package:so_boleto/domain/usecases/get_bills.dart';
+import 'package:so_boleto/domain/usecases/set_bill_as_paid.dart';
 import 'package:so_boleto/infra/local_database/hive_bill_database/hive_bill_model.dart';
 import 'package:so_boleto/infra/local_database/hive_bill_database/hive_bills_database.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
@@ -84,25 +84,25 @@ abstract class InjectionService {
   static void _initUseCases() {
     // Bill Usecase
     _i.registerFactory(
-      () => GetBillsUseCase(_i.get<HiveBillsDatabase>()),
+      () => GetBills(_i.get<HiveBillsDatabase>()),
     );
     _i.registerFactory(
-      () => CreateBillUseCase(_i.get<HiveBillsDatabase>()),
+      () => CreateBill(_i.get<HiveBillsDatabase>()),
     );
     _i.registerFactory(
-      () => SetBillAsPaidUseCase(_i.get<HiveBillsDatabase>()),
+      () => SetBillAsPaid(_i.get<HiveBillsDatabase>()),
     );
     _i.registerFactory(
-      () => DeleteBillUseCase(_i.get<HiveBillsDatabase>()),
+      () => DeleteBill(_i.get<HiveBillsDatabase>()),
     );
     _i.registerFactory(
-      () => EditBillUseCase(_i.get<HiveBillsDatabase>()),
+      () => EditBill(_i.get<HiveBillsDatabase>()),
     );
     _i.registerFactory(
-      () => FilterBillsByParamsUseCase(),
+      () => FilterBillsByParams(),
     );
     _i.registerFactory(
-      () => AddPromptBillsUsecase(_i.get<HiveBillsDatabase>()),
+      () => AddPromptBills(_i.get<HiveBillsDatabase>()),
     );
     // _i.registerFactory(
     //   () => SignUpUseCase(
@@ -180,13 +180,13 @@ abstract class InjectionService {
 
     _i.registerFactory(
       () => HomeBillsCubit(
-        _i.get<GetBillsUseCase>(),
-        _i.get<CreateBillUseCase>(),
-        _i.get<SetBillAsPaidUseCase>(),
-        _i.get<DeleteBillUseCase>(),
-        _i.get<EditBillUseCase>(),
-        _i.get<FilterBillsByParamsUseCase>(),
-        _i.get<AddPromptBillsUsecase>(),
+        _i.get<GetBills>(),
+        _i.get<CreateBill>(),
+        _i.get<SetBillAsPaid>(),
+        _i.get<DeleteBill>(),
+        _i.get<EditBill>(),
+        _i.get<FilterBillsByParams>(),
+        _i.get<AddPromptBills>(),
       ),
     );
 

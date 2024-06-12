@@ -270,16 +270,6 @@ class AppLocalizations {
     );
   }
 
-  /// `Cartão de crédito`
-  String get categoryCreditCard {
-    return Intl.message(
-      'Cartão de crédito',
-      name: 'categoryCreditCard',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Dívida`
   String get categoryDebt {
     return Intl.message(
@@ -935,6 +925,16 @@ class AppLocalizations {
     return Intl.message(
       'Remédios',
       name: 'prompBillMedicine',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Plano de saúde`
+  String get prompBillHelthInsurance {
+    return Intl.message(
+      'Plano de saúde',
+      name: 'prompBillHelthInsurance',
       desc: '',
       args: [],
     );

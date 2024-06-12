@@ -24,8 +24,8 @@ abstract final class PromptBillData {
     ),
     PromptBill(
       id: '00000000004',
-      name: AppLocalizations.current.categoryCreditCard,
-      category: BillCategory.creditCard,
+      name: AppLocalizations.current.prompBillCourse,
+      category: BillCategory.education,
       isSelected: false,
     ),
     PromptBill(
@@ -72,7 +72,7 @@ abstract final class PromptBillData {
     ),
     PromptBill(
       id: '00000000012',
-      name: AppLocalizations.current.categoryHealthCare,
+      name: AppLocalizations.current.prompBillHelthInsurance,
       category: BillCategory.healthCare,
       isSelected: false,
     ),

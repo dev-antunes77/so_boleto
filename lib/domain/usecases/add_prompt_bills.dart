@@ -1,17 +1,17 @@
 import 'package:so_boleto/core/errors/app_errors.dart';
 import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/utils/log_utils.dart';
-import 'package:so_boleto/domain/models/user.dart';
-import 'package:so_boleto/infra/local_database/hive_user_database/hive_user_database.dart';
+import 'package:so_boleto/domain/models/prompt_bill.dart';
+import 'package:so_boleto/infra/local_database/hive_bill_database/hive_bills_database.dart';
 
-final class SignUpUseCase {
-  SignUpUseCase(this._hiveUserDatabase);
+final class AddPromptBills {
+  AddPromptBills(this._hiveBillsDatabase);
 
-  final HiveUserDatabase _hiveUserDatabase;
+  final HiveBillsDatabase _hiveBillsDatabase;
 
-  Future<void> call(UserModel user) async {
+  Future<void> call(List<PromptBill> promptBills) async {
     try {
-      await _hiveUserDatabase.setUser(user);
+      await _hiveBillsDatabase.addPrompBills(promptBills);
     } on AppError catch (error, trace) {
       Log.error(error, trace, 'Error executing $runtimeType: ${error.message}');
       rethrow;

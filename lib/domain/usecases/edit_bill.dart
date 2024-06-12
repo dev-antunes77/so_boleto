@@ -4,14 +4,14 @@ import 'package:so_boleto/core/utils/log_utils.dart';
 import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/infra/local_database/hive_bill_database/hive_bills_database.dart';
 
-final class CreateBillUseCase {
-  CreateBillUseCase(this._hiveBillsDatabase);
+final class EditBill {
+  EditBill(this._hiveBillsDatabase);
 
   final HiveBillsDatabase _hiveBillsDatabase;
 
   Future<void> call(BillModel bill) async {
     try {
-      await _hiveBillsDatabase.createBill(bill);
+      await _hiveBillsDatabase.updateBill(bill);
     } on AppError catch (error, trace) {
       Log.error(error, trace, 'Error executing $runtimeType: ${error.message}');
       rethrow;

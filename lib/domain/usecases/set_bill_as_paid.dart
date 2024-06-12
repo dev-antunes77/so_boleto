@@ -5,34 +5,24 @@ import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/domain/models/enums/bill_state.dart';
 import 'package:so_boleto/infra/local_database/hive_bill_database/hive_bills_database.dart';
 
-final class GetBillsUseCase {
-  GetBillsUseCase(this._hiveBillsDatabase);
+final class SetBillAsPaid {
+  SetBillAsPaid(this._hiveBillsDatabase);
 
   final HiveBillsDatabase _hiveBillsDatabase;
 
-  Future<List<BillModel>> call() async {
+  Future<void> call(BillModel bill) async {
     try {
-      final bills = await _hiveBillsDatabase.getBills();
-      _setDelayedBill(bills);
-      return bills;
+      final hasParcels = bill.totalParcels > 1 && !bill.dueEveryMonth;
+      final parcelPaid = hasParcels ? bill.payedParcels + 1 : null;
+      final paidBill =
+          bill.copyWith(billStatus: BillStatus.payed, payedParcels: parcelPaid);
+      await _hiveBillsDatabase.updateBill(paidBill);
     } on AppError catch (error, trace) {
       Log.error(error, trace, 'Error executing $runtimeType: ${error.message}');
       rethrow;
     } catch (error, trace) {
       Log.error(error, trace, 'Error executing $runtimeType: $error');
       throw ClientError(AppLocalizations.current.errorUnknowError);
-    }
-  }
-
-  void _setDelayedBill(List<BillModel> bills) {
-    final today = DateTime.now().day;
-    for (var bill in bills) {
-      if (bill.dueDayOfTheMonth < today &&
-          bill.billStatus != BillStatus.payed) {
-        final updatedBill = bill.copyWith(billStatus: BillStatus.delayed);
-        bills.insert(bills.indexOf(bill), updatedBill);
-        bills.remove(bill);
-      }
     }
   }
 }

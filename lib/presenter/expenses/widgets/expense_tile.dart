@@ -77,7 +77,7 @@ class _ExpensesTileState extends State<ExpensesTile>
 
   AnimationController _initCountingAnimationController() => AnimationController(
         vsync: this,
-        duration: const Duration(milliseconds: 2750),
+        duration: const Duration(milliseconds: 2250),
       );
 
   Animation<int> _initTweenAnimation(int value) =>

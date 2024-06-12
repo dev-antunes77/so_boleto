@@ -4,8 +4,8 @@ import 'package:so_boleto/core/utils/log_utils.dart';
 import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/domain/models/filter_params.dart';
 
-final class FilterBillsByParamsUseCase {
-  FilterBillsByParamsUseCase();
+final class FilterBillsByParams {
+  FilterBillsByParams();
 
   List<BillModel> call(List<BillModel> bills, FilterParams params) {
     try {

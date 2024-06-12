@@ -4,14 +4,14 @@ import 'package:so_boleto/core/utils/log_utils.dart';
 import 'package:so_boleto/domain/models/user.dart';
 import 'package:so_boleto/infra/local_database/hive_user_database/hive_user_database.dart';
 
-final class SignInUseCase {
-  SignInUseCase(this._hiveUserDatabase);
+final class SignUp {
+  SignUp(this._hiveUserDatabase);
 
   final HiveUserDatabase _hiveUserDatabase;
 
-  Future<UserModel?> call() async {
+  Future<void> call(UserModel user) async {
     try {
-      return _hiveUserDatabase.getUser();
+      await _hiveUserDatabase.setUser(user);
     } on AppError catch (error, trace) {
       Log.error(error, trace, 'Error executing $runtimeType: ${error.message}');
       rethrow;

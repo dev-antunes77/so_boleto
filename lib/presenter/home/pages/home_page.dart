@@ -58,6 +58,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 if (state.status == BaseStateStatus.error) {
                   return const CustomStateHandler(PageResponseHandler.error);
                 }
+                if (state.bills.isEmpty) {
+                  return const CustomStateHandler(
+                      PageResponseHandler.noneRegistered);
+                }
                 return TabBarView(
                   controller: _tabController,
                   children: [
