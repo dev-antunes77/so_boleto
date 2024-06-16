@@ -9,21 +9,37 @@ import 'package:so_boleto/core/helpers/app_formatters.dart';
 import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
+import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
-import 'package:so_boleto/core/utils/base_state.dart';
+import 'package:so_boleto/domain/models/enums/bill_status.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_edit_tile.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_shell.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 
-class BillCheckSection extends StatelessWidget {
+class BillCheckSection extends StatefulWidget {
   const BillCheckSection({super.key});
+
+  @override
+  State<BillCheckSection> createState() => _BillCheckSectionState();
+}
+
+class _BillCheckSectionState extends State<BillCheckSection> {
+  late bool isBillPayed;
+  late final BillCubit cubit;
+
+  @override
+  void initState() {
+    cubit = context.read<BillCubit>();
+    isBillPayed = cubit.state.bill.billStatus == BillStatus.payed;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return BillShell(
-      height: context.height * 0.75,
+      height: context.height * 0.8,
       child: Padding(
         padding: const EdgeInsets.all(AppThemeValues.spaceMedium),
         child: BlocBuilder<BillCubit, BillState>(
@@ -76,27 +92,34 @@ class BillCheckSection extends StatelessWidget {
                 ),
                 LineSeparator.infiniteHorizon(),
                 BillEditTile(
-                  icon: state.bill.category.value,
+                  icon: state.bill.category.getIconResponse(),
                   label: AppLocalizations.current.billFlowCheckCategory,
                   value: state.bill.category.getTextResponse(),
                   onPressed: () =>
                       _pushToEditionFlow(context, Routes.billCategory),
                 ),
+                LineSeparator.infiniteHorizon(),
+                AppThemeValues.spaceVerticalSmall,
+                Row(
+                  children: [
+                    Text(
+                      isBillPayed
+                          ? 'Remover das contas pagas'
+                          : 'Adicionar às contas pagas',
+                      style: context.textRobotoSmall,
+                    ),
+                    AppThemeValues.spaceHorizontalSmall,
+                    Switch(
+                      value: isBillPayed,
+                      onChanged: (value) => setState(() => isBillPayed = value),
+                    ),
+                  ],
+                ),
                 const ExpandedSpace(),
-                if (state.status == BaseStateStatus.loading)
-                  const CircularProgressIndicator()
-                else
-                  PillButton(
-                    onTap: () {
-                      state.isEditionFlow
-                          ? context.read<HomeBillsCubit>().editBill(state.bill)
-                          : context
-                              .read<HomeBillsCubit>()
-                              .createBill(state.bill);
-                      context.navigateTo(Routes.home);
-                    },
-                    child: Text(AppLocalizations.current.done),
-                  ),
+                PillButton(
+                  onTap: () => _onDone(context, state.isEditionFlow),
+                  child: Text(AppLocalizations.current.done),
+                ),
                 AppThemeValues.spaceVerticalLarge,
               ],
             );
@@ -109,5 +132,13 @@ class BillCheckSection extends StatelessWidget {
   void _pushToEditionFlow(BuildContext context, String route) {
     context.navigateTo(route);
     context.read<BillCubit>().initiateEditionFlow();
+  }
+
+  void _onDone(BuildContext context, bool isEditionFlow) {
+    final bill = cubit.onBillPayed(isBillPayed);
+    isEditionFlow
+        ? context.read<HomeBillsCubit>().editBill(bill)
+        : context.read<HomeBillsCubit>().createBill(bill);
+    context.navigateTo(Routes.home);
   }
 }

@@ -31,16 +31,11 @@ class _ExpensesPageState extends State<ExpensesPage>
     return CustomSafeArea(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              top: AppThemeValues.spaceLarge,
-            ),
-            child: ExpensesTile(
-              label: AppLocalizations.current.expensesForThisMonth,
-              value: cubit.state.totalExpenses,
-            ),
+          ExpensesTile(
+            label: AppLocalizations.current.expensesForThisMonth,
+            value: cubit.state.totalExpenses,
           ),
           LineSeparator.infiniteHorizon(),
           ExpensesTile(
@@ -52,8 +47,7 @@ class _ExpensesPageState extends State<ExpensesPage>
             label: AppLocalizations.current.expensesForSixMonth,
             value: cubit.state.totalExpensesLast6Months,
           ),
-          LineSeparator.infiniteHorizon(),
-          AppThemeValues.spaceVerticalEnormous,
+          AppThemeValues.spaceVerticalHuge,
         ],
       ),
     );

@@ -56,7 +56,10 @@ class _BillValueSectionState extends State<BillValueSection> {
                 helperText: state.bill.totalParcels > 1
                     ? AppLocalizations.current.billFlowParcelValue
                     : null,
-                onSubmitted: (p0) => _onSubmitted(state.bill.value),
+                onSubmitted: (p0) => _onSubmitted(
+                  state.bill.value,
+                  state.isEditionFlow,
+                ),
               ),
               const ExpandedSpace(),
               if (state.isEditionFlow)
@@ -79,7 +82,8 @@ class _BillValueSectionState extends State<BillValueSection> {
 
   bool _disableButton(int value) => value < 1;
 
-  _onSubmitted(int value) {
+  _onSubmitted(int value, bool isEditionFlow) {
+    if (isEditionFlow) return;
     if (!_disableButton(value)) {
       context.pushTo(Routes.billDueDay);
     }

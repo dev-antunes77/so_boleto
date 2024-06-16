@@ -51,8 +51,8 @@ class _BillNameSectionState extends State<BillNameSection> {
                 },
                 textInputAction: _getTextInputAction(
                     state.bill.name, state.bill.description),
-                onSubmitted: (_) =>
-                    _onSubmitted(state.bill.name, state.bill.description),
+                onSubmitted: (_) => _onSubmitted(state.bill.name,
+                    state.bill.description, state.isEditionFlow),
                 onTapOutside: (p0) => FocusScope.of(context).unfocus(),
               ),
               BillTextField(
@@ -63,8 +63,8 @@ class _BillNameSectionState extends State<BillNameSection> {
                     context.read<BillCubit>().onBillDescriptionChange(value),
                 textInputAction: _getTextInputAction(
                     state.bill.name, state.bill.description),
-                onSubmitted: (_) =>
-                    _onSubmitted(state.bill.name, state.bill.description),
+                onSubmitted: (_) => _onSubmitted(state.bill.name,
+                    state.bill.description, state.isEditionFlow),
                 onTapOutside: (p0) => FocusScope.of(context).unfocus(),
               ),
               const ExpandedSpace(),
@@ -87,15 +87,24 @@ class _BillNameSectionState extends State<BillNameSection> {
     );
   }
 
-  TextInputAction _getTextInputAction(String name, String description) {
+  TextInputAction _getTextInputAction(
+    String name,
+    String description,
+  ) {
     if (name.isNotEmpty && description.isNotEmpty) {
       return TextInputAction.done;
     }
     return TextInputAction.next;
   }
 
-  _onSubmitted(String name, String description) {
-    if (name.isNotEmpty && description.isNotEmpty) {
+  _onSubmitted(
+    String name,
+    String description,
+    bool isEditionFlow,
+  ) {
+    if (isEditionFlow) {
+      return;
+    } else if (name.isNotEmpty && description.isNotEmpty) {
       context.pushTo(Routes.billParcels);
     }
   }

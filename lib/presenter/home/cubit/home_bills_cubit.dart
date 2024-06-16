@@ -50,9 +50,7 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
     } on AppError catch (error) {
       onAppError(error);
       emit(
-        state.copyWith(
-          status: BaseStateStatus.generalrror,
-        ),
+        state.copyWith(status: BaseStateStatus.generalError),
       );
     }
   }
@@ -63,7 +61,7 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
       await _createBillUseCase(bill);
       await _updateBills();
     } on AppError catch (_) {
-      _handleErrorEmit();
+      _handleErrorEmit(AppLocalizations.current.homeBillCreationError);
     }
   }
 
@@ -77,11 +75,11 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
     );
   }
 
-  bool _handleErrorEmit() {
+  bool _handleErrorEmit(String message) {
     emit(
       state.copyWith(
         status: BaseStateStatus.focusedError,
-        callbackMessage: AppLocalizations.current.homeBillActionError,
+        callbackMessage: message,
       ),
     );
     return false;
@@ -93,7 +91,7 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
       await _editBillUseCase(bill);
       await _updateBills();
     } on AppError catch (_) {
-      _handleErrorEmit();
+      _handleErrorEmit(AppLocalizations.current.homeBillEditionError);
     }
   }
 
@@ -105,21 +103,21 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
       await _updateBills();
       return false;
     } on AppError catch (_) {
-      return _handleErrorEmit();
+      return _handleErrorEmit(AppLocalizations.current.homeBillActionError);
     }
   }
 
   Future<bool> deleteBill(String id) async {
     try {
       emit(state.copyWith(status: BaseStateStatus.loading));
-      final hasDeleted = await _deleteBillUseCase('1234');
+      final hasDeleted = await _deleteBillUseCase(id);
       if (hasDeleted) {
         await _updateBills();
         return true;
       }
-      return _handleErrorEmit();
+      return _handleErrorEmit(AppLocalizations.current.homeBillActionError);
     } on AppError catch (_) {
-      return _handleErrorEmit();
+      return _handleErrorEmit(AppLocalizations.current.homeBillActionError);
     }
   }
 
@@ -166,7 +164,7 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
       onAppError(error);
       emit(
         state.copyWith(
-          status: BaseStateStatus.generalrror,
+          status: BaseStateStatus.generalError,
         ),
       );
     }

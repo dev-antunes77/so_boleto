@@ -8,6 +8,7 @@
     "signIn": "Cadastrar",
     "billFlowName":"Nome da conta",
     "billFlowNewBill":"Nova conta",
+    "billFlowBillEdition":"Edição da conta",
     "billFlowDescription":"Descrição da conta",
     "billFlowOptional":"(Opcional)",
     "billFlowFixedSwitch":"Essa é uma conta mensal fixa?",

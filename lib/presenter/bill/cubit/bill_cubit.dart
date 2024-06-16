@@ -5,6 +5,7 @@ import 'package:so_boleto/core/utils/base_cubit.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
 import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/domain/models/enums/bill_category.dart';
+import 'package:so_boleto/domain/models/enums/bill_status.dart';
 
 part 'bill_state.dart';
 
@@ -32,13 +33,18 @@ class BillCubit extends Cubit<BillState> with BaseCubit {
   /// Sets parcels back to one
   void onBillMonthlyChange(bool dueEveryMonth) {
     emit(state.copyWith(status: BaseStateStatus.loading));
-    emit(state.copyWith(
+    emit(
+      state.copyWith(
         status: BaseStateStatus.success,
-        bill: state.bill
-            .copyWith(totalParcels: 1, dueEveryMonth: dueEveryMonth)));
+        bill: state.bill.copyWith(
+          totalParcels: 1,
+          dueEveryMonth: dueEveryMonth,
+        ),
+      ),
+    );
   }
 
-  void onBillParcelsChange(int billParcels) {
+  void onBillParcelsChange({required int billParcels}) {
     emit(state.copyWith(status: BaseStateStatus.loading));
     emit(state.copyWith(
         status: BaseStateStatus.success,
@@ -46,17 +52,33 @@ class BillCubit extends Cubit<BillState> with BaseCubit {
   }
 
   void onBillCategoryChange(BillCategory billCategory) {
-    emit(state.copyWith(
-        status: BaseStateStatus.loading,
-        bill: state.bill.copyWith(category: billCategory)));
-    emit(state.copyWith(status: BaseStateStatus.success));
+    emit(state.copyWith(status: BaseStateStatus.loading));
+    emit(
+      state.copyWith(
+        status: BaseStateStatus.success,
+        bill: state.bill.copyWith(category: billCategory),
+      ),
+    );
   }
 
   void onBillDueeDayOfTheMonthChange(int billDueDate) {
-    emit(state.copyWith(
-        status: BaseStateStatus.loading,
-        bill: state.bill.copyWith(dueDayOfTheMonth: billDueDate)));
-    emit(state.copyWith(status: BaseStateStatus.success));
+    emit(state.copyWith(status: BaseStateStatus.loading));
+    emit(
+      state.copyWith(
+        status: BaseStateStatus.success,
+        bill: state.bill.copyWith(dueDayOfTheMonth: billDueDate),
+      ),
+    );
+  }
+
+  BillModel onBillPayed(bool payed) {
+    var newStatus = BillStatus.payed;
+    if (!payed) {
+      newStatus = state.bill.dueDayOfTheMonth < DateTime.now().day
+          ? BillStatus.delayed
+          : BillStatus.open;
+    }
+    return state.bill.copyWith(billStatus: newStatus);
   }
 
   void initiateEditionFlow({BillModel? bill}) =>

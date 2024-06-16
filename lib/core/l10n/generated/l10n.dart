@@ -140,6 +140,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Edição da conta`
+  String get billFlowBillEdition {
+    return Intl.message(
+      'Edição da conta',
+      name: 'billFlowBillEdition',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Descrição da conta`
   String get billFlowDescription {
     return Intl.message(

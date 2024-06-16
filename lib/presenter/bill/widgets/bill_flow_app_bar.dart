@@ -35,11 +35,13 @@ class _BillFlowAppBarState extends State<BillFlowAppBar> {
     return CustomAppBar(
       title: _bill == null
           ? AppLocalizations.current.billFlowNewBill
-          : _bill!.name,
-      leadingBackButton: Visibility(
-        visible: isReadyToDisplay,
-        child: const CustomBackButton(),
-      ),
+          : AppLocalizations.current.billFlowBillEdition,
+      leadingBackButton: _bill == null
+          ? Visibility(
+              visible: isReadyToDisplay,
+              child: const CustomBackButton(),
+            )
+          : const Icon(Icons.edit, size: 28),
       actions: [
         Visibility(
           visible: isReadyToDisplay && _bill == null,

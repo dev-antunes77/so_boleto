@@ -41,6 +41,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "appNameHalf1": MessageLookupByLibrary.simpleMessage("Só"),
         "appNameHalf2": MessageLookupByLibrary.simpleMessage("Boleto"),
         "back": MessageLookupByLibrary.simpleMessage("Voltar"),
+        "billFlowBillEdition":
+            MessageLookupByLibrary.simpleMessage("Edição da conta"),
         "billFlowCheckCategory":
             MessageLookupByLibrary.simpleMessage("Categoria"),
         "billFlowCheckDescription":

@@ -26,14 +26,6 @@ enum BillCategory {
   const BillCategory(this.value);
   final String value;
 
-  static List<String> get categoryList {
-    List<String> list = [];
-    for (var element in BillCategory.values) {
-      list.add(element.getTextResponse());
-    }
-    return list;
-  }
-
   String getTextResponse() {
     switch (this) {
       case automobile:

@@ -47,7 +47,7 @@ class _BillParcelSectionState extends State<BillParcelSection> {
             onChanged: (value) => setState(() {
               parcelChoice = value;
               monthlyChoice = false;
-              context.read<BillCubit>().onBillParcelsChange(2);
+              context.read<BillCubit>().onBillParcelsChange(billParcels: 2);
             }),
           ),
           if (parcelChoice)
@@ -107,7 +107,7 @@ class _BillParcelSectionState extends State<BillParcelSection> {
       if (value == 1) {
         parcelChoice = false;
       }
-      context.read<BillCubit>().onBillParcelsChange(value);
+      context.read<BillCubit>().onBillParcelsChange(billParcels: value);
     });
   }
 

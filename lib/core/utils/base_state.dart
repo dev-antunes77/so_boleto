@@ -2,7 +2,7 @@ enum BaseStateStatus {
   initial,
   loading,
   success,
-  generalrror,
+  generalError,
   focusedError,
   noConnection,
   updateRequired,
@@ -23,7 +23,7 @@ class BaseState {
     switch (status) {
       case BaseStateStatus.loading:
         return onLoading != null ? onLoading() : onState(this);
-      case BaseStateStatus.generalrror:
+      case BaseStateStatus.generalError:
         return onError != null ? onError() : onState(this);
       case BaseStateStatus.noConnection:
         return onNoConnection != null ? onNoConnection() : onState(this);
