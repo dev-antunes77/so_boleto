@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/custom_bottom_navigator/bottom_navigator_page.dart';
 import 'package:so_boleto/core/components/custom_bottom_navigator/widgets/custom_bottom_navigator.dart';
 import 'package:so_boleto/core/components/custom_pop_scope/custom_pop_scope.dart';
-import 'package:so_boleto/core/components/status_page/widgets/shimmer.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
@@ -39,16 +38,14 @@ class _AppShellState extends State<AppShell> {
                 const Size(double.infinity, AppThemeValues.spaceEnormous),
             child: AppBarHandler(context.currentRoute),
           ),
-          body: Shimmer(child: widget.child),
+          body: widget.child,
           extendBody: true,
           resizeToAvoidBottomInset: false,
           bottomNavigationBar: _showBottomNav()
               ? BlocBuilder<InitialCubit, InitialState>(
-                  builder: (context, state) => Shimmer(
-                    child: CustomBottomNavigator(
-                      currentScreen: state.currentPage.value,
-                      onChangePage: _onChangePage,
-                    ),
+                  builder: (context, state) => CustomBottomNavigator(
+                    currentScreen: state.currentPage.value,
+                    onChangePage: _onChangePage,
                   ),
                 )
               : const SizedBox.shrink(),

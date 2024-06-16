@@ -1,5 +1,5 @@
 import 'package:so_boleto/domain/models/enums/bill_category.dart';
-import 'package:so_boleto/domain/models/enums/bill_state.dart';
+import 'package:so_boleto/domain/models/enums/bill_status.dart';
 
 extension StringExtensions on String {
   BillCategory categoryToEnum() =>

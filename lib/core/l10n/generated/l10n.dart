@@ -80,6 +80,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Erro`
+  String get error {
+    return Intl.message(
+      'Erro',
+      name: 'error',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Sem conexão`
   String get errorNoConnectionPage {
     return Intl.message(
@@ -805,6 +815,36 @@ class AppLocalizations {
     return Intl.message(
       'Deletando...',
       name: 'homeBillDeleting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ops! Não foi possível realizar essa ação.`
+  String get homeBillActionError {
+    return Intl.message(
+      'Ops! Não foi possível realizar essa ação.',
+      name: 'homeBillActionError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Erro ao criar a conta`
+  String get homeBillCreationError {
+    return Intl.message(
+      'Erro ao criar a conta',
+      name: 'homeBillCreationError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Erro ao editar a conta`
+  String get homeBillEditionError {
+    return Intl.message(
+      'Erro ao editar a conta',
+      name: 'homeBillEditionError',
       desc: '',
       args: [],
     );

@@ -8,9 +8,9 @@ final class DeleteBill {
 
   final HiveBillsDatabase _hiveBillsDatabase;
 
-  Future<void> call(String id) async {
+  Future<bool> call(String id) async {
     try {
-      await _hiveBillsDatabase.deleteBill(id);
+      return await _hiveBillsDatabase.deleteBill(id);
     } on AppError catch (error, trace) {
       Log.error(error, trace, 'Error executing $runtimeType: ${error.message}');
       rethrow;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/buttons/pill_button.dart';
 import 'package:so_boleto/core/components/custom_safe_area/custom_safe_area.dart';
-import 'package:so_boleto/core/components/custom_state_handler/custom_state_handler.dart';
+import 'package:so_boleto/core/components/custom_status_handler/custom_status_handler.dart';
 import 'package:so_boleto/core/components/expanded_space/expanded_space.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
 import 'package:so_boleto/core/components/thin_line_separator/thin_line_separator.dart';
@@ -45,7 +45,7 @@ class _PromptBillsPageState extends State<PromptBillsPage> {
               previous.howManySelectd != current.howManySelectd,
           builder: (context, state) {
             if (state.promptBills.isEmpty) {
-              return const CustomStateHandler(
+              return const CustomStatusHandler(
                 PageResponseHandler.noMorePromptBills,
               );
             }
@@ -103,7 +103,7 @@ class _PromptBillsPageState extends State<PromptBillsPage> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         SvgAsset(
-                                          svg: bill.category.value,
+                                          svg: bill.category.getIconResponse(),
                                           height: bill.isSelected ? 40 : 32,
                                           color: bill.isSelected
                                               ? AppColors.primary

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/custom_safe_area/custom_safe_area.dart';
-import 'package:so_boleto/core/components/custom_state_handler/custom_state_handler.dart';
-import 'package:so_boleto/core/components/status_page/pages/loading_page.dart';
+import 'package:so_boleto/core/components/custom_status_handler/custom_status_handler.dart';
+import 'package:so_boleto/core/components/loading_page/loading_page.dart';
 import 'package:so_boleto/core/l10n/generated/l10n.dart';
+import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
 import 'package:so_boleto/domain/models/enums/page_response_handler.dart';
@@ -25,7 +26,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     _tabController = TabController(length: 3, vsync: this);
     final cubit = context.read<HomeBillsCubit>();
     if (cubit.state.bills.isEmpty) {
-      cubit.getBills();
+      cubit.onInit();
     }
     super.initState();
   }
@@ -48,21 +49,19 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             ),
           ),
           Expanded(
-            child: BlocBuilder<HomeBillsCubit, HomeBillsState>(
+            child: BlocConsumer<HomeBillsCubit, HomeBillsState>(
+              listener: (context, state) {
+                if (state.status == BaseStateStatus.focusedError) {
+                  context.showSnackBar(state.callbackMessage);
+                }
+              },
               buildWhen: (previous, current) =>
                   previous.status != current.status,
-              builder: (context, state) {
-                if (state.status == BaseStateStatus.loading) {
-                  return const LoadingPage3();
-                }
-                if (state.status == BaseStateStatus.error) {
-                  return const CustomStateHandler(PageResponseHandler.error);
-                }
-                if (state.bills.isEmpty) {
-                  return const CustomStateHandler(
-                      PageResponseHandler.noneRegistered);
-                }
-                return TabBarView(
+              builder: (context, state) => state.when(
+                onLoading: () => const LoadingPage3(),
+                onError: () =>
+                    const CustomStatusHandler(PageResponseHandler.error),
+                onState: (_) => TabBarView(
                   controller: _tabController,
                   children: [
                     HomeBillTab(
@@ -84,8 +83,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           : PageResponseHandler.noneDelayed,
                     ),
                   ],
-                );
-              },
+                ),
+              ),
             ),
           ),
         ],

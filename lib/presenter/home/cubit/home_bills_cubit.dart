@@ -2,10 +2,11 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:so_boleto/core/errors/app_errors.dart';
 import 'package:so_boleto/core/extensions/list_extensions.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/utils/base_cubit.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
 import 'package:so_boleto/domain/models/bill.dart';
-import 'package:so_boleto/domain/models/enums/bill_state.dart';
+import 'package:so_boleto/domain/models/enums/bill_status.dart';
 import 'package:so_boleto/domain/models/filter_params.dart';
 import 'package:so_boleto/domain/models/prompt_bill.dart';
 import 'package:so_boleto/domain/models/user.dart';
@@ -38,7 +39,7 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
   final FilterBillsByParams _filterBillsByParamsUseCase;
   final AddPromptBills _addPromptBillsUsecase;
 
-  Future<void> getBills() async {
+  Future<void> onInit() async {
     try {
       if (state.bills.isEmpty) {
         emit(state.copyWith(status: BaseStateStatus.loading));
@@ -50,7 +51,7 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
       onAppError(error);
       emit(
         state.copyWith(
-          status: BaseStateStatus.error,
+          status: BaseStateStatus.generalrror,
         ),
       );
     }
@@ -60,29 +61,39 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
     try {
       emit(state.copyWith(status: BaseStateStatus.loading));
       await _createBillUseCase(bill);
-      await getBills();
-    } on AppError catch (error) {
-      onAppError(error);
-      emit(
-        state.copyWith(
-          status: BaseStateStatus.error,
-        ),
-      );
+      await _updateBills();
+    } on AppError catch (_) {
+      _handleErrorEmit();
     }
+  }
+
+  Future<void> _updateBills() async {
+    final updatedBills = await _getBillsUseCase();
+    emit(
+      state.copyWith(
+        status: BaseStateStatus.success,
+        bills: updatedBills,
+      ),
+    );
+  }
+
+  bool _handleErrorEmit() {
+    emit(
+      state.copyWith(
+        status: BaseStateStatus.focusedError,
+        callbackMessage: AppLocalizations.current.homeBillActionError,
+      ),
+    );
+    return false;
   }
 
   Future<void> editBill(BillModel bill) async {
     try {
       emit(state.copyWith(status: BaseStateStatus.loading));
       await _editBillUseCase(bill);
-      await getBills();
-    } on AppError catch (error) {
-      onAppError(error);
-      emit(
-        state.copyWith(
-          status: BaseStateStatus.error,
-        ),
-      );
+      await _updateBills();
+    } on AppError catch (_) {
+      _handleErrorEmit();
     }
   }
 
@@ -91,38 +102,36 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
       if (bill.billStatus == BillStatus.payed) return false;
       emit(state.copyWith(status: BaseStateStatus.loading));
       await _setBillAsPaidUseCase(bill);
-      await getBills();
+      await _updateBills();
       return false;
-    } on AppError catch (error) {
-      onAppError(error);
-      emit(
-        state.copyWith(
-          status: BaseStateStatus.error,
-        ),
-      );
+    } on AppError catch (_) {
+      return _handleErrorEmit();
     }
-    return false;
   }
 
-  Future<void> deleteBill(String id) async {
+  Future<bool> deleteBill(String id) async {
     try {
       emit(state.copyWith(status: BaseStateStatus.loading));
-      await _deleteBillUseCase(id);
-      await getBills();
-    } on AppError catch (error) {
-      onAppError(error);
-      emit(
-        state.copyWith(
-          status: BaseStateStatus.error,
-        ),
-      );
+      final hasDeleted = await _deleteBillUseCase('1234');
+      if (hasDeleted) {
+        await _updateBills();
+        return true;
+      }
+      return _handleErrorEmit();
+    } on AppError catch (_) {
+      return _handleErrorEmit();
     }
   }
 
   /// setting value to empty closes search by name flow
   void setSearchByNameValue(String query) {
     emit(state.copyWith(status: BaseStateStatus.loading));
-    emit(state.copyWith(querySearch: query, status: BaseStateStatus.success));
+    emit(
+      state.copyWith(
+        status: BaseStateStatus.success,
+        querySearch: query,
+      ),
+    );
   }
 
   void setFilterParams(FilterParams params) {
@@ -152,12 +161,12 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
     try {
       emit(state.copyWith(status: BaseStateStatus.loading));
       await _addPromptBillsUsecase(promptBills);
-      await getBills();
+      await _updateBills();
     } on AppError catch (error) {
       onAppError(error);
       emit(
         state.copyWith(
-          status: BaseStateStatus.error,
+          status: BaseStateStatus.generalrror,
         ),
       );
     }

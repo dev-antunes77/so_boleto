@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:so_boleto/core/components/custom_state_handler/custom_state_handler.dart';
+import 'package:so_boleto/core/components/custom_status_handler/custom_status_handler.dart';
 import 'package:so_boleto/core/components/thin_line_separator/thin_line_separator.dart';
 import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/domain/models/enums/page_response_handler.dart';
@@ -22,9 +22,9 @@ class HomeBillTab extends StatelessWidget {
   Widget build(BuildContext context) {
     if (bills.isEmpty &&
         context.read<HomeBillsCubit>().state.querySearch.isNotEmpty) {
-      return const CustomStateHandler(PageResponseHandler.noneWithThisName);
+      return const CustomStatusHandler(PageResponseHandler.noneWithThisName);
     } else if (bills.isEmpty) {
-      return CustomStateHandler(message);
+      return CustomStatusHandler(message);
     }
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),

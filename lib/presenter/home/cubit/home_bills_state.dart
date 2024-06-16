@@ -85,7 +85,7 @@ class HomeBillsState extends BaseState with EquatableMixin {
         callbackMessage: callbackMessage ?? this.callbackMessage,
         bills: bills ?? this.bills,
         filterParams: filteredByParams ?? this.filteredByParams,
-        paramsApplied: paramsApplied ?? this.paramsApplied,
         querySearch: querySearch ?? this.querySearch,
+        paramsApplied: paramsApplied ?? this.paramsApplied,
       );
 }

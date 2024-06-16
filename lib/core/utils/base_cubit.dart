@@ -14,14 +14,14 @@ mixin BaseCubit<T extends BaseState> on Cubit<T> {
 
     return emit(state.copyWith(
       callbackMessage: error.message,
-      status: BaseStateStatus.error,
+      status: BaseStateStatus.generalrror,
     ) as T);
   }
 
   void unexpectedError(Object exception) {
     emit(state.copyWith(
       callbackMessage: 'Error',
-      status: BaseStateStatus.error,
+      status: BaseStateStatus.generalrror,
     ) as T);
   }
 }

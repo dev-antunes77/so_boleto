@@ -10,7 +10,7 @@ import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/domain/models/bill.dart';
-import 'package:so_boleto/domain/models/enums/bill_state.dart';
+import 'package:so_boleto/domain/models/enums/bill_status.dart';
 import 'package:so_boleto/domain/models/enums/page_transitions.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
@@ -56,7 +56,7 @@ class BillListTile extends StatelessWidget {
                     radius: 25,
                     backgroundColor: AppColors.grey,
                     child: SvgAsset(
-                      svg: bill.category.value,
+                      svg: bill.category.getIconResponse(),
                       height: 30,
                       color: AppColors.primaryLight,
                     ),

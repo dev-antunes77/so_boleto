@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/domain/models/enums/bill_category.dart';
-import 'package:so_boleto/domain/models/enums/bill_state.dart';
+import 'package:so_boleto/domain/models/enums/bill_status.dart';
 import 'package:so_boleto/domain/models/prompt_bill.dart';
 import 'package:so_boleto/infra/local_database/hive_bill_database/hive_bill_model.dart';
 

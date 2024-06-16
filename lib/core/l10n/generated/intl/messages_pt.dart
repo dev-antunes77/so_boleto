@@ -102,6 +102,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Vence em"),
         "dueDayExtensionsDueToday":
             MessageLookupByLibrary.simpleMessage("Vence hoje"),
+        "error": MessageLookupByLibrary.simpleMessage("Erro"),
         "errorNoConnectionPage":
             MessageLookupByLibrary.simpleMessage("Sem conexão"),
         "errorUnknowError":
@@ -137,8 +138,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "homeAppBarAddPromptBills":
             MessageLookupByLibrary.simpleMessage("Adicionar contas prontas"),
         "homeAppBarTitle": MessageLookupByLibrary.simpleMessage("Suas contas"),
+        "homeBillActionError": MessageLookupByLibrary.simpleMessage(
+            "Ops! Não foi possível realizar essa ação."),
+        "homeBillCreationError":
+            MessageLookupByLibrary.simpleMessage("Erro ao criar a conta"),
         "homeBillDeleting":
             MessageLookupByLibrary.simpleMessage("Deletando..."),
+        "homeBillEditionError":
+            MessageLookupByLibrary.simpleMessage("Erro ao editar a conta"),
         "homeBillPayedTag": MessageLookupByLibrary.simpleMessage("Paga"),
         "homeBillPaying": MessageLookupByLibrary.simpleMessage("Pagando..."),
         "homeTabAll": MessageLookupByLibrary.simpleMessage("Todas"),

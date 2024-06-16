@@ -12,7 +12,7 @@ void getCustomSnackBar(
 
   Overlay.of(context).insert(overlayEntry);
 
-  Future.delayed(const Duration(seconds: 3))
+  Future.delayed(const Duration(milliseconds: 4300))
       .then((value) => overlayEntry.remove());
 }
 
@@ -22,7 +22,7 @@ OverlayEntry _getOverlayEntry(
 ) =>
     OverlayEntry(
       builder: (context) => Positioned(
-        bottom: AppThemeValues.spaceTitanic,
+        bottom: AppThemeValues.spaceColossal,
         left: AppThemeValues.spaceMedium,
         right: AppThemeValues.spaceMedium,
         child: GestureDetector(
@@ -31,16 +31,17 @@ OverlayEntry _getOverlayEntry(
             elevation: 1,
             borderRadius:
                 const BorderRadius.all(AppThemeValues.borderRadiusSmall),
-            color: AppColors.primary,
+            color: AppColors.greyMediumLight,
             child: Container(
-              padding: const EdgeInsets.all(AppThemeValues.spaceMedium),
-              height: AppThemeValues.playerHeight,
-              child: Center(
-                child: Text(
-                  title,
-                  style: context.textRobotoMedium
-                      .copyWith(color: AppColors.textLighter),
+              padding: const EdgeInsets.symmetric(
+                vertical: AppThemeValues.spaceMedium,
+              ),
+              child: Text(
+                title,
+                style: context.textRobotoMedium.copyWith(
+                  color: AppColors.black,
                 ),
+                textAlign: TextAlign.center,
               ),
             ),
           ),

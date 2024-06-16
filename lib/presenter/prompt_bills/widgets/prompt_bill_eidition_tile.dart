@@ -45,7 +45,7 @@ class PromptBillEditionTile extends StatelessWidget {
             child: Column(
               children: [
                 SvgAsset(
-                  svg: promptBill.category.value,
+                  svg: promptBill.category.getIconResponse(),
                   height: 32,
                   color: promptBill.value > 0
                       ? AppColors.primaryDark

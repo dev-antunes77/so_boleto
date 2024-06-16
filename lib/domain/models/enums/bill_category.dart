@@ -2,26 +2,26 @@ import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 
 enum BillCategory {
-  automobile(AppIcons.automobile),
-  creditCard(AppIcons.creditCard),
-  debt(AppIcons.debt),
-  devices(AppIcons.devices),
-  education(AppIcons.education),
-  electricity(AppIcons.electricity),
-  entertainment(AppIcons.entertainment),
-  groceries(AppIcons.groceries),
-  gas(AppIcons.gas),
-  healthCare(AppIcons.healthCare),
-  insurance(AppIcons.insurance),
-  investment(AppIcons.investment),
-  internet(AppIcons.internet),
-  miscellaneous(AppIcons.miscellaneous),
-  rent(AppIcons.rent),
-  petShop(AppIcons.petShop),
-  telephone(AppIcons.telephone),
-  transportation(AppIcons.transportation),
-  travel(AppIcons.travel),
-  water(AppIcons.water);
+  automobile('automobile'),
+  creditCard('creditCard'),
+  debt('debt'),
+  devices('devices'),
+  education('education'),
+  electricity('electricity'),
+  entertainment('entertainment'),
+  groceries('groceries'),
+  gas('gas'),
+  healthCare('healthCare'),
+  insurance('insurance'),
+  investment('investment'),
+  internet('internet'),
+  miscellaneous('miscellaneous'),
+  rent('rent'),
+  petShop('petShop'),
+  telephone('telephone'),
+  transportation('transportation'),
+  travel('travel'),
+  water('water');
 
   const BillCategory(this.value);
   final String value;
@@ -76,6 +76,51 @@ enum BillCategory {
         return AppLocalizations.current.categoryTravel;
       case water:
         return AppLocalizations.current.categoryWater;
+    }
+  }
+
+  String getIconResponse() {
+    switch (this) {
+      case automobile:
+        return AppIcons.automobile;
+      case creditCard:
+        return AppIcons.creditCard;
+      case debt:
+        return AppIcons.debt;
+      case devices:
+        return AppIcons.devices;
+      case education:
+        return AppIcons.education;
+      case electricity:
+        return AppIcons.electricity;
+      case entertainment:
+        return AppIcons.entertainment;
+      case groceries:
+        return AppIcons.groceries;
+      case gas:
+        return AppIcons.gas;
+      case healthCare:
+        return AppIcons.healthCare;
+      case insurance:
+        return AppIcons.insurance;
+      case investment:
+        return AppIcons.investment;
+      case internet:
+        return AppIcons.internet;
+      case miscellaneous:
+        return AppIcons.miscellaneous;
+      case rent:
+        return AppIcons.rent;
+      case petShop:
+        return AppIcons.petShop;
+      case telephone:
+        return AppIcons.telephone;
+      case transportation:
+        return AppIcons.transportation;
+      case travel:
+        return AppIcons.travel;
+      case water:
+        return AppIcons.water;
     }
   }
 }

@@ -36,9 +36,15 @@ final class HiveBillsDatabase with OpneBoxMixin implements HiveBills {
   }
 
   @override
-  Future<void> deleteBill(String id) async {
+  Future<bool> deleteBill(String id) async {
     final itemBox = await openBox(_box, _boxLabel);
-    return itemBox.delete(id);
+    final hiveList = itemBox.values.toList();
+    final hasId = hiveList.any((element) => element.id == id);
+    if (hasId) {
+      itemBox.delete(id);
+      return true;
+    }
+    return false;
   }
 
   @override

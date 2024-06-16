@@ -29,15 +29,13 @@ class BillCategorySection extends StatelessWidget {
               AppThemeValues.spaceVerticalLarge,
               Center(
                 child: CustomDropdownMenu(
-                  width: context.width * 0.6,
+                  width: context.width * 0.35,
                   value: state.bill.category.getTextResponse(),
                   items: BillCategory.categoryList
                       .map(
                         (e) => DropdownMenuItem<String>(
                           value: e,
-                          child: Text(
-                            e,
-                          ),
+                          child: Text(e),
                         ),
                       )
                       .toList(),

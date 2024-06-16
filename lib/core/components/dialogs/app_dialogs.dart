@@ -35,8 +35,7 @@ abstract class AppDialogs {
           .then(
         (confirmed) {
           if (confirmed != null && confirmed) {
-            context.read<HomeBillsCubit>().deleteBill(bill.id);
-            return true;
+            return context.read<HomeBillsCubit>().deleteBill(bill.id);
           }
           return false;
         },
