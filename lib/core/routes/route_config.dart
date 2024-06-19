@@ -14,6 +14,7 @@ import 'package:so_boleto/presenter/filter/pages/filter_page.dart';
 import 'package:so_boleto/presenter/home/pages/home_page.dart';
 import 'package:so_boleto/presenter/initial/app_shell.dart';
 import 'package:so_boleto/presenter/initial/pages/splash_page.dart';
+import 'package:so_boleto/presenter/login/pages/login_page.dart';
 import 'package:so_boleto/presenter/profile/pages/profile_page.dart';
 import 'package:so_boleto/presenter/prompt_bills/pages/prompt_bills_edition_page.dart';
 import 'package:so_boleto/presenter/prompt_bills/pages/prompt_bills_page.dart';
@@ -36,6 +37,11 @@ abstract class RoutesConfig {
         path: RelativePaths.app,
         parentNavigatorKey: _rootKey,
         builder: (_, __) => const SplashPage(),
+      ),
+      GoRoute(
+        path: RelativePaths.login,
+        parentNavigatorKey: _rootKey,
+        builder: (_, __) => const LoginPage(),
       ),
       ShellRoute(
         builder: (context, state, child) => AppShell(child: child),
@@ -210,28 +216,6 @@ abstract class RoutesConfig {
       ),
     ],
   );
-
-//   static CustomTransitionPage<Widget> _fadeTransition(
-//     GoRouterState state,
-//     Widget child,
-//   ) {
-//     final tween = Tween(begin: 0.0, end: 1.0).chain(
-//       CurveTween(curve: Curves.ease),
-//     );
-
-//     return CustomTransitionPage(
-//       key: state.pageKey,
-//       child: child,
-//       transitionDuration: const Duration(milliseconds: 200),
-//       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-//         return FadeTransition(
-//           opacity: animation.drive(tween),
-//           child: child,
-//         );
-//       },
-//     );
-//   }
-// }
 
   static CustomTransitionPage _getTransitionPage(
     GoRouterState state,

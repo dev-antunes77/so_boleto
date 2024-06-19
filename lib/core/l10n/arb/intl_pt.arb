@@ -13,6 +13,8 @@
     "billFlowOptional":"(Opcional)",
     "billFlowFixedSwitch":"Essa é uma conta mensal fixa?",
     "billFlowParceledSwitch":"Ou uma conta mensal parcelada?",
+    "billFlowRemoveFromPayed":"Remover das contas pagas",
+    "billFlowAddToPayed":"Adicionar às contas pagas",
     "billFlowHowManyParcels":"Quantas parcelas?",
     "billFlowValueTitle":"Valor da conta",
     "billFlowParcelValue":"(Valor da parcela)",

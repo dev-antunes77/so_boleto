@@ -16,23 +16,6 @@ class LoginCubit extends Cubit<LoginState> with BaseCubit {
   final SignUp _signUp;
   final SignIn _signIn;
 
-  Future<void> onSignIn() async {
-    try {
-      emit(state.copyWith(status: BaseStateStatus.loading));
-      final user = await _signIn();
-      if (user == null) {
-        emit(state.copyWith(
-            status: BaseStateStatus.initial,
-            callbackMessage: 'Você não está cadastrado'));
-      } else {
-        await _signIn();
-        emit(state.copyWith(status: BaseStateStatus.success));
-      }
-    } on AppError catch (error) {
-      onAppError(error);
-    }
-  }
-
   Future<void> onSignUp(UserModel user) async {
     try {
       emit(state.copyWith(status: BaseStateStatus.loading));
@@ -44,11 +27,13 @@ class LoginCubit extends Cubit<LoginState> with BaseCubit {
     }
   }
 
-  // void onChangeMsisdn(String msisdn) => emit(state.copyWith(msisdn: msisdn));
-
-  // void onChangePinCode(String digit, int position) => emit(
-  //       state.copyWith(
-  //         pinCode: state.pinCode.replaceCharAt(digit[0], position),
-  //       ),
-  //     );
+  Future<void> onSignIn(UserModel user) async {
+    try {
+      emit(state.copyWith(status: BaseStateStatus.loading));
+      await _signIn(user.email, user.password);
+      emit(state.copyWith(status: BaseStateStatus.success));
+    } on AppError catch (error) {
+      onAppError(error);
+    }
+  }
 }

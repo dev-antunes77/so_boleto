@@ -104,8 +104,8 @@ class _BillCheckSectionState extends State<BillCheckSection> {
                   children: [
                     Text(
                       isBillPayed
-                          ? 'Remover das contas pagas'
-                          : 'Adicionar às contas pagas',
+                          ? AppLocalizations.current.billFlowRemoveFromPayed
+                          : AppLocalizations.current.billFlowAddToPayed,
                       style: context.textRobotoSmall,
                     ),
                     AppThemeValues.spaceHorizontalSmall,

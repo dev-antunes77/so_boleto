@@ -3,6 +3,8 @@
 import 'package:hive/hive.dart';
 import 'package:so_boleto/domain/models/user.dart';
 
+part 'hive_user_model.g.dart';
+
 @HiveType(typeId: 1)
 final class HiveUserModel extends UserModel with HiveObjectMixin {
   HiveUserModel({

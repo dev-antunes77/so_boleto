@@ -190,6 +190,26 @@ class AppLocalizations {
     );
   }
 
+  /// `Remover das contas pagas`
+  String get billFlowRemoveFromPayed {
+    return Intl.message(
+      'Remover das contas pagas',
+      name: 'billFlowRemoveFromPayed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Adicionar às contas pagas`
+  String get billFlowAddToPayed {
+    return Intl.message(
+      'Adicionar às contas pagas',
+      name: 'billFlowAddToPayed',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Quantas parcelas?`
   String get billFlowHowManyParcels {
     return Intl.message(

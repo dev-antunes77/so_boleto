@@ -41,6 +41,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "appNameHalf1": MessageLookupByLibrary.simpleMessage("Só"),
         "appNameHalf2": MessageLookupByLibrary.simpleMessage("Boleto"),
         "back": MessageLookupByLibrary.simpleMessage("Voltar"),
+        "billFlowAddToPayed":
+            MessageLookupByLibrary.simpleMessage("Adicionar às contas pagas"),
         "billFlowBillEdition":
             MessageLookupByLibrary.simpleMessage("Edição da conta"),
         "billFlowCheckCategory":
@@ -66,6 +68,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("(Valor da parcela)"),
         "billFlowParceledSwitch": MessageLookupByLibrary.simpleMessage(
             "Ou uma conta mensal parcelada?"),
+        "billFlowRemoveFromPayed":
+            MessageLookupByLibrary.simpleMessage("Remover das contas pagas"),
         "billFlowValueTitle":
             MessageLookupByLibrary.simpleMessage("Valor da conta"),
         "categoryAutomobile": MessageLookupByLibrary.simpleMessage("Automóvel"),

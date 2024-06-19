@@ -11,12 +11,13 @@ final class HiveUserDatabase with OpneBoxMixin implements HiveUser {
   @override
   Future<UserModel>? getUser() async {
     final itemBox = await openBox(_box, _boxLabel);
-    return itemBox as UserModel;
+    final hiveUser = itemBox as HiveUserModel;
+    return UserModel.fromHiveUser(hiveUser);
   }
 
   @override
   Future<void> setUser(UserModel user) async {
     final itemBox = await openBox(_box, _boxLabel);
-    return itemBox.put(user, HiveUserModel.fromUserModel(user));
+    return itemBox.put(user.userId, HiveUserModel.fromUserModel(user));
   }
 }

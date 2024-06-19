@@ -1,6 +1,9 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:so_boleto/core/environment/firebase_env.dart';
 import 'package:so_boleto/domain/database/hive_bills.dart';
+import 'package:so_boleto/domain/database/hive_user.dart';
 import 'package:so_boleto/domain/usecases/add_prompt_bills.dart';
 import 'package:so_boleto/domain/usecases/create_bill.dart';
 import 'package:so_boleto/domain/usecases/delete_bill.dart';
@@ -8,13 +11,20 @@ import 'package:so_boleto/domain/usecases/edit_bill.dart';
 import 'package:so_boleto/domain/usecases/filter_bills_by_params.dart';
 import 'package:so_boleto/domain/usecases/get_bills.dart';
 import 'package:so_boleto/domain/usecases/set_bill_as_paid.dart';
+import 'package:so_boleto/domain/usecases/sign_in.dart';
+import 'package:so_boleto/domain/usecases/sign_up.dart';
 import 'package:so_boleto/infra/local_database/hive_bill_database/hive_bill_model.dart';
 import 'package:so_boleto/infra/local_database/hive_bill_database/hive_bills_database.dart';
+import 'package:so_boleto/infra/local_database/hive_user_database/hive_user_database.dart';
+import 'package:so_boleto/infra/local_database/hive_user_database/hive_user_model.dart';
+import 'package:so_boleto/infra/services/auth_service/auth_service.dart';
+import 'package:so_boleto/infra/services/firestore_service/firestore_service.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
 import 'package:so_boleto/presenter/expenses/cubit/expenses_cubit.dart';
 import 'package:so_boleto/presenter/filter/cubit/filter_cubit.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
+import 'package:so_boleto/presenter/login/bloc/login_cubit.dart';
 import 'package:so_boleto/presenter/prompt_bills/cubit/prompt_bills_cubit.dart';
 
 abstract class InjectionService {
@@ -23,26 +33,35 @@ abstract class InjectionService {
   static T get<T extends Object>() => _i.get<T>();
 
   static Future<void> init() async {
-    await _initStorages();
-    // await _initServices();
+    await _initFirebase();
+    await _initLocalStorage();
+    await _initServices();
     _initUseCases();
     _initBloc();
   }
 
-  static Future<HiveBills> _initStorages() async {
+  static Future<void> _initFirebase() async {
+    await Firebase.initializeApp(options: FirebaseEnv.instance);
+  }
+
+  static _initLocalStorage() {
+    _initUserStorage();
+    _initBillStorage();
+  }
+
+  static Future<HiveUser> _initUserStorage() async {
+    await Hive.initFlutter();
+    Hive.registerAdapter(HiveUserModelAdapter());
+    _i.registerFactory<HiveUserDatabase>(() => HiveUserDatabase());
+    return _i.get<HiveUserDatabase>();
+  }
+
+  static Future<HiveBills> _initBillStorage() async {
     await Hive.initFlutter();
     Hive.registerAdapter(HiveBillModelAdapter());
     _i.registerFactory<HiveBillsDatabase>(() => HiveBillsDatabase());
     return _i.get<HiveBillsDatabase>();
   }
-
-  // static Future<void> _initFirebase() async {
-  //   await Firebase.initializeApp(
-  //     options: Environment.instance.firebaseOptions.instance,
-  //   );
-
-  //   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-  // }
 
   // static Future<void> _initStorages() async {
   //   _i.registerSingleton<LocalStorage>(
@@ -68,26 +87,45 @@ abstract class InjectionService {
   //   );
   // }
 
-  // static Future<void> _initServices() async {
-  //   _i.registerSingleton<AnalyticsService>(
-  //       FirebaseAnalyticsService(_i.get<LocalStorage>()));
+  static Future<void> _initServices() async {
+    _i.registerSingleton<FirestoreService>(FirestoreService());
+    _i.registerSingleton<AuthService>(AuthService());
 
-  //   final playerService = await AudioServiceInitializer.init(
-  //     _i.get<SongRepository>(),
-  //   );
-  //   _i.registerSingleton<PlayerService>(playerService);
+    // final playerService = await AudioServiceInitializer.init(
+    //   _i.get<SongRepository>(),
+    // );
+    // _i.registerSingleton<PlayerService>(playerService);
 
-  //   final apiAuthRepository = ApiAuthService(_i.get<AuthRepository>());
-  //   _i.registerSingleton<AuthService>(apiAuthRepository);
-  // }
+    // final apiAuthRepository = ApiAuthService(_i.get<AuthRepository>());
+    // _i.registerSingleton<AuthService>(apiAuthRepository);
+  }
 
   static void _initUseCases() {
+    _i.registerFactory(
+      () => SignUp(
+        _i.get<HiveUserDatabase>(),
+        _i.get<FirestoreService>(),
+        _i.get<AuthService>(),
+      ),
+    );
+
+    _i.registerFactory(
+      () => SignIn(
+        _i.get<HiveUserDatabase>(),
+        _i.get<AuthService>(),
+      ),
+    );
+
     // Bill Usecase
     _i.registerFactory(
       () => GetBills(_i.get<HiveBillsDatabase>()),
     );
+
     _i.registerFactory(
-      () => CreateBill(_i.get<HiveBillsDatabase>()),
+      () => CreateBill(
+        _i.get<HiveBillsDatabase>(),
+        _i.get<FirestoreService>(),
+      ),
     );
     _i.registerFactory(
       () => SetBillAsPaid(_i.get<HiveBillsDatabase>()),
@@ -104,78 +142,18 @@ abstract class InjectionService {
     _i.registerFactory(
       () => AddPromptBills(_i.get<HiveBillsDatabase>()),
     );
-    // _i.registerFactory(
-    //   () => SignUpUseCase(
-    //     _i.get<AuthService>(),
-    //     _i.get<LocalStorage>(),
-    //   ),
-    // );
-    // _i.registerFactory(
-    //   () => SignOutUseCase(
-    //     _i.get<AuthService>(),
-    //     _i.get<LocalStorage>(),
-    //   ),
-    // );
-
-    //Player Use Case
-    // _i.registerFactory(
-    //   () => ChangePlayerRadioUseCase(
-    //     _i.get<PlayerService>(),
-    //     _i.get<LocalStorage>(),
-    //   ),
-    // );
-    // _i.registerFactory(() => TogglePlayerUseCase(_i.get<PlayerService>()));
-    // _i.registerFactory(() => ListenPlayerSongUseCase(_i.get<PlayerService>()));
-    // _i.registerFactory(
-    //   () => ListenPlayerSongStateUseCase(_i.get<PlayerService>()),
-    // );
-    // _i.registerFactory(() => GetUserUseCase(_i.get<LocalStorage>()));
-    // _i.registerFactory(
-    //   () => RadioChangeTimerEventUseCase(_i.get<AnalyticsService>()),
-    // );
-
-    // //Live UseCase
-    // _i.registerFactory(() => GetSliderRadiosUseCase(_i.get<RadioRepository>()));
-    // _i.registerFactory(() => CheckOnboardingUseCase(_i.get<LocalStorage>()));
-    // _i.registerFactory(() => FinishOnboardingUseCase(_i.get<LocalStorage>()));
-
-    // //Radios Use Case
-    // _i.registerFactory(() => GetRadiosUseCase(_i.get<RadioRepository>()));
-    // _i.registerFactory(
-    //   () => GetFavoriteRadiosUseCase(
-    //     _i.get<RadioRepository>(),
-    //     _i.get<LocalStorage>(),
-    //     _i.get<Cache>(),
-    //   ),
-    // );
-    // _i.registerFactory(
-    //   () => ToggleFavoriteRadioUseCase(
-    //     _i.get<RadioRepository>(),
-    //     _i.get<LocalStorage>(),
-    //     _i.get<Cache>(),
-    //     _i.get<AnalyticsService>(),
-    //   ),
-    // );
-    // _i.registerFactory(() => GetLastRadioUseCase(_i.get<LocalStorage>()));
-    // _i.registerFactory(() => IsFavoriteRadioUseCase(_i.get<Cache>()));
-
-    //Profile Use Case
-    // _i.registerFactory(
-    //   () => GetLegalTextsUseCase(_i.get<EditorialRepository>()),
-    // );
-
-    // //Initial Use Case
-    // _i.registerFactory(
-    //   () => BottomButtonEventUseCase(_i.get<AnalyticsService>()),
-    // );
-    // _i.registerFactory(
-    //   () => CheckVersionUpdateUseCase(_i.get<UpdateRepository>()),
-    // );
   }
 
   static void _initBloc() {
     _i.registerFactory(
       () => InitialCubit(),
+    );
+
+    _i.registerFactory(
+      () => LoginCubit(
+        _i.get<SignUp>(),
+        _i.get<SignIn>(),
+      ),
     );
 
     _i.registerFactory(

@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:so_boleto/domain/models/enums/bill_category.dart';
 import 'package:so_boleto/domain/models/enums/bill_status.dart';
 
@@ -17,4 +18,6 @@ extension StringExtensions on String {
     if (result.isEmpty) return 0;
     return int.parse(result);
   }
+
+  DateTime stringToDateTime() => DateFormat.yMd().add_jms().parse(this);
 }
