@@ -2,6 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/buttons/pill_button.dart';
+import 'package:so_boleto/core/components/loading_page/loading_page.dart';
+import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
@@ -9,7 +11,7 @@ import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
 import 'package:so_boleto/core/utils/form_validator.dart';
 import 'package:so_boleto/domain/models/user.dart';
-import 'package:so_boleto/presenter/login/bloc/login_cubit.dart';
+import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -32,11 +34,11 @@ class _LoginPageState extends State<LoginPage> {
 
   void _toggleSignUpAndSignIn() => setState(() => _isSignUp = !_isSignUp);
 
-  late LoginCubit cubit;
+  late InitialCubit cubit;
 
   @override
   void initState() {
-    cubit = context.read<LoginCubit>();
+    cubit = context.read<InitialCubit>();
     super.initState();
   }
 
@@ -44,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: BlocConsumer<LoginCubit, LoginState>(
+      body: BlocConsumer<InitialCubit, InitialState>(
         listenWhen: (previous, current) => previous.status != current.status,
         buildWhen: (previous, current) => previous.status != current.status,
         bloc: cubit,
@@ -52,11 +54,12 @@ class _LoginPageState extends State<LoginPage> {
           if (state.status == BaseStateStatus.loading) {
             showDialog(
               context: context,
-              builder: (context) => const Center(
-                child: SizedBox(
-                    height: 22, width: 22, child: CircularProgressIndicator()),
-              ),
+              builder: (context) => const LoadingPage2(),
             );
+          }
+          if (state.status == BaseStateStatus.generalError) {
+            context.pop(true);
+            context.showSnackBar(state.callbackMessage);
           }
           if (state.status == BaseStateStatus.success) {
             context.navigateTo(Routes.home);
@@ -65,15 +68,18 @@ class _LoginPageState extends State<LoginPage> {
         builder: (context, state) {
           return state.when(
             onState: (_) => Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(AppThemeValues.spaceMassive),
               child: Form(
                 key: _formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Center(child: Text('Login', style: context.textLarge)),
+                    Center(
+                        child: Text(_isSignUp ? 'Cadastre-se' : 'Entre',
+                            style: context.textLarge)),
                     if (_isSignUp) ...[
+                      AppThemeValues.spaceVerticalLarge,
                       TextFormField(
                         controller: _nameController,
                         decoration: const InputDecoration(
@@ -123,9 +129,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         onTap: () {
                           if (_formKey.currentState!.validate()) {
-                            _isSignUp
-                                ? cubit.onSignUp(_buildUser())
-                                : cubit.onSignIn(_buildUser());
+                            _isSignUp ? _onSignUp() : _onSignIn();
                           }
                         }),
                     AppThemeValues.spaceVerticalLarge,
@@ -159,10 +163,20 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  _onSignUp() => cubit.onSignUp(
+        _buildUser(),
+        _passwordController.text,
+      );
+
+  _onSignIn() => cubit.onSignIn(
+        _buildUser(),
+        _passwordController.text,
+      );
+
   _buildUser() => UserModel(
         name: _nameController.text,
         lastName: _lastNameController.text,
         email: _emailController.text,
-        password: _passwordController.text,
+        password: _passwordController.text.encodePassword(),
       );
 }

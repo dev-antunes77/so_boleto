@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:intl/intl.dart';
 import 'package:so_boleto/domain/models/enums/bill_category.dart';
 import 'package:so_boleto/domain/models/enums/bill_status.dart';
@@ -20,4 +22,8 @@ extension StringExtensions on String {
   }
 
   DateTime stringToDateTime() => DateFormat.yMd().add_jms().parse(this);
+
+  String encodePassword() => base64.encode(utf8.encode(this));
+
+  String decodePassword() => utf8.decode(base64.decode(this));
 }

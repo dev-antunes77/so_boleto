@@ -17,12 +17,13 @@ class HiveUserModelAdapter extends TypeAdapter<HiveUserModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return HiveUserModel(
-      userId: fields[1] as String,
+      id: fields[1] as String,
       name: fields[2] as String,
       lastName: fields[3] as String,
       email: fields[4] as String,
-      password: fields[6] as String,
-      createdAt: fields[8] as DateTime?,
+      password: fields[5] as String,
+      createdAt: fields[8] as DateTime,
+      bills: (fields[6] as List).cast<HiveBillModel>(),
       hasSeenOnbording: fields[7] as bool,
     );
   }
@@ -30,17 +31,19 @@ class HiveUserModelAdapter extends TypeAdapter<HiveUserModel> {
   @override
   void write(BinaryWriter writer, HiveUserModel obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(1)
-      ..write(obj.userId)
+      ..write(obj.id)
       ..writeByte(2)
       ..write(obj.name)
       ..writeByte(3)
       ..write(obj.lastName)
       ..writeByte(4)
       ..write(obj.email)
-      ..writeByte(6)
+      ..writeByte(5)
       ..write(obj.password)
+      ..writeByte(6)
+      ..write(obj.bills)
       ..writeByte(7)
       ..write(obj.hasSeenOnbording)
       ..writeByte(8)

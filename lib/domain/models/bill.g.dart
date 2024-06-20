@@ -13,7 +13,6 @@ BillModel _$BillModelFromJson(Map<String, dynamic> json) => BillModel(
       value: (json['value'] as num?)?.toInt() ?? 0,
       payedParcels: (json['payedParcels'] as num?)?.toInt() ?? 0,
       dueDayOfTheMonth: (json['dueDayOfTheMonth'] as num?)?.toInt() ?? 0,
-      dueEveryMonth: json['dueEveryMonth'] as bool? ?? false,
       id: json['id'] as String?,
       category: $enumDecodeNullable(_$BillCategoryEnumMap, json['category']),
       billStatus: $enumDecodeNullable(_$BillStatusEnumMap, json['billStatus']),
@@ -33,7 +32,6 @@ Map<String, dynamic> _$BillModelToJson(BillModel instance) => <String, dynamic>{
       'billStatus': _$BillStatusEnumMap[instance.billStatus]!,
       'totalParcels': instance.totalParcels,
       'payedParcels': instance.payedParcels,
-      'dueEveryMonth': instance.dueEveryMonth,
     };
 
 const _$BillCategoryEnumMap = {

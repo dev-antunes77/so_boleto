@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/domain/models/user.dart';
 import 'package:so_boleto/domain/repositories/firestore_repository.dart';
@@ -9,34 +8,31 @@ class FirestoreService implements FirestoreRepository {
 
   @override
   Future<void> createUser(UserModel user) async {
-    await _firestore.collection('data/user').add(user.toJson());
+    final usersRef = _firestore.collection("users").doc(user.id);
+    await usersRef.set(user.toFirestore());
+  }
+
+  @override
+  Future<UserModel> getUser(String userId) async {
+    final usersRef = _firestore.collection("users").doc(userId).withConverter(
+          fromFirestore: UserModel.fromFirestore,
+          toFirestore: (UserModel user, _) => user.toFirestore(),
+        );
+    final docSnap = await usersRef.get();
+    return docSnap.data()!;
   }
 
   @override
   Future<void> addBill(BillModel bill) async {
-    await _firestore.collection('data/user').add(bill.toJson());
+    final usersRef =
+        _firestore.collection("users").doc("tl36W62OL5n27MuP07Gb7s");
+    usersRef.update({
+      "bills": FieldValue.arrayUnion([bill.toFirestore()]),
+    });
   }
 
   @override
-  Future<BillModel> getBillModel(String id) async {
-    DocumentSnapshot snapshot =
-        await _firestore.collection('bills').doc(id).get();
-    Map<String, dynamic>? data = snapshot.data() as Map<String, dynamic>?;
-    if (data == null) {
-      throw Exception('Bill not found in Firestore');
-    }
-    return BillModel(
-      id: id,
-      name: data['name'],
-      description: data['description'],
-      totalParcels: data['totalParcels'],
-      value: data['value'],
-      payedParcels: data['payedParcels'],
-      dueDayOfTheMonth: data['dueDayOfTheMonth'],
-      dueEveryMonth: data['dueEveryMonth'],
-      createdAt: (data['createdAt'] as String).stringToDateTime(),
-      category: (data['category'] as String).categoryToEnum(),
-      billStatus: (data['billStatus'] as String).billStatuToEnum(),
-    );
+  Future<BillModel> getBills(String id) async {
+    return BillModel();
   }
 }

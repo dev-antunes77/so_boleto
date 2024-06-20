@@ -5,15 +5,18 @@ final class InitialState extends BaseState with EquatableMixin {
     required super.status,
     super.callbackMessage,
     required this.currentPage,
+    this.user,
   });
 
   final BottomNavigatorPage currentPage;
+  final UserModel? user;
 
   @override
   List<Object?> get props => [
         status,
         callbackMessage,
         currentPage,
+        user,
       ];
 
   @override
@@ -21,10 +24,12 @@ final class InitialState extends BaseState with EquatableMixin {
     BaseStateStatus? status,
     String? callbackMessage,
     BottomNavigatorPage? currentPage,
+    UserModel? user,
   }) =>
       InitialState(
         status: status ?? this.status,
         callbackMessage: callbackMessage ?? this.callbackMessage,
         currentPage: currentPage ?? this.currentPage,
+        user: user ?? this.user,
       );
 }

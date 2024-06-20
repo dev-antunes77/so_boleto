@@ -1,24 +1,53 @@
+import 'dart:math';
+
 import 'package:so_boleto/core/extensions/num_extensions.dart';
 import 'package:so_boleto/core/l10n/generated/l10n.dart';
 
 abstract class AppFormatters {
-  static String parcelLabelFormatter(bool dueEveryMonth, int parcels) {
-    if (dueEveryMonth) {
+  static randomIdFormater() {
+    const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+    const numbers = '0123456789';
+    Random random = Random();
+    String randomLetters = '';
+
+    for (int i = 0; i < 22; i++) {
+      String newCharactere = '';
+      if (random.nextBool()) {
+        newCharactere = _setRandomLetter(random, alphabet);
+      } else {
+        int index = random.nextInt(numbers.length);
+        newCharactere = numbers[index];
+      }
+      randomLetters += newCharactere;
+    }
+    return randomLetters;
+  }
+
+  static _setRandomLetter(Random random, String alphabet) {
+    int index = random.nextInt(alphabet.length);
+    String letter = alphabet[index];
+    if (random.nextBool()) {
+      letter = letter.toUpperCase();
+    }
+    return letter;
+  }
+
+  static String parcelLabelFormatter(int parcels) {
+    if (parcels < 2) {
       return AppLocalizations.current.formatterMonthBill;
     }
     return AppLocalizations.current.parcels;
   }
 
-  static String parcelInfoFormatter(bool dueEveryMonth, int parcels) {
-    if (dueEveryMonth) {
+  static String parcelInfoFormatter(int parcels) {
+    if (parcels < 2) {
       return AppLocalizations.current.formatterMonth;
     }
     return AppLocalizations.current.formatterParcelsTimes(parcels);
   }
 
-  static String parcelRelationFormatter(
-      bool dueEveryMonth, int parcels, int payedParcels) {
-    if (dueEveryMonth) {
+  static String parcelRelationFormatter(int parcels, int payedParcels) {
+    if (parcels < 2) {
       return AppLocalizations.current.formatterMonthBill;
     }
     return AppLocalizations.current

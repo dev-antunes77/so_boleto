@@ -64,11 +64,9 @@ class _BillCheckSectionState extends State<BillCheckSection> {
                 BillEditTile(
                   icon: AppIcons.parcels,
                   label: AppFormatters.parcelLabelFormatter(
-                    state.bill.dueEveryMonth,
                     state.bill.totalParcels,
                   ),
                   value: AppFormatters.parcelInfoFormatter(
-                    state.bill.dueEveryMonth,
                     state.bill.totalParcels,
                   ),
                   onPressed: () =>

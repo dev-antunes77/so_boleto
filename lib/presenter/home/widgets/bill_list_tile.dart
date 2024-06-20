@@ -103,7 +103,6 @@ class BillListTile extends StatelessWidget {
                       ),
                       Text(
                         AppFormatters.parcelRelationFormatter(
-                          bill.dueEveryMonth,
                           bill.totalParcels,
                           bill.payedParcels,
                         ),

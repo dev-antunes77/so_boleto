@@ -12,7 +12,7 @@ final class SetBillAsPaid {
 
   Future<void> call(BillModel bill) async {
     try {
-      final hasParcels = bill.totalParcels > 1 && !bill.dueEveryMonth;
+      final hasParcels = bill.totalParcels > 1;
       final parcelPaid = hasParcels ? bill.payedParcels + 1 : null;
       final paidBill =
           bill.copyWith(billStatus: BillStatus.payed, payedParcels: parcelPaid);

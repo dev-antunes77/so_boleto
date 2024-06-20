@@ -3,6 +3,7 @@ import 'package:so_boleto/domain/models/user.dart';
 
 abstract interface class FirestoreRepository {
   Future<void> createUser(UserModel user);
+  Future<UserModel> getUser(String userId);
   Future<void> addBill(BillModel bill);
-  Future<BillModel> getBillModel(String id);
+  Future<BillModel> getBills(String id);
 }

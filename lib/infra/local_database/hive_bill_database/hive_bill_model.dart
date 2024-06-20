@@ -13,7 +13,6 @@ final class HiveBillModel with HiveObjectMixin {
     required this.description,
     required this.category,
     required this.billStatus,
-    required this.dueEveryMonth,
     required this.totalParcels,
     required this.payedParcels,
     required this.value,
@@ -27,13 +26,15 @@ final class HiveBillModel with HiveObjectMixin {
         description: bill.description,
         category: bill.category.value,
         billStatus: bill.billStatus.value,
-        dueEveryMonth: bill.dueEveryMonth,
         totalParcels: bill.totalParcels,
         payedParcels: bill.payedParcels,
         value: bill.value,
         dueDayOfTheMonth: bill.dueDayOfTheMonth,
         createdAt: bill.createdAt,
       );
+
+  static List<HiveBillModel> fromBillModelList(List<BillModel> bills) =>
+      bills.map((bill) => HiveBillModel.fromBillModel(bill)).toList();
 
   @HiveField(1)
   String id;
@@ -49,9 +50,6 @@ final class HiveBillModel with HiveObjectMixin {
 
   @HiveField(5)
   String billStatus;
-
-  @HiveField(6)
-  bool dueEveryMonth;
 
   @HiveField(7)
   int totalParcels;

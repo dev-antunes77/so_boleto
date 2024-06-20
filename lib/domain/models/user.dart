@@ -1,10 +1,13 @@
 // ignore_for_file: must_be_immutable
 
-import 'dart:math';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:so_boleto/core/extensions/date_time_extensions.dart';
+import 'package:so_boleto/core/extensions/string_extensions.dart';
+import 'package:so_boleto/core/helpers/app_formatters.dart';
+import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/infra/local_database/hive_user_database/hive_user_model.dart';
 
 part 'user.g.dart';
@@ -16,17 +19,41 @@ class UserModel extends Equatable {
     this.lastName = '',
     this.email = '',
     this.password = '',
+    this.bills = const [],
     this.hasSeenOnbording = false,
-    String? userId,
+    String? id,
     DateTime? createdAt,
-  })  : userId = userId ?? _generateRandomNumericId(),
+  })  : id = id ?? AppFormatters.randomIdFormater(),
         createdAt = createdAt ?? DateTime.now();
-
-  static String _generateRandomNumericId() =>
-      '${DateTime.now().millisecondsSinceEpoch.toString()}${(Random().nextInt(90000) + 10000)}';
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);
+
+  Map<String, dynamic> toFirestore() => <String, dynamic>{
+        'id': id,
+        'name': name,
+        'lastName': lastName,
+        'email': email,
+        'bills': bills.map((e) => e.toJson()).toList(),
+        'createdAt': createdAt.dateTimeToStringData(),
+      };
+
+  factory UserModel.fromFirestore(
+    DocumentSnapshot<Map<String, dynamic>> snapshot,
+    SnapshotOptions? options,
+  ) {
+    final data = snapshot.data();
+    return UserModel(
+      id: data?['id'],
+      name: data?['name'],
+      lastName: data?['lastName'],
+      email: data?['email'],
+      createdAt: (data?['createdAt'] as String).stringToDateTime(),
+      bills: (data?['bills'] as List<dynamic>)
+          .map((bill) => BillModel.fromJson(bill))
+          .toList(),
+    );
+  }
 
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
 
@@ -36,7 +63,7 @@ class UserModel extends Equatable {
   }
 
   factory UserModel.fromHiveUser(HiveUserModel hiveUser) => UserModel(
-        userId: hiveUser.userId,
+        id: hiveUser.id,
         name: hiveUser.name,
         lastName: hiveUser.lastName,
         email: hiveUser.email,
@@ -45,41 +72,45 @@ class UserModel extends Equatable {
         hasSeenOnbording: hiveUser.hasSeenOnbording,
       );
 
-  final String userId;
+  final String id;
   final String name;
   final String lastName;
   final String email;
   final String password;
   final DateTime createdAt;
+  final List<BillModel> bills;
   bool hasSeenOnbording;
 
   @override
   List<Object?> get props => [
-        userId,
+        id,
         name,
         lastName,
         email,
         password,
         createdAt,
+        bills,
         hasSeenOnbording,
       ];
 
   UserModel copyWith({
-    String? userId,
+    String? id,
     String? name,
     String? lastName,
     String? email,
     String? password,
     DateTime? createdAt,
+    List<BillModel>? bills,
     bool? hasSeenOnbording,
   }) =>
       UserModel(
-        userId: userId ?? this.userId,
+        id: id ?? id,
         name: name ?? this.name,
         lastName: lastName ?? this.lastName,
         email: email ?? this.email,
         password: password ?? this.password,
         createdAt: createdAt ?? this.createdAt,
+        bills: bills ?? this.bills,
         hasSeenOnbording: hasSeenOnbording ?? this.hasSeenOnbording,
       );
 }

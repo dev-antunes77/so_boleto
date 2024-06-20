@@ -10,6 +10,8 @@ import 'package:so_boleto/domain/usecases/delete_bill.dart';
 import 'package:so_boleto/domain/usecases/edit_bill.dart';
 import 'package:so_boleto/domain/usecases/filter_bills_by_params.dart';
 import 'package:so_boleto/domain/usecases/get_bills.dart';
+import 'package:so_boleto/domain/usecases/get_user_from_firebase.dart';
+import 'package:so_boleto/domain/usecases/get_user_from_storage.dart';
 import 'package:so_boleto/domain/usecases/set_bill_as_paid.dart';
 import 'package:so_boleto/domain/usecases/sign_in.dart';
 import 'package:so_boleto/domain/usecases/sign_up.dart';
@@ -24,7 +26,6 @@ import 'package:so_boleto/presenter/expenses/cubit/expenses_cubit.dart';
 import 'package:so_boleto/presenter/filter/cubit/filter_cubit.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
-import 'package:so_boleto/presenter/login/bloc/login_cubit.dart';
 import 'package:so_boleto/presenter/prompt_bills/cubit/prompt_bills_cubit.dart';
 
 abstract class InjectionService {
@@ -102,6 +103,18 @@ abstract class InjectionService {
 
   static void _initUseCases() {
     _i.registerFactory(
+      () => GetUserFromStorage(
+        _i.get<HiveUserDatabase>(),
+      ),
+    );
+
+    _i.registerFactory(
+      () => GetUserFromFirebase(
+        _i.get<FirestoreService>(),
+      ),
+    );
+
+    _i.registerFactory(
       () => SignUp(
         _i.get<HiveUserDatabase>(),
         _i.get<FirestoreService>(),
@@ -127,18 +140,23 @@ abstract class InjectionService {
         _i.get<FirestoreService>(),
       ),
     );
+
     _i.registerFactory(
       () => SetBillAsPaid(_i.get<HiveBillsDatabase>()),
     );
+
     _i.registerFactory(
       () => DeleteBill(_i.get<HiveBillsDatabase>()),
     );
+
     _i.registerFactory(
       () => EditBill(_i.get<HiveBillsDatabase>()),
     );
+
     _i.registerFactory(
       () => FilterBillsByParams(),
     );
+
     _i.registerFactory(
       () => AddPromptBills(_i.get<HiveBillsDatabase>()),
     );
@@ -146,13 +164,11 @@ abstract class InjectionService {
 
   static void _initBloc() {
     _i.registerFactory(
-      () => InitialCubit(),
-    );
-
-    _i.registerFactory(
-      () => LoginCubit(
+      () => InitialCubit(
         _i.get<SignUp>(),
         _i.get<SignIn>(),
+        _i.get<GetUserFromStorage>(),
+        _i.get<GetUserFromFirebase>(),
       ),
     );
 

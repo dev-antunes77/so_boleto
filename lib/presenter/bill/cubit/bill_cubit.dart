@@ -38,7 +38,6 @@ class BillCubit extends Cubit<BillState> with BaseCubit {
         status: BaseStateStatus.success,
         bill: state.bill.copyWith(
           totalParcels: 1,
-          dueEveryMonth: dueEveryMonth,
         ),
       ),
     );

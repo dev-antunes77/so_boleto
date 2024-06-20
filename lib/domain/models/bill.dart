@@ -1,8 +1,8 @@
-import 'dart:math';
-
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:so_boleto/core/extensions/date_time_extensions.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
+import 'package:so_boleto/core/helpers/app_formatters.dart';
 import 'package:so_boleto/domain/models/enums/bill_category.dart';
 import 'package:so_boleto/domain/models/enums/bill_status.dart';
 import 'package:so_boleto/domain/models/prompt_bill.dart';
@@ -19,23 +19,32 @@ class BillModel extends Equatable {
     this.value = 0,
     this.payedParcels = 0,
     this.dueDayOfTheMonth = 0,
-    this.dueEveryMonth = false,
     String? id,
     BillCategory? category,
     BillStatus? billStatus,
     DateTime? createdAt,
-  })  : id = id ?? _generateRandomNumericId(),
+  })  : id = id ?? AppFormatters.randomIdFormater(),
         createdAt = createdAt ?? DateTime.now(),
         category = category ?? BillCategory.miscellaneous,
         billStatus = billStatus ?? BillStatus.open;
-
-  static String _generateRandomNumericId() =>
-      '${DateTime.now().millisecondsSinceEpoch.toString()}${(Random().nextInt(90000) + 10000)}';
 
   factory BillModel.fromJson(Map<String, dynamic> json) =>
       _$BillModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$BillModelToJson(this);
+
+  Map<String, dynamic> toFirestore() => <String, dynamic>{
+        'id': id,
+        'name': name,
+        'description': description,
+        'category': category.value,
+        'billStatus': billStatus.value,
+        'value': value,
+        'totalParcels': totalParcels,
+        'payedParcels': payedParcels,
+        'dueDay': dueDayOfTheMonth,
+        'createdAt': createdAt.dateTimeToStringData(),
+      };
 
   factory BillModel.fromHiveBillModel(HiveBillModel bill) => BillModel(
         id: bill.id,
@@ -43,7 +52,6 @@ class BillModel extends Equatable {
         description: bill.description,
         category: bill.category.categoryToEnum(),
         billStatus: bill.billStatus.billStatuToEnum(),
-        dueEveryMonth: bill.dueEveryMonth,
         totalParcels: bill.totalParcels,
         payedParcels: bill.payedParcels,
         value: bill.value,
@@ -57,7 +65,6 @@ class BillModel extends Equatable {
         description: '',
         category: promptBill.category,
         billStatus: BillStatus.open,
-        dueEveryMonth: true,
         totalParcels: 0,
         payedParcels: 0,
         value: promptBill.value,
@@ -75,7 +82,6 @@ class BillModel extends Equatable {
   final BillStatus billStatus;
   final int totalParcels;
   final int payedParcels;
-  final bool dueEveryMonth;
 
   int get parcelsLeft => totalParcels - payedParcels;
 
@@ -91,7 +97,6 @@ class BillModel extends Equatable {
         billStatus,
         totalParcels,
         payedParcels,
-        dueEveryMonth,
       ];
 
   BillModel copyWith({
@@ -105,7 +110,6 @@ class BillModel extends Equatable {
     int? dueDayOfTheMonth,
     int? totalParcels,
     int? payedParcels,
-    bool? dueEveryMonth,
   }) {
     return BillModel(
       id: id ?? this.id,
@@ -118,7 +122,6 @@ class BillModel extends Equatable {
       dueDayOfTheMonth: dueDayOfTheMonth ?? this.dueDayOfTheMonth,
       totalParcels: totalParcels ?? this.totalParcels,
       payedParcels: payedParcels ?? this.payedParcels,
-      dueEveryMonth: dueEveryMonth ?? this.dueEveryMonth,
     );
   }
 }

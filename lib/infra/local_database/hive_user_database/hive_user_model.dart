@@ -2,56 +2,55 @@
 
 import 'package:hive/hive.dart';
 import 'package:so_boleto/domain/models/user.dart';
+import 'package:so_boleto/infra/local_database/hive_bill_database/hive_bill_model.dart';
 
 part 'hive_user_model.g.dart';
 
 @HiveType(typeId: 1)
-final class HiveUserModel extends UserModel with HiveObjectMixin {
+final class HiveUserModel with HiveObjectMixin {
   HiveUserModel({
-    required super.userId,
-    required super.name,
-    required super.lastName,
-    required super.email,
-    required super.password,
-    required super.createdAt,
-    required super.hasSeenOnbording,
+    required this.id,
+    required this.name,
+    required this.lastName,
+    required this.email,
+    required this.password,
+    required this.createdAt,
+    required this.bills,
+    required this.hasSeenOnbording,
   });
 
   factory HiveUserModel.fromUserModel(UserModel user) => HiveUserModel(
-        userId: user.userId,
+        id: user.id,
         name: user.name,
         lastName: user.lastName,
         email: user.email,
         password: user.password,
         createdAt: user.createdAt,
+        bills: HiveBillModel.fromBillModelList(user.bills),
         hasSeenOnbording: user.hasSeenOnbording,
       );
 
-  @override
   @HiveField(1)
-  String get userId => super.userId;
+  String id;
 
-  @override
   @HiveField(2)
-  String get name => super.name;
+  String name;
 
-  @override
   @HiveField(3)
-  String get lastName => super.lastName;
+  String lastName;
 
-  @override
   @HiveField(4)
-  String get email => super.email;
+  String email;
 
-  @override
+  @HiveField(5)
+  String password;
+
   @HiveField(6)
-  String get password => super.password;
+  List<HiveBillModel> bills;
 
-  @override
   @HiveField(7)
-  bool get hasSeenOnbording => super.hasSeenOnbording;
+  bool hasSeenOnbording;
 
-  @override
   @HiveField(8)
-  DateTime get createdAt => super.createdAt;
+  DateTime createdAt;
 }
