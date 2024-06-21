@@ -7,7 +7,6 @@ import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/domain/models/enums/page_response_handler.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 import 'package:so_boleto/presenter/home/widgets/bill_list_tile.dart';
-import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
 
 class HomeBillTab extends StatelessWidget {
   const HomeBillTab(
@@ -25,7 +24,6 @@ class HomeBillTab extends StatelessWidget {
         context.read<HomeBillsCubit>().state.querySearch.isNotEmpty) {
       return const CustomStatusHandler(PageResponseHandler.noneWithThisName);
     } else if (bills.isEmpty) {
-      print(context.read<InitialCubit>().state.user);
       return CustomStatusHandler(message);
     }
     return SingleChildScrollView(

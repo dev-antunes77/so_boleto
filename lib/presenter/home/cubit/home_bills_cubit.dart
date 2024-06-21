@@ -39,14 +39,19 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
   final FilterBillsByParams _filterBillsByParamsUseCase;
   final AddPromptBills _addPromptBillsUsecase;
 
-  Future<void> onInit() async {
+  Future<void> onInit(UserModel user) async {
     try {
       if (state.bills.isEmpty) {
         emit(state.copyWith(status: BaseStateStatus.loading));
       }
-      final updatedBills = await _getBillsUseCase();
+      final updatedBills = await _getBillsUseCase(user.id);
       emit(
-          state.copyWith(status: BaseStateStatus.success, bills: updatedBills));
+        state.copyWith(
+          status: BaseStateStatus.success,
+          bills: updatedBills,
+          user: user,
+        ),
+      );
     } on AppError catch (error) {
       onAppError(error);
       emit(
@@ -58,7 +63,8 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
   Future<void> createBill(BillModel bill) async {
     try {
       emit(state.copyWith(status: BaseStateStatus.loading));
-      await _createBillUseCase(bill);
+      final userBoundedBill = bill.copyWith(userId: state.user.id);
+      await _createBillUseCase(userBoundedBill);
       await _updateBills();
     } on AppError catch (_) {
       _handleErrorEmit(AppLocalizations.current.homeBillCreationError);
@@ -66,7 +72,7 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
   }
 
   Future<void> _updateBills() async {
-    final updatedBills = await _getBillsUseCase();
+    final updatedBills = await _getBillsUseCase(state.user.id);
     emit(
       state.copyWith(
         status: BaseStateStatus.success,

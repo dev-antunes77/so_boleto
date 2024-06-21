@@ -2,8 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:so_boleto/core/environment/firebase_env.dart';
-import 'package:so_boleto/domain/database/hive_bills.dart';
-import 'package:so_boleto/domain/database/hive_user.dart';
 import 'package:so_boleto/domain/usecases/add_prompt_bills.dart';
 import 'package:so_boleto/domain/usecases/create_bill.dart';
 import 'package:so_boleto/domain/usecases/create_user.dart';
@@ -46,23 +44,16 @@ abstract class InjectionService {
     await Firebase.initializeApp(options: FirebaseEnv.instance);
   }
 
-  static _initLocalStorage() {
-    _initUserStorage();
-    _initBillStorage();
-  }
-
-  static Future<HiveUser> _initUserStorage() async {
+  static Future<void> _initLocalStorage() async {
     await Hive.initFlutter();
+
     Hive.registerAdapter(HiveUserModelAdapter());
     _i.registerFactory<HiveUserDatabase>(() => HiveUserDatabase());
-    return _i.get<HiveUserDatabase>();
-  }
+    _i.get<HiveUserDatabase>();
 
-  static Future<HiveBills> _initBillStorage() async {
-    await Hive.initFlutter();
     Hive.registerAdapter(HiveBillModelAdapter());
     _i.registerFactory<HiveBillsDatabase>(() => HiveBillsDatabase());
-    return _i.get<HiveBillsDatabase>();
+    _i.get<HiveBillsDatabase>();
   }
 
   // static Future<void> _initStorages() async {
@@ -136,7 +127,10 @@ abstract class InjectionService {
 
     // Bill Usecase
     _i.registerFactory(
-      () => GetBills(_i.get<HiveBillsDatabase>()),
+      () => GetBills(
+        _i.get<HiveBillsDatabase>(),
+        _i.get<FirestoreService>(),
+      ),
     );
 
     _i.registerFactory(

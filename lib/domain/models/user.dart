@@ -7,7 +7,6 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:so_boleto/core/extensions/date_time_extensions.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/helpers/app_formatters.dart';
-import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/infra/local_database/hive_user_database/hive_user_model.dart';
 
 part 'user.g.dart';
@@ -19,7 +18,6 @@ class UserModel extends Equatable {
     this.lastName = '',
     this.email = '',
     this.password = '',
-    this.bills = const [],
     this.hasSeenOnbording = false,
     String? id,
     DateTime? createdAt,
@@ -34,7 +32,6 @@ class UserModel extends Equatable {
         'name': name,
         'lastName': lastName,
         'email': email,
-        'bills': bills.map((e) => e.toJson()).toList(),
         'createdAt': createdAt.dateTimeToStringData(),
       };
 
@@ -48,9 +45,6 @@ class UserModel extends Equatable {
       lastName: data?['lastName'],
       email: data?['email'],
       createdAt: (data?['createdAt'] as String).stringToDateTime(),
-      bills: (data?['bills'] as List<dynamic>)
-          .map((bill) => BillModel.fromJson(bill))
-          .toList(),
     );
   }
 
@@ -77,7 +71,6 @@ class UserModel extends Equatable {
   final String email;
   final String password;
   final DateTime createdAt;
-  final List<BillModel> bills;
   bool hasSeenOnbording;
 
   @override
@@ -88,7 +81,6 @@ class UserModel extends Equatable {
         email,
         password,
         createdAt,
-        bills,
         hasSeenOnbording,
       ];
 
@@ -99,7 +91,6 @@ class UserModel extends Equatable {
     String? email,
     String? password,
     DateTime? createdAt,
-    List<BillModel>? bills,
     bool? hasSeenOnbording,
   }) =>
       UserModel(
@@ -109,7 +100,6 @@ class UserModel extends Equatable {
         email: email ?? this.email,
         password: password ?? this.password,
         createdAt: createdAt ?? this.createdAt,
-        bills: bills ?? this.bills,
         hasSeenOnbording: hasSeenOnbording ?? this.hasSeenOnbording,
       );
 }

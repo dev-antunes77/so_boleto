@@ -23,7 +23,6 @@ class HiveUserModelAdapter extends TypeAdapter<HiveUserModel> {
       email: fields[4] as String,
       password: fields[5] as String,
       createdAt: fields[8] as DateTime,
-      bills: (fields[6] as List).cast<HiveBillModel>(),
       hasSeenOnbording: fields[7] as bool,
     );
   }
@@ -31,7 +30,7 @@ class HiveUserModelAdapter extends TypeAdapter<HiveUserModel> {
   @override
   void write(BinaryWriter writer, HiveUserModel obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(7)
       ..writeByte(1)
       ..write(obj.id)
       ..writeByte(2)
@@ -42,8 +41,6 @@ class HiveUserModelAdapter extends TypeAdapter<HiveUserModel> {
       ..write(obj.email)
       ..writeByte(5)
       ..write(obj.password)
-      ..writeByte(6)
-      ..write(obj.bills)
       ..writeByte(7)
       ..write(obj.hasSeenOnbording)
       ..writeByte(8)

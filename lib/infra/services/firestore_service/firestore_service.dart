@@ -29,15 +29,27 @@ class FirestoreService implements FirestoreRepository {
 
   @override
   Future<void> addBill(BillModel bill) async {
-    final usersRef =
-        _firestore.collection("users").doc("tl36W62OL5n27MuP07Gb7s");
-    usersRef.update({
-      "bills": FieldValue.arrayUnion([bill.toFirestore()]),
-    });
+    final usersRef = _firestore
+        .collection("users")
+        .doc(bill.userId)
+        .collection('bills')
+        .doc(bill.id);
+    await usersRef.set(bill.toFirestore());
   }
 
   @override
-  Future<BillModel> getBills(String id) async {
-    return BillModel();
+  Future<List<BillModel>> getBills(String userId) async {
+    List<BillModel> bills = [];
+    await _firestore
+        .collection("users")
+        .doc(userId)
+        .collection('bills')
+        .get()
+        .then((snapDoc) {
+      for (var data in snapDoc.docs) {
+        bills.add(BillModel.fromFirestore(data));
+      }
+    });
+    return bills;
   }
 }

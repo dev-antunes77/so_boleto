@@ -11,6 +11,7 @@ import 'package:so_boleto/domain/models/enums/page_response_handler.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 import 'package:so_boleto/presenter/home/widgets/home_bill_tab.dart';
 import 'package:so_boleto/presenter/home/widgets/tab_indicator.dart';
+import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -25,8 +26,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   void initState() {
     _tabController = TabController(length: 3, vsync: this);
     final cubit = context.read<HomeBillsCubit>();
+    final user = context.read<InitialCubit>().state.user;
     if (cubit.state.bills.isEmpty) {
-      cubit.onInit();
+      cubit.onInit(user!);
     }
     super.initState();
   }

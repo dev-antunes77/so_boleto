@@ -13,7 +13,7 @@ final class CreateBill {
 
   Future<void> call(BillModel bill) async {
     try {
-      await _hiveBillsDatabase.createBill(bill);
+      // await _hiveBillsDatabase.createBill(bill);
       await _firestoreRepository.addBill(bill);
     } on AppError catch (error, trace) {
       Log.error(error, trace, 'Error executing $runtimeType: ${error.message}');

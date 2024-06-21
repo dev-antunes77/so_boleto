@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:so_boleto/core/extensions/date_time_extensions.dart';
@@ -47,6 +48,25 @@ class BillModel extends Equatable {
         'dueDay': dueDayOfTheMonth,
         'createdAt': createdAt.dateTimeToStringData(),
       };
+
+  factory BillModel.fromFirestore(
+      DocumentSnapshot<Map<String, dynamic>> snapshot,
+      [SnapshotOptions? options]) {
+    final data = snapshot.data();
+    return BillModel(
+      id: data?['id'],
+      name: data?['name'],
+      description: data?['description'],
+      billStatus: (data?['billStatus'] as String).billStatuToEnum(),
+      category: (data?['category'] as String).categoryToEnum(),
+      value: data?['value'],
+      payedParcels: data?['payedParcels'],
+      totalParcels: data?['totalParcels'],
+      dueDayOfTheMonth: data?['dueDay'],
+      userId: data?['userId'],
+      createdAt: (data?['createdAt'] as String).stringToDateTime(),
+    );
+  }
 
   factory BillModel.fromHiveBillModel(HiveBillModel bill) => BillModel(
         id: bill.id,

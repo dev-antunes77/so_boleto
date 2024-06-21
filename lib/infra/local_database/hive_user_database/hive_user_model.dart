@@ -2,7 +2,6 @@
 
 import 'package:hive/hive.dart';
 import 'package:so_boleto/domain/models/user.dart';
-import 'package:so_boleto/infra/local_database/hive_bill_database/hive_bill_model.dart';
 
 part 'hive_user_model.g.dart';
 
@@ -15,7 +14,6 @@ final class HiveUserModel with HiveObjectMixin {
     required this.email,
     required this.password,
     required this.createdAt,
-    required this.bills,
     required this.hasSeenOnbording,
   });
 
@@ -26,7 +24,6 @@ final class HiveUserModel with HiveObjectMixin {
         email: user.email,
         password: user.password,
         createdAt: user.createdAt,
-        bills: HiveBillModel.fromBillModelList(user.bills),
         hasSeenOnbording: user.hasSeenOnbording,
       );
 
@@ -44,9 +41,6 @@ final class HiveUserModel with HiveObjectMixin {
 
   @HiveField(5)
   String password;
-
-  @HiveField(6)
-  List<HiveBillModel> bills;
 
   @HiveField(7)
   bool hasSeenOnbording;
