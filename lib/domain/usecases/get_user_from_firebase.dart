@@ -9,7 +9,7 @@ final class GetUserFromFirebase {
 
   final FirestoreRepository _firestoreRepository;
 
-  Future<UserModel?> call(String? userId, String? email) async {
+  Future<UserModel> call(String? userId, String? email) async {
     try {
       return await _firestoreRepository.getUser(userId, email);
     } on AppError catch (error, trace) {

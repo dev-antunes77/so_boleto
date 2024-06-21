@@ -19,6 +19,7 @@ class BillModel extends Equatable {
     this.value = 0,
     this.payedParcels = 0,
     this.dueDayOfTheMonth = 0,
+    this.userId = '',
     String? id,
     BillCategory? category,
     BillStatus? billStatus,
@@ -35,6 +36,7 @@ class BillModel extends Equatable {
 
   Map<String, dynamic> toFirestore() => <String, dynamic>{
         'id': id,
+        'userId': userId,
         'name': name,
         'description': description,
         'category': category.value,
@@ -73,6 +75,7 @@ class BillModel extends Equatable {
       );
 
   final String id;
+  final String userId;
   final String name;
   final String description;
   final BillCategory category;
@@ -88,6 +91,7 @@ class BillModel extends Equatable {
   @override
   List<Object?> get props => [
         id,
+        userId,
         name,
         description,
         category,
@@ -101,6 +105,7 @@ class BillModel extends Equatable {
 
   BillModel copyWith({
     String? id,
+    String? userId,
     String? name,
     String? description,
     BillCategory? category,
@@ -113,6 +118,7 @@ class BillModel extends Equatable {
   }) {
     return BillModel(
       id: id ?? this.id,
+      userId: userId ?? this.userId,
       name: name ?? this.name,
       description: description ?? this.description,
       category: category ?? this.category,
