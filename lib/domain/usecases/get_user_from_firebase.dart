@@ -9,9 +9,9 @@ final class GetUserFromFirebase {
 
   final FirestoreRepository _firestoreRepository;
 
-  Future<UserModel?> call(String userId) async {
+  Future<UserModel?> call(String? userId, String? email) async {
     try {
-      return await _firestoreRepository.getUser(userId);
+      return await _firestoreRepository.getUser(userId, email);
     } on AppError catch (error, trace) {
       Log.error(error, trace, 'Error executing $runtimeType: ${error.message}');
       rethrow;

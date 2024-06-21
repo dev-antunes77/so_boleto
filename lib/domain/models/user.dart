@@ -39,9 +39,8 @@ class UserModel extends Equatable {
       };
 
   factory UserModel.fromFirestore(
-    DocumentSnapshot<Map<String, dynamic>> snapshot,
-    SnapshotOptions? options,
-  ) {
+      DocumentSnapshot<Map<String, dynamic>> snapshot,
+      [SnapshotOptions? options]) {
     final data = snapshot.data();
     return UserModel(
       id: data?['id'],

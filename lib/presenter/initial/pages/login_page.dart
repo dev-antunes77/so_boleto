@@ -169,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
       );
 
   _onSignIn() => cubit.onSignIn(
-        _buildUser(),
+        _emailController.text,
         _passwordController.text,
       );
 

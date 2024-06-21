@@ -13,13 +13,19 @@ class FirestoreService implements FirestoreRepository {
   }
 
   @override
-  Future<UserModel> getUser(String userId) async {
-    final usersRef = _firestore.collection("users").doc(userId).withConverter(
-          fromFirestore: UserModel.fromFirestore,
-          toFirestore: (UserModel user, _) => user.toFirestore(),
-        );
-    final docSnap = await usersRef.get();
-    return docSnap.data()!;
+  Future<UserModel?> getUser(String? userId, String? email) async {
+    if (userId != null) {
+      final docSnap = await _firestore.collection("users").doc(userId).get();
+      return UserModel.fromFirestore(docSnap);
+    }
+    _firestore
+        .collection("users")
+        .where('email', isEqualTo: email!)
+        .get()
+        .then((querySnapshot) {
+      return UserModel.fromFirestore(querySnapshot.docs.first);
+    });
+    return null;
   }
 
   @override
