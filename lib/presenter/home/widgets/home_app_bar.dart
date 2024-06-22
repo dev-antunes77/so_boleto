@@ -42,7 +42,8 @@ class HomeAppBar extends StatelessWidget {
       Routes.billName,
       params: PageTransitions.transitionScale,
     );
-    context.read<HomeBillsCubit>().setSearchByNameValue('');
-    context.read<BillCubit>().initiateCreationFlow();
+    final cubit = context.read<HomeBillsCubit>();
+    cubit.setSearchByNameValue('');
+    context.read<BillCubit>().initiateCreationFlow(cubit.state.user.id);
   }
 }

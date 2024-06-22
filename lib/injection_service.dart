@@ -141,15 +141,24 @@ abstract class InjectionService {
     );
 
     _i.registerFactory(
-      () => SetBillAsPaid(_i.get<HiveBillsDatabase>()),
+      () => SetBillAsPaid(
+        _i.get<HiveBillsDatabase>(),
+        _i.get<FirestoreService>(),
+      ),
     );
 
     _i.registerFactory(
-      () => DeleteBill(_i.get<HiveBillsDatabase>()),
+      () => DeleteBill(
+        _i.get<HiveBillsDatabase>(),
+        _i.get<FirestoreService>(),
+      ),
     );
 
     _i.registerFactory(
-      () => EditBill(_i.get<HiveBillsDatabase>()),
+      () => EditBill(
+        _i.get<HiveBillsDatabase>(),
+        _i.get<FirestoreService>(),
+      ),
     );
 
     _i.registerFactory(
@@ -157,7 +166,10 @@ abstract class InjectionService {
     );
 
     _i.registerFactory(
-      () => AddPromptBills(_i.get<HiveBillsDatabase>()),
+      () => AddPromptBills(
+        _i.get<HiveBillsDatabase>(),
+        _i.get<FirestoreService>(),
+      ),
     );
   }
 

@@ -81,8 +81,10 @@ class BillModel extends Equatable {
         createdAt: bill.createdAt,
       );
 
-  factory BillModel.fromPromptToBill(PromptBill promptBill) => BillModel(
+  factory BillModel.fromPromptToBill(String userId, PromptBill promptBill) =>
+      BillModel(
         id: promptBill.id,
+        userId: userId,
         name: promptBill.name,
         description: '',
         category: promptBill.category,

@@ -113,10 +113,10 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
     }
   }
 
-  Future<bool> deleteBill(String id) async {
+  Future<bool> deleteBill(String billId) async {
     try {
       emit(state.copyWith(status: BaseStateStatus.loading));
-      final hasDeleted = await _deleteBillUseCase(id);
+      final hasDeleted = await _deleteBillUseCase(state.user.id, billId);
       if (hasDeleted) {
         await _updateBills();
         return true;
@@ -164,7 +164,7 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
   void addPrompBills(List<PromptBill> promptBills) async {
     try {
       emit(state.copyWith(status: BaseStateStatus.loading));
-      await _addPromptBillsUsecase(promptBills);
+      await _addPromptBillsUsecase(state.user.id, promptBills);
       await _updateBills();
     } on AppError catch (error) {
       onAppError(error);

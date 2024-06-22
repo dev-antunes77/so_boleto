@@ -83,6 +83,6 @@ class BillCubit extends Cubit<BillState> with BaseCubit {
   void initiateEditionFlow({BillModel? bill}) =>
       emit(state.copyWith(bill: bill, isEditionFlow: true));
 
-  void initiateCreationFlow() =>
-      emit(state.copyWith(bill: BillModel(), isEditionFlow: false));
+  void initiateCreationFlow(String userId) => emit(
+      state.copyWith(bill: BillModel(userId: userId), isEditionFlow: false));
 }
