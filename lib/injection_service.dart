@@ -25,6 +25,7 @@ import 'package:so_boleto/presenter/expenses/cubit/expenses_cubit.dart';
 import 'package:so_boleto/presenter/filter/cubit/filter_cubit.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
+import 'package:so_boleto/presenter/profile/cubit/profile_cubit.dart';
 import 'package:so_boleto/presenter/prompt_bills/cubit/prompt_bills_cubit.dart';
 
 abstract class InjectionService {
@@ -207,43 +208,13 @@ abstract class InjectionService {
     _i.registerFactory(
       () => PromptBillsCubit(),
     );
+
     _i.registerFactory(
       () => ExpensesCubit(),
     );
-    // _i.registerFactory(
-    //   () => PlayerCubit(
-    //     _i.get<ChangePlayerRadioUseCase>(),
-    //     _i.get<ToggleFavoriteRadioUseCase>(),
-    //     _i.get<TogglePlayerUseCase>(),
-    //     _i.get<GetLastRadioUseCase>(),
-    //     _i.get<ListenPlayerSongUseCase>(),
-    //     _i.get<ListenPlayerSongStateUseCase>(),
-    //     _i.get<RadioChangeTimerEventUseCase>(),
-    //   ),
-    // );
 
-    // _i.registerFactory(
-    //   () => LiveCubit(
-    //     _i.get<FinishOnboardingUseCase>(),
-    //     _i.get<CheckOnboardingUseCase>(),
-    //     _i.get<GetSliderRadiosUseCase>(),
-    //     _i.get<GetLastRadioUseCase>(),
-    //     _i.get<IsFavoriteRadioUseCase>(),
-    //   ),
-    // );
-
-    // _i.registerFactory(
-    //   () => ProfileCubit(
-    //     _i.get<GetLegalTextsUseCase>(),
-    //     _i.get<GetUserUseCase>(),
-    //   ),
-    // );
-
-    // _i.registerFactory(
-    //   () => RadiosCubit(
-    //     _i.get<GetRadiosUseCase>(),
-    //     _i.get<GetFavoriteRadiosUseCase>(),
-    //   ),
-// );
+    _i.registerFactory(
+      () => ProfileCubit(),
+    );
   }
 }

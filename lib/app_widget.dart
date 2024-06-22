@@ -10,6 +10,7 @@ import 'package:so_boleto/presenter/expenses/cubit/expenses_cubit.dart';
 import 'package:so_boleto/presenter/filter/cubit/filter_cubit.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
+import 'package:so_boleto/presenter/profile/cubit/profile_cubit.dart';
 import 'package:so_boleto/presenter/prompt_bills/cubit/prompt_bills_cubit.dart';
 
 class AppWidget extends StatelessWidget {
@@ -25,6 +26,7 @@ class AppWidget extends StatelessWidget {
         BlocProvider(create: (_) => InjectionService.get<FilterCubit>()),
         BlocProvider(create: (_) => InjectionService.get<PromptBillsCubit>()),
         BlocProvider(create: (_) => InjectionService.get<ExpensesCubit>()),
+        BlocProvider(create: (_) => InjectionService.get<ProfileCubit>()),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
