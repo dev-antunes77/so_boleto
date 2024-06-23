@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/custom_safe_area/custom_safe_area.dart';
+import 'package:so_boleto/core/components/custom_status_handler/custom_status_handler.dart';
 import 'package:so_boleto/core/components/loading_page/loading_page_new.dart';
 import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes.dart';
@@ -62,8 +63,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             ),
             Expanded(
               child: BlocBuilder<HomeBillsCubit, HomeBillsState>(
-                builder: (context, state) {
-                  return TabBarView(
+                builder: (context, state) => state.when(
+                  onError: () =>
+                      const CustomStatusHandler(PageResponseHandler.error),
+                  onLoading: () => const SizedBox.shrink(),
+                  onState: (_) => TabBarView(
                     controller: _tabController,
                     children: [
                       HomeBillTab(
@@ -85,8 +89,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             : PageResponseHandler.noneDelayed,
                       ),
                     ],
-                  );
-                },
+                  ),
+                ),
               ),
             ),
           ],

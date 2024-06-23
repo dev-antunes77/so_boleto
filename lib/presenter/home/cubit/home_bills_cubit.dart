@@ -44,6 +44,7 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
       if (state.bills.isNotEmpty) return;
 
       emit(state.copyWith(status: BaseStateStatus.loading));
+      // Future.delayed(const Duration(seconds: 10)).then((_) async {
       final updatedBills = await _getBillsUseCase(user.id);
       emit(
         state.copyWith(
@@ -52,6 +53,7 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
           user: user,
         ),
       );
+      // });
     } on AppError catch (error) {
       onAppError(error);
       emit(
