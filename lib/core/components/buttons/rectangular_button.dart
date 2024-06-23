@@ -9,32 +9,65 @@ class RectangularButton extends StatelessWidget {
     required this.label,
     required this.isValid,
     required this.onTap,
+    this.isInversed = false,
     this.horizontalPadding = AppThemeValues.spaceSmall,
   });
 
+  factory RectangularButton.inverse({
+    required String label,
+    required bool isValid,
+    required VoidCallback onTap,
+  }) =>
+      RectangularButton(
+        isInversed: true,
+        label: label,
+        isValid: isValid,
+        onTap: onTap,
+      );
+
   final String label;
   final bool isValid;
+  final bool isInversed;
   final double horizontalPadding;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
+    final Color validButtonColor =
+        isInversed ? Colors.transparent : AppColors.primary;
+
+    final Color invalidButtonColor =
+        isInversed ? Colors.transparent : AppColors.grey;
+
+    final Color validButtonTextColor =
+        isInversed ? AppColors.primary : AppColors.background;
+
+    final Color invalidButtonTextColor =
+        isInversed ? AppColors.grey : AppColors.background;
+
     return InkWell(
       onTap: isValid ? onTap : null,
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
         child: Card(
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.horizontal(),
+          shadowColor: isInversed ? Colors.transparent : null,
+          shape: RoundedRectangleBorder(
+            borderRadius: const BorderRadius.horizontal(),
+            side: isInversed
+                ? BorderSide(
+                    color: isValid ? AppColors.primary : AppColors.grey,
+                    width: 2)
+                : BorderSide.none,
           ),
-          color: isValid ? AppColors.primary : AppColors.grey,
+          color: isValid ? validButtonColor : invalidButtonColor,
           child: Center(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 label,
                 style: context.textRobotoSubtitleSmall.copyWith(
-                  color: AppColors.background,
+                  color:
+                      isValid ? validButtonTextColor : invalidButtonTextColor,
                 ),
               ),
             ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 
-class TutorialPageIndicator extends StatelessWidget {
-  const TutorialPageIndicator({
+class OnboardingPageIndicator extends StatelessWidget {
+  const OnboardingPageIndicator({
     super.key,
     required this.hasOpacity,
     required this.animationController,
@@ -23,7 +23,7 @@ class TutorialPageIndicator extends StatelessWidget {
             shape: BoxShape.circle,
           ),
           child: SizedBox.square(
-            dimension: hasOpacity ? 10 : 10 + (3 * animationController.value),
+            dimension: hasOpacity ? 10 : 10 + (2 * animationController.value),
           ),
         );
       },
