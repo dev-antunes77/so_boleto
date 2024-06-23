@@ -9,11 +9,15 @@ class CustomTextButton extends StatelessWidget {
     required this.label,
     required this.onPressed,
     this.disable = false,
+    this.padding,
+    this.fontSize,
   });
 
   final String label;
   final VoidCallback onPressed;
   final bool disable;
+  final EdgeInsets? padding;
+  final double? fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +25,16 @@ class CustomTextButton extends StatelessWidget {
       borderRadius: BorderRadius.circular(AppThemeValues.spaceSmall),
       onTap: disable ? null : onPressed,
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppThemeValues.spaceLarge,
-          vertical: AppThemeValues.spaceSmall,
-        ),
+        padding: padding ??
+            const EdgeInsets.symmetric(
+              horizontal: AppThemeValues.spaceLarge,
+              vertical: AppThemeValues.spaceSmall,
+            ),
         child: Text(
           label,
           style: context.textRobotoSmall.copyWith(
             fontWeight: FontWeight.bold,
+            fontSize: fontSize,
             color: disable
                 ? AppColors.primary.withOpacity(0.4)
                 : AppColors.primary,

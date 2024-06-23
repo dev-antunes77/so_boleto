@@ -1100,10 +1100,10 @@ class AppLocalizations {
     );
   }
 
-  /// `Você não tem contas pagas.'`
+  /// `Você não tem contas pagas.`
   String get responseHandlerNonePayed {
     return Intl.message(
-      'Você não tem contas pagas.\'',
+      'Você não tem contas pagas.',
       name: 'responseHandlerNonePayed',
       desc: '',
       args: [],

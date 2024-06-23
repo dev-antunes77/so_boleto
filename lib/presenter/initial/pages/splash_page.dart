@@ -26,50 +26,58 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      body: BlocListener<InitialCubit, InitialState>(
-        listenWhen: (previous, current) => previous.status != current.status,
-        listener: (context, state) {
-          if (state.status == BaseStateStatus.success && state.user != null) {
-            context.navigateTo(Routes.home);
-          }
-          if (state.status == BaseStateStatus.success && state.user == null) {
-            context.navigateTo(Routes.login);
-          }
-        },
-        child: Center(
-          child: CircleAvatar(
-            backgroundColor: AppColors.primary,
-            radius: 100,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Stack(
-                  alignment: Alignment.bottomLeft,
-                  children: [
-                    Text(
-                      AppLocalizations.current.appNameHalf1,
-                      style: context.textSubtitleLarge
-                          .copyWith(color: AppColors.white),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: AppThemeValues.spaceSmall),
-                      child: SvgAsset(
-                        svg: AppIcons.money,
-                        height: 80,
-                        color: AppColors.white,
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        backgroundColor: AppColors.background,
+        body: BlocListener<InitialCubit, InitialState>(
+          listenWhen: (previous, current) => previous.status != current.status,
+          listener: (context, state) {
+            if (state.status == BaseStateStatus.success && state.user != null) {
+              if (state.user!.hasSeenOnbording) {
+                context.navigateTo(Routes.home);
+              } else {
+                context.navigateTo(Routes.onboarding);
+              }
+            }
+            if (state.status == BaseStateStatus.success && state.user == null) {
+              context.navigateTo(Routes.login);
+            }
+          },
+          child: Center(
+            child: CircleAvatar(
+              backgroundColor: AppColors.primary,
+              radius: 100,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Stack(
+                    alignment: Alignment.bottomLeft,
+                    children: [
+                      Text(
+                        AppLocalizations.current.appNameHalf1,
+                        style: context.textSubtitleLarge
+                            .copyWith(color: AppColors.white),
                       ),
-                    ),
-                  ],
-                ),
-                Text(
-                  AppLocalizations.current.appNameHalf2,
-                  style:
-                      context.textSubtitleHuge.copyWith(color: AppColors.white),
-                ),
-              ],
+                      const Padding(
+                        padding:
+                            EdgeInsets.only(left: AppThemeValues.spaceSmall),
+                        child: SvgAsset(
+                          svg: AppIcons.money,
+                          height: 80,
+                          color: AppColors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Text(
+                    AppLocalizations.current.appNameHalf2,
+                    style: context.textSubtitleHuge
+                        .copyWith(color: AppColors.white),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

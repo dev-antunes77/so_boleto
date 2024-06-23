@@ -15,11 +15,11 @@ class AuthService implements AuthRepository {
   }
 
   @override
-  Future<UserCredential> signIn(String email, String password) async {
+  Future<String> signIn(String email, String password) async {
     try {
       final creds = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
-      return creds;
+      return creds.user?.uid ?? '';
     } on AppError catch (error, trace) {
       Log.error(error, trace, 'Error executing $runtimeType: ${error.message}');
       rethrow;
@@ -30,10 +30,11 @@ class AuthService implements AuthRepository {
   }
 
   @override
-  Future<void> signUp(String email, String password) async {
+  Future<String> signUp(String email, String password) async {
     try {
-      await _auth.createUserWithEmailAndPassword(
+      final creds = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
+      return creds.user?.uid ?? '';
     } on AppError catch (error, trace) {
       Log.error(error, trace, 'Error executing $runtimeType: ${error.message}');
       rethrow;

@@ -18,33 +18,40 @@ class OnboardingPageHandler extends StatelessWidget {
           title: 'Bem-vindo',
           text:
               'Só Boleto vai ser o seu assitente pessoal de contas daqui em diante, ok?\n\nDeixa com a gente.',
-          svg: AppIcons.onboarding1,
+          svg: AppIcons.onboardingWelcome,
         );
       case 1:
         return const OnboardingSection(
           title: 'Agilidade',
           text:
               'Contas registradas serão gerenciadas de forma simples e rápida.\n\nRelaxe!',
-          svg: AppIcons.onboarding5,
+          svg: AppIcons.onboardingRelax,
         );
       case 2:
         return const OnboardingSection(
           title: 'Notificações',
           text: 'Vamos notificá-lo quando uma conta estiver perto de vencer.',
-          svg: AppIcons.onboarding3,
+          svg: AppIcons.onboardingNotifications,
         );
       case 3:
         return const OnboardingSection(
-          title: 'Poupe seu tempo',
+          title: 'Controle',
           text:
-              'Deixa de lado as preocupações com os vencimentos e aproveite a vida.',
-          svg: AppIcons.onboarding4,
+              'Acompanhe seus gastos mensais.\nDo mês atual até 6 meses anteriores.',
+          svg: AppIcons.onboardingExpenses,
         );
       case 4:
         return const OnboardingSection(
+          title: 'Poupe seu tempo',
+          text:
+              'Deixa de lado as preocupações com os vencimentos de suas contas e aproveite a vida.',
+          svg: AppIcons.onboardingLiving,
+        );
+      case 5:
+        return const OnboardingSection(
           title: 'Comece agora',
           text: 'Vamos lá?',
-          svg: AppIcons.onboarding2,
+          svg: AppIcons.onboardingLetsGo,
         );
     }
 

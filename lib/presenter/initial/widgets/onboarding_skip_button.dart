@@ -6,7 +6,10 @@ import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 class OnboardingSkipButton extends StatelessWidget {
   const OnboardingSkipButton({
     super.key,
+    required this.onSkip,
   });
+
+  final VoidCallback onSkip;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +17,7 @@ class OnboardingSkipButton extends StatelessWidget {
       alignment: Alignment.topRight,
       child: InkWell(
         borderRadius: BorderRadius.circular(AppThemeValues.spaceSmall),
-        onTap: () {},
+        onTap: onSkip,
         child: Padding(
           padding: const EdgeInsets.only(
             right: AppThemeValues.spaceMedium,

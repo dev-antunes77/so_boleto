@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/buttons/custom_text_button.dart';
 import 'package:so_boleto/core/components/buttons/rectangular_button.dart';
+import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
+import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
 import 'package:so_boleto/presenter/initial/widgets/onboarding_page_indicator.dart';
 
 class OnboardingBottomNavigator extends StatefulWidget {
@@ -44,13 +47,16 @@ class _OnboardingBottomNavigatorState extends State<OnboardingBottomNavigator>
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (_currentPage == 4)
+        if (_currentPage == 5)
           Column(
             children: [
               RectangularButton(
                 label: 'Começar',
                 isValid: true,
-                onTap: () {},
+                onTap: () =>
+                    context.read<InitialCubit>().onSkipOnboarding().then(
+                          (_) => context.navigateTo(Routes.home),
+                        ),
               ),
               AppThemeValues.spaceVerticalSmall,
               RectangularButton.inverse(
@@ -65,7 +71,7 @@ class _OnboardingBottomNavigatorState extends State<OnboardingBottomNavigator>
           SizedBox(
             height: AppThemeValues.spaceLarge,
             child: ListView.separated(
-              itemCount: 4,
+              itemCount: 5,
               separatorBuilder: (context, index) =>
                   AppThemeValues.spaceHorizontalXXXSmall,
               shrinkWrap: true,

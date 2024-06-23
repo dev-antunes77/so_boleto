@@ -5,7 +5,6 @@ import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:so_boleto/core/extensions/date_time_extensions.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
-import 'package:so_boleto/core/helpers/app_formatters.dart';
 import 'package:so_boleto/infra/local_database/hive_user_database/hive_user_model.dart';
 
 part 'user.g.dart';
@@ -13,15 +12,14 @@ part 'user.g.dart';
 @JsonSerializable(explicitToJson: true)
 class UserModel extends Equatable {
   UserModel({
+    this.id = '',
     this.name = '',
     this.lastName = '',
     this.email = '',
     this.password = '',
     this.hasSeenOnbording = false,
-    String? id,
     DateTime? createdAt,
-  })  : id = id ?? AppFormatters.randomIdFormater(),
-        createdAt = createdAt ?? DateTime.now();
+  }) : createdAt = createdAt ?? DateTime.now();
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);
@@ -88,7 +86,7 @@ class UserModel extends Equatable {
     bool? hasSeenOnbording,
   }) =>
       UserModel(
-        id: id ?? id,
+        id: id ?? this.id,
         name: name ?? this.name,
         lastName: lastName ?? this.lastName,
         email: email ?? this.email,

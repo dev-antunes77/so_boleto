@@ -3,18 +3,15 @@ import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/utils/log_utils.dart';
 import 'package:so_boleto/domain/models/user.dart';
 import 'package:so_boleto/domain/repositories/firestore_repository.dart';
-import 'package:so_boleto/infra/local_database/hive_user_database/hive_user_database.dart';
 
 final class CreateUser {
-  CreateUser(this._hiveUserDatabase, this._firestoreRepository);
+  CreateUser(this._firestoreRepository);
 
-  final HiveUserDatabase _hiveUserDatabase;
   final FirestoreRepository _firestoreRepository;
 
   Future<void> call(UserModel user) async {
     try {
       await _firestoreRepository.createUser(user);
-      await _hiveUserDatabase.setUser(user);
     } on AppError catch (error, trace) {
       Log.error(error, trace, 'Error executing $runtimeType: ${error.message}');
       rethrow;

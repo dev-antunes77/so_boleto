@@ -11,6 +11,7 @@ import 'package:so_boleto/domain/usecases/get_user_from_firebase.dart';
 import 'package:so_boleto/domain/usecases/get_user_from_storage.dart';
 import 'package:so_boleto/domain/usecases/sign_in.dart';
 import 'package:so_boleto/domain/usecases/sign_up.dart';
+import 'package:so_boleto/domain/usecases/store_user.dart';
 
 part 'initial_state.dart';
 
@@ -21,11 +22,13 @@ class InitialCubit extends Cubit<InitialState> with BaseCubit {
     this._getUserFromStorageUsecase,
     this._getUserFromFirebaseUsecase,
     this._createUserUsecase,
+    this._storeUserUsecase,
   ) : super(InitialState(
           status: BaseStateStatus.initial,
           currentPage: BottomNavigatorPage.bills,
         ));
   final CreateUser _createUserUsecase;
+  final StoreUser _storeUserUsecase;
   final GetUserFromStorage _getUserFromStorageUsecase;
   final GetUserFromFirebase _getUserFromFirebaseUsecase;
   final SignUp _signUpUsecase;
@@ -34,24 +37,28 @@ class InitialCubit extends Cubit<InitialState> with BaseCubit {
   Future<void> onInit() async {
     try {
       emit(state.copyWith(status: BaseStateStatus.loading));
-      await Future.delayed(const Duration(seconds: 4));
-      final storageUser = await _getUserFromStorageUsecase();
-      if (storageUser != null) {
-        final password = storageUser.password.decodePassword();
-        await _signInUsecase(storageUser.email, password);
-      }
-      emit(state.copyWith(status: BaseStateStatus.success, user: storageUser));
+      await Future.delayed(const Duration(seconds: 4)).then((_) async {
+        final storageUser = await _getUserFromStorageUsecase();
+        if (storageUser != null) {
+          final decodedPassword = storageUser.password.decodePassword();
+          await _signInUsecase(storageUser.email, decodedPassword);
+        }
+        emit(
+            state.copyWith(status: BaseStateStatus.success, user: storageUser));
+      });
     } on AppError catch (error) {
       onAppError(error);
     }
   }
 
-  Future<void> onSignUp(UserModel user, String password) async {
+  Future<void> onSignUp(UserModel user) async {
     try {
       emit(state.copyWith(status: BaseStateStatus.loading));
-      await _signUpUsecase(user, password);
-      await _createUserUsecase(user);
-      final apiUser = await _getUserFromFirebaseUsecase(user.id, null);
+      final userId = await _signUpUsecase(user, user.password.decodePassword());
+      final identifiedUser = user.copyWith(id: userId);
+      await _createUserUsecase(identifiedUser);
+      await _storeUserUsecase(identifiedUser);
+      final apiUser = await _getUserFromFirebaseUsecase(identifiedUser.id);
       emit(state.copyWith(status: BaseStateStatus.success, user: apiUser));
     } on AppError catch (error) {
       onAppError(error);
@@ -61,9 +68,24 @@ class InitialCubit extends Cubit<InitialState> with BaseCubit {
   Future<void> onSignIn(String email, String password) async {
     try {
       emit(state.copyWith(status: BaseStateStatus.loading));
-      await _signInUsecase(email, password);
-      final apiUser = await _getUserFromFirebaseUsecase(null, email);
-      emit(state.copyWith(status: BaseStateStatus.success, user: apiUser));
+      final userId = await _signInUsecase(email, password.decodePassword());
+      final apiUser = await _getUserFromFirebaseUsecase(userId);
+      final userToStore = apiUser.copyWith(password: password);
+      await _storeUserUsecase(userToStore);
+      emit(state.copyWith(status: BaseStateStatus.success, user: userToStore));
+    } on AppError catch (error) {
+      onAppError(error);
+    }
+  }
+
+  Future<void> onSkipOnboarding() async {
+    try {
+      emit(state.copyWith(status: BaseStateStatus.loading));
+      await Future.delayed(const Duration(seconds: 2)).then((_) async {
+        final updatedUser = state.user!.copyWith(hasSeenOnbording: true);
+        await _storeUserUsecase(updatedUser);
+        emit(state.copyWith(user: updatedUser));
+      });
     } on AppError catch (error) {
       onAppError(error);
     }

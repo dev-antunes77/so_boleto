@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:so_boleto/core/components/buttons/custom_text_button.dart';
 import 'package:so_boleto/core/components/dialogs/app_dialogs.dart';
+import 'package:so_boleto/core/components/expanded_section/expanded_section.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
 import 'package:so_boleto/core/extensions/num_extensions.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
@@ -18,22 +20,31 @@ import 'package:so_boleto/presenter/home/widgets/bill_paid_tag.dart';
 import 'package:so_boleto/presenter/home/widgets/dismissable_background.dart';
 import 'package:so_boleto/presenter/home/widgets/left_line_status_bar.dart';
 
-class BillListTile extends StatelessWidget {
+class BillListTile extends StatefulWidget {
   const BillListTile(this.bill, {super.key});
 
   final BillModel bill;
 
   @override
+  State<BillListTile> createState() => _BillListTileState();
+}
+
+class _BillListTileState extends State<BillListTile> {
+  bool expand = false;
+
+  void _toggleExpandDescription() => setState(() => expand = !expand);
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.read<BillCubit>().initiateEditionFlow(bill: bill);
+        context.read<BillCubit>().initiateEditionFlow(bill: widget.bill);
         context.pushTo(Routes.billCheck,
             params: PageTransitions.transitionScale);
       },
       child: Dismissible(
-        key: Key(bill.id),
-        direction: bill.billStatus == BillStatus.payed
+        key: Key(widget.bill.id),
+        direction: widget.bill.billStatus == BillStatus.payed
             ? DismissDirection.endToStart
             : DismissDirection.horizontal,
         confirmDismiss: (direction) => _confirmDismiss(direction, context),
@@ -51,12 +62,12 @@ class BillListTile extends StatelessWidget {
               leading: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  LeftLineStatusBar(billStatus: bill.billStatus),
+                  LeftLineStatusBar(billStatus: widget.bill.billStatus),
                   CircleAvatar(
                     radius: 25,
                     backgroundColor: AppColors.grey,
                     child: SvgAsset(
-                      svg: bill.category.getIconResponse(),
+                      svg: widget.bill.category.getIconResponse(),
                       height: 30,
                       color: AppColors.primaryLight,
                     ),
@@ -68,22 +79,36 @@ class BillListTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    bill.name.capitalize(),
+                    widget.bill.name.capitalize(),
                     style: context.textRobotoSubtitleSmall,
                   ),
-                  if (bill.description.isNotEmpty)
-                    Text(
-                      bill.description.capitalize(),
-                      style: context.textRobotoXSmall,
+                  if (widget.bill.description.isNotEmpty) ...[
+                    CustomTextButton(
+                      label: expand ? 'Fechar descrição' : 'Abrir descrição',
+                      padding: EdgeInsets.zero,
+                      fontSize: 12,
+                      onPressed: _toggleExpandDescription,
                     ),
+                    ExpandedSection(
+                      expand: expand,
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            top: AppThemeValues.spaceSmall),
+                        child: Text(
+                          widget.bill.description.capitalize(),
+                          style: context.textRobotoXSmall,
+                        ),
+                      ),
+                    )
+                  ],
                 ],
               ),
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (bill.billStatus != BillStatus.payed)
+                  if (widget.bill.billStatus != BillStatus.payed)
                     Text(
-                      bill.dueDayOfTheMonth.properDueDay(),
+                      widget.bill.dueDayOfTheMonth.properDueDay(),
                       style: context.textRobotoSubtitleTiny,
                     ),
                 ],
@@ -95,16 +120,16 @@ class BillListTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        bill.value.toDouble().formatCurrency(),
-                        style: bill.value <= 0
+                        widget.bill.value.toDouble().formatCurrency(),
+                        style: widget.bill.value <= 0
                             ? context.textRobotoSubtitleTiny
                             : context.textRobotoSubtitleXSmall,
                         textAlign: TextAlign.right,
                       ),
                       Text(
                         AppFormatters.parcelRelationFormatter(
-                          bill.totalParcels,
-                          bill.payedParcels,
+                          widget.bill.totalParcels,
+                          widget.bill.payedParcels,
                         ),
                         textAlign: TextAlign.right,
                         style: context.textRobotoSubtitleTiny,
@@ -121,7 +146,7 @@ class BillListTile extends StatelessWidget {
                 ],
               ),
             ),
-            BillPaidTag(bill.billStatus == BillStatus.payed)
+            BillPaidTag(widget.bill.billStatus == BillStatus.payed)
           ],
         ),
       ),
@@ -131,6 +156,6 @@ class BillListTile extends StatelessWidget {
   Future<bool> _confirmDismiss(
           DismissDirection direction, BuildContext context) =>
       direction == DismissDirection.endToStart
-          ? AppDialogs.confirmDeleteBill(context, bill)
-          : context.read<HomeBillsCubit>().setBillAsPaid(bill);
+          ? AppDialogs.confirmDeleteBill(context, widget.bill)
+          : context.read<HomeBillsCubit>().setBillAsPaid(widget.bill);
 }

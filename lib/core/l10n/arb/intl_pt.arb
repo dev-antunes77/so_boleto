@@ -170,7 +170,7 @@
     "responseHandlerNoneRegistered":"Você não tem contas cadastradas.",
     "responseHandlerNoneDelayed":"Você não tem contas atrasadas.",
     "responseHandlerNoneForTheseFilters":"Nenhuma conta com esses filtros.",
-    "responseHandlerNonePayed":"Você não tem contas pagas.'",
+    "responseHandlerNonePayed":"Você não tem contas pagas.",
     "responseHandlerNoneWithThisName":"Nenhuma conta com esse nome.",
     "tryAgain": "Tente novamente",
     "validatorEmail": "Não é um email válido"

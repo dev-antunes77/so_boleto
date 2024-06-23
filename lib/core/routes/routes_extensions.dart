@@ -43,8 +43,10 @@ extension RoutesExtensions on BuildContext {
   Future<dynamic> showDialog({
     required String title,
     required String description,
-    required VoidCallback onAcept,
+    VoidCallback? onAcept,
     VoidCallback? onDeny,
+    String? onConfirmText,
+    String? onDenyText,
   }) {
     Log.navigation('''Showing dialog: 
     child: $title : $description,
@@ -55,6 +57,8 @@ extension RoutesExtensions on BuildContext {
       onDeny: onDeny,
       title: title,
       description: description,
+      onConfirmText: onConfirmText,
+      onDenyText: onDenyText,
     );
   }
 

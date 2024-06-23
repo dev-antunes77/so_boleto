@@ -16,6 +16,7 @@ import 'package:so_boleto/presenter/initial/app_shell.dart';
 import 'package:so_boleto/presenter/initial/pages/login_page.dart';
 import 'package:so_boleto/presenter/initial/pages/onboarding_page.dart';
 import 'package:so_boleto/presenter/initial/pages/splash_page.dart';
+import 'package:so_boleto/presenter/profile/pages/profile_page.dart';
 import 'package:so_boleto/presenter/prompt_bills/pages/prompt_bills_edition_page.dart';
 import 'package:so_boleto/presenter/prompt_bills/pages/prompt_bills_page.dart';
 
@@ -42,6 +43,11 @@ abstract class RoutesConfig {
         path: RelativePaths.login,
         parentNavigatorKey: _rootKey,
         builder: (_, __) => const LoginPage(),
+      ),
+      GoRoute(
+        path: RelativePaths.onboarding,
+        parentNavigatorKey: _rootKey,
+        builder: (_, __) => const OnboardingPage(),
       ),
       ShellRoute(
         builder: (context, state, child) => AppShell(child: child),
@@ -70,7 +76,7 @@ abstract class RoutesConfig {
             parentNavigatorKey: _shellKey,
             pageBuilder: (_, state) => _getTransitionPage(
               state,
-              const OnboardingPage(),
+              const ProfilePage(),
               duration: duration300,
             ),
           ),

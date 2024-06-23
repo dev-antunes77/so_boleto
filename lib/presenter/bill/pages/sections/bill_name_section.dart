@@ -20,14 +20,14 @@ class BillNameSection extends StatefulWidget {
 }
 
 class _BillNameSectionState extends State<BillNameSection> {
-  final TextEditingController billNameController = TextEditingController();
-  final TextEditingController billDescriptionController =
+  final TextEditingController _billNameController = TextEditingController();
+  final TextEditingController _billDescriptionController =
       TextEditingController();
 
   @override
   void initState() {
-    billNameController.text = context.read<BillCubit>().state.bill.name;
-    billDescriptionController.text =
+    _billNameController.text = context.read<BillCubit>().state.bill.name;
+    _billDescriptionController.text =
         context.read<BillCubit>().state.bill.description;
     super.initState();
   }
@@ -35,7 +35,7 @@ class _BillNameSectionState extends State<BillNameSection> {
   @override
   Widget build(BuildContext context) {
     return BillShell(
-      height: context.height * 0.47,
+      height: context.height * 0.5,
       child: BlocBuilder<BillCubit, BillState>(
         buildWhen: (previous, current) => previous.bill != current.bill,
         builder: (context, state) {
@@ -45,7 +45,7 @@ class _BillNameSectionState extends State<BillNameSection> {
               const BillSectionTopIcon(AppIcons.description),
               BillTextField(
                 hitText: AppLocalizations.current.billFlowName,
-                controller: billNameController,
+                controller: _billNameController,
                 onChanged: (value) {
                   context.read<BillCubit>().onBillNameChange(value);
                 },
@@ -54,10 +54,11 @@ class _BillNameSectionState extends State<BillNameSection> {
                 onSubmitted: (_) => _onSubmitted(state.bill.name,
                     state.bill.description, state.isEditionFlow),
                 onTapOutside: (p0) => FocusScope.of(context).unfocus(),
+                maxLines: _getProperMaxLines(_billNameController.text.length),
               ),
               BillTextField(
                 hitText: AppLocalizations.current.billFlowDescription,
-                controller: billDescriptionController,
+                controller: _billDescriptionController,
                 helperText: AppLocalizations.current.billFlowOptional,
                 onChanged: (value) =>
                     context.read<BillCubit>().onBillDescriptionChange(value),
@@ -66,6 +67,9 @@ class _BillNameSectionState extends State<BillNameSection> {
                 onSubmitted: (_) => _onSubmitted(state.bill.name,
                     state.bill.description, state.isEditionFlow),
                 onTapOutside: (p0) => FocusScope.of(context).unfocus(),
+                maxLines:
+                    _getProperMaxLines(_billDescriptionController.text.length),
+                hasExtendedLength: true,
               ),
               const ExpandedSpace(),
               if (state.isEditionFlow)
@@ -85,6 +89,17 @@ class _BillNameSectionState extends State<BillNameSection> {
         },
       ),
     );
+  }
+
+  int _getProperMaxLines(int length) {
+    if (length > 90) {
+      return 4;
+    } else if (length > 60) {
+      return 3;
+    } else if (length > 30) {
+      return 2;
+    }
+    return 1;
   }
 
   TextInputAction _getTextInputAction(

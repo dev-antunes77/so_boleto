@@ -190,8 +190,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "responseHandlerNoneForTheseFilters":
             MessageLookupByLibrary.simpleMessage(
                 "Nenhuma conta com esses filtros."),
-        "responseHandlerNonePayed": MessageLookupByLibrary.simpleMessage(
-            "Você não tem contas pagas.\'"),
+        "responseHandlerNonePayed":
+            MessageLookupByLibrary.simpleMessage("Você não tem contas pagas."),
         "responseHandlerNoneRegistered": MessageLookupByLibrary.simpleMessage(
             "Você não tem contas cadastradas."),
         "responseHandlerNoneWithThisName": MessageLookupByLibrary.simpleMessage(

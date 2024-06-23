@@ -3,12 +3,12 @@ import 'package:so_boleto/core/theme/settings/app_icons.dart';
 
 enum PageResponseHandler {
   error(AppIcons.error),
-  noMorePromptBills(AppIcons.happy2),
-  noneRegistered(AppIcons.sad2),
-  noneDelayed(AppIcons.happy),
-  noneForTheseFilters(AppIcons.disappointed2),
-  nonePayed(AppIcons.worried1),
-  noneWithThisName(AppIcons.disappointed1);
+  noMorePromptBills(AppIcons.noneForPrompt),
+  noneRegistered(AppIcons.noneRegistered),
+  noneDelayed(AppIcons.noneDelayed),
+  noneForTheseFilters(AppIcons.noneForFilters),
+  nonePayed(AppIcons.nonePayed),
+  noneWithThisName(AppIcons.noneForName);
 
   const PageResponseHandler(this.value);
   final String value;

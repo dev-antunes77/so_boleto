@@ -20,6 +20,8 @@ class BillTextField extends StatelessWidget {
     this.helperText,
     this.textAlign,
     this.formatters,
+    this.maxLines,
+    this.hasExtendedLength = false,
   });
 
   final TextEditingController controller;
@@ -34,6 +36,8 @@ class BillTextField extends StatelessWidget {
   final double? width;
   final TextAlign? textAlign;
   final List<TextInputFormatter>? formatters;
+  final int? maxLines;
+  final bool hasExtendedLength;
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +68,10 @@ class BillTextField extends StatelessWidget {
             focusedBorder: const UnderlineInputBorder(
               borderSide: BorderSide(color: AppColors.primaryLight),
             ),
+            counter: const SizedBox.shrink(),
           ),
+          maxLines: maxLines,
+          maxLength: hasExtendedLength ? 100 : 40,
           textInputAction: textInputAction,
           onSubmitted: onSubmitted,
           onChanged: onChanged,

@@ -26,4 +26,6 @@ extension StringExtensions on String {
   String encodePassword() => base64.encode(utf8.encode(this));
 
   String decodePassword() => utf8.decode(base64.decode(this));
+
+  String breakLongStrings() => length > 30 ? "${substring(0, 28)}..." : this;
 }

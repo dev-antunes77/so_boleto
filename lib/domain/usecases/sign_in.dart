@@ -8,9 +8,9 @@ final class SignIn {
 
   final AuthService _authService;
 
-  Future<void> call(String email, String password) async {
+  Future<String> call(String email, String password) async {
     try {
-      await _authService.signIn(email, password);
+      return await _authService.signIn(email, password);
     } on AppError catch (error, trace) {
       Log.error(error, trace, 'Error executing $runtimeType: ${error.message}');
       rethrow;

@@ -12,14 +12,18 @@ class BaseDialog extends StatelessWidget {
     super.key,
     required this.title,
     required this.description,
-    required this.onAcept,
+    this.onAcept,
     this.onDeny,
+    this.onConfirmText,
+    this.onDenyText,
   });
 
   final String title;
   final String description;
-  final VoidCallback onAcept;
+  final VoidCallback? onAcept;
   final VoidCallback? onDeny;
+  final String? onConfirmText;
+  final String? onDenyText;
 
   @override
   Widget build(BuildContext context) {
@@ -64,13 +68,13 @@ class BaseDialog extends StatelessWidget {
                         PillButton(
                           backgroundColor: AppColors.primary,
                           onTap: () => context.pop(true),
-                          child: const Text('Não'),
+                          child: Text(onDenyText ?? 'Não'),
                         ),
                         PillButton(
                           backgroundColor: AppColors.background,
                           onTap: onAcept,
                           child: Text(
-                            'Sim',
+                            onConfirmText ?? 'Sim',
                             style: context.textRobotoMedium
                                 .copyWith(color: Colors.black),
                           ),

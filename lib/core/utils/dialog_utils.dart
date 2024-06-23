@@ -5,8 +5,10 @@ Future<T?> showBaseDialog<T>({
   required BuildContext context,
   required String title,
   required String description,
-  required VoidCallback onAcept,
+  VoidCallback? onAcept,
   VoidCallback? onDeny,
+  String? onConfirmText,
+  String? onDenyText,
 }) =>
     showDialog<T>(
       context: context,
@@ -15,5 +17,7 @@ Future<T?> showBaseDialog<T>({
         description: description,
         onAcept: onAcept,
         onDeny: onDeny,
+        onConfirmText: onConfirmText,
+        onDenyText: onDenyText,
       ),
     );

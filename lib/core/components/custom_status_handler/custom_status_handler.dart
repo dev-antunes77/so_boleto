@@ -28,12 +28,6 @@ class CustomStatusHandler extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SvgAsset(
-                svg: message.value,
-                height: 100,
-                color: AppColors.grey,
-              ),
-              AppThemeValues.spaceVerticalLarge,
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: AppThemeValues.spaceXLarge,
@@ -46,6 +40,12 @@ class CustomStatusHandler extends StatelessWidget {
                   ),
                 ),
               ),
+              AppThemeValues.spaceVerticalLarge,
+              SvgAsset(
+                svg: message.value,
+                height: context.height * 0.2,
+              ),
+              AppThemeValues.spaceVerticalLarge,
               if (message == PageResponseHandler.error)
                 RectangularButton(
                   label: AppLocalizations.current.tryAgain,

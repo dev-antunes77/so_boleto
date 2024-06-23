@@ -4,6 +4,7 @@ export 'routes_extensions.dart';
 class Routes {
   static const app = '/';
   static const login = '/login';
+  static const onboarding = '/onboarding';
   static const home = '/home';
   static const billCategory = '/bill-category';
   static const billCheck = '/bill-check';
@@ -24,6 +25,7 @@ class Routes {
 class RelativePaths {
   static const app = '/';
   static const login = '/login';
+  static const onboarding = '/onboarding';
   static const home = '/home';
   static const billCategory = '/bill-category';
   static const billCheck = '/bill-check';

@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/buttons/pill_button.dart';
+import 'package:so_boleto/core/components/custom_pop_scope/custom_pop_scope.dart';
 import 'package:so_boleto/core/components/loading_page/loading_page.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/routes/routes.dart';
@@ -32,7 +33,11 @@ class _LoginPageState extends State<LoginPage> {
   void _togglePasswordVisibility() =>
       setState(() => _isPasswordVisible = !_isPasswordVisible);
 
-  void _toggleSignUpAndSignIn() => setState(() => _isSignUp = !_isSignUp);
+  void _toggleSignUpAndSignIn() => setState(() {
+        _isSignUp = !_isSignUp;
+        _emailController.text = '';
+        _passwordController.text = '';
+      });
 
   late InitialCubit cubit;
 
@@ -44,133 +49,137 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      body: BlocConsumer<InitialCubit, InitialState>(
-        listenWhen: (previous, current) => previous.status != current.status,
-        buildWhen: (previous, current) => previous.status != current.status,
-        bloc: cubit,
-        listener: (context, state) {
-          if (state.status == BaseStateStatus.loading) {
-            showDialog(
-              context: context,
-              builder: (context) => const LoadingPage2(),
-            );
-          }
-          if (state.status == BaseStateStatus.generalError) {
-            context.pop(true);
-            context.showSnackBar(state.callbackMessage);
-          }
-          if (state.status == BaseStateStatus.success) {
-            context.navigateTo(Routes.home);
-          }
-        },
-        builder: (context, state) {
-          return state.when(
-            onState: (_) => Padding(
-              padding: const EdgeInsets.all(AppThemeValues.spaceMassive),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Center(
-                        child: Text(_isSignUp ? 'Cadastre-se' : 'Entre',
-                            style: context.textLarge)),
-                    if (_isSignUp) ...[
+    return CustomPopScope(
+      leaveTheApp: true,
+      child: Scaffold(
+        backgroundColor: AppColors.background,
+        body: BlocConsumer<InitialCubit, InitialState>(
+          listenWhen: (previous, current) => previous.status != current.status,
+          buildWhen: (previous, current) => previous.status != current.status,
+          bloc: cubit,
+          listener: (context, state) {
+            if (state.status == BaseStateStatus.loading) {
+              showDialog(
+                context: context,
+                builder: (context) => const LoadingPage2(),
+              );
+            }
+            if (state.status == BaseStateStatus.generalError) {
+              context.pop(true);
+              context.showSnackBar(state.callbackMessage);
+            }
+            if (state.status == BaseStateStatus.success) {
+              if (cubit.state.user!.hasSeenOnbording) {
+                context.navigateTo(Routes.home);
+              } else {
+                context.navigateTo(Routes.onboarding);
+              }
+            }
+          },
+          builder: (context, state) {
+            return state.when(
+              onState: (_) => Padding(
+                padding: const EdgeInsets.all(AppThemeValues.spaceMassive),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Center(
+                          child: Text(_isSignUp ? 'Cadastre-se' : 'Entre',
+                              style: context.textLarge)),
+                      if (_isSignUp) ...[
+                        AppThemeValues.spaceVerticalLarge,
+                        TextFormField(
+                          controller: _nameController,
+                          decoration: const InputDecoration(
+                            labelText: 'Nome',
+                            icon: Icon(Icons.person),
+                          ),
+                          validator: FormValidator.validateNames,
+                        ),
+                        AppThemeValues.spaceVerticalLarge,
+                        TextFormField(
+                          controller: _lastNameController,
+                          decoration: const InputDecoration(
+                            labelText: 'Sobrenome',
+                            icon: Icon(Icons.person),
+                          ),
+                          validator: FormValidator.validateNames,
+                        ),
+                      ],
                       AppThemeValues.spaceVerticalLarge,
                       TextFormField(
-                        controller: _nameController,
+                        controller: _emailController,
                         decoration: const InputDecoration(
-                          labelText: 'Nome',
-                          icon: Icon(Icons.person),
+                          labelText: 'Email',
+                          icon: Icon(Icons.email),
                         ),
-                        validator: FormValidator.validateNames,
+                        validator: FormValidator.validateEmailField,
                       ),
                       AppThemeValues.spaceVerticalLarge,
                       TextFormField(
-                        controller: _lastNameController,
-                        decoration: const InputDecoration(
-                          labelText: 'Sobrenome',
-                          icon: Icon(Icons.person),
+                        controller: _passwordController,
+                        obscureText: !_isPasswordVisible,
+                        decoration: InputDecoration(
+                          labelText: 'Password',
+                          icon: const Icon(Icons.lock),
+                          suffixIcon: IconButton(
+                            icon: _isPasswordVisible
+                                ? const Icon(Icons.visibility_off)
+                                : const Icon(Icons.visibility),
+                            onPressed: _togglePasswordVisibility,
+                          ),
                         ),
-                        validator: FormValidator.validateNames,
+                      ),
+                      AppThemeValues.spaceVerticalLarge,
+                      PillButton(
+                          child: Text(
+                            _isSignUp ? 'Cadastrar' : 'Entrar',
+                          ),
+                          onTap: () {
+                            if (_formKey.currentState!.validate()) {
+                              _isSignUp ? _onSignUp() : _onSignIn();
+                            }
+                          }),
+                      AppThemeValues.spaceVerticalLarge,
+                      RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: _isSignUp
+                                  ? 'Já possui conta?  '
+                                  : 'Ainda não tem conta? Cadastre-se  ',
+                              style: context.textRobotoSmall,
+                            ),
+                            TextSpan(
+                              text: _isSignUp ? 'Entrar' : 'Aqui',
+                              style: context.textRobotoSmall.copyWith(
+                                color: AppColors.primary,
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () => _toggleSignUpAndSignIn(),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
-                    AppThemeValues.spaceVerticalLarge,
-                    TextFormField(
-                      controller: _emailController,
-                      decoration: const InputDecoration(
-                        labelText: 'Email',
-                        icon: Icon(Icons.email),
-                      ),
-                      validator: FormValidator.validateEmailField,
-                    ),
-                    AppThemeValues.spaceVerticalLarge,
-                    TextFormField(
-                      controller: _passwordController,
-                      obscureText: !_isPasswordVisible,
-                      decoration: InputDecoration(
-                        labelText: 'Password',
-                        icon: const Icon(Icons.lock),
-                        suffixIcon: IconButton(
-                          icon: _isPasswordVisible
-                              ? const Icon(Icons.visibility_off)
-                              : const Icon(Icons.visibility),
-                          onPressed: _togglePasswordVisibility,
-                        ),
-                      ),
-                    ),
-                    AppThemeValues.spaceVerticalLarge,
-                    PillButton(
-                        child: Text(
-                          _isSignUp ? 'Cadastrar' : 'Entrar',
-                        ),
-                        onTap: () {
-                          if (_formKey.currentState!.validate()) {
-                            _isSignUp ? _onSignUp() : _onSignIn();
-                          }
-                        }),
-                    AppThemeValues.spaceVerticalLarge,
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: _isSignUp
-                                ? 'Já possui conta?  '
-                                : 'Ainda não tem conta? Cadastre-se  ',
-                            style: context.textRobotoSmall,
-                          ),
-                          TextSpan(
-                            text: _isSignUp ? 'Entrar' : 'Aqui',
-                            style: context.textRobotoSmall.copyWith(
-                              color: AppColors.primary,
-                            ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () => _toggleSignUpAndSignIn(),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
 
-  _onSignUp() => cubit.onSignUp(
-        _buildUser(),
-        _passwordController.text,
-      );
+  _onSignUp() => cubit.onSignUp(_buildUser());
 
   _onSignIn() => cubit.onSignIn(
         _emailController.text,
-        _passwordController.text,
+        _passwordController.text.encodePassword(),
       );
 
   _buildUser() => UserModel(

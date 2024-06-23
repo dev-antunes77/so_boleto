@@ -14,6 +14,7 @@ import 'package:so_boleto/domain/usecases/get_user_from_storage.dart';
 import 'package:so_boleto/domain/usecases/set_bill_as_paid.dart';
 import 'package:so_boleto/domain/usecases/sign_in.dart';
 import 'package:so_boleto/domain/usecases/sign_up.dart';
+import 'package:so_boleto/domain/usecases/store_user.dart';
 import 'package:so_boleto/infra/local_database/hive_bill_database/hive_bill_model.dart';
 import 'package:so_boleto/infra/local_database/hive_bill_database/hive_bills_database.dart';
 import 'package:so_boleto/infra/local_database/hive_user_database/hive_user_database.dart';
@@ -97,8 +98,13 @@ abstract class InjectionService {
   static void _initUseCases() {
     _i.registerFactory(
       () => CreateUser(
-        _i.get<HiveUserDatabase>(),
         _i.get<FirestoreService>(),
+      ),
+    );
+
+    _i.registerFactory(
+      () => StoreUser(
+        _i.get<HiveUserDatabase>(),
       ),
     );
 
@@ -182,6 +188,7 @@ abstract class InjectionService {
         _i.get<GetUserFromStorage>(),
         _i.get<GetUserFromFirebase>(),
         _i.get<CreateUser>(),
+        _i.get<StoreUser>(),
       ),
     );
 

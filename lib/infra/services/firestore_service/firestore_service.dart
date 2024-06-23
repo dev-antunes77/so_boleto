@@ -18,21 +18,9 @@ class FirestoreService implements FirestoreRepository {
   }
 
   @override
-  Future<UserModel> getUser(String? userId, String? email) async {
-    if (userId != null) {
-      final docSnap = await _firestore.collection("users").doc(userId).get();
-      return UserModel.fromFirestore(docSnap);
-    }
-    late QueryDocumentSnapshot<Map<String, dynamic>> userDoc;
-    await _firestore
-        .collection("users")
-        .where(
-          'email',
-          isEqualTo: email!,
-        )
-        .get()
-        .then((querySnapshot) => userDoc = querySnapshot.docs.first);
-    return UserModel.fromFirestore(userDoc);
+  Future<UserModel> getUser(String userId) async {
+    final docSnap = await _firestore.collection("users").doc(userId).get();
+    return UserModel.fromFirestore(docSnap);
   }
 
   @override

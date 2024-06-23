@@ -438,8 +438,8 @@ class _LoadingPage3State extends State<LoadingPage3>
 
   @override
   Widget build(BuildContext context) {
-    //print(animation_1.value <= 0.4 ? 2.5 * animation_1.value : (animation_1.value > 0.40 && animation_1.value <= 0.60) ? 1.0 : 2.5 - (2.5 * animation_1.value));
     return Row(
+      mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Opacity(
