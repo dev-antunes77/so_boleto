@@ -15,9 +15,9 @@ import 'package:so_boleto/presenter/home/pages/home_page.dart';
 import 'package:so_boleto/presenter/initial/app_shell.dart';
 import 'package:so_boleto/presenter/initial/pages/login_page.dart';
 import 'package:so_boleto/presenter/initial/pages/splash_page.dart';
-import 'package:so_boleto/presenter/profile/pages/profile_page.dart';
 import 'package:so_boleto/presenter/prompt_bills/pages/prompt_bills_edition_page.dart';
 import 'package:so_boleto/presenter/prompt_bills/pages/prompt_bills_page.dart';
+import 'package:so_boleto/presenter/tutorial/pages/tutorial_page.dart';
 
 import 'routes.dart';
 
@@ -70,7 +70,7 @@ abstract class RoutesConfig {
             parentNavigatorKey: _shellKey,
             pageBuilder: (_, state) => _getTransitionPage(
               state,
-              const ProfilePage(),
+              const TutotialPage(),
               duration: duration300,
             ),
           ),

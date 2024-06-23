@@ -261,9 +261,7 @@ class _LoadingPage2State extends State<LoadingPage2>
     );
 
     controller.addListener(() {
-      setState(() {
-        //print(animation_1.value);
-      });
+      setState(() {});
     });
 
     controller.repeat();
