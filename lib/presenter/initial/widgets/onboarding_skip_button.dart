@@ -19,8 +19,9 @@ class OnboardingSkipButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppThemeValues.spaceSmall),
         onTap: onSkip,
         child: Padding(
-          padding: const EdgeInsets.only(
-            right: AppThemeValues.spaceMedium,
+          padding: const EdgeInsets.symmetric(
+            vertical: AppThemeValues.spaceXSmall,
+            horizontal: AppThemeValues.spaceXLarge,
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,

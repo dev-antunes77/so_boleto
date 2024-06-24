@@ -44,6 +44,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     cubit = context.read<InitialCubit>();
+    cubit.state.user == null ? _isSignUp = true : false;
     super.initState();
   }
 
@@ -52,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
     return CustomPopScope(
       leaveTheApp: true,
       child: Scaffold(
-        backgroundColor: AppColors.background,
+        backgroundColor: AppColors.primaryBackground,
         body: BlocConsumer<InitialCubit, InitialState>(
           listenWhen: (previous, current) => previous.status != current.status,
           buildWhen: (previous, current) => previous.status != current.status,
@@ -95,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                           controller: _nameController,
                           decoration: const InputDecoration(
                             labelText: 'Nome',
-                            icon: Icon(Icons.person),
+                            icon: Icon(Icons.person_4_outlined),
                           ),
                           validator: FormValidator.validateNames,
                         ),
@@ -104,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
                           controller: _lastNameController,
                           decoration: const InputDecoration(
                             labelText: 'Sobrenome',
-                            icon: Icon(Icons.person),
+                            icon: Icon(Icons.person_4),
                           ),
                           validator: FormValidator.validateNames,
                         ),
@@ -133,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
-                      AppThemeValues.spaceVerticalLarge,
+                      AppThemeValues.spaceVerticalImense,
                       PillButton(
                           child: Text(
                             _isSignUp ? 'Cadastrar' : 'Entrar',
@@ -151,11 +152,11 @@ class _LoginPageState extends State<LoginPage> {
                               text: _isSignUp
                                   ? 'Já possui conta?  '
                                   : 'Ainda não tem conta? Cadastre-se  ',
-                              style: context.textRobotoSmall,
+                              style: context.textRobotoMediumToLarge,
                             ),
                             TextSpan(
                               text: _isSignUp ? 'Entrar' : 'Aqui',
-                              style: context.textRobotoSmall.copyWith(
+                              style: context.textRobotoMediumToLarge.copyWith(
                                 color: AppColors.primary,
                               ),
                               recognizer: TapGestureRecognizer()

@@ -29,7 +29,7 @@ class _SplashPageState extends State<SplashPage> {
     return PopScope(
       canPop: false,
       child: Scaffold(
-        backgroundColor: AppColors.background,
+        backgroundColor: AppColors.primaryBackground,
         body: BlocListener<InitialCubit, InitialState>(
           listenWhen: (previous, current) => previous.status != current.status,
           listener: (context, state) {

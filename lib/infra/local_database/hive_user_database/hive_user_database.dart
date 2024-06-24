@@ -23,6 +23,25 @@ final class HiveUserDatabase with OpneBoxMixin implements HiveUser {
   @override
   Future<void> setUser(UserModel user) async {
     final itemBox = await openBox(_box, _boxLabel);
-    return itemBox.put('currentUser', HiveUserModel.fromUserModel(user));
+    return itemBox.put(user.id, HiveUserModel.fromUserModel(user));
+  }
+
+  @override
+  Future<void> updateUser(UserModel user) async {
+    final itemBox = await openBox(_box, _boxLabel);
+    final hiveList = itemBox.values.toList();
+    final hiveItem = hiveList.where((element) => element.id == user.id);
+    final hiveItemIndex = itemBox.values.toList().indexOf(hiveItem.first);
+    return itemBox.putAt(hiveItemIndex, HiveUserModel.fromUserModel(user));
+  }
+
+  @override
+  Future<void> removeUser(String userId) async {
+    final itemBox = await openBox(_box, _boxLabel);
+    final hiveList = itemBox.values.toList();
+    final hasId = hiveList.any((element) => element.id == userId);
+    if (hasId) {
+      itemBox.delete(userId);
+    }
   }
 }

@@ -3,8 +3,10 @@ import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:so_boleto/core/environment/firebase_env.dart';
 import 'package:so_boleto/domain/usecases/add_prompt_bills.dart';
+import 'package:so_boleto/domain/usecases/clear_user_storage.dart';
 import 'package:so_boleto/domain/usecases/create_bill.dart';
 import 'package:so_boleto/domain/usecases/create_user.dart';
+import 'package:so_boleto/domain/usecases/create_user_storage.dart';
 import 'package:so_boleto/domain/usecases/delete_bill.dart';
 import 'package:so_boleto/domain/usecases/edit_bill.dart';
 import 'package:so_boleto/domain/usecases/filter_bills_by_params.dart';
@@ -13,8 +15,9 @@ import 'package:so_boleto/domain/usecases/get_user_from_firebase.dart';
 import 'package:so_boleto/domain/usecases/get_user_from_storage.dart';
 import 'package:so_boleto/domain/usecases/set_bill_as_paid.dart';
 import 'package:so_boleto/domain/usecases/sign_in.dart';
+import 'package:so_boleto/domain/usecases/sign_out.dart';
 import 'package:so_boleto/domain/usecases/sign_up.dart';
-import 'package:so_boleto/domain/usecases/store_user.dart';
+import 'package:so_boleto/domain/usecases/update_user_storage.dart';
 import 'package:so_boleto/infra/local_database/hive_bill_database/hive_bill_model.dart';
 import 'package:so_boleto/infra/local_database/hive_bill_database/hive_bills_database.dart';
 import 'package:so_boleto/infra/local_database/hive_user_database/hive_user_database.dart';
@@ -103,13 +106,25 @@ abstract class InjectionService {
     );
 
     _i.registerFactory(
-      () => StoreUser(
+      () => CreateUserStorage(
+        _i.get<HiveUserDatabase>(),
+      ),
+    );
+
+    _i.registerFactory(
+      () => UpdateUserStorage(
         _i.get<HiveUserDatabase>(),
       ),
     );
 
     _i.registerFactory(
       () => GetUserFromStorage(
+        _i.get<HiveUserDatabase>(),
+      ),
+    );
+
+    _i.registerFactory(
+      () => ClearUserStorage(
         _i.get<HiveUserDatabase>(),
       ),
     );
@@ -128,6 +143,12 @@ abstract class InjectionService {
 
     _i.registerFactory(
       () => SignIn(
+        _i.get<AuthService>(),
+      ),
+    );
+
+    _i.registerFactory(
+      () => SignOut(
         _i.get<AuthService>(),
       ),
     );
@@ -188,7 +209,8 @@ abstract class InjectionService {
         _i.get<GetUserFromStorage>(),
         _i.get<GetUserFromFirebase>(),
         _i.get<CreateUser>(),
-        _i.get<StoreUser>(),
+        _i.get<CreateUserStorage>(),
+        _i.get<UpdateUserStorage>(),
       ),
     );
 
@@ -221,7 +243,10 @@ abstract class InjectionService {
     );
 
     _i.registerFactory(
-      () => ProfileCubit(),
+      () => ProfileCubit(
+        _i.get<SignOut>(),
+        _i.get<ClearUserStorage>(),
+      ),
     );
   }
 }

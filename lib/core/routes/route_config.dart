@@ -26,9 +26,9 @@ abstract class RoutesConfig {
   static final _rootKey = GlobalKey<NavigatorState>(debugLabel: 'Root Key');
   static final _shellKey = GlobalKey<NavigatorState>(debugLabel: 'Shell Key');
 
-  static const Duration duration300 = Duration(milliseconds: 300);
+  static const Duration duration100 = Duration(milliseconds: 100);
+  static const Duration duration200 = Duration(milliseconds: 200);
   static const Duration duration400 = Duration(milliseconds: 400);
-  static const Duration duration600 = Duration(milliseconds: 600);
 
   static final router = GoRouter(
     initialLocation: RelativePaths.app,
@@ -59,7 +59,7 @@ abstract class RoutesConfig {
             pageBuilder: (_, state) => _getTransitionPage(
               state,
               const HomePage(),
-              duration: duration300,
+              duration: duration100,
             ),
           ),
           GoRoute(
@@ -68,7 +68,7 @@ abstract class RoutesConfig {
             pageBuilder: (_, state) => _getTransitionPage(
               state,
               const ExpensesPage(),
-              duration: duration300,
+              duration: duration100,
             ),
           ),
           GoRoute(
@@ -77,7 +77,7 @@ abstract class RoutesConfig {
             pageBuilder: (_, state) => _getTransitionPage(
               state,
               const ProfilePage(),
-              duration: duration300,
+              duration: duration100,
             ),
           ),
 
@@ -152,7 +152,7 @@ abstract class RoutesConfig {
               state,
               const FilterPage(),
               type: PageTransitions.transitionFade,
-              duration: duration300,
+              duration: duration100,
             ),
           ),
           GoRoute(
@@ -162,7 +162,7 @@ abstract class RoutesConfig {
               state,
               const PromptBillsPage(),
               type: PageTransitions.transitionScale,
-              duration: duration300,
+              duration: duration100,
             ),
           ),
           GoRoute(
@@ -170,8 +170,8 @@ abstract class RoutesConfig {
             parentNavigatorKey: _shellKey,
             pageBuilder: (_, state) => _getTransitionPage(
               state,
+              duration: duration100,
               const PromptBillsEditionPage(),
-              duration: duration400,
             ),
           ),
           // GoRoute(
@@ -227,7 +227,7 @@ abstract class RoutesConfig {
     GoRouterState state,
     Widget child, {
     PageTransitions type = PageTransitions.transitionFade,
-    Duration duration = duration600,
+    Duration duration = duration400,
   }) {
     return CustomTransitionPage(
       key: state.pageKey,

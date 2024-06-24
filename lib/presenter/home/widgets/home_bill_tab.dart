@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/custom_status_handler/custom_status_handler.dart';
-import 'package:so_boleto/core/components/thin_line_separator/thin_line_separator.dart';
 import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/domain/models/enums/page_response_handler.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
@@ -28,11 +27,10 @@ class HomeBillTab extends StatelessWidget {
     }
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
-      child: ListView.separated(
+      child: ListView.builder(
         itemCount: bills.length,
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        separatorBuilder: (context, index) => LineSeparator.horizontal(),
         itemBuilder: (context, index) {
           final bill = bills[index];
           return BillListTile(bill);

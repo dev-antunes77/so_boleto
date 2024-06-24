@@ -6,7 +6,6 @@ import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
-import 'package:so_boleto/domain/models/enums/page_transitions.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
 import 'package:so_boleto/presenter/filter/widgets/home_filter_icon_button.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
@@ -38,12 +37,9 @@ class HomeAppBar extends StatelessWidget {
   }
 
   void _onCreateBillPressed(BuildContext context) {
-    context.pushTo(
-      Routes.billName,
-      params: PageTransitions.transitionScale,
-    );
     final cubit = context.read<HomeBillsCubit>();
     cubit.setSearchByNameValue('');
     context.read<BillCubit>().initiateCreationFlow(cubit.state.user.id);
+    context.pushTo(Routes.billName);
   }
 }

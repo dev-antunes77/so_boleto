@@ -9,27 +9,20 @@ final class FilterBillsByParams {
 
   List<BillModel> call(List<BillModel> bills, FilterParams params) {
     try {
+      List<BillModel> billsByParecels = [];
+      List<BillModel> billByDueDay = [];
+      List<BillModel> billByPriceRange = [];
+
       final billByCategory = bills
           .where(
             (element) => params.categoryList.contains(element.category),
           )
           .toList();
-      final billsByParecels = bills
-          .where(
-            (element) => _filterMatch(element.totalParcels, params.parcelRange),
-          )
-          .toList();
-      final billByDueDay = bills
-          .where(
-            (element) =>
-                _filterMatch(element.dueDayOfTheMonth, params.dueDayRange),
-          )
-          .toList();
-      final billByPriceRange = bills
-          .where(
-            (element) => _filterMatch(element.value, params.priceRange),
-          )
-          .toList();
+
+      billsByParecels = _filterNumericalRange(bills, params.parcelRange);
+      billByDueDay = _filterNumericalRange(bills, params.dueDayRange);
+      billByPriceRange = _filterNumericalRange(bills, params.priceRange);
+
       return billByCategory + billsByParecels + billByDueDay + billByPriceRange;
     } on AppError catch (error, trace) {
       Log.error(error, trace, 'Error executing $runtimeType: ${error.message}');
@@ -39,6 +32,16 @@ final class FilterBillsByParams {
       throw ClientError(AppLocalizations.current.errorUnknowError);
     }
   }
+
+  List<BillModel> _filterNumericalRange(
+          List<BillModel> bills, List<int> params) =>
+      params.isEmpty
+          ? []
+          : bills
+              .where(
+                (element) => _filterMatch(element.totalParcels, params),
+              )
+              .toList();
 
   bool _filterMatch(int value, List<int> range) =>
       value > range.first && value <= range.last;

@@ -4,8 +4,8 @@ import 'package:so_boleto/core/utils/log_utils.dart';
 import 'package:so_boleto/domain/models/user.dart';
 import 'package:so_boleto/infra/local_database/hive_user_database/hive_user_database.dart';
 
-final class StoreUser {
-  StoreUser(this._hiveUserDatabase);
+final class CreateUserStorage {
+  CreateUserStorage(this._hiveUserDatabase);
 
   final HiveUserDatabase _hiveUserDatabase;
 

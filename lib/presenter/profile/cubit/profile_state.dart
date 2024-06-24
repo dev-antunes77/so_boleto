@@ -6,7 +6,7 @@ class ProfileState extends BaseState with EquatableMixin {
     required super.status,
     super.callbackMessage,
     UserModel? user,
-  }) : user = user ?? InjectionService.get<InitialCubit>().state.user!;
+  }) : user = user ?? UserModel();
 
   final UserModel user;
 
@@ -15,6 +15,7 @@ class ProfileState extends BaseState with EquatableMixin {
     return [
       callbackMessage,
       status,
+      user,
     ];
   }
 
@@ -22,9 +23,11 @@ class ProfileState extends BaseState with EquatableMixin {
   ProfileState copyWith({
     BaseStateStatus? status,
     String? callbackMessage,
+    UserModel? user,
   }) =>
       ProfileState(
         status: status ?? this.status,
         callbackMessage: callbackMessage ?? this.callbackMessage,
+        user: user ?? this.user,
       );
 }

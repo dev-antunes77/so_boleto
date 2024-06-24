@@ -64,15 +64,9 @@ class FilterCubit extends Cubit<FilterState> with BaseCubit {
     }
     return FilterParams(
       categoryList: categories,
-      dueDayRange: state.dueDaySelected
-          ? state.dueDayFilter
-          : DueDayOrParcelRanges.upToThree.value,
-      priceRange: state.priceSelected
-          ? state.priceFilter
-          : PriceRanges.upToHundred.value,
-      parcelRange: state.parcelSelected
-          ? state.parcelFilter
-          : DueDayOrParcelRanges.upToThree.value,
+      dueDayRange: state.dueDaySelected ? state.dueDayFilter : null,
+      priceRange: state.priceSelected ? state.priceFilter : null,
+      parcelRange: state.parcelSelected ? state.parcelFilter : null,
     );
   }
 
@@ -82,6 +76,9 @@ class FilterCubit extends Cubit<FilterState> with BaseCubit {
     }
     emit(state.copyWith(
       status: BaseStateStatus.success,
+      dueDaySelected: false,
+      parcelSelected: false,
+      priceSelected: false,
       parcelFilter: DueDayOrParcelRanges.upToThree.value,
       dueDayFilter: DueDayOrParcelRanges.upToThree.value,
       priceFilter: PriceRanges.upToHundred.value,

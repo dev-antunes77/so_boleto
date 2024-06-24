@@ -29,7 +29,7 @@ class OnboardingSection extends StatelessWidget {
           Text(
             title,
             textAlign: TextAlign.center,
-            style: context.textLarge.copyWith(
+            style: context.textSubtitleHuge.copyWith(
               color: AppColors.primaryDark,
             ),
           ),
@@ -37,12 +37,12 @@ class OnboardingSection extends StatelessWidget {
           Text(
             text,
             textAlign: TextAlign.center,
-            style: context.textSmall,
+            style: context.textMedium,
           ),
           AppThemeValues.spaceVerticalImense,
           SvgAsset(
             svg: svg,
-            height: context.height * 0.2,
+            height: context.height * 0.25,
           ),
         ],
       ),

@@ -7,11 +7,12 @@ import 'package:so_boleto/core/utils/base_cubit.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
 import 'package:so_boleto/domain/models/user.dart';
 import 'package:so_boleto/domain/usecases/create_user.dart';
+import 'package:so_boleto/domain/usecases/create_user_storage.dart';
 import 'package:so_boleto/domain/usecases/get_user_from_firebase.dart';
 import 'package:so_boleto/domain/usecases/get_user_from_storage.dart';
 import 'package:so_boleto/domain/usecases/sign_in.dart';
 import 'package:so_boleto/domain/usecases/sign_up.dart';
-import 'package:so_boleto/domain/usecases/store_user.dart';
+import 'package:so_boleto/domain/usecases/update_user_storage.dart';
 
 part 'initial_state.dart';
 
@@ -22,13 +23,15 @@ class InitialCubit extends Cubit<InitialState> with BaseCubit {
     this._getUserFromStorageUsecase,
     this._getUserFromFirebaseUsecase,
     this._createUserUsecase,
-    this._storeUserUsecase,
+    this._createUserStorageUsecase,
+    this._updateUserStorage,
   ) : super(InitialState(
           status: BaseStateStatus.initial,
           currentPage: BottomNavigatorPage.bills,
         ));
   final CreateUser _createUserUsecase;
-  final StoreUser _storeUserUsecase;
+  final CreateUserStorage _createUserStorageUsecase;
+  final UpdateUserStorage _updateUserStorage;
   final GetUserFromStorage _getUserFromStorageUsecase;
   final GetUserFromFirebase _getUserFromFirebaseUsecase;
   final SignUp _signUpUsecase;
@@ -57,9 +60,9 @@ class InitialCubit extends Cubit<InitialState> with BaseCubit {
       final userId = await _signUpUsecase(user, user.password.decodePassword());
       final identifiedUser = user.copyWith(id: userId);
       await _createUserUsecase(identifiedUser);
-      await _storeUserUsecase(identifiedUser);
-      final apiUser = await _getUserFromFirebaseUsecase(identifiedUser.id);
-      emit(state.copyWith(status: BaseStateStatus.success, user: apiUser));
+      await _createUserStorageUsecase(identifiedUser);
+      emit(state.copyWith(
+          status: BaseStateStatus.success, user: identifiedUser));
     } on AppError catch (error) {
       onAppError(error);
     }
@@ -71,7 +74,7 @@ class InitialCubit extends Cubit<InitialState> with BaseCubit {
       final userId = await _signInUsecase(email, password.decodePassword());
       final apiUser = await _getUserFromFirebaseUsecase(userId);
       final userToStore = apiUser.copyWith(password: password);
-      await _storeUserUsecase(userToStore);
+      await _createUserStorageUsecase(userToStore);
       emit(state.copyWith(status: BaseStateStatus.success, user: userToStore));
     } on AppError catch (error) {
       onAppError(error);
@@ -83,7 +86,7 @@ class InitialCubit extends Cubit<InitialState> with BaseCubit {
       emit(state.copyWith(status: BaseStateStatus.loading));
       await Future.delayed(const Duration(seconds: 2)).then((_) async {
         final updatedUser = state.user!.copyWith(hasSeenOnbording: true);
-        await _storeUserUsecase(updatedUser);
+        await _updateUserStorage(updatedUser);
         emit(state.copyWith(user: updatedUser));
       });
     } on AppError catch (error) {

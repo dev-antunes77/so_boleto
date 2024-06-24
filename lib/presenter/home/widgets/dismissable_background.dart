@@ -16,11 +16,15 @@ class DismissableBackGround extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style =
-        context.textSubtitleLarge.copyWith(color: AppColors.background);
+    final style = context.textSubtitleLarge.copyWith(
+      color: payDragging ? AppColors.primary : AppColors.darkRed,
+    );
     return DecoratedBox(
       decoration: BoxDecoration(
-          color: payDragging ? AppColors.primary : AppColors.darkRed),
+        color: payDragging
+            ? AppColors.primary.withOpacity(0.15)
+            : AppColors.darkRed.withOpacity(0.15),
+      ),
       child: Padding(
         padding:
             const EdgeInsets.symmetric(horizontal: AppThemeValues.spaceLarge),
@@ -34,7 +38,7 @@ class DismissableBackGround extends StatelessWidget {
               const SvgAsset(
                 svg: AppIcons.money,
                 height: 46,
-                color: AppColors.background,
+                color: AppColors.primary,
               ),
             ] else ...[
               Text(AppLocalizations.current.homeBillDeleting, style: style),
@@ -42,7 +46,7 @@ class DismissableBackGround extends StatelessWidget {
               const SvgAsset(
                 svg: AppIcons.delete,
                 height: 30,
-                color: AppColors.background,
+                color: AppColors.darkRed,
               ),
             ]
           ],
