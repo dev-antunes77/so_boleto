@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:so_boleto/core/environment/firebase_env.dart';
+import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/domain/usecases/add_prompt_bills.dart';
 import 'package:so_boleto/domain/usecases/clear_user_storage.dart';
 import 'package:so_boleto/domain/usecases/create_bill.dart';
@@ -202,6 +203,10 @@ abstract class InjectionService {
   }
 
   static void _initBloc() {
+    _i.registerFactory(
+      () => ThemeCubit(),
+    );
+
     _i.registerFactory(
       () => InitialCubit(
         _i.get<SignUp>(),

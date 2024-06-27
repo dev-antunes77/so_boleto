@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/buttons/custom_text_button.dart';
+import 'package:so_boleto/core/components/custom_payed_tag/check_payed_tag.dart';
 import 'package:so_boleto/core/components/dialogs/app_dialogs.dart';
 import 'package:so_boleto/core/components/expanded_section/expanded_section.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
@@ -16,7 +17,6 @@ import 'package:so_boleto/domain/models/enums/bill_status.dart';
 import 'package:so_boleto/domain/models/enums/page_transitions.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
-import 'package:so_boleto/presenter/home/widgets/bill_paid_tag.dart';
 import 'package:so_boleto/presenter/home/widgets/dismissable_background.dart';
 
 class BillListTile extends StatefulWidget {
@@ -57,13 +57,13 @@ class _BillListTileState extends State<BillListTile> {
                 ? AppColors.primary.withOpacity(0.15)
                 : null,
           ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: AppThemeValues.spaceXXSmall,
-            ),
-            child: Stack(
-              children: [
-                ListTile(
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: AppThemeValues.spaceXXSmall,
+                ),
+                child: ListTile(
                   contentPadding: const EdgeInsets.symmetric(
                     horizontal: AppThemeValues.spaceSmall,
                   ),
@@ -155,9 +155,10 @@ class _BillListTileState extends State<BillListTile> {
                     ],
                   ),
                 ),
-                BillPaidTag(widget.bill.billStatus == BillStatus.payed)
-              ],
-            ),
+              ),
+              CheckPayedLabel(widget.bill.billStatus == BillStatus.payed),
+              // BillPaidTag(widget.bill.billStatus == BillStatus.payed)
+            ],
           ),
         ),
       ),

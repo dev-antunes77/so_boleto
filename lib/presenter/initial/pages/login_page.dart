@@ -59,23 +59,12 @@ class _LoginPageState extends State<LoginPage> {
           buildWhen: (previous, current) => previous.status != current.status,
           bloc: cubit,
           listener: (context, state) {
-            if (state.status == BaseStateStatus.loading) {
-              showDialog(
-                context: context,
-                builder: (context) => const LoadingPage2(),
-              );
-            }
             if (state.status == BaseStateStatus.generalError) {
               context.pop(true);
               context.showSnackBar(state.callbackMessage);
             }
-            if (state.status == BaseStateStatus.success) {
-              if (cubit.state.user!.hasSeenOnbording) {
-                context.navigateTo(Routes.home);
-              } else {
-                context.navigateTo(Routes.onboarding);
-              }
-            }
+            _whenStateIsLoading(state.status == BaseStateStatus.loading);
+            _whenLogInIsSuccessful(state.status == BaseStateStatus.success);
           },
           builder: (context, state) {
             return state.when(
@@ -174,6 +163,25 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  _whenStateIsLoading(bool match) {
+    if (match) {
+      showDialog(
+        context: context,
+        builder: (context) => const LoadingPage2(),
+      );
+    }
+  }
+
+  _whenLogInIsSuccessful(bool match) {
+    if (match) {
+      if (cubit.state.user!.hasSeenOnbording) {
+        context.navigateTo(Routes.home);
+      } else {
+        context.navigateTo(Routes.onboarding);
+      }
+    }
   }
 
   _onSignUp() => cubit.onSignUp(_buildUser());

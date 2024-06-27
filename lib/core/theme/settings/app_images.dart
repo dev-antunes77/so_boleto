@@ -1,9 +1,7 @@
 abstract class AppImages {
-  static const path = 'assets/images/';
+  static const _path = 'assets/images/';
 
-  static const logo = '${path}logo.png';
-  static const billErasing1 = '${path}bill_erasing_1.png';
-  static const billErasing2 = '${path}bill_erasing_2.png';
-  static const billErasing3 = '${path}bill_erasing_3.png';
-  static const payment1 = '${path}payment_1.png';
+  static const logo = '${_path}logo.png';
+  static const darkMode = '${_path}dark_mode.png';
+  static const lightMode = '${_path}light_mode.png';
 }

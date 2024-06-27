@@ -18,9 +18,9 @@ class LineSeparator extends StatelessWidget {
   final double width;
   final Color color;
 
-  factory LineSeparator.horizontal() => LineSeparator(
-        verticalPadding: AppThemeValues.spaceXSmall,
-        horizontalPadding: AppThemeValues.spaceXSmall,
+  factory LineSeparator.horizontal({bool noPadding = false}) => LineSeparator(
+        verticalPadding: noPadding ? 0.0 : AppThemeValues.spaceXXSmall,
+        horizontalPadding: noPadding ? 0.0 : AppThemeValues.spaceXXSmall,
         height: 0.5,
         width: double.infinity,
       );
@@ -30,8 +30,8 @@ class LineSeparator extends StatelessWidget {
     bool noPadding = false,
   }) =>
       LineSeparator(
-        verticalPadding: noPadding ? 0.0 : AppThemeValues.spaceXSmall,
-        horizontalPadding: noPadding ? 0.0 : AppThemeValues.spaceXSmall,
+        verticalPadding: noPadding ? 0.0 : AppThemeValues.spaceXXSmall,
+        horizontalPadding: noPadding ? 0.0 : AppThemeValues.spaceXXSmall,
         height: 0.5,
         width: width,
       );
@@ -43,23 +43,23 @@ class LineSeparator extends StatelessWidget {
     Color? color,
   }) =>
       LineSeparator(
-        verticalPadding: noPadding ? 0.0 : AppThemeValues.spaceXSmall,
-        horizontalPadding: noPadding ? 0.0 : AppThemeValues.spaceXSmall,
+        verticalPadding: noPadding ? 0.0 : AppThemeValues.spaceXXSmall,
+        horizontalPadding: noPadding ? 0.0 : AppThemeValues.spaceXXSmall,
         height: height,
         width: width,
         color: color,
       );
 
   factory LineSeparator.infiniteHorizon() => LineSeparator(
-        verticalPadding: AppThemeValues.spaceXSmall,
+        verticalPadding: AppThemeValues.spaceXXSmall,
         horizontalPadding: 0.0,
         height: 0.5,
         width: double.infinity,
       );
 
   factory LineSeparator.vertical({required double height}) => LineSeparator(
-        verticalPadding: AppThemeValues.spaceXSmall,
-        horizontalPadding: AppThemeValues.spaceXSmall,
+        verticalPadding: AppThemeValues.spaceXXSmall,
+        horizontalPadding: AppThemeValues.spaceXXSmall,
         height: height,
         width: 0.5,
       );

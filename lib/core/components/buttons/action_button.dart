@@ -25,8 +25,8 @@ class ActionButton extends StatelessWidget {
         onTap: onTap,
         child: SvgAsset(
           svg: icon,
+          color: AppColors.white,
           height: height ?? 24,
-          color: AppColors.primary,
         ),
       ),
     );

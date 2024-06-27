@@ -37,7 +37,7 @@ class _SearchBarAnimationState extends State<BillSearchBar> {
           prefixIcon: const SvgAsset(
             svg: AppIcons.search,
             height: 28,
-            color: AppColors.primary,
+            color: AppColors.white,
           ),
           suffixIcon: isExpanded
               ? GestureDetector(

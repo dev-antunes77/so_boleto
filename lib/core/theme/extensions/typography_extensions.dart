@@ -6,21 +6,18 @@ const _defaultTextStyle = TextStyle(
   fontFamily: 'AMX',
   fontSize: AppThemeValues.fontSizeMedium,
   fontWeight: AppThemeValues.fontWeightRegular,
-  color: AppColors.text,
 );
 
 const _oldStamperTextStyle = TextStyle(
   fontFamily: 'Old-Stamper',
   fontSize: AppThemeValues.fontSizeMedium,
   fontWeight: AppThemeValues.fontWeightRegular,
-  color: AppColors.text,
 );
 
 const _robotoTextStyle = TextStyle(
   fontFamily: 'roboto',
   fontSize: AppThemeValues.fontSizeMedium,
   fontWeight: AppThemeValues.fontWeightRegular,
-  color: AppColors.textLight,
 );
 
 extension TypographyExtension on BuildContext {

@@ -3,6 +3,8 @@ import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_flow_app_bar.dart';
 import 'package:so_boleto/presenter/expenses/widgets/expenses_app_bar.dart';
 import 'package:so_boleto/presenter/home/widgets/home_app_bar.dart';
+import 'package:so_boleto/presenter/profile/widgets/profile_options_app_bar.dart';
+import 'package:so_boleto/presenter/profile/widgets/profile_theme_app_bar.dart';
 import 'package:so_boleto/presenter/prompt_bills/widgets/promot_bills_edition_app_bar.dart';
 import 'package:so_boleto/presenter/prompt_bills/widgets/prompt_bills_app_bar.dart';
 
@@ -12,17 +14,28 @@ class AppBarHandler extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (route == Routes.expenses) {
-      return const ExpensesAppBar();
-    } else if (route == Routes.profile) {
-      return const SizedBox.shrink();
-    } else if (route == Routes.promptBills) {
-      return const PromptBillsAppBar();
-    } else if (route == Routes.promptBillsEdition) {
-      return const PromptBillsEditionAppBar();
-    } else if (route.contains('bill')) {
-      return const BillFlowAppBar();
+    switch (route) {
+      case Routes.home:
+        return const HomeAppBar();
+      case Routes.expenses:
+        return const ExpensesAppBar();
+      case Routes.promptBills:
+        return const PromptBillsAppBar();
+      case Routes.promptBillsEdition:
+        return const PromptBillsEditionAppBar();
+
+      case Routes.billCategory:
+      case Routes.billCheck:
+      case Routes.billName:
+      case Routes.billDueDay:
+      case Routes.billParcels:
+      case Routes.billValue:
+        return const BillFlowAppBar();
+      case Routes.profile:
+        return const ProfileThemeAppBar();
+      case Routes.profilePreferences:
+        return const ProfileOptionsAppBar();
     }
-    return const HomeAppBar();
+    throw Exception();
   }
 }

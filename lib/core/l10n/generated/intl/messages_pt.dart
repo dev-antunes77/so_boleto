@@ -158,6 +158,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "homeTabDelayed": MessageLookupByLibrary.simpleMessage("Atrasadas"),
         "homeTabPayed": MessageLookupByLibrary.simpleMessage("Pagas"),
         "parcels": MessageLookupByLibrary.simpleMessage("Parcelas"),
+        "profile": MessageLookupByLibrary.simpleMessage("Perfil"),
         "prompBillAppBar":
             MessageLookupByLibrary.simpleMessage("Contas prontas"),
         "prompBillAppBarRemoveAll":

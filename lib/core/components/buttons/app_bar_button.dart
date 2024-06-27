@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
-import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 
 class AppBarButton extends StatelessWidget {
@@ -22,7 +21,6 @@ class AppBarButton extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Card(
-          color: AppColors.primary.withOpacity(0.6),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
               AppThemeValues.spaceSmall,
@@ -35,9 +33,7 @@ class AppBarButton extends StatelessWidget {
             ),
             child: Text(
               label,
-              style: context.textSmall.copyWith(
-                color: AppColors.textLighter,
-              ),
+              style: context.textSmall.copyWith(),
             ),
           ),
         ),

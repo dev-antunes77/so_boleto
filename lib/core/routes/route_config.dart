@@ -17,6 +17,7 @@ import 'package:so_boleto/presenter/initial/pages/login_page.dart';
 import 'package:so_boleto/presenter/initial/pages/onboarding_page.dart';
 import 'package:so_boleto/presenter/initial/pages/splash_page.dart';
 import 'package:so_boleto/presenter/profile/pages/profile_page.dart';
+import 'package:so_boleto/presenter/profile/pages/sections/profile_preferences.dart';
 import 'package:so_boleto/presenter/prompt_bills/pages/prompt_bills_edition_page.dart';
 import 'package:so_boleto/presenter/prompt_bills/pages/prompt_bills_page.dart';
 
@@ -59,25 +60,6 @@ abstract class RoutesConfig {
             pageBuilder: (_, state) => _getTransitionPage(
               state,
               const HomePage(),
-              duration: duration100,
-            ),
-          ),
-          GoRoute(
-            path: RelativePaths.expenses,
-            parentNavigatorKey: _shellKey,
-            pageBuilder: (_, state) => _getTransitionPage(
-              state,
-              const ExpensesPage(),
-              duration: duration100,
-            ),
-          ),
-          GoRoute(
-            path: RelativePaths.profile,
-            parentNavigatorKey: _shellKey,
-            pageBuilder: (_, state) => _getTransitionPage(
-              state,
-              const ProfilePage(),
-              duration: duration100,
             ),
           ),
 
@@ -90,6 +72,7 @@ abstract class RoutesConfig {
                   : PageTransitions.transitionMatrix;
               return _getTransitionPage(
                 state,
+                duration: duration400,
                 const BillNameSection(),
                 type: type,
               );
@@ -101,6 +84,7 @@ abstract class RoutesConfig {
             pageBuilder: (_, state) => _getTransitionPage(
               state,
               const BillParcelSection(),
+              duration: duration400,
               type: PageTransitions.transitionMatrix,
             ),
           ),
@@ -110,6 +94,7 @@ abstract class RoutesConfig {
             pageBuilder: (_, state) => _getTransitionPage(
               state,
               const BillValueSection(),
+              duration: duration400,
               type: PageTransitions.transitionMatrix,
             ),
           ),
@@ -119,6 +104,7 @@ abstract class RoutesConfig {
             pageBuilder: (_, state) => _getTransitionPage(
               state,
               const BillDueDayOfTheMonthSection(),
+              duration: duration400,
               type: PageTransitions.transitionMatrix,
             ),
           ),
@@ -128,6 +114,7 @@ abstract class RoutesConfig {
             pageBuilder: (_, state) => _getTransitionPage(
               state,
               const BillCategorySection(),
+              duration: duration400,
               type: PageTransitions.transitionMatrix,
             ),
           ),
@@ -142,6 +129,7 @@ abstract class RoutesConfig {
                 state,
                 const BillCheckSection(),
                 type: type,
+                duration: duration400,
               );
             },
           ),
@@ -152,7 +140,6 @@ abstract class RoutesConfig {
               state,
               const FilterPage(),
               type: PageTransitions.transitionFade,
-              duration: duration100,
             ),
           ),
           GoRoute(
@@ -162,7 +149,6 @@ abstract class RoutesConfig {
               state,
               const PromptBillsPage(),
               type: PageTransitions.transitionScale,
-              duration: duration100,
             ),
           ),
           GoRoute(
@@ -170,8 +156,32 @@ abstract class RoutesConfig {
             parentNavigatorKey: _shellKey,
             pageBuilder: (_, state) => _getTransitionPage(
               state,
-              duration: duration100,
               const PromptBillsEditionPage(),
+            ),
+          ),
+
+          GoRoute(
+            path: RelativePaths.expenses,
+            parentNavigatorKey: _shellKey,
+            pageBuilder: (_, state) => _getTransitionPage(
+              state,
+              const ExpensesPage(),
+            ),
+          ),
+          GoRoute(
+            path: RelativePaths.profile,
+            parentNavigatorKey: _shellKey,
+            pageBuilder: (_, state) => _getTransitionPage(
+              state,
+              const ProfilePage(),
+            ),
+          ),
+          GoRoute(
+            path: RelativePaths.profileSettings,
+            parentNavigatorKey: _shellKey,
+            pageBuilder: (_, state) => _getTransitionPage(
+              state,
+              const ProfilePreferences(),
             ),
           ),
           // GoRoute(
@@ -227,7 +237,7 @@ abstract class RoutesConfig {
     GoRouterState state,
     Widget child, {
     PageTransitions type = PageTransitions.transitionFade,
-    Duration duration = duration400,
+    Duration duration = duration100,
   }) {
     return CustomTransitionPage(
       key: state.pageKey,

@@ -5,7 +5,6 @@ import 'package:so_boleto/core/components/custom_bottom_navigator/bottom_navigat
 import 'package:so_boleto/core/components/custom_bottom_navigator/widgets/custom_bottom_navigator.dart';
 import 'package:so_boleto/core/components/custom_pop_scope/custom_pop_scope.dart';
 import 'package:so_boleto/core/routes/routes.dart';
-import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
@@ -32,7 +31,6 @@ class _AppShellState extends State<AppShell> {
       builder: (context, state) => CustomPopScope(
         leaveTheApp: _showBottomNav(),
         child: Scaffold(
-          backgroundColor: AppColors.primaryBackground,
           appBar: PreferredSize(
             preferredSize:
                 const Size(double.infinity, AppThemeValues.spaceEnormous),

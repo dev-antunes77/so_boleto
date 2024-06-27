@@ -17,6 +17,7 @@ class Routes {
   static const expenses = '/expenses';
   static const filter = '/filter';
   static const profile = '/profile';
+  static const profilePreferences = '/profile-preferences';
 }
 
 ///Represents the routes with relative paths
@@ -38,4 +39,5 @@ class RelativePaths {
   static const expenses = '/expenses';
   static const filter = '/filter';
   static const profile = '/profile';
+  static const profileSettings = '/profile-preferences';
 }

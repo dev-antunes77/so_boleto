@@ -6,8 +6,8 @@ import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 
-class BillPaidTag extends StatelessWidget {
-  const BillPaidTag(this.showTag, {super.key});
+class StamplePayedTag extends StatelessWidget {
+  const StamplePayedTag(this.showTag, {super.key});
 
   final bool showTag;
 

@@ -152,6 +152,7 @@
     "homeTabPayed":"Pagas",
     "homeTabDelayed":"Atrasadas",
     "parcels":"Parcelas",
+    "profile" : "Perfil",
     "prompBillAppBar":"Contas prontas",
     "prompBillEditionAppBar":"Edição de contas prontas",
     "prompBillEditionTileDueDay":" Vencimento",

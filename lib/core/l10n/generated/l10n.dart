@@ -920,6 +920,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Perfil`
+  String get profile {
+    return Intl.message(
+      'Perfil',
+      name: 'profile',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Contas prontas`
   String get prompBillAppBar {
     return Intl.message(

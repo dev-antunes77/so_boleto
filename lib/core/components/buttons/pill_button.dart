@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
+import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 
 class PillButton extends StatelessWidget {
   const PillButton({
@@ -28,12 +29,18 @@ class PillButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final minimunSize =
-        size ?? (fillWidth ? const Size.fromHeight(48) : const Size(107, 48));
+    final minimunSize = size ??
+        (fillWidth
+            ? const Size.fromHeight(AppThemeValues.spaceMassive)
+            : const Size(
+                AppThemeValues.spaceTitanic,
+                AppThemeValues.spaceMassive,
+              ));
 
     final ButtonStyle buttonStyle = ButtonStyle(
       shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+        RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppThemeValues.spaceHuge)),
       ),
       side: WidgetStateProperty.all(
         outlinedButton
