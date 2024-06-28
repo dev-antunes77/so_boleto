@@ -18,6 +18,7 @@ import 'package:so_boleto/presenter/initial/pages/onboarding_page.dart';
 import 'package:so_boleto/presenter/initial/pages/splash_page.dart';
 import 'package:so_boleto/presenter/profile/pages/profile_page.dart';
 import 'package:so_boleto/presenter/profile/pages/sections/profile_preferences.dart';
+import 'package:so_boleto/presenter/profile/pages/sections/theme_choice.dart';
 import 'package:so_boleto/presenter/prompt_bills/pages/prompt_bills_edition_page.dart';
 import 'package:so_boleto/presenter/prompt_bills/pages/prompt_bills_page.dart';
 
@@ -177,11 +178,19 @@ abstract class RoutesConfig {
             ),
           ),
           GoRoute(
-            path: RelativePaths.profileSettings,
+            path: RelativePaths.profilePreferences,
             parentNavigatorKey: _shellKey,
             pageBuilder: (_, state) => _getTransitionPage(
               state,
               const ProfilePreferences(),
+            ),
+          ),
+          GoRoute(
+            path: RelativePaths.profilePreferencesTheme,
+            parentNavigatorKey: _shellKey,
+            pageBuilder: (_, state) => _getTransitionPage(
+              state,
+              const ThemeChoice(),
             ),
           ),
           // GoRoute(

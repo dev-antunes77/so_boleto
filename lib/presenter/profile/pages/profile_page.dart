@@ -8,6 +8,7 @@ import 'package:so_boleto/core/theme/settings/app_images.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
 import 'package:so_boleto/presenter/profile/cubit/profile_cubit.dart';
+import 'package:so_boleto/presenter/profile/widgets/profile_option_tile.dart';
 import 'package:so_boleto/presenter/profile/widgets/profile_title_sections.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -48,22 +49,22 @@ class _ProfilePageState extends State<ProfilePage> {
             subtitle: const Text('email@example.com.br'),
           ),
           const Divider(height: AppThemeValues.spaceXLarge),
-          const ProfileOptions(
+          const ProfileOptionTile(
             label: 'Ação número 1',
             subtitle: 'Something else',
             route: '',
           ),
-          const ProfileOptions(
+          const ProfileOptionTile(
             label: 'Ação número 2',
             subtitle: 'Something else',
             route: '',
           ),
-          const ProfileOptions(
+          const ProfileOptionTile(
             label: 'Ação número 3',
             subtitle: 'Something else',
             route: '',
           ),
-          const ProfileOptions(
+          const ProfileOptionTile(
             label: 'Preferências',
             subtitle: 'Custumize suas preferências',
             route: Routes.profilePreferences,
@@ -94,33 +95,4 @@ class _ProfilePageState extends State<ProfilePage> {
               );
         },
       );
-}
-
-class ProfileOptions extends StatelessWidget {
-  const ProfileOptions({
-    super.key,
-    required this.label,
-    required this.subtitle,
-    required this.route,
-  });
-
-  final String label;
-  final String subtitle;
-  final String route;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      contentPadding: const EdgeInsets.symmetric(
-        horizontal: AppThemeValues.spaceXXSmall,
-      ),
-      onTap: () => context.pushTo(route),
-      title: Text(label, style: context.textRobotoSubtitleMedium),
-      subtitle: Text(subtitle),
-      trailing: const Icon(
-        Icons.arrow_forward_ios_rounded,
-        size: 18,
-      ),
-    );
-  }
 }

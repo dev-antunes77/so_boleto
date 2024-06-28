@@ -4,7 +4,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/route_config.dart';
 import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
-import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/injection_service.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
 import 'package:so_boleto/presenter/expenses/cubit/expenses_cubit.dart';
@@ -43,12 +42,12 @@ class _AppWidgetState extends State<AppWidget> {
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
               useMaterial3: true,
-              colorSchemeSeed: AppColors.primary,
+              colorSchemeSeed: state.selectedColor,
             ),
             darkTheme: ThemeData(
               useMaterial3: true,
               brightness: Brightness.dark,
-              colorSchemeSeed: AppColors.primary,
+              colorSchemeSeed: state.selectedColor,
             ),
             themeMode: state.isLightTheme ? ThemeMode.light : ThemeMode.dark,
             localizationsDelegates: const [

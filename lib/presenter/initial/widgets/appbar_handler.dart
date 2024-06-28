@@ -34,6 +34,7 @@ class AppBarHandler extends StatelessWidget {
       case Routes.profile:
         return const ProfileThemeAppBar();
       case Routes.profilePreferences:
+      case Routes.profilePreferencesTheme:
         return const ProfileOptionsAppBar();
     }
     throw Exception();
