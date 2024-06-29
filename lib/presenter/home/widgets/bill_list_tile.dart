@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/buttons/custom_text_button.dart';
-import 'package:so_boleto/core/components/custom_payed_tag/check_payed_tag.dart';
 import 'package:so_boleto/core/components/dialogs/app_dialogs.dart';
 import 'package:so_boleto/core/components/expanded_section/expanded_section.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
@@ -9,6 +8,7 @@ import 'package:so_boleto/core/extensions/num_extensions.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/helpers/app_formatters.dart';
 import 'package:so_boleto/core/routes/routes.dart';
+import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
@@ -20,9 +20,16 @@ import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 import 'package:so_boleto/presenter/home/widgets/dismissable_background.dart';
 
 class BillListTile extends StatefulWidget {
-  const BillListTile(this.bill, {super.key});
+  const BillListTile(
+    this.bill, {
+    super.key,
+    this.isTagPreferenceScreen = false,
+    required this.payedTagSelector,
+  });
 
   final BillModel bill;
+  final Widget payedTagSelector;
+  final bool isTagPreferenceScreen;
 
   @override
   State<BillListTile> createState() => _BillListTileState();
@@ -35,18 +42,23 @@ class _BillListTileState extends State<BillListTile> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.read<ThemeCubit>().state;
     return GestureDetector(
-      onTap: () {
-        context.read<BillCubit>().initiateEditionFlow(bill: widget.bill);
-        context.pushTo(Routes.billCheck,
-            params: PageTransitions.transitionScale);
-      },
+      onTap: widget.isTagPreferenceScreen
+          ? null
+          : () {
+              context.read<BillCubit>().initiateEditionFlow(bill: widget.bill);
+              context.pushTo(Routes.billCheck,
+                  params: PageTransitions.transitionScale);
+            },
       child: Dismissible(
         key: Key(widget.bill.id),
         direction: widget.bill.billStatus == BillStatus.payed
             ? DismissDirection.endToStart
             : DismissDirection.horizontal,
-        confirmDismiss: (direction) => _confirmDismiss(direction, context),
+        confirmDismiss: widget.isTagPreferenceScreen
+            ? null
+            : (direction) => _confirmDismiss(direction, context),
         background: const DismissableBackGround(
           payDragging: true,
         ),
@@ -54,7 +66,7 @@ class _BillListTileState extends State<BillListTile> {
         child: DecoratedBox(
           decoration: BoxDecoration(
             color: widget.bill.billStatus == BillStatus.payed
-                ? AppColors.primary.withOpacity(0.15)
+                ? theme.selectedColor.withOpacity(0.05)
                 : null,
           ),
           child: Stack(
@@ -73,11 +85,12 @@ class _BillListTileState extends State<BillListTile> {
                     children: [
                       CircleAvatar(
                         radius: 25,
-                        backgroundColor: AppColors.grey,
                         child: SvgAsset(
                           svg: widget.bill.category.getIconResponse(),
                           height: 30,
-                          color: AppColors.primaryLight,
+                          color: theme.isLightTheme
+                              ? AppColors.black
+                              : AppColors.white,
                         ),
                       ),
                     ],
@@ -96,7 +109,9 @@ class _BillListTileState extends State<BillListTile> {
                               expand ? 'Fechar descrição' : 'Abrir descrição',
                           padding: EdgeInsets.zero,
                           fontSize: 12,
-                          onPressed: _toggleExpandDescription,
+                          onPressed: widget.isTagPreferenceScreen
+                              ? () {}
+                              : _toggleExpandDescription,
                         ),
                         ExpandedSection(
                           expand: expand,
@@ -156,8 +171,7 @@ class _BillListTileState extends State<BillListTile> {
                   ),
                 ),
               ),
-              CheckPayedLabel(widget.bill.billStatus == BillStatus.payed),
-              // BillPaidTag(widget.bill.billStatus == BillStatus.payed)
+              widget.payedTagSelector,
             ],
           ),
         ),

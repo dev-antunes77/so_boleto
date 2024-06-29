@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/domain/models/prompt_bill.dart';
-import 'package:so_boleto/domain/models/user.dart';
+import 'package:so_boleto/domain/models/user_data.dart';
 import 'package:so_boleto/domain/repositories/firestore_repository.dart';
 
 class FirestoreService implements FirestoreRepository {
@@ -12,15 +12,15 @@ class FirestoreService implements FirestoreRepository {
       _firestore.collection("users").doc(userId).collection('bills');
 
   @override
-  Future<void> createUser(UserModel user) async {
+  Future<void> createUser(UserData user) async {
     final usersRef = _firestore.collection("users").doc(user.id);
     await usersRef.set(user.toFirestore());
   }
 
   @override
-  Future<UserModel> getUser(String userId) async {
+  Future<UserData> getUser(String userId) async {
     final docSnap = await _firestore.collection("users").doc(userId).get();
-    return UserModel.fromFirestore(docSnap);
+    return UserData.fromFirestore(docSnap);
   }
 
   @override

@@ -34,7 +34,7 @@ class _SplashPageState extends State<SplashPage> {
           listenWhen: (previous, current) => previous.status != current.status,
           listener: (context, state) {
             if (state.status == BaseStateStatus.success && state.user != null) {
-              if (state.user!.hasSeenOnbording) {
+              if (state.user!.hasSeenOnboarding) {
                 context.navigateTo(Routes.home);
               } else {
                 context.navigateTo(Routes.onboarding);

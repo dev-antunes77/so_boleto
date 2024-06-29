@@ -5,10 +5,10 @@ class ProfileState extends BaseState with EquatableMixin {
   ProfileState({
     required super.status,
     super.callbackMessage,
-    UserModel? user,
-  }) : user = user ?? UserModel();
+    UserData? user,
+  }) : user = user ?? UserData();
 
-  final UserModel user;
+  final UserData user;
 
   @override
   List<Object> get props {
@@ -23,7 +23,7 @@ class ProfileState extends BaseState with EquatableMixin {
   ProfileState copyWith({
     BaseStateStatus? status,
     String? callbackMessage,
-    UserModel? user,
+    UserData? user,
   }) =>
       ProfileState(
         status: status ?? this.status,

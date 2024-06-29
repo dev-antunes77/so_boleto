@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
@@ -55,7 +57,8 @@ class PillButton extends StatelessWidget {
           if (states.contains(WidgetState.disabled) || isDisabled) {
             return Colors.grey;
           }
-          return backgroundColor ?? AppColors.primary;
+          return backgroundColor ??
+              context.read<ThemeCubit>().state.selectedColor;
         },
       ),
       foregroundColor: WidgetStateProperty.all<Color>(

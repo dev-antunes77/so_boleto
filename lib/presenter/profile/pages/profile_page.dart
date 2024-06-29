@@ -37,37 +37,43 @@ class _ProfilePageState extends State<ProfilePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const ProfileTitleSection('Meu perfil'),
-          ListTile(
-            contentPadding: EdgeInsets.zero,
-            leading: const CircleAvatar(
-              radius: 26,
-              backgroundImage: AssetImage(AppImages.logo),
-            ),
-            title: Text('Nome completo aqui',
-                style: context.textRobotoSubtitleMedium),
-            subtitle: const Text('email@example.com.br'),
+          AppThemeValues.spaceVerticalSmall,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const CircleAvatar(
+                radius: 36,
+                backgroundImage: AssetImage(AppImages.logo),
+              ),
+              AppThemeValues.spaceHorizontalMedium,
+              Column(
+                children: [
+                  Text('Nome completo aqui',
+                      style: context.textRobotoSubtitleMedium),
+                  Text(
+                    'email@example.com.br',
+                    style: context.textRobotoSmall,
+                  ),
+                ],
+              )
+            ],
           ),
           const Divider(height: AppThemeValues.spaceXLarge),
+          const ProfileTitleSection('Preferências'),
           const ProfileOptionTile(
-            label: 'Ação número 1',
-            subtitle: 'Something else',
-            route: '',
+            label: 'Tema',
+            subtitle: 'escolha entre tema claro ou escuro',
+            route: Routes.profileTheme,
           ),
           const ProfileOptionTile(
-            label: 'Ação número 2',
-            subtitle: 'Something else',
-            route: '',
+            label: 'Vencimento',
+            subtitle: 'escolha um dia para suas contas vencerem',
+            route: Routes.profileDueDay,
           ),
           const ProfileOptionTile(
-            label: 'Ação número 3',
-            subtitle: 'Something else',
-            route: '',
-          ),
-          const ProfileOptionTile(
-            label: 'Preferências',
-            subtitle: 'Custumize suas preferências',
-            route: Routes.profilePreferences,
+            label: 'Marca de pagamento',
+            subtitle: 'escolha uma tag para as contas marcadas como pagas',
+            route: Routes.profilePayedTag,
           ),
           Center(
             child: PillButton(

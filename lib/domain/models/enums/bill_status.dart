@@ -13,4 +13,6 @@ enum BillStatus {
     }
     return list;
   }
+
+  bool get isPayed => this == BillStatus.payed;
 }

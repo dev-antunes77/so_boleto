@@ -10,15 +10,21 @@ class ProfileOptionsAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomAppBar(
       title: _displayProperTitle(context.currentRoute),
-      leadingBackButton: const CustomBackButton(),
+      leadingBackButton: context.currentRoute == Routes.profile
+          ? null
+          : const CustomBackButton(),
     );
   }
 
   String _displayProperTitle(String route) {
     switch (route) {
-      case Routes.profilePreferences:
-        return 'Preferências';
+      case Routes.profileTheme:
+        return 'Temas';
+      case Routes.profileDueDay:
+        return 'Vencimento';
+      case Routes.profilePayedTag:
+        return 'Marca de pagamento';
     }
-    return 'Profile';
+    return 'Meu Perfil';
   }
 }

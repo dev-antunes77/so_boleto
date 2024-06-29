@@ -9,7 +9,7 @@ import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/domain/models/enums/bill_status.dart';
 import 'package:so_boleto/domain/models/filter_params.dart';
 import 'package:so_boleto/domain/models/prompt_bill.dart';
-import 'package:so_boleto/domain/models/user.dart';
+import 'package:so_boleto/domain/models/user_data.dart';
 import 'package:so_boleto/domain/usecases/add_prompt_bills.dart';
 import 'package:so_boleto/domain/usecases/create_bill.dart';
 import 'package:so_boleto/domain/usecases/delete_bill.dart';
@@ -39,7 +39,7 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
   final FilterBillsByParams _filterBillsByParamsUseCase;
   final AddPromptBills _addPromptBillsUsecase;
 
-  Future<void> onInit(UserModel user) async {
+  Future<void> onInit(UserData user) async {
     try {
       if (state.bills.isNotEmpty) return;
 

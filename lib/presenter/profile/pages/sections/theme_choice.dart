@@ -41,8 +41,9 @@ class _ThemeChoiceState extends State<ThemeChoice> {
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
-                      crossAxisSpacing: AppThemeValues.spaceLarge,
-                      mainAxisSpacing: AppThemeValues.spaceLarge,
+                      childAspectRatio: 1.5,
+                      crossAxisSpacing: AppThemeValues.spaceSmall,
+                      mainAxisSpacing: AppThemeValues.spaceSmall,
                     ),
                     physics: const BouncingScrollPhysics(),
                     shrinkWrap: true,
@@ -56,9 +57,7 @@ class _ThemeChoiceState extends State<ThemeChoice> {
                               AppThemeValues.spaceXXXSmall),
                           child: Opacity(
                             opacity: state.isLightTheme ? 1 : 0.7,
-                            child: Container(
-                              height: 40,
-                              width: 40,
+                            child: DecoratedBox(
                               decoration: BoxDecoration(
                                 color: color,
                                 borderRadius: BorderRadius.circular(12),

@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:so_boleto/core/utils/base_cubit.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
-import 'package:so_boleto/domain/models/user.dart';
+import 'package:so_boleto/domain/models/user_data.dart';
 import 'package:so_boleto/domain/usecases/clear_user_storage.dart';
 import 'package:so_boleto/domain/usecases/sign_out.dart';
 
@@ -15,7 +15,7 @@ class ProfileCubit extends Cubit<ProfileState> with BaseCubit {
   final SignOut _signOutUsecase;
   final ClearUserStorage _clearUserStorage;
 
-  void onInit(UserModel user) {
+  void onInit(UserData user) {
     emit(state.copyWith(status: BaseStateStatus.initial, user: user));
   }
 

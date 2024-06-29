@@ -9,7 +9,7 @@ final class InitialState extends BaseState with EquatableMixin {
   });
 
   final BottomNavigatorPage currentPage;
-  final UserModel? user;
+  final UserData? user;
 
   @override
   List<Object?> get props => [
@@ -24,7 +24,7 @@ final class InitialState extends BaseState with EquatableMixin {
     BaseStateStatus? status,
     String? callbackMessage,
     BottomNavigatorPage? currentPage,
-    UserModel? user,
+    UserData? user,
   }) =>
       InitialState(
         status: status ?? this.status,

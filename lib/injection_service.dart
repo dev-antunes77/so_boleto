@@ -21,8 +21,8 @@ import 'package:so_boleto/domain/usecases/sign_up.dart';
 import 'package:so_boleto/domain/usecases/update_user_storage.dart';
 import 'package:so_boleto/infra/local_database/hive_bill_database/hive_bill_model.dart';
 import 'package:so_boleto/infra/local_database/hive_bill_database/hive_bills_database.dart';
+import 'package:so_boleto/infra/local_database/hive_user_database/hive_user_data.dart';
 import 'package:so_boleto/infra/local_database/hive_user_database/hive_user_database.dart';
-import 'package:so_boleto/infra/local_database/hive_user_database/hive_user_model.dart';
 import 'package:so_boleto/infra/services/auth_service/auth_service.dart';
 import 'package:so_boleto/infra/services/firestore_service/firestore_service.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
@@ -53,7 +53,7 @@ abstract class InjectionService {
   static Future<void> _initLocalStorage() async {
     await Hive.initFlutter();
 
-    Hive.registerAdapter(HiveUserModelAdapter());
+    Hive.registerAdapter(HiveUserDataAdapter());
     _i.registerFactory<HiveUserDatabase>(() => HiveUserDatabase());
     _i.get<HiveUserDatabase>();
 

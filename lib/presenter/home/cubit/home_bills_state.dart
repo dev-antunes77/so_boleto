@@ -4,18 +4,18 @@ class HomeBillsState extends BaseState with EquatableMixin {
   HomeBillsState({
     required super.status,
     super.callbackMessage,
-    UserModel? user,
+    UserData? user,
     String? querySearch,
     List<BillModel>? bills,
     List<BillModel>? filterParams,
     bool? paramsApplied,
-  })  : user = user ?? UserModel(),
+  })  : user = user ?? UserData(),
         filteredByParams = filterParams ?? List.empty(),
         bills = bills ?? List.empty(),
         querySearch = querySearch ?? '',
         paramsApplied = paramsApplied ?? false;
 
-  final UserModel user;
+  final UserData user;
   final List<BillModel> bills;
   final List<BillModel> filteredByParams;
   final String querySearch;
@@ -82,7 +82,7 @@ class HomeBillsState extends BaseState with EquatableMixin {
     List<BillModel>? filteredByParams,
     String? querySearch,
     bool? paramsApplied,
-    UserModel? user,
+    UserData? user,
   }) =>
       HomeBillsState(
         status: status ?? this.status,

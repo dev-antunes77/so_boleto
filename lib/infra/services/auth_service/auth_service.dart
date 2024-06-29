@@ -2,17 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:so_boleto/core/errors/app_errors.dart';
 import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/utils/log_utils.dart';
-import 'package:so_boleto/domain/models/user.dart';
+import 'package:so_boleto/domain/models/user_data.dart';
 import 'package:so_boleto/domain/repositories/auth_repository.dart';
 
 class AuthService implements AuthRepository {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
-  @override
-  Future<UserModel?> getUser() {
-    // TODO: implement getUser
-    throw UnimplementedError();
-  }
 
   @override
   Future<String> signIn(String email, String password) async {
@@ -55,5 +49,11 @@ class AuthService implements AuthRepository {
       Log.error(error, trace, 'Error executing $runtimeType: $error');
       throw ClientError(AppLocalizations.current.errorUnknowError);
     }
+  }
+
+  @override
+  Future<UserData?> getUser() {
+    // TODO: implement getUser
+    throw UnimplementedError();
   }
 }

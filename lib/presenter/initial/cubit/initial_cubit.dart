@@ -5,7 +5,7 @@ import 'package:so_boleto/core/errors/app_errors.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/utils/base_cubit.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
-import 'package:so_boleto/domain/models/user.dart';
+import 'package:so_boleto/domain/models/user_data.dart';
 import 'package:so_boleto/domain/usecases/create_user.dart';
 import 'package:so_boleto/domain/usecases/create_user_storage.dart';
 import 'package:so_boleto/domain/usecases/get_user_from_firebase.dart';
@@ -54,7 +54,7 @@ class InitialCubit extends Cubit<InitialState> with BaseCubit {
     }
   }
 
-  Future<void> onSignUp(UserModel user) async {
+  Future<void> onSignUp(UserData user) async {
     try {
       emit(state.copyWith(status: BaseStateStatus.loading));
       final userId = await _signUpUsecase(user, user.password.decodePassword());
@@ -85,7 +85,7 @@ class InitialCubit extends Cubit<InitialState> with BaseCubit {
     try {
       emit(state.copyWith(status: BaseStateStatus.loading));
       await Future.delayed(const Duration(seconds: 2)).then((_) async {
-        final updatedUser = state.user!.copyWith(hasSeenOnbording: true);
+        final updatedUser = state.user!.copyWith(hasSeenOnboarding: true);
         await _updateUserStorage(updatedUser);
         emit(state.copyWith(user: updatedUser));
       });

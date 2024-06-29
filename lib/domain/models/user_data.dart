@@ -5,56 +5,67 @@ import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:so_boleto/core/extensions/date_time_extensions.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
-import 'package:so_boleto/infra/local_database/hive_user_database/hive_user_model.dart';
+import 'package:so_boleto/domain/models/enums/payed_tag.dart';
+import 'package:so_boleto/infra/local_database/hive_user_database/hive_user_data.dart';
 
-part 'user.g.dart';
+part 'user_data.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class UserModel extends Equatable {
-  UserModel({
+class UserData extends Equatable {
+  UserData({
     this.id = '',
     this.name = '',
     this.lastName = '',
     this.email = '',
     this.password = '',
-    this.hasSeenOnbording = false,
+    this.hasSeenOnboarding = false,
+    this.hasLightTheme = true,
+    this.payedTag = PayedTag.stample,
     DateTime? createdAt,
   }) : createdAt = createdAt ?? DateTime.now();
 
-  factory UserModel.fromJson(Map<String, dynamic> json) =>
-      _$UserModelFromJson(json);
+  factory UserData.fromJson(Map<String, dynamic> json) =>
+      _$UserDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UserDataToJson(this);
 
   Map<String, dynamic> toFirestore() => <String, dynamic>{
         'id': id,
         'name': name,
         'lastName': lastName,
         'email': email,
+        'hasSeenOnboarding': hasSeenOnboarding,
+        'hasLightTheme': hasLightTheme,
+        'payedTag': payedTag.value,
         'createdAt': createdAt.dateTimeToStringData(),
       };
 
-  factory UserModel.fromFirestore(
+  factory UserData.fromFirestore(
       DocumentSnapshot<Map<String, dynamic>> snapshot,
       [SnapshotOptions? options]) {
     final data = snapshot.data();
-    return UserModel(
+    return UserData(
       id: data?['id'],
       name: data?['name'],
       lastName: data?['lastName'],
       email: data?['email'],
+      hasSeenOnboarding: data?['hasSeenOnboarding'],
+      hasLightTheme: data?['hasLightTheme'],
+      payedTag: (data?['payedTag'] as String).payedTagToEnum(),
       createdAt: (data?['createdAt'] as String).stringToDateTime(),
     );
   }
 
-  Map<String, dynamic> toJson() => _$UserModelToJson(this);
-
-  factory UserModel.fromHiveUser(HiveUserModel hiveUser) => UserModel(
+  factory UserData.fromHiveUser(HiveUserData hiveUser) => UserData(
         id: hiveUser.id,
         name: hiveUser.name,
         lastName: hiveUser.lastName,
         email: hiveUser.email,
         password: hiveUser.password,
+        hasLightTheme: hiveUser.hasLightTheme,
+        hasSeenOnboarding: hiveUser.hasSeenOnboarding,
+        payedTag: hiveUser.payedTag.payedTagToEnum(),
         createdAt: hiveUser.createdAt,
-        hasSeenOnbording: hiveUser.hasSeenOnbording,
       );
 
   final String id;
@@ -62,8 +73,10 @@ class UserModel extends Equatable {
   final String lastName;
   final String email;
   final String password;
+  final bool hasSeenOnboarding;
+  final bool hasLightTheme;
+  final PayedTag payedTag;
   final DateTime createdAt;
-  bool hasSeenOnbording;
 
   @override
   List<Object?> get props => [
@@ -73,25 +86,28 @@ class UserModel extends Equatable {
         email,
         password,
         createdAt,
-        hasSeenOnbording,
       ];
 
-  UserModel copyWith({
+  UserData copyWith({
     String? id,
     String? name,
     String? lastName,
     String? email,
     String? password,
+    bool? hasSeenOnboarding,
+    bool? hasLightTheme,
+    PayedTag? payedTag,
     DateTime? createdAt,
-    bool? hasSeenOnbording,
   }) =>
-      UserModel(
+      UserData(
         id: id ?? this.id,
         name: name ?? this.name,
         lastName: lastName ?? this.lastName,
         email: email ?? this.email,
         password: password ?? this.password,
+        hasSeenOnboarding: hasSeenOnboarding ?? this.hasSeenOnboarding,
+        hasLightTheme: hasLightTheme ?? this.hasLightTheme,
+        payedTag: payedTag ?? this.payedTag,
         createdAt: createdAt ?? this.createdAt,
-        hasSeenOnbording: hasSeenOnbording ?? this.hasSeenOnbording,
       );
 }

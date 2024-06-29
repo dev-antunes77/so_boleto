@@ -1,36 +1,38 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'hive_user_model.dart';
+part of 'hive_user_data.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class HiveUserModelAdapter extends TypeAdapter<HiveUserModel> {
+class HiveUserDataAdapter extends TypeAdapter<HiveUserData> {
   @override
   final int typeId = 1;
 
   @override
-  HiveUserModel read(BinaryReader reader) {
+  HiveUserData read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return HiveUserModel(
+    return HiveUserData(
       id: fields[1] as String,
       name: fields[2] as String,
       lastName: fields[3] as String,
       email: fields[4] as String,
       password: fields[5] as String,
-      createdAt: fields[8] as DateTime,
-      hasSeenOnbording: fields[7] as bool,
+      hasSeenOnboarding: fields[6] as bool,
+      hasLightTheme: fields[7] as bool,
+      payedTag: fields[8] as String,
+      createdAt: fields[9] as DateTime,
     );
   }
 
   @override
-  void write(BinaryWriter writer, HiveUserModel obj) {
+  void write(BinaryWriter writer, HiveUserData obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(9)
       ..writeByte(1)
       ..write(obj.id)
       ..writeByte(2)
@@ -41,9 +43,13 @@ class HiveUserModelAdapter extends TypeAdapter<HiveUserModel> {
       ..write(obj.email)
       ..writeByte(5)
       ..write(obj.password)
+      ..writeByte(6)
+      ..write(obj.hasSeenOnboarding)
       ..writeByte(7)
-      ..write(obj.hasSeenOnbording)
+      ..write(obj.hasLightTheme)
       ..writeByte(8)
+      ..write(obj.payedTag)
+      ..writeByte(9)
       ..write(obj.createdAt);
   }
 
@@ -53,7 +59,7 @@ class HiveUserModelAdapter extends TypeAdapter<HiveUserModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is HiveUserModelAdapter &&
+      other is HiveUserDataAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

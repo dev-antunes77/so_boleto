@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:intl/intl.dart';
 import 'package:so_boleto/domain/models/enums/bill_category.dart';
 import 'package:so_boleto/domain/models/enums/bill_status.dart';
+import 'package:so_boleto/domain/models/enums/payed_tag.dart';
 
 extension StringExtensions on String {
   BillCategory categoryToEnum() =>
@@ -10,6 +11,9 @@ extension StringExtensions on String {
 
   BillStatus billStatuToEnum() =>
       BillStatus.values.firstWhere((element) => element.value == this);
+
+  PayedTag payedTagToEnum() =>
+      PayedTag.values.firstWhere((element) => element.value == this);
 
   String capitalize() =>
       isNotEmpty ? this[0].toUpperCase() + substring(1).toLowerCase() : this;

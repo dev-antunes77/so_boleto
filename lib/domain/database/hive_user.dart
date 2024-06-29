@@ -1,8 +1,8 @@
-import 'package:so_boleto/domain/models/user.dart';
+import 'package:so_boleto/domain/models/user_data.dart';
 
 abstract interface class HiveUser {
-  Future<UserModel?> getUser();
-  Future<void> setUser(UserModel user);
-  Future<void> updateUser(UserModel user);
+  Future<UserData?> getUser();
+  Future<void> setUser(UserData user);
+  Future<void> updateUser(UserData user);
   Future<void> removeUser(String userId);
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
-import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 
 class CardEdgeDecoration extends StatelessWidget {
   const CardEdgeDecoration({
@@ -35,8 +34,8 @@ class CardEdgeDecoration extends StatelessWidget {
           ),
         ),
         child: const SizedBox(
-          height: AppThemeValues.spaceMedium,
-          width: AppThemeValues.spaceMedium,
+          height: 14,
+          width: 14,
         ),
       ),
     );

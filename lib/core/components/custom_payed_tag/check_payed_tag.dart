@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 
-class CheckPayedLabel extends StatelessWidget {
-  const CheckPayedLabel(this.display, {super.key});
+class CheckPayedTag extends StatelessWidget {
+  const CheckPayedTag(this.showTag, {super.key, required this.color});
 
-  final bool display;
+  final bool showTag;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
-    return display
+    return showTag
         ? Positioned(
             right: 0,
             top: 0,
@@ -20,7 +21,7 @@ class CheckPayedLabel extends StatelessWidget {
                       175,
                       (175 * 0.5833333333333334)
                           .toDouble()), //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
-                  painter: LabelCustomPainter(),
+                  painter: LabelCustomPainter(color),
                 ),
                 const Positioned(
                   right: 2,
@@ -39,10 +40,13 @@ class CheckPayedLabel extends StatelessWidget {
 }
 
 class LabelCustomPainter extends CustomPainter {
+  LabelCustomPainter(this.color, {super.repaint});
+  final Color color;
+
   @override
   void paint(Canvas canvas, Size size) {
     Paint paintFill0 = Paint()
-      ..color = AppColors.primary.withOpacity(0.5)
+      ..color = color
       ..style = PaintingStyle.fill
       ..strokeWidth = size.width * 0.00
       ..strokeCap = StrokeCap.butt

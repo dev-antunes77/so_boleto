@@ -11,7 +11,7 @@ import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
 import 'package:so_boleto/core/utils/form_validator.dart';
-import 'package:so_boleto/domain/models/user.dart';
+import 'package:so_boleto/domain/models/user_data.dart';
 import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
 
 class LoginPage extends StatefulWidget {
@@ -176,7 +176,7 @@ class _LoginPageState extends State<LoginPage> {
 
   _whenLogInIsSuccessful(bool match) {
     if (match) {
-      if (cubit.state.user!.hasSeenOnbording) {
+      if (cubit.state.user!.hasSeenOnboarding) {
         context.navigateTo(Routes.home);
       } else {
         context.navigateTo(Routes.onboarding);
@@ -191,7 +191,7 @@ class _LoginPageState extends State<LoginPage> {
         _passwordController.text.encodePassword(),
       );
 
-  _buildUser() => UserModel(
+  _buildUser() => UserData(
         name: _nameController.text,
         lastName: _lastNameController.text,
         email: _emailController.text,

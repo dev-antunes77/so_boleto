@@ -63,100 +63,104 @@ class _PromptBillsPageState extends State<PromptBillsPage> {
                   ),
                 ),
                 LineSeparator.horizontal(),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppThemeValues.spaceSmall,
-                  ),
-                  child: GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      childAspectRatio: 4 / 3,
-                      crossAxisSpacing: AppThemeValues.spaceSmall,
-                      mainAxisSpacing: AppThemeValues.spaceSmall,
+                SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppThemeValues.spaceSmall,
                     ),
-                    itemCount: state.promptBills.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      final bill = state.promptBills[index];
-                      return GestureDetector(
-                        onTap: () => cubit.onCardClicked(bill),
-                        child: Stack(
-                          children: [
-                            Card(
-                              child: DecoratedBox(
-                                decoration: BoxDecoration(
-                                  border: bill.isSelected
-                                      ? Border.all(
-                                          width: AppThemeValues.spaceXXSmall,
-                                          color: AppColors.primary,
-                                        )
-                                      : null,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(
-                                      AppThemeValues.spaceXXSmall),
-                                  child: Center(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        SvgAsset(
-                                          svg: bill.category.getIconResponse(),
-                                          height: bill.isSelected ? 40 : 32,
-                                          color: bill.isSelected
-                                              ? AppColors.primary
-                                              : AppColors.greyMediumLight,
-                                        ),
-                                        AppThemeValues.spaceVerticalTiny,
-                                        FittedBox(
-                                          fit: BoxFit.contain,
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal:
-                                                  AppThemeValues.spaceTiny,
-                                            ),
-                                            child: Text(
-                                              bill.name,
-                                              style: context
-                                                  .textRobotoSubtitleSmall
-                                                  .copyWith(
-                                                color: bill.isSelected
-                                                    ? AppColors.primary
-                                                    : null,
+                    child: GridView.builder(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        childAspectRatio: 4 / 3.5,
+                        crossAxisSpacing: AppThemeValues.spaceSmall,
+                        mainAxisSpacing: AppThemeValues.spaceSmall,
+                      ),
+                      itemCount: state.promptBills.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        final bill = state.promptBills[index];
+                        return GestureDetector(
+                          onTap: () => cubit.onCardClicked(bill),
+                          child: Stack(
+                            children: [
+                              Card(
+                                child: DecoratedBox(
+                                  decoration: BoxDecoration(
+                                    border: bill.isSelected
+                                        ? Border.all(
+                                            width: AppThemeValues.spaceXXSmall,
+                                            color: AppColors.primary,
+                                          )
+                                        : null,
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(
+                                        AppThemeValues.spaceXXSmall),
+                                    child: Center(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          SvgAsset(
+                                            svg:
+                                                bill.category.getIconResponse(),
+                                            height: bill.isSelected ? 40 : 32,
+                                            color: bill.isSelected
+                                                ? AppColors.primary
+                                                : AppColors.greyMediumLight,
+                                          ),
+                                          AppThemeValues.spaceVerticalTiny,
+                                          FittedBox(
+                                            fit: BoxFit.contain,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                horizontal:
+                                                    AppThemeValues.spaceTiny,
+                                              ),
+                                              child: Text(
+                                                bill.name,
+                                                style: context
+                                                    .textRobotoSubtitleSmall
+                                                    .copyWith(
+                                                  color: bill.isSelected
+                                                      ? AppColors.primary
+                                                      : null,
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                            if (bill.isSelected) ...[
-                              const CardEdgeDecoration(
-                                alignment: Alignment.topLeft,
-                                bottomRightRadius: true,
-                              ),
-                              const CardEdgeDecoration(
-                                alignment: Alignment.topRight,
-                                bottomLeftRadius: true,
-                              ),
-                              const CardEdgeDecoration(
-                                alignment: Alignment.bottomLeft,
-                                topRightRadius: true,
-                              ),
-                              const CardEdgeDecoration(
-                                alignment: Alignment.bottomRight,
-                                topLefttRadius: true,
-                              ),
+                              if (bill.isSelected) ...[
+                                const CardEdgeDecoration(
+                                  alignment: Alignment.topLeft,
+                                  bottomRightRadius: true,
+                                ),
+                                const CardEdgeDecoration(
+                                  alignment: Alignment.topRight,
+                                  bottomLeftRadius: true,
+                                ),
+                                const CardEdgeDecoration(
+                                  alignment: Alignment.bottomLeft,
+                                  topRightRadius: true,
+                                ),
+                                const CardEdgeDecoration(
+                                  alignment: Alignment.bottomRight,
+                                  topLefttRadius: true,
+                                ),
+                              ],
                             ],
-                          ],
-                        ),
-                      );
-                    },
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
                 LineSeparator.horizontal(),

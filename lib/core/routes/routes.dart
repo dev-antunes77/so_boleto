@@ -17,8 +17,9 @@ class Routes {
   static const expenses = '/expenses';
   static const filter = '/filter';
   static const profile = '/profile';
-  static const profilePreferences = '/profile-preferences';
-  static const profilePreferencesTheme = '/profile-preferences-theme';
+  static const profileTheme = '/profile-theme';
+  static const profileDueDay = '/profile-due-day';
+  static const profilePayedTag = '/profile-payed-tag';
 }
 
 ///Represents the routes with relative paths
@@ -40,6 +41,7 @@ class RelativePaths {
   static const expenses = '/expenses';
   static const filter = '/filter';
   static const profile = '/profile';
-  static const profilePreferences = '/profile-preferences';
-  static const profilePreferencesTheme = '/profile-preferences-theme';
+  static const profileTheme = '/profile-theme';
+  static const profileDueDay = '/profile-due-day';
+  static const profilePayedTag = '/profile-payed-tag';
 }
