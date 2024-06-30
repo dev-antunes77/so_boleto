@@ -24,6 +24,8 @@ class ProfileOptionsAppBar extends StatelessWidget {
         return 'Vencimento';
       case Routes.profilePayedTag:
         return 'Marca de pagamento';
+      case Routes.profileSecurity:
+        return 'Segurança';
     }
     return 'Meu Perfil';
   }

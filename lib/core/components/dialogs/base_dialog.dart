@@ -10,16 +10,18 @@ import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 class BaseDialog extends StatelessWidget {
   const BaseDialog({
     super.key,
-    required this.title,
-    required this.description,
+    this.title,
+    this.description,
+    this.content,
     this.onAcept,
     this.onDeny,
     this.onConfirmText,
     this.onDenyText,
-  });
+  }) : assert(content != null || (title != null && description != null));
 
-  final String title;
-  final String description;
+  final String? title;
+  final String? description;
+  final Widget? content;
   final VoidCallback? onAcept;
   final VoidCallback? onDeny;
   final String? onConfirmText;
@@ -50,39 +52,41 @@ class BaseDialog extends StatelessWidget {
                     ),
                   ),
                 ),
-                Column(
-                  children: [
-                    AppThemeValues.spaceVerticalLarge,
-                    Text(title, style: context.textSubtitleMedium),
-                    if (description.isNotEmpty) ...[
-                      AppThemeValues.spaceVerticalXLarge,
-                      Text(
-                        description,
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                    AppThemeValues.spaceVerticalXLarge,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                content ??
+                    Column(
                       children: [
-                        PillButton(
-                          backgroundColor: AppColors.primary,
-                          onTap: () => context.pop(true),
-                          child: Text(onDenyText ?? 'Não'),
-                        ),
-                        PillButton(
-                          backgroundColor: AppColors.background,
-                          onTap: onAcept,
-                          child: Text(
-                            onConfirmText ?? 'Sim',
-                            style: context.textRobotoMedium
-                                .copyWith(color: Colors.black),
+                        AppThemeValues.spaceVerticalLarge,
+                        if (title != null)
+                          Text(title!, style: context.textSubtitleMedium),
+                        if (description != null) ...[
+                          AppThemeValues.spaceVerticalXLarge,
+                          Text(
+                            description!,
+                            textAlign: TextAlign.center,
                           ),
+                        ],
+                        AppThemeValues.spaceVerticalXLarge,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            PillButton(
+                              backgroundColor: AppColors.primary,
+                              onTap: () => context.pop(true),
+                              child: Text(onDenyText ?? 'Não'),
+                            ),
+                            PillButton(
+                              backgroundColor: AppColors.background,
+                              onTap: onAcept,
+                              child: Text(
+                                onConfirmText ?? 'Sim',
+                                style: context.textRobotoMedium
+                                    .copyWith(color: Colors.black),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ],
-                ),
               ],
             ),
           ],

@@ -5,6 +5,7 @@ import 'package:so_boleto/core/errors/app_errors.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/utils/base_cubit.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
+import 'package:so_boleto/domain/models/enums/payed_tag.dart';
 import 'package:so_boleto/domain/models/user_data.dart';
 import 'package:so_boleto/domain/usecases/create_user.dart';
 import 'package:so_boleto/domain/usecases/create_user_storage.dart';
@@ -96,4 +97,16 @@ class InitialCubit extends Cubit<InitialState> with BaseCubit {
 
   void onChangePage(BottomNavigatorPage page) =>
       emit(state.copyWith(currentPage: page));
+
+  void onUpdateUserTag(PayedTag payedTag) {
+    emit(state.copyWith(status: BaseStateStatus.loading));
+    emit(
+      state.copyWith(
+        status: BaseStateStatus.success,
+        user: state.user!.copyWith(
+          payedTag: payedTag,
+        ),
+      ),
+    );
+  }
 }

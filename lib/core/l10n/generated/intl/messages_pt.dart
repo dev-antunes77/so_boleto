@@ -152,12 +152,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Deletando..."),
         "homeBillEditionError":
             MessageLookupByLibrary.simpleMessage("Erro ao editar a conta"),
-        "homeBillPayedTag": MessageLookupByLibrary.simpleMessage("Paga"),
         "homeBillPaying": MessageLookupByLibrary.simpleMessage("Pagando..."),
         "homeTabAll": MessageLookupByLibrary.simpleMessage("Todas"),
         "homeTabDelayed": MessageLookupByLibrary.simpleMessage("Atrasadas"),
         "homeTabPayed": MessageLookupByLibrary.simpleMessage("Pagas"),
         "parcels": MessageLookupByLibrary.simpleMessage("Parcelas"),
+        "payedTag": MessageLookupByLibrary.simpleMessage("PAGA"),
         "profile": MessageLookupByLibrary.simpleMessage("Perfil"),
         "prompBillAppBar":
             MessageLookupByLibrary.simpleMessage("Contas prontas"),

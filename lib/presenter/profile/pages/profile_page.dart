@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:so_boleto/core/components/buttons/pill_button.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
-import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
@@ -71,32 +69,41 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           const Divider(height: AppThemeValues.spaceXLarge),
           const ProfileTitleSection('Preferências'),
-          const ProfileOptionTile(
+          ProfileOptionTile(
             label: 'Tema',
-            subtitle: 'escolha entre tema claro ou escuro',
-            route: Routes.profileTheme,
+            subtitle: 'Temas e cores do seu app',
+            onTap: () => context.pushTo(Routes.profileTheme),
+            svg: AppIcons.paintRoll,
+            color: themeColors.text,
           ),
-          const ProfileOptionTile(
+          ProfileOptionTile(
             label: 'Vencimento',
-            subtitle: 'escolha um dia para suas contas vencerem',
-            route: Routes.profileDueDay,
+            subtitle: 'Dia para suas contas vencerem',
+            onTap: () => context.pushTo(Routes.profileDueDay),
+            svg: AppIcons.calendar2,
+            color: themeColors.text,
           ),
-          const ProfileOptionTile(
+          ProfileOptionTile(
             label: 'Marca de pagamento',
-            subtitle: 'escolha uma tag para as contas marcadas como pagas',
-            route: Routes.profilePayedTag,
+            subtitle: 'Tag para as contas marcadas como pagas',
+            onTap: () => context.pushTo(Routes.profilePayedTag),
+            svg: AppIcons.tag,
+            color: themeColors.text,
           ),
-          Center(
-            child: PillButton(
-              onTap: _onLogoutPressed,
-              child: Text(
-                'Sair',
-                style: context.textRobotoSmall.copyWith(
-                  color: AppColors.white,
-                ),
-              ),
-            ),
-          )
+          const Divider(height: AppThemeValues.spaceXLarge),
+          const ProfileTitleSection('Gerenciamento'),
+          ProfileOptionTile(
+            label: 'Segurança',
+            onTap: () => context.pushTo(Routes.profileSecurity),
+            svg: AppIcons.key,
+            color: themeColors.text,
+          ),
+          ProfileOptionTile(
+            label: 'Sair',
+            onTap: _onLogoutPressed,
+            svg: AppIcons.logout,
+            color: themeColors.text,
+          ),
         ],
       ),
     );

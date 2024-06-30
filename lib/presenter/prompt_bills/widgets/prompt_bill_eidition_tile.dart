@@ -11,8 +11,8 @@ import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
+import 'package:so_boleto/core/theme/settings/theme_colors.dart';
 import 'package:so_boleto/domain/models/prompt_bill.dart';
-import 'package:so_boleto/domain/models/theme_colors.dart';
 
 class PromptBillEditionTile extends StatelessWidget {
   const PromptBillEditionTile({

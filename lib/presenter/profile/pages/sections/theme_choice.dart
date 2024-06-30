@@ -61,8 +61,23 @@ class _ThemeChoiceState extends State<ThemeChoice> {
                             child: DecoratedBox(
                               decoration: BoxDecoration(
                                 color: color,
+                                border: color == state.selectedColors.baseColor
+                                    ? Border.all(
+                                        width: 5,
+                                        color: state.selectedColors.text,
+                                        strokeAlign:
+                                            BorderSide.strokeAlignOutside,
+                                      )
+                                    : null,
                                 borderRadius: BorderRadius.circular(12),
                               ),
+                              child: color == state.selectedColors.baseColor
+                                  ? const Icon(
+                                      Icons.check,
+                                      color: AppColors.white,
+                                      size: 24,
+                                    )
+                                  : null,
                             ),
                           ),
                         ),
@@ -79,11 +94,11 @@ class _ThemeChoiceState extends State<ThemeChoice> {
   }
 
   static const List<Color> themeColors = [
-    AppColors.primary,
-    Colors.amber,
-    Colors.blueAccent,
+    Color.fromARGB(255, 7, 134, 60),
+    Color.fromARGB(255, 251, 139, 35),
+    Color.fromARGB(255, 15, 82, 186),
     Colors.red,
     Colors.deepPurple,
-    Color.fromARGB(255, 214, 212, 145),
+    Color.fromARGB(255, 0, 154, 166),
   ];
 }

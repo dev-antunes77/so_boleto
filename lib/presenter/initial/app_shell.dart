@@ -7,8 +7,8 @@ import 'package:so_boleto/core/components/custom_pop_scope/custom_pop_scope.dart
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
+import 'package:so_boleto/presenter/initial/appbar_handler.dart';
 import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
-import 'package:so_boleto/presenter/initial/widgets/appbar_handler.dart';
 
 class AppShell extends StatefulWidget {
   const AppShell({

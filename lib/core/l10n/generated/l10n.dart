@@ -820,16 +820,6 @@ class AppLocalizations {
     );
   }
 
-  /// `Paga`
-  String get homeBillPayedTag {
-    return Intl.message(
-      'Paga',
-      name: 'homeBillPayedTag',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Pagando...`
   String get homeBillPaying {
     return Intl.message(
@@ -905,6 +895,16 @@ class AppLocalizations {
     return Intl.message(
       'Atrasadas',
       name: 'homeTabDelayed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PAGA`
+  String get payedTag {
+    return Intl.message(
+      'PAGA',
+      name: 'payedTag',
       desc: '',
       args: [],
     );

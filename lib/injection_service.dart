@@ -5,6 +5,7 @@ import 'package:so_boleto/core/environment/firebase_env.dart';
 import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/domain/usecases/add_prompt_bills.dart';
 import 'package:so_boleto/domain/usecases/clear_user_storage.dart';
+import 'package:so_boleto/domain/usecases/confirm_user_password.dart';
 import 'package:so_boleto/domain/usecases/create_bill.dart';
 import 'package:so_boleto/domain/usecases/create_user.dart';
 import 'package:so_boleto/domain/usecases/create_user_storage.dart';
@@ -131,6 +132,12 @@ abstract class InjectionService {
     );
 
     _i.registerFactory(
+      () => ConfirmUserPassword(
+        _i.get<HiveUserDatabase>(),
+      ),
+    );
+
+    _i.registerFactory(
       () => GetUserFromFirebase(
         _i.get<FirestoreService>(),
       ),
@@ -251,6 +258,7 @@ abstract class InjectionService {
       () => ProfileCubit(
         _i.get<SignOut>(),
         _i.get<ClearUserStorage>(),
+        _i.get<ConfirmUserPassword>(),
       ),
     );
   }

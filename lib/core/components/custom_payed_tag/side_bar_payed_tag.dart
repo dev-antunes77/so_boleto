@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
-import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
+import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
+import 'package:so_boleto/core/theme/settings/app_colors.dart';
 
 class SideBarPayedTag extends StatelessWidget {
   const SideBarPayedTag({
@@ -16,21 +18,35 @@ class SideBarPayedTag extends StatelessWidget {
   Widget build(BuildContext context) {
     return showTag
         ? Positioned(
-            left: 0,
-            top: 10,
-            bottom: 10,
-            child: Transform.translate(
-              offset: const Offset(-AppThemeValues.spaceSmall, 0),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                    topRight: Radius.circular(20),
-                    bottomRight: Radius.circular(20),
+            right: 0,
+            top: 0,
+            bottom: 0,
+            child: Container(
+              decoration: BoxDecoration(
+                color: color,
+              ),
+              width: context.width * 0.06,
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Center(
+                  child: FittedBox(
+                    fit: BoxFit.contain,
+                    child: Column(
+                      children: AppLocalizations.current.payedTag
+                          .split('')
+                          .map(
+                            (letter) => Text(
+                              letter,
+                              style: context.textRobotoSmall.copyWith(
+                                decorationStyle: TextDecorationStyle.dashed,
+                                color: AppColors.white,
+                              ),
+                            ),
+                          )
+                          .toList(),
+                    ),
                   ),
-                  color: color,
                 ),
-                height: 60,
-                width: context.width * 0.03,
               ),
             ),
           )

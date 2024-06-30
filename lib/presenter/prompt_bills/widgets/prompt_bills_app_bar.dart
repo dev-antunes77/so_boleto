@@ -28,11 +28,8 @@ class PromptBillsAppBar extends StatelessWidget {
                       label: state.allSelected
                           ? AppLocalizations.current.prompBillAppBarRemoveAll
                           : AppLocalizations.current.prompBillAppBarSelectAll,
-                      color: context
-                          .read<ThemeCubit>()
-                          .state
-                          .selectedColors
-                          .cardBackground,
+                      color:
+                          context.read<ThemeCubit>().state.selectedColors.tag,
                       onTap: state.allSelected
                           ? () => context
                               .read<PromptBillsCubit>()

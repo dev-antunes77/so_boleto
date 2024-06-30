@@ -8,4 +8,8 @@ extension ColorExtensions on Color {
     int alpha = (this.alpha * opacityFactor).round();
     return Color.fromARGB(alpha, red, green, blue);
   }
+
+  String toHexColor() {
+    return '#${value.toRadixString(16).substring(2)}';
+  }
 }

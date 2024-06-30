@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
+import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 
 class StamplePayedTag extends StatelessWidget {
   const StamplePayedTag(this.showTag, {super.key, required this.color});
@@ -15,7 +16,7 @@ class StamplePayedTag extends StatelessWidget {
   Widget build(BuildContext context) {
     return showTag
         ? Positioned(
-            top: 0,
+            top: AppThemeValues.spaceXXXSmall,
             left: context.width * 0.55,
             child: Transform.rotate(
               angle: pi / 6.0,
@@ -24,17 +25,17 @@ class StamplePayedTag extends StatelessWidget {
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(
-                      Radius.circular(12),
+                      Radius.circular(AppThemeValues.spaceSmall),
                     ),
                     border: Border.all(
                       color: color,
-                      width: 2,
+                      width: AppThemeValues.spaceXTiny,
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(AppThemeValues.spaceXXSmall),
                     child: Text(
-                      AppLocalizations.current.homeBillPayedTag,
+                      AppLocalizations.current.payedTag,
                       style: context.textStamper.copyWith(
                         color: color,
                       ),

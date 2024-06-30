@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
@@ -23,6 +25,8 @@ class CustomTextFormField extends StatefulWidget {
     this.maxLines = 1,
     this.obscureText = false,
     this.focusNode,
+    this.icon,
+    this.suffixIcon,
     this.onFieldSubmitted,
   });
 
@@ -39,6 +43,8 @@ class CustomTextFormField extends StatefulWidget {
   final TextEditingController? controller;
   final TextCapitalization textCapitalization;
   final FocusNode? focusNode;
+  final Widget? icon;
+  final Widget? suffixIcon;
   final void Function(String value)? onChanged;
   final void Function()? onTap;
   final void Function()? onEditingComplete;
@@ -51,18 +57,20 @@ class CustomTextFormField extends StatefulWidget {
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
   final FocusNode focusNode = FocusNode();
   late final TextEditingController controller;
-  var borderColor = AppColors.black;
+  late Color borderColor;
   String? error;
 
   @override
   void initState() {
+    borderColor =
+        context.read<ThemeCubit>().state.selectedColors.circleBackground;
     super.initState();
     controller = widget.controller ?? TextEditingController();
 
     controller.addListener(() {
       setState(() {
         error = widget.validator?.call(controller.value.text);
-        borderColor = error != null ? AppColors.error : AppColors.black;
+        borderColor = error != null ? AppColors.error : borderColor;
       });
     });
   }
@@ -122,13 +130,14 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               labelStyle: context.textRobotoXSmall,
               hintText: widget.hintText,
               hintStyle: context.textRobotoSubtitleMedium,
-              // ignore: avoid_redundant_argument_values
               errorMaxLines: null,
               errorStyle: const TextStyle(
                 color: Colors.transparent,
                 height: 0.001,
                 fontSize: 0,
               ),
+              suffixIcon: widget.suffixIcon,
+              icon: widget.icon,
             ),
           ),
         ),

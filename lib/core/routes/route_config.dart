@@ -20,6 +20,7 @@ import 'package:so_boleto/presenter/profile/pages/profile_page.dart';
 import 'package:so_boleto/presenter/profile/pages/sections/due_day_choice.dart';
 import 'package:so_boleto/presenter/profile/pages/sections/payed_tag_choice.dart';
 import 'package:so_boleto/presenter/profile/pages/sections/theme_choice.dart';
+import 'package:so_boleto/presenter/profile/pages/security_page.dart';
 import 'package:so_boleto/presenter/prompt_bills/pages/prompt_bills_edition_page.dart';
 import 'package:so_boleto/presenter/prompt_bills/pages/prompt_bills_page.dart';
 
@@ -200,6 +201,14 @@ abstract class RoutesConfig {
             pageBuilder: (_, state) => _getTransitionPage(
               state,
               const PayedTagChoice(),
+            ),
+          ),
+          GoRoute(
+            path: RelativePaths.profileSecurity,
+            parentNavigatorKey: _shellKey,
+            pageBuilder: (_, state) => _getTransitionPage(
+              state,
+              const SecurityPage(),
             ),
           ),
           // GoRoute(

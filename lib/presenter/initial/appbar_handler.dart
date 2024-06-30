@@ -34,6 +34,7 @@ class AppBarHandler extends StatelessWidget {
       case Routes.profileTheme:
       case Routes.profileDueDay:
       case Routes.profilePayedTag:
+      case Routes.profileSecurity:
         return const ProfileOptionsAppBar();
     }
     throw Exception();

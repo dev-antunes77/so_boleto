@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
+import 'package:so_boleto/core/theme/settings/theme_colors.dart';
 
 void getCustomSnackBar(
   BuildContext context, {
   required String title,
   VoidCallback? action,
 }) {
-  final overlayEntry = _getOverlayEntry(title, action);
+  final color = context.read<ThemeCubit>().state.selectedColors;
+  final overlayEntry = _getOverlayEntry(title, color, action);
 
   Overlay.of(context).insert(overlayEntry);
 
@@ -18,6 +22,7 @@ void getCustomSnackBar(
 
 OverlayEntry _getOverlayEntry(
   String title,
+  ThemeColors color,
   VoidCallback? action,
 ) =>
     OverlayEntry(
@@ -31,7 +36,7 @@ OverlayEntry _getOverlayEntry(
             elevation: 1,
             borderRadius:
                 const BorderRadius.all(AppThemeValues.borderRadiusSmall),
-            color: AppColors.greyMediumLight,
+            color: color.error,
             child: Container(
               padding: const EdgeInsets.symmetric(
                 vertical: AppThemeValues.spaceMedium,
@@ -39,7 +44,7 @@ OverlayEntry _getOverlayEntry(
               child: Text(
                 title,
                 style: context.textRobotoMedium.copyWith(
-                  color: AppColors.black,
+                  color: AppColors.white,
                 ),
                 textAlign: TextAlign.center,
               ),

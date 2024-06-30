@@ -44,4 +44,13 @@ final class HiveUserDatabase with OpneBoxMixin implements HiveUser {
       itemBox.delete(userId);
     }
   }
+
+  @override
+  Future<String> checkUserPassword(String userId) async {
+    final itemBox = await openBox(_box, _boxLabel);
+    final hiveUser = (itemBox.values.toList().isEmpty)
+        ? null
+        : itemBox.values.first as HiveUserData;
+    return hiveUser?.password ?? '';
+  }
 }

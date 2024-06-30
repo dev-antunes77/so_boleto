@@ -13,6 +13,7 @@ final class ThemeColors {
     required this.icon,
     required this.tag,
     required this.disabled,
+    required this.error,
   });
 
   factory ThemeColors.dark(Color color) {
@@ -27,6 +28,7 @@ final class ThemeColors {
       inversedText: _mixColors(primary, AppColors.black, 0.9),
       icon: _mixColors(primary, AppColors.white, 0.5),
       disabled: AppColors.darkGrey,
+      error: _mixColors(AppColors.error, Colors.black, 0.3),
     );
   }
 
@@ -40,6 +42,7 @@ final class ThemeColors {
         inversedText: _mixColors(color, Colors.white, 0.9),
         icon: _mixColors(color, Colors.black, 0.6),
         disabled: Colors.grey,
+        error: _mixColors(AppColors.error, Colors.black, 0.3),
       );
 
   final Color baseColor;
@@ -51,6 +54,7 @@ final class ThemeColors {
   final Color text;
   final Color inversedText;
   final Color disabled;
+  final Color error;
 
   static Color _mixColors(Color color1, Color color2, double ratio) {
     assert(ratio >= 0 && ratio <= 1);
@@ -70,6 +74,7 @@ final class ThemeColors {
     Color? icon,
     Color? tag,
     Color? disabled,
+    Color? error,
   }) {
     return ThemeColors(
       baseColor: baseColor ?? this.baseColor,
@@ -81,6 +86,7 @@ final class ThemeColors {
       icon: icon ?? this.icon,
       tag: tag ?? this.tag,
       disabled: disabled ?? this.disabled,
+      error: error ?? this.error,
     );
   }
 }

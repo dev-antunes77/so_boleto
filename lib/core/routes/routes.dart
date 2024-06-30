@@ -20,6 +20,7 @@ class Routes {
   static const profileTheme = '/profile-theme';
   static const profileDueDay = '/profile-due-day';
   static const profilePayedTag = '/profile-payed-tag';
+  static const profileSecurity = '/profile-security-tag';
 }
 
 ///Represents the routes with relative paths
@@ -44,4 +45,5 @@ class RelativePaths {
   static const profileTheme = '/profile-theme';
   static const profileDueDay = '/profile-due-day';
   static const profilePayedTag = '/profile-payed-tag';
+  static const profileSecurity = '/profile-security-tag';
 }

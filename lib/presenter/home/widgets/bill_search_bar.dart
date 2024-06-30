@@ -51,11 +51,7 @@ class _SearchBarAnimationState extends State<BillSearchBar> {
                     setState(() {});
                   },
                   label: AppLocalizations.current.close,
-                  color: context
-                      .read<ThemeCubit>()
-                      .state
-                      .selectedColors
-                      .cardBackground,
+                  color: context.read<ThemeCubit>().state.selectedColors.tag,
                 )
               : const SizedBox.shrink(),
           suffixIconConstraints: const BoxConstraints.tightFor(height: 22),
