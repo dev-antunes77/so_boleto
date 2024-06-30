@@ -7,34 +7,31 @@ class AppBarButton extends StatelessWidget {
     super.key,
     required this.label,
     required this.onTap,
+    required this.color,
   });
 
   final String label;
+  final Color color;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        right: AppThemeValues.spaceSmall,
-      ),
-      child: GestureDetector(
-        onTap: onTap,
-        child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-              AppThemeValues.spaceSmall,
-            ),
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
+          color: color,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(
+            left: AppThemeValues.spaceXXSmall,
+            right: AppThemeValues.spaceXXSmall,
+            top: AppThemeValues.spaceXTiny,
           ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppThemeValues.spaceSmall,
-              vertical: AppThemeValues.spaceTiny,
-            ),
-            child: Text(
-              label,
-              style: context.textSmall.copyWith(),
-            ),
+          child: Text(
+            label,
+            style: context.textXSmall,
           ),
         ),
       ),

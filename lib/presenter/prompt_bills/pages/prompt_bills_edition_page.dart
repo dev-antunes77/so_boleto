@@ -6,9 +6,11 @@ import 'package:so_boleto/core/components/thin_line_separator/thin_line_separato
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes.dart';
+import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/domain/models/prompt_bill.dart';
+import 'package:so_boleto/domain/models/theme_colors.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 import 'package:so_boleto/presenter/prompt_bills/cubit/prompt_bills_cubit.dart';
 import 'package:so_boleto/presenter/prompt_bills/widgets/prompt_bill_eidition_tile.dart';
@@ -24,10 +26,13 @@ class _PromptBillsEditionPageState extends State<PromptBillsEditionPage> {
   late final PromptBillsCubit cubit;
   List<PromptBill> selectedPromptBills = [];
   List<FocusNode> focuses = [];
+  late final ThemeColors colors;
 
   @override
   void initState() {
     cubit = context.read<PromptBillsCubit>();
+    colors = context.read<ThemeCubit>().state.selectedColors;
+
     cubit.onEditionInit();
     focuses = List.generate(
       cubit.state.selectedPromptBills.length,
@@ -73,6 +78,7 @@ class _PromptBillsEditionPageState extends State<PromptBillsEditionPage> {
                         dueDayValue: promptBill.dueDay,
                         isLastItem: isLastItem,
                         valueFocus: valueFocus,
+                        colors: colors,
                         onEditingComplete: () => _onEditingComplete(index),
                         onDueDayChanged: (dueDay) =>
                             cubit.onDueDayEdition(promptBill.id, dueDay),

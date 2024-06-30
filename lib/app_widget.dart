@@ -42,12 +42,12 @@ class _AppWidgetState extends State<AppWidget> {
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
               useMaterial3: true,
-              colorSchemeSeed: state.selectedColor,
+              colorSchemeSeed: state.selectedColors.primary,
             ),
             darkTheme: ThemeData(
               useMaterial3: true,
               brightness: Brightness.dark,
-              colorSchemeSeed: state.selectedColor,
+              colorSchemeSeed: state.selectedColors.primary,
             ),
             themeMode: state.isLightTheme ? ThemeMode.light : ThemeMode.dark,
             localizationsDelegates: const [

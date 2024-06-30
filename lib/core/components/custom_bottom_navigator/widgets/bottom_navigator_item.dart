@@ -6,6 +6,7 @@ import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 BottomNavigationBarItem buildBottomNavigationBarItem(
   String text,
   String icon,
+  Color color,
 ) =>
     BottomNavigationBarItem(
       label: text,
@@ -22,7 +23,7 @@ BottomNavigationBarItem buildBottomNavigationBarItem(
         child: SvgAsset(
           height: 35,
           svg: icon,
-          color: AppColors.primary,
+          color: color,
         ),
       ),
     );

@@ -10,7 +10,6 @@ import 'package:so_boleto/core/helpers/app_formatters.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
-import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/domain/models/enums/bill_status.dart';
@@ -66,7 +65,7 @@ class _BillListTileState extends State<BillListTile> {
         child: DecoratedBox(
           decoration: BoxDecoration(
             color: widget.bill.billStatus == BillStatus.payed
-                ? theme.selectedColor.withOpacity(0.05)
+                ? theme.selectedColors.cardBackground
                 : null,
           ),
           child: Stack(
@@ -85,12 +84,11 @@ class _BillListTileState extends State<BillListTile> {
                     children: [
                       CircleAvatar(
                         radius: 25,
+                        backgroundColor: theme.selectedColors.circleBackground,
                         child: SvgAsset(
                           svg: widget.bill.category.getIconResponse(),
                           height: 30,
-                          color: theme.isLightTheme
-                              ? AppColors.black
-                              : AppColors.white,
+                          color: theme.selectedColors.icon,
                         ),
                       ),
                     ],

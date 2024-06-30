@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:so_boleto/core/components/buttons/app_bar_button.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
 import 'package:so_boleto/core/l10n/generated/l10n.dart';
+import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
-import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
@@ -22,6 +23,7 @@ class _SearchBarAnimationState extends State<BillSearchBar> {
 
   @override
   Widget build(BuildContext context) {
+    final themeColors = context.read<ThemeCubit>().state.selectedColors;
     return AnimatedContainer(
       duration: const Duration(milliseconds: 500),
       width: isExpanded ? context.width * 0.65 : 36,
@@ -34,13 +36,13 @@ class _SearchBarAnimationState extends State<BillSearchBar> {
         decoration: InputDecoration(
           contentPadding:
               const EdgeInsets.only(bottom: AppThemeValues.spaceXSmall),
-          prefixIcon: const SvgAsset(
+          prefixIcon: SvgAsset(
             svg: AppIcons.search,
             height: 28,
-            color: AppColors.white,
+            color: themeColors.icon,
           ),
           suffixIcon: isExpanded
-              ? GestureDetector(
+              ? AppBarButton(
                   onTap: () {
                     context.read<HomeBillsCubit>().setSearchByNameValue('');
                     FocusScope.of(context).unfocus();
@@ -48,24 +50,12 @@ class _SearchBarAnimationState extends State<BillSearchBar> {
                     isExpanded = false;
                     setState(() {});
                   },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: AppColors.primary,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        left: AppThemeValues.spaceXXSmall,
-                        right: AppThemeValues.spaceXXSmall,
-                        top: AppThemeValues.spaceXTiny,
-                      ),
-                      child: Text(
-                        AppLocalizations.current.close,
-                        style: context.textXSmall
-                            .copyWith(color: AppColors.primaryBackground),
-                      ),
-                    ),
-                  ),
+                  label: AppLocalizations.current.close,
+                  color: context
+                      .read<ThemeCubit>()
+                      .state
+                      .selectedColors
+                      .cardBackground,
                 )
               : const SizedBox.shrink(),
           suffixIconConstraints: const BoxConstraints.tightFor(height: 22),
@@ -73,8 +63,8 @@ class _SearchBarAnimationState extends State<BillSearchBar> {
           fillColor: Colors.transparent,
           border: InputBorder.none,
           enabledBorder: InputBorder.none,
-          focusedBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(color: AppColors.primary),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: themeColors.primary),
           ),
         ),
         controller: controller,

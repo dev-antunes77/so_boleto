@@ -6,11 +6,11 @@ class ThemeState extends BaseState with EquatableMixin {
     required super.status,
     super.callbackMessage,
     this.isLightTheme = true,
-    this.selectedColor = AppColors.primary,
-  });
+    ThemeColors? selectedColors,
+  }) : selectedColors = selectedColors ?? ThemeColors.light(AppColors.primary);
 
   final bool isLightTheme;
-  final Color selectedColor;
+  final ThemeColors selectedColors;
 
   @override
   List<Object> get props {
@@ -18,7 +18,7 @@ class ThemeState extends BaseState with EquatableMixin {
       callbackMessage,
       status,
       isLightTheme,
-      selectedColor,
+      selectedColors,
     ];
   }
 
@@ -27,12 +27,12 @@ class ThemeState extends BaseState with EquatableMixin {
     BaseStateStatus? status,
     String? callbackMessage,
     bool? isLightTheme,
-    Color? selectedColor,
+    ThemeColors? selectedColors,
   }) =>
       ThemeState(
         status: status ?? this.status,
         callbackMessage: callbackMessage ?? this.callbackMessage,
         isLightTheme: isLightTheme ?? this.isLightTheme,
-        selectedColor: selectedColor ?? this.selectedColor,
+        selectedColors: selectedColors ?? this.selectedColors,
       );
 }

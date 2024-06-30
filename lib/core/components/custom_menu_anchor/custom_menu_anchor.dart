@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/buttons/action_button.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
+import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 
 class CustomMenuAnchor extends StatelessWidget {
   const CustomMenuAnchor({
@@ -26,6 +28,8 @@ class CustomMenuAnchor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeColors = context.read<ThemeCubit>().state.selectedColors;
+
     return MenuAnchor(
       builder: (
         BuildContext context,
@@ -44,6 +48,7 @@ class CustomMenuAnchor extends StatelessWidget {
           leadingIcon: SvgAsset(
             svg: firstChildIcon,
             height: 22,
+            color: themeColors.text,
           ),
           onPressed: onfirstChildPressed,
           child: Text(firstChildLabel),
@@ -52,6 +57,7 @@ class CustomMenuAnchor extends StatelessWidget {
           leadingIcon: SvgAsset(
             svg: secondChildIcon,
             height: 22,
+            color: themeColors.text,
           ),
           onPressed: onsecondChildPressed,
           child: Text(secondChildLabel),

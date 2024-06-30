@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/custom_payed_tag/bottom_bar_payed_tag.dart';
 import 'package:so_boleto/core/components/custom_payed_tag/check_payed_tag.dart';
 import 'package:so_boleto/core/components/custom_payed_tag/side_bar_payed_tag.dart';
 import 'package:so_boleto/core/components/custom_payed_tag/stample_payed_tag.dart';
-import 'package:so_boleto/core/theme/settings/app_colors.dart';
+import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/domain/models/enums/payed_tag.dart';
 
 class PayedTagSelector extends StatelessWidget {
@@ -14,25 +15,26 @@ class PayedTagSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.read<ThemeCubit>().state.selectedColors.tag;
     if (payedTag.ischeck) {
       return CheckPayedTag(
         showTag,
-        color: AppColors.primary.withOpacity(0.5),
+        color: color,
       );
     } else if (payedTag.isStample) {
       return StamplePayedTag(
         showTag,
-        color: AppColors.primary.withOpacity(0.5),
+        color: color,
       );
     } else if (payedTag.isSideBar) {
       return SideBarPayedTag(
         showTag: showTag,
-        color: AppColors.primary.withOpacity(0.8),
+        color: color,
       );
     } else {
       return BottomBarTag(
         showTag: showTag,
-        color: AppColors.primary.withOpacity(0.8),
+        color: color,
       );
     }
   }

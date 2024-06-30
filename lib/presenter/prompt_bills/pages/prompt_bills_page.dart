@@ -8,10 +8,12 @@ import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
 import 'package:so_boleto/core/components/thin_line_separator/thin_line_separator.dart';
 import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes.dart';
+import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/domain/models/enums/page_response_handler.dart';
+import 'package:so_boleto/domain/models/theme_colors.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 import 'package:so_boleto/presenter/prompt_bills/cubit/prompt_bills_cubit.dart';
 import 'package:so_boleto/presenter/prompt_bills/widgets/card_edge_decoration.dart';
@@ -25,10 +27,12 @@ class PromptBillsPage extends StatefulWidget {
 
 class _PromptBillsPageState extends State<PromptBillsPage> {
   late final PromptBillsCubit cubit;
+  late final ThemeColors colors;
   @override
   void initState() {
     cubit = context.read<PromptBillsCubit>();
     final homeBills = context.read<HomeBillsCubit>().state.bills;
+    colors = context.read<ThemeCubit>().state.selectedColors;
     cubit.onInit(homeBills);
     super.initState();
   }
@@ -90,7 +94,7 @@ class _PromptBillsPageState extends State<PromptBillsPage> {
                                     border: bill.isSelected
                                         ? Border.all(
                                             width: AppThemeValues.spaceXXSmall,
-                                            color: AppColors.primary,
+                                            color: colors.primary,
                                           )
                                         : null,
                                   ),
@@ -108,7 +112,7 @@ class _PromptBillsPageState extends State<PromptBillsPage> {
                                                 bill.category.getIconResponse(),
                                             height: bill.isSelected ? 40 : 32,
                                             color: bill.isSelected
-                                                ? AppColors.primary
+                                                ? colors.primary
                                                 : AppColors.greyMediumLight,
                                           ),
                                           AppThemeValues.spaceVerticalTiny,
@@ -126,7 +130,7 @@ class _PromptBillsPageState extends State<PromptBillsPage> {
                                                     .textRobotoSubtitleSmall
                                                     .copyWith(
                                                   color: bill.isSelected
-                                                      ? AppColors.primary
+                                                      ? colors.text
                                                       : null,
                                                 ),
                                               ),
@@ -139,19 +143,23 @@ class _PromptBillsPageState extends State<PromptBillsPage> {
                                 ),
                               ),
                               if (bill.isSelected) ...[
-                                const CardEdgeDecoration(
+                                CardEdgeDecoration(
+                                  color: colors.primary,
                                   alignment: Alignment.topLeft,
                                   bottomRightRadius: true,
                                 ),
-                                const CardEdgeDecoration(
+                                CardEdgeDecoration(
+                                  color: colors.primary,
                                   alignment: Alignment.topRight,
                                   bottomLeftRadius: true,
                                 ),
-                                const CardEdgeDecoration(
+                                CardEdgeDecoration(
+                                  color: colors.primary,
                                   alignment: Alignment.bottomLeft,
                                   topRightRadius: true,
                                 ),
-                                const CardEdgeDecoration(
+                                CardEdgeDecoration(
+                                  color: colors.primary,
                                   alignment: Alignment.bottomRight,
                                   topLefttRadius: true,
                                 ),

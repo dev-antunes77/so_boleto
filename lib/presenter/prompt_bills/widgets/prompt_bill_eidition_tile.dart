@@ -12,6 +12,7 @@ import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/domain/models/prompt_bill.dart';
+import 'package:so_boleto/domain/models/theme_colors.dart';
 
 class PromptBillEditionTile extends StatelessWidget {
   const PromptBillEditionTile({
@@ -23,6 +24,7 @@ class PromptBillEditionTile extends StatelessWidget {
     required this.valueFocus,
     this.onEditingComplete,
     required this.isLastItem,
+    required this.colors,
   });
 
   final PromptBill promptBill;
@@ -32,6 +34,7 @@ class PromptBillEditionTile extends StatelessWidget {
   final Function(dynamic) onDueDayChanged;
   final FocusNode valueFocus;
   final VoidCallback? onEditingComplete;
+  final ThemeColors colors;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +51,7 @@ class PromptBillEditionTile extends StatelessWidget {
                   svg: promptBill.category.getIconResponse(),
                   height: 32,
                   color: promptBill.value > 0
-                      ? AppColors.primaryDark
+                      ? colors.primary
                       : AppColors.greyMediumLight,
                 ),
                 AppThemeValues.spaceVerticalTiny,
@@ -56,7 +59,7 @@ class PromptBillEditionTile extends StatelessWidget {
                   promptBill.name,
                   style: context.textRobotoSubtitleSmall.copyWith(
                     color: promptBill.value > 0
-                        ? AppColors.primaryDark
+                        ? colors.text
                         : AppColors.greyMediumLight,
                   ),
                   textAlign: TextAlign.center,
@@ -78,7 +81,6 @@ class PromptBillEditionTile extends StatelessWidget {
               CustomDropdownMenu(
                 height: 30,
                 value: dueDayValue,
-                color: AppColors.grey,
                 items: AppConstants.monthDays
                     .map(
                       (e) => DropdownMenuItem<int>(

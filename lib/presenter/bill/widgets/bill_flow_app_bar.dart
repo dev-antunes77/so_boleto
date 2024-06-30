@@ -5,6 +5,8 @@ import 'package:so_boleto/core/components/buttons/back_button.dart';
 import 'package:so_boleto/core/components/custom_app_bar/custom_app_bar.dart';
 import 'package:so_boleto/core/components/dialogs/app_dialogs.dart';
 import 'package:so_boleto/core/l10n/generated/l10n.dart';
+import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
+import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
 
@@ -43,9 +45,17 @@ class _BillFlowAppBarState extends State<BillFlowAppBar> {
       actions: [
         Visibility(
           visible: isReadyToDisplay && _bill == null,
-          child: AppBarButton(
-            label: AppLocalizations.current.close,
-            onTap: () => AppDialogs.leaveBillCreation(context),
+          child: Padding(
+            padding: const EdgeInsets.only(right: AppThemeValues.spaceSmall),
+            child: AppBarButton(
+              label: AppLocalizations.current.close,
+              color: context
+                  .read<ThemeCubit>()
+                  .state
+                  .selectedColors
+                  .cardBackground,
+              onTap: () => AppDialogs.leaveBillCreation(context),
+            ),
           ),
         )
       ],

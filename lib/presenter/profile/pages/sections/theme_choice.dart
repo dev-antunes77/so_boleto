@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
+import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/presenter/profile/widgets/animated_theme_switch.dart';
 import 'package:so_boleto/presenter/profile/widgets/profile_title_sections.dart';
@@ -78,11 +79,11 @@ class _ThemeChoiceState extends State<ThemeChoice> {
   }
 
   static const List<Color> themeColors = [
-    Colors.teal,
+    AppColors.primary,
     Colors.amber,
     Colors.blueAccent,
     Colors.red,
     Colors.deepPurple,
-    Colors.limeAccent,
+    Color.fromARGB(255, 214, 212, 145),
   ];
 }

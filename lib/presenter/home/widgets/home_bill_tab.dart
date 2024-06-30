@@ -6,9 +6,9 @@ import 'package:so_boleto/core/components/custom_status_handler/custom_status_ha
 import 'package:so_boleto/core/components/thin_line_separator/thin_line_separator.dart';
 import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/domain/models/enums/page_response_handler.dart';
+import 'package:so_boleto/domain/models/enums/payed_tag.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 import 'package:so_boleto/presenter/home/widgets/bill_list_tile.dart';
-import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
 
 class HomeBillTab extends StatelessWidget {
   const HomeBillTab(
@@ -38,7 +38,8 @@ class HomeBillTab extends StatelessWidget {
         shrinkWrap: true,
         itemBuilder: (context, index) {
           final bill = bills[index];
-          final payedTag = context.read<InitialCubit>().state.user!.payedTag;
+          const payedTag = PayedTag.check;
+          // final payedTag = context.read<InitialCubit>().state.user!.payedTag;
 
           return BillListTile(
             bill,

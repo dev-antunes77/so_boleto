@@ -68,6 +68,8 @@ class UserData extends Equatable {
         createdAt: hiveUser.createdAt,
       );
 
+  String get userName => '${name.capitalize()} ${lastName.capitalize()}';
+
   final String id;
   final String name;
   final String lastName;

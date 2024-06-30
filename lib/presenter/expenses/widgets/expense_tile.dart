@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
 import 'package:so_boleto/core/extensions/num_extensions.dart';
+import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
-import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 
@@ -41,14 +42,14 @@ class _ExpensesTileState extends State<ExpensesTile>
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: const Padding(
-        padding: EdgeInsets.only(
+      leading: Padding(
+        padding: const EdgeInsets.only(
           top: AppThemeValues.spaceMedium,
         ),
         child: SvgAsset(
           svg: AppIcons.coins,
           height: 54,
-          color: AppColors.primaryDark,
+          color: context.read<ThemeCubit>().state.selectedColors.icon,
         ),
       ),
       title: Column(

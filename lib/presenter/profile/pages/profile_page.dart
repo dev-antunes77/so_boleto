@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/buttons/pill_button.dart';
+import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
 import 'package:so_boleto/core/routes/routes.dart';
+import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
-import 'package:so_boleto/core/theme/settings/app_images.dart';
+import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
 import 'package:so_boleto/presenter/profile/cubit/profile_cubit.dart';
@@ -30,6 +32,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    final themeColors = context.watch<ThemeCubit>().state.selectedColors;
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: AppThemeValues.spaceXSmall,
@@ -41,17 +44,25 @@ class _ProfilePageState extends State<ProfilePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const CircleAvatar(
+              CircleAvatar(
                 radius: 36,
-                backgroundImage: AssetImage(AppImages.logo),
+                backgroundColor: themeColors.primary,
+                child: const SvgAsset(
+                  svg: AppIcons.money,
+                  height: 52,
+                  color: Colors.white,
+                ),
               ),
               AppThemeValues.spaceHorizontalMedium,
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Nome completo aqui',
-                      style: context.textRobotoSubtitleMedium),
                   Text(
-                    'email@example.com.br',
+                    _profileCubit.state.user.userName,
+                    style: context.textRobotoSubtitleMedium,
+                  ),
+                  Text(
+                    _profileCubit.state.user.email,
                     style: context.textRobotoSmall,
                   ),
                 ],

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
@@ -16,6 +18,7 @@ class CategoryFilterButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeColors = context.read<ThemeCubit>().state.selectedColors;
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: AppThemeValues.spaceTiny,
@@ -25,12 +28,13 @@ class CategoryFilterButton extends StatelessWidget {
         onTap: onTap,
         child: DecoratedBox(
           decoration: BoxDecoration(
-            color:
-                pill.isSelected ? AppColors.primaryLight : Colors.transparent,
+            color: pill.isSelected
+                ? themeColors.circleBackground
+                : Colors.transparent,
             borderRadius: BorderRadius.circular(30),
             border: Border.all(
               color: pill.isSelected
-                  ? AppColors.primary.withOpacity(0.5)
+                  ? themeColors.circleBackground
                   : AppColors.grey,
             ),
           ),
@@ -47,7 +51,7 @@ class CategoryFilterButton extends StatelessWidget {
                       ? Icons.check_box_rounded
                       : Icons.check_box_outline_blank_rounded,
                   size: 16,
-                  color: pill.isSelected ? AppColors.primary : null,
+                  color: pill.isSelected ? themeColors.primary : null,
                 ),
                 AppThemeValues.spaceHorizontalTiny,
                 Text(
