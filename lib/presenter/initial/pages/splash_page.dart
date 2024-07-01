@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
 import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes.dart';
+import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
@@ -20,7 +21,12 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
-    context.read<InitialCubit>().onInit();
+    final initialCubit = context.read<InitialCubit>();
+    initialCubit.onInit().then((_) {
+      if (initialCubit.state.user != null) {
+        context.read<ThemeCubit>().onInit(initialCubit.state.user!);
+      }
+    });
     super.initState();
   }
 

@@ -1,16 +1,12 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:flutter/material.dart';
+import 'package:so_boleto/core/extensions/color_extensions.dart';
 import 'package:so_boleto/core/extensions/date_time_extensions.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/domain/models/enums/payed_tag.dart';
 import 'package:so_boleto/infra/local_database/hive_user_database/hive_user_data.dart';
 
-part 'user_data.g.dart';
-
-@JsonSerializable(explicitToJson: true)
 class UserData extends Equatable {
   UserData({
     this.id = '',
@@ -21,15 +17,11 @@ class UserData extends Equatable {
     this.hasSeenOnboarding = false,
     this.hasLightTheme = true,
     this.payedTag = PayedTag.stample,
+    this.baseColor = const Color.fromARGB(255, 4, 135, 58),
     DateTime? createdAt,
   }) : createdAt = createdAt ?? DateTime.now();
 
-  factory UserData.fromJson(Map<String, dynamic> json) =>
-      _$UserDataFromJson(json);
-
-  Map<String, dynamic> toJson() => _$UserDataToJson(this);
-
-  Map<String, dynamic> toFirestore() => <String, dynamic>{
+  Map<String, dynamic> toJson() => <String, dynamic>{
         'id': id,
         'name': name,
         'lastName': lastName,
@@ -37,6 +29,7 @@ class UserData extends Equatable {
         'hasSeenOnboarding': hasSeenOnboarding,
         'hasLightTheme': hasLightTheme,
         'payedTag': payedTag.value,
+        'baseColor': baseColor.colorToJson(),
         'createdAt': createdAt.dateTimeToStringData(),
       };
 
@@ -52,6 +45,7 @@ class UserData extends Equatable {
       hasSeenOnboarding: data?['hasSeenOnboarding'],
       hasLightTheme: data?['hasLightTheme'],
       payedTag: (data?['payedTag'] as String).payedTagToEnum(),
+      baseColor: (data?['baseColor'] as String).colorFromJson(),
       createdAt: (data?['createdAt'] as String).stringToDateTime(),
     );
   }
@@ -65,6 +59,7 @@ class UserData extends Equatable {
         hasLightTheme: hiveUser.hasLightTheme,
         hasSeenOnboarding: hiveUser.hasSeenOnboarding,
         payedTag: hiveUser.payedTag.payedTagToEnum(),
+        baseColor: hiveUser.baseColor.colorFromJson(),
         createdAt: hiveUser.createdAt,
       );
 
@@ -78,6 +73,7 @@ class UserData extends Equatable {
   final bool hasSeenOnboarding;
   final bool hasLightTheme;
   final PayedTag payedTag;
+  final Color baseColor;
   final DateTime createdAt;
 
   @override
@@ -87,6 +83,11 @@ class UserData extends Equatable {
         lastName,
         email,
         password,
+        createdAt,
+        hasSeenOnboarding,
+        hasLightTheme,
+        payedTag,
+        baseColor,
         createdAt,
       ];
 
@@ -99,6 +100,7 @@ class UserData extends Equatable {
     bool? hasSeenOnboarding,
     bool? hasLightTheme,
     PayedTag? payedTag,
+    Color? baseColor,
     DateTime? createdAt,
   }) =>
       UserData(
@@ -110,6 +112,7 @@ class UserData extends Equatable {
         hasSeenOnboarding: hasSeenOnboarding ?? this.hasSeenOnboarding,
         hasLightTheme: hasLightTheme ?? this.hasLightTheme,
         payedTag: payedTag ?? this.payedTag,
+        baseColor: baseColor ?? this.baseColor,
         createdAt: createdAt ?? this.createdAt,
       );
 }

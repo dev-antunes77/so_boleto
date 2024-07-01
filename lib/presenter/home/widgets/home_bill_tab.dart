@@ -8,7 +8,6 @@ import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/domain/models/enums/page_response_handler.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 import 'package:so_boleto/presenter/home/widgets/bill_list_tile.dart';
-import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
 
 class HomeBillTab extends StatelessWidget {
   const HomeBillTab(
@@ -22,13 +21,13 @@ class HomeBillTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (bills.isEmpty &&
-        context.read<HomeBillsCubit>().state.querySearch.isNotEmpty) {
+    final homeState = context.read<HomeBillsCubit>().state;
+    if (bills.isEmpty && homeState.querySearch.isNotEmpty) {
       return const CustomStatusHandler(PageResponseHandler.noneWithThisName);
     } else if (bills.isEmpty) {
       return CustomStatusHandler(message);
     }
-    final payedTag = context.read<InitialCubit>().state.user!.payedTag;
+    final payedTag = homeState.user.payedTag;
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: ListView.separated(

@@ -25,14 +25,15 @@ class HiveUserDataAdapter extends TypeAdapter<HiveUserData> {
       hasSeenOnboarding: fields[6] as bool,
       hasLightTheme: fields[7] as bool,
       payedTag: fields[8] as String,
-      createdAt: fields[9] as DateTime,
+      baseColor: fields[9] as String,
+      createdAt: fields[10] as DateTime,
     );
   }
 
   @override
   void write(BinaryWriter writer, HiveUserData obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(1)
       ..write(obj.id)
       ..writeByte(2)
@@ -50,6 +51,8 @@ class HiveUserDataAdapter extends TypeAdapter<HiveUserData> {
       ..writeByte(8)
       ..write(obj.payedTag)
       ..writeByte(9)
+      ..write(obj.baseColor)
+      ..writeByte(10)
       ..write(obj.createdAt);
   }
 

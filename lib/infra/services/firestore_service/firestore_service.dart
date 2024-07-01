@@ -14,7 +14,7 @@ class FirestoreService implements FirestoreRepository {
   @override
   Future<void> createUser(UserData user) async {
     final usersRef = _firestore.collection("users").doc(user.id);
-    await usersRef.set(user.toFirestore());
+    await usersRef.set(user.toJson());
   }
 
   @override

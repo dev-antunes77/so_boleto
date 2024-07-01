@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:so_boleto/core/components/custom_bottom_navigator/bottom_navigator_page.dart';
 import 'package:so_boleto/core/errors/app_errors.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
@@ -98,14 +99,30 @@ class InitialCubit extends Cubit<InitialState> with BaseCubit {
   void onChangePage(BottomNavigatorPage page) =>
       emit(state.copyWith(currentPage: page));
 
-  void onUpdateUserTag(PayedTag payedTag) {
+  Future<void> onUpdateUserTag(PayedTag payedTag) async {
     emit(state.copyWith(status: BaseStateStatus.loading));
+    final updatedUser = state.user!.copyWith(payedTag: payedTag);
+    await _updateUserStorage(updatedUser);
     emit(
       state.copyWith(
         status: BaseStateStatus.success,
-        user: state.user!.copyWith(
-          payedTag: payedTag,
-        ),
+        user: updatedUser,
+      ),
+    );
+  }
+
+  Future<void> onUpdateUserThemeColors(
+      Color baseColor, bool hasLightTheme) async {
+    emit(state.copyWith(status: BaseStateStatus.loading));
+    final updatedUser = state.user!.copyWith(
+      hasLightTheme: hasLightTheme,
+      baseColor: baseColor,
+    );
+    await _updateUserStorage(updatedUser);
+    emit(
+      state.copyWith(
+        status: BaseStateStatus.success,
+        user: updatedUser,
       ),
     );
   }

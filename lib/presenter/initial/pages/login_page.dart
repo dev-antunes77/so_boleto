@@ -54,112 +54,115 @@ class _LoginPageState extends State<LoginPage> {
       leaveTheApp: true,
       child: Scaffold(
         backgroundColor: AppColors.primaryBackground,
-        body: BlocConsumer<InitialCubit, InitialState>(
-          listenWhen: (previous, current) => previous.status != current.status,
-          buildWhen: (previous, current) => previous.status != current.status,
-          bloc: cubit,
-          listener: (context, state) {
-            if (state.status == BaseStateStatus.generalError) {
-              context.pop(true);
-              context.showSnackBar(state.callbackMessage);
-            }
-            _whenStateIsLoading(state.status == BaseStateStatus.loading);
-            _whenLogInIsSuccessful(state.status == BaseStateStatus.success);
-          },
-          builder: (context, state) {
-            return state.when(
-              onState: (_) => Padding(
-                padding: const EdgeInsets.all(AppThemeValues.spaceMassive),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Center(
-                          child: Text(_isSignUp ? 'Cadastre-se' : 'Entre',
-                              style: context.textLarge)),
-                      if (_isSignUp) ...[
+        body: SingleChildScrollView(
+          child: BlocConsumer<InitialCubit, InitialState>(
+            listenWhen: (previous, current) =>
+                previous.status != current.status,
+            buildWhen: (previous, current) => previous.status != current.status,
+            bloc: cubit,
+            listener: (context, state) {
+              if (state.status == BaseStateStatus.generalError) {
+                context.pop(true);
+                context.showSnackBar(state.callbackMessage);
+              }
+              _whenStateIsLoading(state.status == BaseStateStatus.loading);
+              _whenLogInIsSuccessful(state.status == BaseStateStatus.success);
+            },
+            builder: (context, state) {
+              return state.when(
+                onState: (_) => Padding(
+                  padding: const EdgeInsets.all(AppThemeValues.spaceMassive),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Center(
+                            child: Text(_isSignUp ? 'Cadastre-se' : 'Entre',
+                                style: context.textLarge)),
+                        if (_isSignUp) ...[
+                          AppThemeValues.spaceVerticalLarge,
+                          TextFormField(
+                            controller: _nameController,
+                            decoration: const InputDecoration(
+                              labelText: 'Nome',
+                              icon: Icon(Icons.person_4_outlined),
+                            ),
+                            validator: FormValidator.validateNames,
+                          ),
+                          AppThemeValues.spaceVerticalLarge,
+                          TextFormField(
+                            controller: _lastNameController,
+                            decoration: const InputDecoration(
+                              labelText: 'Sobrenome',
+                              icon: Icon(Icons.person_4),
+                            ),
+                            validator: FormValidator.validateNames,
+                          ),
+                        ],
                         AppThemeValues.spaceVerticalLarge,
                         TextFormField(
-                          controller: _nameController,
+                          controller: _emailController,
                           decoration: const InputDecoration(
-                            labelText: 'Nome',
-                            icon: Icon(Icons.person_4_outlined),
+                            labelText: 'Email',
+                            icon: Icon(Icons.email),
                           ),
-                          validator: FormValidator.validateNames,
+                          validator: FormValidator.validateEmailField,
                         ),
                         AppThemeValues.spaceVerticalLarge,
                         TextFormField(
-                          controller: _lastNameController,
-                          decoration: const InputDecoration(
-                            labelText: 'Sobrenome',
-                            icon: Icon(Icons.person_4),
+                          controller: _passwordController,
+                          obscureText: !_isPasswordVisible,
+                          decoration: InputDecoration(
+                            labelText: 'Password',
+                            icon: const Icon(Icons.lock),
+                            suffixIcon: IconButton(
+                              icon: _isPasswordVisible
+                                  ? const Icon(Icons.visibility_off)
+                                  : const Icon(Icons.visibility),
+                              onPressed: _togglePasswordVisibility,
+                            ),
                           ),
-                          validator: FormValidator.validateNames,
+                        ),
+                        AppThemeValues.spaceVerticalImense,
+                        PillButton(
+                            child: Text(
+                              _isSignUp ? 'Cadastrar' : 'Entrar',
+                            ),
+                            onTap: () {
+                              if (_formKey.currentState!.validate()) {
+                                _isSignUp ? _onSignUp() : _onSignIn();
+                              }
+                            }),
+                        AppThemeValues.spaceVerticalLarge,
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: _isSignUp
+                                    ? 'Já possui conta?  '
+                                    : 'Ainda não tem conta? Cadastre-se  ',
+                                style: context.textRobotoMediumToLarge,
+                              ),
+                              TextSpan(
+                                text: _isSignUp ? 'Entrar' : 'Aqui',
+                                style: context.textRobotoMediumToLarge.copyWith(
+                                  color: AppColors.primary,
+                                ),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () => _toggleSignUpAndSignIn(),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
-                      AppThemeValues.spaceVerticalLarge,
-                      TextFormField(
-                        controller: _emailController,
-                        decoration: const InputDecoration(
-                          labelText: 'Email',
-                          icon: Icon(Icons.email),
-                        ),
-                        validator: FormValidator.validateEmailField,
-                      ),
-                      AppThemeValues.spaceVerticalLarge,
-                      TextFormField(
-                        controller: _passwordController,
-                        obscureText: !_isPasswordVisible,
-                        decoration: InputDecoration(
-                          labelText: 'Password',
-                          icon: const Icon(Icons.lock),
-                          suffixIcon: IconButton(
-                            icon: _isPasswordVisible
-                                ? const Icon(Icons.visibility_off)
-                                : const Icon(Icons.visibility),
-                            onPressed: _togglePasswordVisibility,
-                          ),
-                        ),
-                      ),
-                      AppThemeValues.spaceVerticalImense,
-                      PillButton(
-                          child: Text(
-                            _isSignUp ? 'Cadastrar' : 'Entrar',
-                          ),
-                          onTap: () {
-                            if (_formKey.currentState!.validate()) {
-                              _isSignUp ? _onSignUp() : _onSignIn();
-                            }
-                          }),
-                      AppThemeValues.spaceVerticalLarge,
-                      RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: _isSignUp
-                                  ? 'Já possui conta?  '
-                                  : 'Ainda não tem conta? Cadastre-se  ',
-                              style: context.textRobotoMediumToLarge,
-                            ),
-                            TextSpan(
-                              text: _isSignUp ? 'Entrar' : 'Aqui',
-                              style: context.textRobotoMediumToLarge.copyWith(
-                                color: AppColors.primary,
-                              ),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () => _toggleSignUpAndSignIn(),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );

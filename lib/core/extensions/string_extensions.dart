@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:so_boleto/domain/models/enums/bill_category.dart';
 import 'package:so_boleto/domain/models/enums/bill_status.dart';
@@ -32,4 +33,14 @@ extension StringExtensions on String {
   String decodePassword() => utf8.decode(base64.decode(this));
 
   String breakLongStrings() => length > 30 ? "${substring(0, 28)}..." : this;
+
+  Color colorFromJson() {
+    String hexColor = replaceAll('#', '');
+    int intValue = int.parse(hexColor, radix: 16);
+    int alpha = (intValue >> 24) & 0xFF;
+    int red = (intValue >> 16) & 0xFF;
+    int green = (intValue >> 8) & 0xFF;
+    int blue = intValue & 0xFF;
+    return Color.fromARGB(alpha, red, green, blue);
+  }
 }

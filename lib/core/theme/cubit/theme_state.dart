@@ -7,7 +7,8 @@ class ThemeState extends BaseState with EquatableMixin {
     super.callbackMessage,
     this.isLightTheme = true,
     ThemeColors? selectedColors,
-  }) : selectedColors = selectedColors ?? ThemeColors.light(AppColors.primary);
+  }) : selectedColors = selectedColors ??
+            ThemeColors.light(const Color.fromARGB(255, 4, 136, 59));
 
   final bool isLightTheme;
   final ThemeColors selectedColors;

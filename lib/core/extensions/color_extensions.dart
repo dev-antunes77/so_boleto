@@ -9,7 +9,8 @@ extension ColorExtensions on Color {
     return Color.fromARGB(alpha, red, green, blue);
   }
 
-  String toHexColor() {
-    return '#${value.toRadixString(16).substring(2)}';
-  }
+  String toHexColor() => '#${value.toRadixString(16).substring(2)}';
+
+  String colorToJson() =>
+      '#${value.toRadixString(16).padLeft(8, '0').toUpperCase()}';
 }
