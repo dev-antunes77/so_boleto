@@ -4,32 +4,32 @@ class HomeBillsState extends BaseState with EquatableMixin {
   HomeBillsState({
     required super.status,
     super.callbackMessage,
-    UserData? user,
     String? querySearch,
     List<BillModel>? bills,
     List<BillModel>? filterParams,
     bool? paramsApplied,
-  })  : user = user ?? UserData(),
+    String? userId,
+  })  : userId = userId ?? '',
         filteredByParams = filterParams ?? List.empty(),
         bills = bills ?? List.empty(),
         querySearch = querySearch ?? '',
         paramsApplied = paramsApplied ?? false;
 
-  final UserData user;
   final List<BillModel> bills;
   final List<BillModel> filteredByParams;
   final String querySearch;
   final bool paramsApplied;
+  final String userId;
 
   @override
   List<Object?> get props => [
         status,
         callbackMessage,
-        user,
         bills,
         filteredByParams,
         querySearch,
         paramsApplied,
+        userId,
       ];
 
   List<BillModel> get allBills => paramsApplied
@@ -42,9 +42,8 @@ class HomeBillsState extends BaseState with EquatableMixin {
           .toList()
       : bills;
 
-  List<BillModel> get payedBills => allBills
-      .where((element) => element.billStatus == BillStatus.payed)
-      .toList();
+  List<BillModel> get payedBills =>
+      allBills.where((element) => element.billStatus.isPayed).toList();
 
   List<BillModel> get delayedBills => allBills
       .where((element) => element.billStatus == BillStatus.delayed)
@@ -56,7 +55,7 @@ class HomeBillsState extends BaseState with EquatableMixin {
   int get totalExpensesPayed {
     int total = 0;
     for (var bill in allBills) {
-      if (bill.billStatus == BillStatus.payed) {
+      if (bill.billStatus.isPayed) {
         total += bill.value;
       }
     }
@@ -82,15 +81,15 @@ class HomeBillsState extends BaseState with EquatableMixin {
     List<BillModel>? filteredByParams,
     String? querySearch,
     bool? paramsApplied,
-    UserData? user,
+    String? userId,
   }) =>
       HomeBillsState(
         status: status ?? this.status,
         callbackMessage: callbackMessage ?? this.callbackMessage,
         bills: bills ?? this.bills,
-        user: user ?? this.user,
         filterParams: filteredByParams ?? this.filteredByParams,
         querySearch: querySearch ?? this.querySearch,
         paramsApplied: paramsApplied ?? this.paramsApplied,
+        userId: userId ?? this.userId,
       );
 }

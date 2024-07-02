@@ -6,19 +6,19 @@ class ProfileState extends BaseState with EquatableMixin {
     required super.status,
     super.callbackMessage,
     this.allowSecurityAccess = false,
-    UserData? user,
-  }) : user = user ?? UserData();
+    this.userId = '',
+  });
 
-  final UserData user;
   final bool allowSecurityAccess;
+  final String userId;
 
   @override
   List<Object> get props {
     return [
       callbackMessage,
       status,
-      user,
       allowSecurityAccess,
+      userId,
     ];
   }
 
@@ -26,13 +26,13 @@ class ProfileState extends BaseState with EquatableMixin {
   ProfileState copyWith({
     BaseStateStatus? status,
     String? callbackMessage,
-    UserData? user,
+    String? userId,
     bool? allowSecurityAccess,
   }) =>
       ProfileState(
         status: status ?? this.status,
         callbackMessage: callbackMessage ?? this.callbackMessage,
-        user: user ?? this.user,
         allowSecurityAccess: allowSecurityAccess ?? this.allowSecurityAccess,
+        userId: userId ?? this.userId,
       );
 }

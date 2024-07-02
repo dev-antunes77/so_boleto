@@ -110,16 +110,16 @@ abstract class AppFormatters {
   static List<String> dueDayRangeToString(List<List<int>> list) {
     List<String> formattedRanges = [];
     for (List<int> range in list) {
-      if (range[1] == 1000) {
+      if (range[1] < 4) {
         formattedRanges.add(
           AppLocalizations.current.formatterDayBefore(
-            range[0],
+            range[1],
           ),
         );
-      } else if (range[1] < 4) {
+      } else if (range[1] > 24) {
         formattedRanges.add(
           AppLocalizations.current.formatterDayAfter(
-            range[1],
+            range[0],
           ),
         );
       } else {

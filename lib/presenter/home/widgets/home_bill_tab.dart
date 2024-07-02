@@ -6,8 +6,10 @@ import 'package:so_boleto/core/components/custom_status_handler/custom_status_ha
 import 'package:so_boleto/core/components/thin_line_separator/thin_line_separator.dart';
 import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/domain/models/enums/page_response_handler.dart';
+import 'package:so_boleto/domain/models/enums/payed_tag.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 import 'package:so_boleto/presenter/home/widgets/bill_list_tile.dart';
+import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
 
 class HomeBillTab extends StatelessWidget {
   const HomeBillTab(
@@ -27,7 +29,8 @@ class HomeBillTab extends StatelessWidget {
     } else if (bills.isEmpty) {
       return CustomStatusHandler(message);
     }
-    final payedTag = homeState.user.payedTag;
+    final payedTag =
+        context.read<InitialCubit>().state.user?.payedTag ?? PayedTag.stample;
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: ListView.separated(

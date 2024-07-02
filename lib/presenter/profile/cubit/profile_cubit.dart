@@ -3,7 +3,6 @@ import 'package:equatable/equatable.dart';
 import 'package:so_boleto/core/errors/app_errors.dart';
 import 'package:so_boleto/core/utils/base_cubit.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
-import 'package:so_boleto/domain/models/user_data.dart';
 import 'package:so_boleto/domain/usecases/clear_user_storage.dart';
 import 'package:so_boleto/domain/usecases/confirm_user_password.dart';
 import 'package:so_boleto/domain/usecases/sign_out.dart';
@@ -19,8 +18,8 @@ class ProfileCubit extends Cubit<ProfileState> with BaseCubit {
   final ConfirmUserPassword _confirmUserPasswordUsecase;
   final ClearUserStorage _clearUserStorage;
 
-  void onInit(UserData user) {
-    emit(state.copyWith(status: BaseStateStatus.initial, user: user));
+  void onInit(String userId) {
+    emit(state.copyWith(status: BaseStateStatus.initial, userId: userId));
   }
 
   Future<void> onLogout() async {
@@ -37,7 +36,7 @@ class ProfileCubit extends Cubit<ProfileState> with BaseCubit {
       } else {
         emit(state.copyWith(status: BaseStateStatus.loading));
         final allow =
-            await _confirmUserPasswordUsecase(state.user.id, password!);
+            await _confirmUserPasswordUsecase(state.userId, password!);
         if (allow) {
           emit(state.copyWith(
               status: BaseStateStatus.success, allowSecurityAccess: true));

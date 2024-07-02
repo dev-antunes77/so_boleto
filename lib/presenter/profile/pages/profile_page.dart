@@ -6,6 +6,7 @@ import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
+import 'package:so_boleto/domain/models/user_data.dart';
 import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
 import 'package:so_boleto/presenter/profile/cubit/profile_cubit.dart';
 import 'package:so_boleto/presenter/profile/widgets/profile_option_tile.dart';
@@ -20,11 +21,12 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   late ProfileCubit _profileCubit;
-
+  late final UserData _user;
   @override
   void initState() {
     _profileCubit = context.read<ProfileCubit>();
-    _profileCubit.onInit(context.read<InitialCubit>().state.user!);
+    _user = context.read<InitialCubit>().state.user!;
+    _profileCubit.onInit(_user.id);
     super.initState();
   }
 
@@ -56,11 +58,11 @@ class _ProfilePageState extends State<ProfilePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    _profileCubit.state.user.userName,
+                    _user.userName,
                     style: context.textRobotoSubtitleMedium,
                   ),
                   Text(
-                    _profileCubit.state.user.email,
+                    _user.email,
                     style: context.textRobotoSmall,
                   ),
                 ],
@@ -78,7 +80,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           ProfileOptionTile(
             label: 'Vencimento',
-            subtitle: 'Dia para suas contas vencerem',
+            subtitle: 'Dia preferido para suas contas vencerem',
             onTap: () => context.pushTo(Routes.profileDueDay),
             svg: AppIcons.calendar2,
             color: themeColors.text,
@@ -111,8 +113,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   void _onLogoutPressed() => context.showDialog(
         title: 'Sair?',
-        description:
-            'Tem certeza que deseja deslogar deslogar, ${_profileCubit.state.user.name}?',
+        description: 'Tem certeza que deseja deslogar deslogar, ${_user.name}?',
         onAcept: () {
           _profileCubit.onLogout().then(
                 (_) => context.navigateTo(Routes.login),

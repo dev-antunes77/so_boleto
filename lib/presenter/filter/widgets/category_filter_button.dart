@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
+import 'package:so_boleto/core/theme/settings/theme_colors.dart';
 import 'package:so_boleto/domain/models/filter_pill.dart';
 
 class CategoryFilterButton extends StatelessWidget {
@@ -11,14 +10,15 @@ class CategoryFilterButton extends StatelessWidget {
     super.key,
     required this.pill,
     required this.onTap,
+    required this.themeColors,
   });
 
   final FilterPill pill;
   final VoidCallback onTap;
+  final ThemeColors themeColors;
 
   @override
   Widget build(BuildContext context) {
-    final themeColors = context.read<ThemeCubit>().state.selectedColors;
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: AppThemeValues.spaceTiny,

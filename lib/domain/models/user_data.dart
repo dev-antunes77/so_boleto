@@ -16,6 +16,7 @@ class UserData extends Equatable {
     this.password = '',
     this.hasSeenOnboarding = false,
     this.hasLightTheme = true,
+    this.favoredDueDay = 0,
     this.payedTag = PayedTag.stample,
     this.baseColor = const Color.fromARGB(255, 4, 135, 58),
     DateTime? createdAt,
@@ -73,6 +74,7 @@ class UserData extends Equatable {
   final bool hasSeenOnboarding;
   final bool hasLightTheme;
   final PayedTag payedTag;
+  final int favoredDueDay;
   final Color baseColor;
   final DateTime createdAt;
 
@@ -88,6 +90,7 @@ class UserData extends Equatable {
         hasLightTheme,
         payedTag,
         baseColor,
+        favoredDueDay,
         createdAt,
       ];
 
@@ -101,6 +104,7 @@ class UserData extends Equatable {
     bool? hasLightTheme,
     PayedTag? payedTag,
     Color? baseColor,
+    int? favoredDueDay,
     DateTime? createdAt,
   }) =>
       UserData(
@@ -113,6 +117,7 @@ class UserData extends Equatable {
         hasLightTheme: hasLightTheme ?? this.hasLightTheme,
         payedTag: payedTag ?? this.payedTag,
         baseColor: baseColor ?? this.baseColor,
+        favoredDueDay: favoredDueDay ?? this.favoredDueDay,
         createdAt: createdAt ?? this.createdAt,
       );
 }

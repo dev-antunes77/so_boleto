@@ -15,6 +15,7 @@ import 'package:so_boleto/presenter/bill/widgets/bill_section_button_row.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_section_top_icon.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_shell.dart';
 import 'package:so_boleto/presenter/bill/widgets/bill_text_field.dart';
+import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
 
 class BillValueSection extends StatefulWidget {
   const BillValueSection({super.key});
@@ -69,7 +70,7 @@ class _BillValueSectionState extends State<BillValueSection> {
                 )
               else
                 BillSectionDoubleButtonRow(
-                  onTap: () => context.pushTo(Routes.billDueDay),
+                  onTap: () => _onContinue(),
                   isDisabled: _disableButton(state.bill.value),
                 ),
               AppThemeValues.spaceVerticalLarge,
@@ -85,6 +86,17 @@ class _BillValueSectionState extends State<BillValueSection> {
   _onSubmitted(int value, bool isEditionFlow) {
     if (isEditionFlow) return;
     if (!_disableButton(value)) {
+      _onContinue();
+    }
+  }
+
+  void _onContinue() {
+    final favoriteDueDay =
+        context.read<InitialCubit>().state.user!.favoredDueDay;
+    if (favoriteDueDay > 0) {
+      context.read<BillCubit>().onBillDueeDayOfTheMonthChange(favoriteDueDay);
+      context.pushTo(Routes.billCategory);
+    } else {
       context.pushTo(Routes.billDueDay);
     }
   }

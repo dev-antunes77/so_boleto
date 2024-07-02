@@ -9,7 +9,6 @@ import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/domain/models/enums/bill_status.dart';
 import 'package:so_boleto/domain/models/filter_params.dart';
 import 'package:so_boleto/domain/models/prompt_bill.dart';
-import 'package:so_boleto/domain/models/user_data.dart';
 import 'package:so_boleto/domain/usecases/add_prompt_bills.dart';
 import 'package:so_boleto/domain/usecases/create_bill.dart';
 import 'package:so_boleto/domain/usecases/delete_bill.dart';
@@ -39,21 +38,19 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
   final FilterBillsByParams _filterBillsByParamsUseCase;
   final AddPromptBills _addPromptBillsUsecase;
 
-  Future<void> onInit(UserData user) async {
+  Future<void> onInit(String userId) async {
     try {
       if (state.bills.isNotEmpty) return;
 
       emit(state.copyWith(status: BaseStateStatus.loading));
-      // Future.delayed(const Duration(seconds: 10)).then((_) async {
-      final updatedBills = await _getBillsUseCase(user.id);
+      final updatedBills = await _getBillsUseCase(userId);
       emit(
         state.copyWith(
           status: BaseStateStatus.success,
           bills: updatedBills,
-          user: user,
+          userId: userId,
         ),
       );
-      // });
     } on AppError catch (error) {
       onAppError(error);
       emit(
@@ -65,7 +62,7 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
   Future<void> createBill(BillModel bill) async {
     try {
       emit(state.copyWith(status: BaseStateStatus.loading));
-      final userBoundedBill = bill.copyWith(userId: state.user.id);
+      final userBoundedBill = bill.copyWith(userId: state.userId);
       await _createBillUseCase(userBoundedBill);
       await _updateBills();
     } on AppError catch (_) {
@@ -74,7 +71,7 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
   }
 
   Future<void> _updateBills() async {
-    final updatedBills = await _getBillsUseCase(state.user.id);
+    final updatedBills = await _getBillsUseCase(state.userId);
     emit(
       state.copyWith(
         status: BaseStateStatus.success,
@@ -105,7 +102,7 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
 
   Future<bool> setBillAsPaid(BillModel bill) async {
     try {
-      if (bill.billStatus == BillStatus.payed) return false;
+      if (bill.billStatus.isPayed) return false;
       emit(state.copyWith(status: BaseStateStatus.loading));
       await _setBillAsPaidUseCase(bill);
       await _updateBills();
@@ -118,7 +115,7 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
   Future<bool> deleteBill(String billId) async {
     try {
       emit(state.copyWith(status: BaseStateStatus.loading));
-      final hasDeleted = await _deleteBillUseCase(state.user.id, billId);
+      final hasDeleted = await _deleteBillUseCase(state.userId, billId);
       if (hasDeleted) {
         await _updateBills();
         return true;
@@ -166,7 +163,7 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
   void addPrompBills(List<PromptBill> promptBills) async {
     try {
       emit(state.copyWith(status: BaseStateStatus.loading));
-      await _addPromptBillsUsecase(state.user.id, promptBills);
+      await _addPromptBillsUsecase(state.userId, promptBills);
       await _updateBills();
     } on AppError catch (error) {
       onAppError(error);

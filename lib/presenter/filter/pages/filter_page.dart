@@ -7,6 +7,7 @@ import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
 import 'package:so_boleto/core/components/thin_line_separator/thin_line_separator.dart';
 import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes_extensions.dart';
+import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
@@ -39,6 +40,8 @@ class _FilterPageState extends State<FilterPage> {
 
   @override
   Widget build(BuildContext context) {
+    final themeColors = context.read<ThemeCubit>().state.selectedColors;
+
     return SizedBox(
       height: context.height * 0.85,
       child: Padding(
@@ -67,7 +70,7 @@ class _FilterPageState extends State<FilterPage> {
                           height: AppThemeValues.spaceTiny,
                           width: context.width * 0.2,
                           color: state.areFiltersValid
-                              ? AppColors.primary
+                              ? themeColors.tag
                               : AppColors.grey,
                         ),
                       ],
@@ -102,6 +105,7 @@ class _FilterPageState extends State<FilterPage> {
                       .map(
                         (pill) => CategoryFilterButton(
                           pill: pill,
+                          themeColors: themeColors,
                           onTap: () =>
                               setState(() => cubit.onFilterPillSelected(pill)),
                         ),

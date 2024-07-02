@@ -28,12 +28,13 @@ class PromptBillsPage extends StatefulWidget {
 class _PromptBillsPageState extends State<PromptBillsPage> {
   late final PromptBillsCubit cubit;
   late final ThemeColors colors;
+
   @override
   void initState() {
     cubit = context.read<PromptBillsCubit>();
     final homeBills = context.read<HomeBillsCubit>().state.bills;
-    colors = context.read<ThemeCubit>().state.selectedColors;
     cubit.onInit(homeBills);
+    colors = context.read<ThemeCubit>().state.selectedColors;
     super.initState();
   }
 

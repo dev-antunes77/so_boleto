@@ -12,6 +12,7 @@ import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/core/theme/settings/theme_colors.dart';
 import 'package:so_boleto/domain/models/prompt_bill.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
+import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
 import 'package:so_boleto/presenter/prompt_bills/cubit/prompt_bills_cubit.dart';
 import 'package:so_boleto/presenter/prompt_bills/widgets/prompt_bill_eidition_tile.dart';
 
@@ -33,13 +34,18 @@ class _PromptBillsEditionPageState extends State<PromptBillsEditionPage> {
     cubit = context.read<PromptBillsCubit>();
     colors = context.read<ThemeCubit>().state.selectedColors;
 
-    cubit.onEditionInit();
+    cubit.onEditionInit(_checkForFavoredDueDay());
     focuses = List.generate(
       cubit.state.selectedPromptBills.length,
       (index) => FocusNode(),
     );
 
     super.initState();
+  }
+
+  int _checkForFavoredDueDay() {
+    int favoredDueDay = context.read<InitialCubit>().state.user!.favoredDueDay;
+    return favoredDueDay > 0 ? favoredDueDay : 1;
   }
 
   @override

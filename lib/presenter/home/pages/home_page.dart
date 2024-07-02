@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     _tabController = TabController(length: 3, vsync: this);
     final cubit = context.read<HomeBillsCubit>();
     final user = context.read<InitialCubit>().state.user;
-    cubit.onInit(user!);
+    cubit.onInit(user!.id);
     super.initState();
   }
 

@@ -65,9 +65,9 @@ class PromptBillsCubit extends Cubit<PromptBillsState> with BaseCubit {
   List<PromptBill> onPrompBillsSelected() =>
       state.promptBills.where((element) => element.isSelected).toList();
 
-  void onEditionInit() {
+  void onEditionInit(int favoredDueDay) {
     for (var promptBill in state.selectedPromptBills) {
-      promptBill.dueDay = 1;
+      promptBill.dueDay = favoredDueDay;
       promptBill.value = 0;
     }
   }

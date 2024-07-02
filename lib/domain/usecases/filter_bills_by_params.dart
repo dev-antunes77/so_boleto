@@ -6,22 +6,33 @@ import 'package:so_boleto/domain/models/filter_params.dart';
 
 final class FilterBillsByParams {
   FilterBillsByParams();
+  static const parcels = 'parcels';
+  static const dueDay = 'dueDay';
+  static const value = 'value';
 
   List<BillModel> call(List<BillModel> bills, FilterParams params) {
     try {
       List<BillModel> billsByParecels = [];
       List<BillModel> billByDueDay = [];
       List<BillModel> billByPriceRange = [];
-
       final billByCategory = bills
           .where(
             (element) => params.categoryList.contains(element.category),
           )
           .toList();
 
-      billsByParecels = _filterNumericalRange(bills, params.parcelRange);
-      billByDueDay = _filterNumericalRange(bills, params.dueDayRange);
-      billByPriceRange = _filterNumericalRange(bills, params.priceRange);
+      billsByParecels =
+          _filterNumericalRange(bills, parcels, params.parcelRange);
+      billByDueDay = _filterNumericalRange(bills, dueDay, params.dueDayRange);
+
+      if (params.priceRange.isNotEmpty) {
+        final updatedPriceRange = [
+          (params.priceRange.first * 100),
+          (params.priceRange.last * 100)
+        ];
+        billByPriceRange =
+            _filterNumericalRange(bills, value, updatedPriceRange);
+      }
 
       return billByCategory + billsByParecels + billByDueDay + billByPriceRange;
     } on AppError catch (error, trace) {
@@ -34,14 +45,18 @@ final class FilterBillsByParams {
   }
 
   List<BillModel> _filterNumericalRange(
-          List<BillModel> bills, List<int> params) =>
+          List<BillModel> bills, String type, List<int> params) =>
       params.isEmpty
           ? []
-          : bills
-              .where(
-                (element) => _filterMatch(element.totalParcels, params),
-              )
-              .toList();
+          : bills.where((element) {
+              if (type == parcels) {
+                return _filterMatch(element.totalParcels, params);
+              } else if (type == dueDay) {
+                return _filterMatch(element.dueDayOfTheMonth, params);
+              } else {
+                return _filterMatch(element.value, params);
+              }
+            }).toList();
 
   bool _filterMatch(int value, List<int> range) =>
       value > range.first && value <= range.last;

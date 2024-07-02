@@ -66,7 +66,7 @@ class _SecurityPageState extends State<SecurityPage> {
                   svg: AppIcons.delete2,
                   color: _themeColors.text,
                 ),
-                AppThemeValues.spaceVerticalImense,
+                const Expanded(child: AppThemeValues.spaceVerticalImense),
                 Center(
                   child: SvgAsset(
                     svg: AppIcons.security,
@@ -74,7 +74,8 @@ class _SecurityPageState extends State<SecurityPage> {
                     color: _themeColors.primary,
                     isMulticolor: true,
                   ),
-                )
+                ),
+                AppThemeValues.spaceVerticalColossal,
               ],
             ),
           );

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/buttons/pill_button.dart';
 import 'package:so_boleto/core/components/buttons/svg_button.dart';
 import 'package:so_boleto/core/routes/routes.dart';
+import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
@@ -29,6 +31,7 @@ class BaseDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.read<ThemeCubit>().state.selectedColors;
     return Dialog(
       insetPadding:
           const EdgeInsets.symmetric(horizontal: AppThemeValues.spaceHuge),
@@ -70,12 +73,12 @@ class BaseDialog extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             PillButton(
-                              backgroundColor: AppColors.primary,
+                              backgroundColor: color.tag,
                               onTap: () => context.pop(true),
                               child: Text(onDenyText ?? 'Não'),
                             ),
                             PillButton(
-                              backgroundColor: AppColors.background,
+                              backgroundColor: AppColors.white.withOpacity(0.5),
                               onTap: onAcept,
                               child: Text(
                                 onConfirmText ?? 'Sim',

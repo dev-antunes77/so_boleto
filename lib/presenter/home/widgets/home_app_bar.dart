@@ -39,7 +39,7 @@ class HomeAppBar extends StatelessWidget {
   void _onCreateBillPressed(BuildContext context) {
     final cubit = context.read<HomeBillsCubit>();
     cubit.setSearchByNameValue('');
-    context.read<BillCubit>().initiateCreationFlow(cubit.state.user.id);
+    context.read<BillCubit>().initiateCreationFlow(cubit.state.userId);
     context.pushTo(Routes.billName);
   }
 }

@@ -111,6 +111,18 @@ class InitialCubit extends Cubit<InitialState> with BaseCubit {
     );
   }
 
+  Future<void> onUpdateUserFavoredDueDay(int dueDay) async {
+    emit(state.copyWith(status: BaseStateStatus.loading));
+    final updatedUser = state.user!.copyWith(favoredDueDay: dueDay);
+    await _updateUserStorage(updatedUser);
+    emit(
+      state.copyWith(
+        status: BaseStateStatus.success,
+        user: updatedUser,
+      ),
+    );
+  }
+
   Future<void> onUpdateUserThemeColors(
       Color baseColor, bool hasLightTheme) async {
     emit(state.copyWith(status: BaseStateStatus.loading));

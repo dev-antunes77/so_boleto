@@ -52,7 +52,7 @@ class _BillListTileState extends State<BillListTile> {
             },
       child: Dismissible(
         key: Key(widget.bill.id),
-        direction: widget.bill.billStatus == BillStatus.payed
+        direction: widget.bill.billStatus.isPayed
             ? DismissDirection.endToStart
             : DismissDirection.horizontal,
         confirmDismiss: widget.isTagPreferenceScreen
@@ -64,7 +64,7 @@ class _BillListTileState extends State<BillListTile> {
         secondaryBackground: const DismissableBackGround(),
         child: DecoratedBox(
           decoration: BoxDecoration(
-            color: widget.bill.billStatus == BillStatus.payed
+            color: widget.bill.billStatus.isPayed
                 ? theme.selectedColors.cardBackground
                 : null,
           ),
