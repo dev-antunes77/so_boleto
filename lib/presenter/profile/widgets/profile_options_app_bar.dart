@@ -26,6 +26,8 @@ class ProfileOptionsAppBar extends StatelessWidget {
         return 'Marca de pagamento';
       case Routes.profileSecurity:
         return 'Segurança';
+      case Routes.profileViewPicture:
+        return 'Foto de perfil';
     }
     return 'Meu Perfil';
   }

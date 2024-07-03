@@ -4,6 +4,7 @@ abstract class AppIcons {
   static const add = '${_path}add.svg';
   static const addReady = '${_path}add_ready.svg';
   static const automobile = '${_path}automobile.svg';
+  static const camera = '${_path}camera.svg';
   static const coins = '${_path}coins.svg';
   static const calendar = '${_path}calendar.svg';
   static const calendar2 = '${_path}calendar2.svg';
@@ -24,6 +25,7 @@ abstract class AppIcons {
   static const filter = '${_path}filter.svg';
   static const filterApplied = '${_path}filter_applied.svg';
   static const groceries = '${_path}groceries.svg';
+  static const gallery = '${_path}gallery.svg';
   static const gas = '${_path}gas.svg';
   static const healthCare = '${_path}health_care.svg';
   static const insurance = '${_path}insurance.svg';
@@ -51,6 +53,7 @@ abstract class AppIcons {
   static const password = '${_path}password.svg';
   static const payment = '${_path}payment.svg';
   static const petShop = '${_path}pet_shop.svg';
+  static const picture = '${_path}picture.svg';
   static const profile = '${_path}profile.svg';
   static const rent = '${_path}rent.svg';
   static const search = '${_path}search.svg';

@@ -7,10 +7,12 @@ class ProfileState extends BaseState with EquatableMixin {
     super.callbackMessage,
     this.allowSecurityAccess = false,
     this.userId = '',
-  });
+    Object? image,
+  }) : image = image ?? Object();
 
   final bool allowSecurityAccess;
   final String userId;
+  final Object image;
 
   @override
   List<Object> get props {
@@ -19,6 +21,7 @@ class ProfileState extends BaseState with EquatableMixin {
       status,
       allowSecurityAccess,
       userId,
+      image,
     ];
   }
 
@@ -27,6 +30,7 @@ class ProfileState extends BaseState with EquatableMixin {
     BaseStateStatus? status,
     String? callbackMessage,
     String? userId,
+    Object? image,
     bool? allowSecurityAccess,
   }) =>
       ProfileState(
@@ -34,5 +38,6 @@ class ProfileState extends BaseState with EquatableMixin {
         callbackMessage: callbackMessage ?? this.callbackMessage,
         allowSecurityAccess: allowSecurityAccess ?? this.allowSecurityAccess,
         userId: userId ?? this.userId,
+        image: image ?? this.image,
       );
 }

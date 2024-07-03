@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:so_boleto/domain/models/enums/page_transitions.dart';
+import 'package:so_boleto/domain/models/image_model.dart';
 import 'package:so_boleto/presenter/bill/pages/sections/bill_category_section.dart';
 import 'package:so_boleto/presenter/bill/pages/sections/bill_check_section.dart';
 import 'package:so_boleto/presenter/bill/pages/sections/bill_due_day_of_the_month_section.dart';
@@ -21,6 +22,7 @@ import 'package:so_boleto/presenter/profile/pages/sections/due_day_choice.dart';
 import 'package:so_boleto/presenter/profile/pages/sections/payed_tag_choice.dart';
 import 'package:so_boleto/presenter/profile/pages/sections/theme_choice.dart';
 import 'package:so_boleto/presenter/profile/pages/security_page.dart';
+import 'package:so_boleto/presenter/profile/widgets/view_picture.dart';
 import 'package:so_boleto/presenter/prompt_bills/pages/prompt_bills_edition_page.dart';
 import 'package:so_boleto/presenter/prompt_bills/pages/prompt_bills_page.dart';
 
@@ -179,6 +181,18 @@ abstract class RoutesConfig {
               const ProfilePage(),
             ),
           ),
+          GoRoute(
+              path: RelativePaths.profileViewPicture,
+              parentNavigatorKey: _shellKey,
+              pageBuilder: (_, state) {
+                final image =
+                    state.extra != null ? state.extra as ImageModel : null;
+                return _getTransitionPage(
+                  state,
+                  ViewPicture(image!),
+                  duration: duration400,
+                );
+              }),
           GoRoute(
             path: RelativePaths.profileTheme,
             parentNavigatorKey: _shellKey,

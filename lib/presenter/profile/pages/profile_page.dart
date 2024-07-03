@@ -1,11 +1,17 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:so_boleto/core/components/custom_menu_anchor/custom_menu_anchor.dart';
+import 'package:so_boleto/core/components/custom_menu_anchor/custom_menu_item_button.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
+import 'package:so_boleto/domain/models/image_model.dart';
 import 'package:so_boleto/domain/models/user_data.dart';
 import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
 import 'package:so_boleto/presenter/profile/cubit/profile_cubit.dart';
@@ -21,7 +27,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   late ProfileCubit _profileCubit;
-  late final UserData _user;
+  late UserData _user;
   @override
   void initState() {
     _profileCubit = context.read<ProfileCubit>();
@@ -44,14 +50,75 @@ class _ProfilePageState extends State<ProfilePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              CircleAvatar(
-                radius: 36,
-                backgroundColor: themeColors.primary,
-                child: const SvgAsset(
-                  svg: AppIcons.money,
-                  height: 52,
-                  color: Colors.white,
-                ),
+              BlocBuilder<ProfileCubit, ProfileState>(
+                builder: (context, state) {
+                  _user = context.read<InitialCubit>().state.user!;
+
+                  final navigationParams = _user.profilePicturePath.isNotEmpty
+                      ? ImageModel(path: _user.profilePicturePath)
+                      : ImageModel.fromXfile(state.image as XFile);
+                  return CustomMenuAnchor(
+                    alignment: Alignment.topRight,
+                    builder: (context, controller, child) {
+                      return GestureDetector(
+                        onTap: () => controller.isOpen
+                            ? controller.close()
+                            : controller.open(),
+                        child: Builder(
+                          builder: (context) {
+                            if (_user.profilePicturePath.isNotEmpty) {
+                              return CircleAvatar(
+                                radius: 36,
+                                backgroundColor: themeColors.primary,
+                                backgroundImage:
+                                    FileImage(File(_user.profilePicturePath)),
+                              );
+                            }
+                            if (state.image is XFile) {
+                              return CircleAvatar(
+                                radius: 36,
+                                backgroundColor: themeColors.primary,
+                                backgroundImage: FileImage(
+                                    File((state.image as XFile).path)),
+                              );
+                            }
+                            return CircleAvatar(
+                              radius: 36,
+                              backgroundColor: themeColors.primary,
+                              child: const SvgAsset(
+                                svg: AppIcons.money,
+                                height: 52,
+                                color: Colors.white,
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    },
+                    menuChildren: [
+                      if (state.image is XFile ||
+                          _user.profilePicturePath.isNotEmpty)
+                        CustomMenuItemButton(
+                          svg: AppIcons.picture,
+                          label: 'Ver foto',
+                          onPressed: () => context.pushTo(
+                            Routes.profileViewPicture,
+                            params: navigationParams,
+                          ),
+                        ),
+                      CustomMenuItemButton(
+                        svg: AppIcons.camera,
+                        label: 'tirar foto',
+                        onPressed: () => _onCameraChoice(),
+                      ),
+                      CustomMenuItemButton(
+                        svg: AppIcons.gallery,
+                        label: 'Galeria',
+                        onPressed: () => _onGalleryChoice(),
+                      ),
+                    ],
+                  );
+                },
               ),
               AppThemeValues.spaceHorizontalMedium,
               Column(
@@ -109,6 +176,16 @@ class _ProfilePageState extends State<ProfilePage> {
         ],
       ),
     );
+  }
+
+  void _onCameraChoice() {
+    _profileCubit.getImageFromCamera(
+        context.read<InitialCubit>().onUpdateUserProfilePictrue);
+  }
+
+  void _onGalleryChoice() {
+    _profileCubit.getImageFromGallery(
+        context.read<InitialCubit>().onUpdateUserProfilePictrue);
   }
 
   void _onLogoutPressed() => context.showDialog(

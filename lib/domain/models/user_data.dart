@@ -14,6 +14,7 @@ class UserData extends Equatable {
     this.lastName = '',
     this.email = '',
     this.password = '',
+    this.profilePicturePath = '',
     this.hasSeenOnboarding = false,
     this.hasLightTheme = true,
     this.favoredDueDay = 0,
@@ -30,6 +31,8 @@ class UserData extends Equatable {
         'hasSeenOnboarding': hasSeenOnboarding,
         'hasLightTheme': hasLightTheme,
         'payedTag': payedTag.value,
+        'favoredDueDay': favoredDueDay,
+        'profilePicturePath': profilePicturePath,
         'baseColor': baseColor.colorToJson(),
         'createdAt': createdAt.dateTimeToStringData(),
       };
@@ -45,6 +48,8 @@ class UserData extends Equatable {
       email: data?['email'],
       hasSeenOnboarding: data?['hasSeenOnboarding'],
       hasLightTheme: data?['hasLightTheme'],
+      favoredDueDay: data?['favoredDueDay'],
+      profilePicturePath: data?['profilePicturePath'],
       payedTag: (data?['payedTag'] as String).payedTagToEnum(),
       baseColor: (data?['baseColor'] as String).colorFromJson(),
       createdAt: (data?['createdAt'] as String).stringToDateTime(),
@@ -61,6 +66,8 @@ class UserData extends Equatable {
         hasSeenOnboarding: hiveUser.hasSeenOnboarding,
         payedTag: hiveUser.payedTag.payedTagToEnum(),
         baseColor: hiveUser.baseColor.colorFromJson(),
+        favoredDueDay: hiveUser.favoredDueDay,
+        profilePicturePath: hiveUser.profilePicturePath,
         createdAt: hiveUser.createdAt,
       );
 
@@ -71,6 +78,7 @@ class UserData extends Equatable {
   final String lastName;
   final String email;
   final String password;
+  final String profilePicturePath;
   final bool hasSeenOnboarding;
   final bool hasLightTheme;
   final PayedTag payedTag;
@@ -90,6 +98,7 @@ class UserData extends Equatable {
         hasLightTheme,
         payedTag,
         baseColor,
+        profilePicturePath,
         favoredDueDay,
         createdAt,
       ];
@@ -100,6 +109,7 @@ class UserData extends Equatable {
     String? lastName,
     String? email,
     String? password,
+    String? profilePicturePath,
     bool? hasSeenOnboarding,
     bool? hasLightTheme,
     PayedTag? payedTag,
@@ -113,6 +123,7 @@ class UserData extends Equatable {
         lastName: lastName ?? this.lastName,
         email: email ?? this.email,
         password: password ?? this.password,
+        profilePicturePath: profilePicturePath ?? this.profilePicturePath,
         hasSeenOnboarding: hasSeenOnboarding ?? this.hasSeenOnboarding,
         hasLightTheme: hasLightTheme ?? this.hasLightTheme,
         payedTag: payedTag ?? this.payedTag,

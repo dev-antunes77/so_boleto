@@ -8,10 +8,12 @@ import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
+import 'package:so_boleto/core/theme/settings/theme_colors.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 
 class BillSearchBar extends StatefulWidget {
-  const BillSearchBar({super.key});
+  const BillSearchBar(this.themeColors, {super.key});
+  final ThemeColors themeColors;
 
   @override
   State<BillSearchBar> createState() => _SearchBarAnimationState();
@@ -23,7 +25,6 @@ class _SearchBarAnimationState extends State<BillSearchBar> {
 
   @override
   Widget build(BuildContext context) {
-    final themeColors = context.read<ThemeCubit>().state.selectedColors;
     return AnimatedContainer(
       duration: const Duration(milliseconds: 500),
       width: isExpanded ? context.width * 0.65 : 36,
@@ -39,7 +40,7 @@ class _SearchBarAnimationState extends State<BillSearchBar> {
           prefixIcon: SvgAsset(
             svg: AppIcons.search,
             height: 28,
-            color: themeColors.icon,
+            color: widget.themeColors.icon,
           ),
           suffixIcon: isExpanded
               ? AppBarButton(
@@ -60,7 +61,7 @@ class _SearchBarAnimationState extends State<BillSearchBar> {
           border: InputBorder.none,
           enabledBorder: InputBorder.none,
           focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: themeColors.primary),
+            borderSide: BorderSide(color: widget.themeColors.primary),
           ),
         ),
         controller: controller,

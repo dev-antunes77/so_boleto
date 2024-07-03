@@ -138,4 +138,16 @@ class InitialCubit extends Cubit<InitialState> with BaseCubit {
       ),
     );
   }
+
+  Future<void> onUpdateUserProfilePictrue(String path) async {
+    emit(state.copyWith(status: BaseStateStatus.loading));
+    final updatedUser = state.user!.copyWith(profilePicturePath: path);
+    await _updateUserStorage(updatedUser);
+    emit(
+      state.copyWith(
+        status: BaseStateStatus.success,
+        user: updatedUser,
+      ),
+    );
+  }
 }

@@ -13,6 +13,8 @@ import 'package:so_boleto/domain/usecases/delete_bill.dart';
 import 'package:so_boleto/domain/usecases/edit_bill.dart';
 import 'package:so_boleto/domain/usecases/filter_bills_by_params.dart';
 import 'package:so_boleto/domain/usecases/get_bills.dart';
+import 'package:so_boleto/domain/usecases/get_image_from_camera.dart';
+import 'package:so_boleto/domain/usecases/get_image_from_gallery.dart';
 import 'package:so_boleto/domain/usecases/get_user_from_firebase.dart';
 import 'package:so_boleto/domain/usecases/get_user_from_storage.dart';
 import 'package:so_boleto/domain/usecases/set_bill_as_paid.dart';
@@ -26,6 +28,7 @@ import 'package:so_boleto/infra/local_database/hive_user_database/hive_user_data
 import 'package:so_boleto/infra/local_database/hive_user_database/hive_user_database.dart';
 import 'package:so_boleto/infra/services/auth_service/auth_service.dart';
 import 'package:so_boleto/infra/services/firestore_service/firestore_service.dart';
+import 'package:so_boleto/infra/services/image_service/image_service.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
 import 'package:so_boleto/presenter/expenses/cubit/expenses_cubit.dart';
 import 'package:so_boleto/presenter/filter/cubit/filter_cubit.dart';
@@ -90,6 +93,7 @@ abstract class InjectionService {
   static Future<void> _initServices() async {
     _i.registerSingleton<FirestoreService>(FirestoreService());
     _i.registerSingleton<AuthService>(AuthService());
+    _i.registerSingleton<ImageService>(ImageService());
 
     // final playerService = await AudioServiceInitializer.init(
     //   _i.get<SongRepository>(),
@@ -207,6 +211,18 @@ abstract class InjectionService {
         _i.get<FirestoreService>(),
       ),
     );
+
+    _i.registerFactory(
+      () => GetImageFromCamera(
+        _i.get<ImageService>(),
+      ),
+    );
+
+    _i.registerFactory(
+      () => GetImageFromGallery(
+        _i.get<ImageService>(),
+      ),
+    );
   }
 
   static void _initBloc() {
@@ -257,8 +273,10 @@ abstract class InjectionService {
     _i.registerFactory(
       () => ProfileCubit(
         _i.get<SignOut>(),
-        _i.get<ClearUserStorage>(),
         _i.get<ConfirmUserPassword>(),
+        _i.get<ClearUserStorage>(),
+        _i.get<GetImageFromCamera>(),
+        _i.get<GetImageFromGallery>(),
       ),
     );
   }

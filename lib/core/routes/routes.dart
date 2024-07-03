@@ -18,6 +18,7 @@ class Routes {
   static const filter = '/filter';
   static const profile = '/profile';
   static const profileTheme = '/profile-theme';
+  static const profileViewPicture = '/profile-view-picture';
   static const profileDueDay = '/profile-due-day';
   static const profilePayedTag = '/profile-payed-tag';
   static const profileSecurity = '/profile-security-tag';
@@ -42,6 +43,7 @@ class RelativePaths {
   static const expenses = '/expenses';
   static const filter = '/filter';
   static const profile = '/profile';
+  static const profileViewPicture = '/profile-view-picture';
   static const profileTheme = '/profile-theme';
   static const profileDueDay = '/profile-due-day';
   static const profilePayedTag = '/profile-payed-tag';

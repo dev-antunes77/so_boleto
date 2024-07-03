@@ -1,6 +1,5 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:so_boleto/core/extensions/color_extensions.dart';
 import 'package:so_boleto/domain/models/user_data.dart';
@@ -19,6 +18,8 @@ class HiveUserData with HiveObjectMixin {
     required this.hasLightTheme,
     required this.payedTag,
     required this.baseColor,
+    required this.favoredDueDay,
+    required this.profilePicturePath,
     required this.createdAt,
   });
 
@@ -31,6 +32,8 @@ class HiveUserData with HiveObjectMixin {
         hasLightTheme: user.hasLightTheme,
         hasSeenOnboarding: user.hasSeenOnboarding,
         payedTag: user.payedTag.value,
+        favoredDueDay: user.favoredDueDay,
+        profilePicturePath: user.profilePicturePath,
         baseColor: user.baseColor.colorToJson(),
         createdAt: user.createdAt,
       );
@@ -63,5 +66,11 @@ class HiveUserData with HiveObjectMixin {
   final String baseColor;
 
   @HiveField(10)
+  final int favoredDueDay;
+
+  @HiveField(11)
+  final String profilePicturePath;
+
+  @HiveField(12)
   final DateTime createdAt;
 }
