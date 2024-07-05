@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:so_boleto/core/constants/app_constants.dart';
 import 'package:so_boleto/core/extensions/color_extensions.dart';
+import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 
 class SvgAsset extends StatelessWidget {
   const SvgAsset({
@@ -9,8 +11,8 @@ class SvgAsset extends StatelessWidget {
     required this.svg,
     this.height,
     this.width,
-    this.color,
     this.isMulticolor = false,
+    this.color,
   });
   final String svg;
   final Color? color;
@@ -20,6 +22,8 @@ class SvgAsset extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final iconColor =
+        color ?? context.read<ThemeCubit>().state.selectedColors.tag;
     return isMulticolor
         ? FutureBuilder<String>(
             future: DefaultAssetBundle.of(context).loadString(svg),
@@ -27,7 +31,7 @@ class SvgAsset extends StatelessWidget {
               if (snapshot.hasData) {
                 final String modifiedSvgContent = snapshot.data!
                     .replaceAll(
-                        AppConstants.defaultColorHex, color!.toHexColor())
+                        AppConstants.defaultColorHex, iconColor.toHexColor())
                     .replaceAll(AppConstants.defaultColorHex, 'themeColor');
                 return SvgPicture.string(
                   modifiedSvgContent,
@@ -42,9 +46,7 @@ class SvgAsset extends StatelessWidget {
             svg,
             height: height,
             width: width,
-            colorFilter: color != null
-                ? ColorFilter.mode(color!, BlendMode.srcATop)
-                : null,
+            colorFilter: ColorFilter.mode(iconColor, BlendMode.srcATop),
           );
   }
 }

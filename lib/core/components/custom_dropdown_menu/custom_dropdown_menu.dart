@@ -23,11 +23,12 @@ class CustomDropdownMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeColors = context.read<ThemeCubit>().state.selectedColors;
     return DecoratedBox(
       decoration: BoxDecoration(
         border: Border.all(
           width: 1.5,
-          color: context.read<ThemeCubit>().state.selectedColors.cardBackground,
+          color: themeColors.cardBackground,
         ),
         borderRadius: BorderRadius.circular(
           AppThemeValues.spaceSmall,
@@ -45,7 +46,7 @@ class CustomDropdownMenu extends StatelessWidget {
             padding: EdgeInsets.zero,
             isExpanded: true,
             alignment: Alignment.centerLeft,
-            style: context.textRobotoSmall,
+            style: context.textRobotoSmall.copyWith(color: themeColors.text),
             borderRadius: BorderRadius.circular(
               AppThemeValues.spaceSmall,
             ),

@@ -6,7 +6,6 @@ import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
-import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/domain/models/enums/page_response_handler.dart';
 
@@ -20,7 +19,7 @@ class CustomStatusHandler extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = context.read<ThemeCubit>().state.selectedColors.primary;
+    final color = context.read<ThemeCubit>().state.selectedColors.inversedText;
     return SingleChildScrollView(
       child: ConstrainedBox(
         constraints: BoxConstraints(
@@ -39,7 +38,7 @@ class CustomStatusHandler extends StatelessWidget {
                   message.getTextResponse(),
                   textAlign: TextAlign.center,
                   style: context.textLarge.copyWith(
-                    color: AppColors.grey,
+                    color: color,
                   ),
                 ),
               ),
@@ -48,7 +47,6 @@ class CustomStatusHandler extends StatelessWidget {
                 svg: message.value,
                 height: context.height * 0.2,
                 isMulticolor: true,
-                color: color,
               ),
               AppThemeValues.spaceVerticalLarge,
               if (message == PageResponseHandler.error)

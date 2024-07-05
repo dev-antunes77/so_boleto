@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
+import 'package:so_boleto/core/theme/settings/theme_colors.dart';
 
 class AppBarButton extends StatelessWidget {
   const AppBarButton({
     super.key,
     required this.label,
     required this.onTap,
-    required this.color,
+    required this.colors,
   });
 
   final String label;
-  final Color color;
+  final ThemeColors colors;
   final VoidCallback onTap;
 
   @override
@@ -21,7 +22,7 @@ class AppBarButton extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
-          color: color,
+          color: colors.tag,
         ),
         child: Padding(
           padding: const EdgeInsets.only(
@@ -31,7 +32,9 @@ class AppBarButton extends StatelessWidget {
           ),
           child: Text(
             label,
-            style: context.textXSmall,
+            style: context.textXSmall.copyWith(
+              color: colors.inversedText,
+            ),
           ),
         ),
       ),

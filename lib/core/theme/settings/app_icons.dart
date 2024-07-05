@@ -60,6 +60,7 @@ abstract class AppIcons {
   static const security = '${_path}security.svg';
   static const tag = '${_path}tag.svg';
   static const telephone = '${_path}telephone.svg';
+  static const theme = '${_path}theme.svg';
   static const transportation = '${_path}transportation.svg';
   static const travel = '${_path}travel.svg';
   static const value = '${_path}value.svg';

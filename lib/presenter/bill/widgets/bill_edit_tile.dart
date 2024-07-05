@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
-import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 
 class BillEditTile extends StatelessWidget {
@@ -13,11 +12,13 @@ class BillEditTile extends StatelessWidget {
     required this.value,
     required this.onPressed,
     this.width,
+    required this.color,
   });
 
   final String icon;
   final String label;
   final String value;
+  final Color color;
   final VoidCallback onPressed;
   final double? width;
 
@@ -30,7 +31,7 @@ class BillEditTile extends StatelessWidget {
           SvgAsset(
             svg: icon,
             height: 32,
-            color: AppColors.primary,
+            color: color,
           ),
           AppThemeValues.spaceHorizontalXLarge,
           Column(

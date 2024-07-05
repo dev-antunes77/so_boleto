@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/loading_page/loading_page.dart';
+import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
+import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
 import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
@@ -19,9 +21,7 @@ class ThemeChoice extends StatefulWidget {
 
   static const List<Color> themeColors = [
     Color.fromARGB(255, 4, 136, 59),
-    Color.fromARGB(255, 251, 139, 35),
-    Color.fromARGB(255, 15, 82, 186),
-    Colors.red,
+    Color.fromARGB(255, 251, 125, 35),
     Colors.deepPurple,
     Color.fromARGB(255, 0, 154, 166),
   ];
@@ -69,7 +69,7 @@ class _ThemeChoiceState extends State<ThemeChoice> {
                   GridView.builder(
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
+                      crossAxisCount: 4,
                       childAspectRatio: 1.5,
                       crossAxisSpacing: AppThemeValues.spaceSmall,
                       mainAxisSpacing: AppThemeValues.spaceSmall,
@@ -112,6 +112,14 @@ class _ThemeChoiceState extends State<ThemeChoice> {
                       );
                     },
                   ),
+                  SizedBox(height: context.height * 0.12),
+                  Center(
+                    child: SvgAsset(
+                      svg: AppIcons.theme,
+                      height: context.height * 0.25,
+                      isMulticolor: true,
+                    ),
+                  )
                 ],
               ),
             )

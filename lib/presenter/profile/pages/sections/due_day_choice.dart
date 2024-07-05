@@ -37,10 +37,10 @@ class _DueDayChoiceState extends State<DueDayChoice> {
               ),
               AppThemeValues.spaceVerticalSmall,
               const Text(
-                'Você ainda pode alterar isso ao editar a conta.',
+                'Você ainda pode alterar essa data\nao criar ou editar uma conta.',
                 textAlign: TextAlign.center,
               ),
-              AppThemeValues.spaceVerticalSmall,
+              AppThemeValues.spaceVerticalMassive,
               GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 6,
@@ -69,6 +69,7 @@ class _DueDayChoiceState extends State<DueDayChoice> {
             ],
           ),
         ),
+        AppThemeValues.spaceVerticalMassive,
         PillButton(
           onTap: () {
             context.read<InitialCubit>().onUpdateUserFavoredDueDay(_dueDay);

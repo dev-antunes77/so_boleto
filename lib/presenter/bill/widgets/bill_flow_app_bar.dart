@@ -21,13 +21,15 @@ class _BillFlowAppBarState extends State<BillFlowAppBar> {
   bool isReadyToDisplay = false;
 
   late BillModel? _bill;
+  late final bool isEditionFlow;
 
   @override
   void initState() {
     delayAppBarActions();
     final billState = context.read<BillCubit>().state;
+    isEditionFlow = billState.isEditionFlow;
 
-    _bill = billState.isEditionFlow ? billState.bill : null;
+    _bill = isEditionFlow ? billState.bill : null;
 
     super.initState();
   }
@@ -40,7 +42,8 @@ class _BillFlowAppBarState extends State<BillFlowAppBar> {
           : AppLocalizations.current.billFlowBillEdition,
       leadingBackButton: Visibility(
         visible: isReadyToDisplay,
-        child: const CustomBackButton(),
+        child:
+            isEditionFlow ? const SizedBox.shrink() : const CustomBackButton(),
       ),
       actions: [
         Visibility(
@@ -49,7 +52,7 @@ class _BillFlowAppBarState extends State<BillFlowAppBar> {
             padding: const EdgeInsets.only(right: AppThemeValues.spaceSmall),
             child: AppBarButton(
               label: AppLocalizations.current.close,
-              color: context.read<ThemeCubit>().state.selectedColors.tag,
+              colors: context.read<ThemeCubit>().state.selectedColors,
               onTap: () => AppDialogs.leaveBillCreation(context),
             ),
           ),

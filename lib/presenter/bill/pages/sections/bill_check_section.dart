@@ -8,6 +8,7 @@ import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/helpers/app_formatters.dart';
 import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes.dart';
+import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
@@ -37,6 +38,7 @@ class _BillCheckSectionState extends State<BillCheckSection> {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.read<ThemeCubit>().state.selectedColors.tag;
     return BillShell(
       height: context.height * 0.8,
       child: Padding(
@@ -48,6 +50,7 @@ class _BillCheckSectionState extends State<BillCheckSection> {
                 BillEditTile(
                   icon: AppIcons.description,
                   label: AppLocalizations.current.billFlowCheckName,
+                  color: color,
                   value: state.bill.name.capitalize(),
                   width: double.infinity,
                   onPressed: () => _pushToEditionFlow(context, Routes.billName),
@@ -56,12 +59,14 @@ class _BillCheckSectionState extends State<BillCheckSection> {
                 BillEditTile(
                   icon: AppIcons.description,
                   label: AppLocalizations.current.billFlowCheckDescription,
+                  color: color,
                   value: state.bill.description.capitalize(),
                   onPressed: () => _pushToEditionFlow(context, Routes.billName),
                 ),
                 LineSeparator.infiniteHorizon(),
                 BillEditTile(
                   icon: AppIcons.parcels,
+                  color: color,
                   label: AppFormatters.parcelLabelFormatter(
                     state.bill.totalParcels,
                   ),
@@ -75,6 +80,7 @@ class _BillCheckSectionState extends State<BillCheckSection> {
                 BillEditTile(
                   icon: AppIcons.calendar,
                   label: AppLocalizations.current.billFlowCheckDueDay,
+                  color: color,
                   value: state.bill.dueDayOfTheMonth.addLeadingZero(),
                   onPressed: () =>
                       _pushToEditionFlow(context, Routes.billDueDay),
@@ -83,6 +89,7 @@ class _BillCheckSectionState extends State<BillCheckSection> {
                 BillEditTile(
                   icon: AppIcons.value,
                   label: AppLocalizations.current.billFlowCheckValue,
+                  color: color,
                   value: state.bill.value.toDouble().formatCurrency(),
                   onPressed: () =>
                       _pushToEditionFlow(context, Routes.billValue),
@@ -91,6 +98,7 @@ class _BillCheckSectionState extends State<BillCheckSection> {
                 BillEditTile(
                   icon: state.bill.category.getIconResponse(),
                   label: AppLocalizations.current.billFlowCheckCategory,
+                  color: color,
                   value: state.bill.category.getTextResponse(),
                   onPressed: () =>
                       _pushToEditionFlow(context, Routes.billCategory),
