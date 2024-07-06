@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_images.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
@@ -55,7 +56,7 @@ class _AnimatedThemeSwitchState extends State<AnimatedThemeSwitch>
             children: [
               Opacity(
                   opacity: widget.isLightTheme ? 0.5 : 1,
-                  child: Text('Dark',
+                  child: Text(AppLocalizations.current.profileThemeDark,
                       style: context.textRobotoMedium.copyWith(
                           fontWeight: widget.isLightTheme
                               ? FontWeight.normal
@@ -90,7 +91,7 @@ class _AnimatedThemeSwitchState extends State<AnimatedThemeSwitch>
               ),
               Opacity(
                   opacity: widget.isLightTheme ? 1 : 0.5,
-                  child: Text('Light',
+                  child: Text(AppLocalizations.current.profileThemeLight,
                       style: context.textRobotoMedium.copyWith(
                           fontWeight: widget.isLightTheme
                               ? FontWeight.bold

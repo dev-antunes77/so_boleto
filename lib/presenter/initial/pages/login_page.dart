@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/buttons/pill_button.dart';
 import 'package:so_boleto/core/components/custom_pop_scope/custom_pop_scope.dart';
-import 'package:so_boleto/core/components/loading_page/loading_page.dart';
+import 'package:so_boleto/core/components/loading_page/loading_animation.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
@@ -79,24 +80,27 @@ class _LoginPageState extends State<LoginPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Center(
-                            child: Text(_isSignUp ? 'Cadastre-se' : 'Entre',
+                            child: Text(
+                                _isSignUp
+                                    ? AppLocalizations.current.signUp
+                                    : AppLocalizations.current.signIn,
                                 style: context.textLarge)),
                         if (_isSignUp) ...[
                           AppThemeValues.spaceVerticalLarge,
                           TextFormField(
                             controller: _nameController,
-                            decoration: const InputDecoration(
-                              labelText: 'Nome',
-                              icon: Icon(Icons.person_4_outlined),
+                            decoration: InputDecoration(
+                              labelText: AppLocalizations.current.loginName,
+                              icon: const Icon(Icons.person_4_outlined),
                             ),
                             validator: FormValidator.validateNames,
                           ),
                           AppThemeValues.spaceVerticalLarge,
                           TextFormField(
                             controller: _lastNameController,
-                            decoration: const InputDecoration(
-                              labelText: 'Sobrenome',
-                              icon: Icon(Icons.person_4),
+                            decoration: InputDecoration(
+                              labelText: AppLocalizations.current.loginSurename,
+                              icon: const Icon(Icons.person_4),
                             ),
                             validator: FormValidator.validateNames,
                           ),
@@ -104,9 +108,9 @@ class _LoginPageState extends State<LoginPage> {
                         AppThemeValues.spaceVerticalLarge,
                         TextFormField(
                           controller: _emailController,
-                          decoration: const InputDecoration(
-                            labelText: 'Email',
-                            icon: Icon(Icons.email),
+                          decoration: InputDecoration(
+                            labelText: AppLocalizations.current.loginEmail,
+                            icon: const Icon(Icons.email),
                           ),
                           validator: FormValidator.validateEmailField,
                         ),
@@ -115,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                           controller: _passwordController,
                           obscureText: !_isPasswordVisible,
                           decoration: InputDecoration(
-                            labelText: 'Password',
+                            labelText: AppLocalizations.current.loginPassword,
                             icon: const Icon(Icons.lock),
                             suffixIcon: IconButton(
                               icon: _isPasswordVisible
@@ -128,7 +132,9 @@ class _LoginPageState extends State<LoginPage> {
                         AppThemeValues.spaceVerticalImense,
                         PillButton(
                             child: Text(
-                              _isSignUp ? 'Cadastrar' : 'Entrar',
+                              _isSignUp
+                                  ? AppLocalizations.current.signUpTitle
+                                  : AppLocalizations.current.signInTitle,
                             ),
                             onTap: () {
                               if (_formKey.currentState!.validate()) {
@@ -141,12 +147,17 @@ class _LoginPageState extends State<LoginPage> {
                             children: [
                               TextSpan(
                                 text: _isSignUp
-                                    ? 'Já possui conta?  '
-                                    : 'Ainda não tem conta? Cadastre-se  ',
-                                style: context.textRobotoMediumToLarge,
+                                    ? AppLocalizations
+                                        .current.loginHasAccountAlready
+                                    : AppLocalizations.current.loginNoAccount,
+                                style: context.textRobotoMediumToLarge.copyWith(
+                                  color: AppColors.black,
+                                ),
                               ),
                               TextSpan(
-                                text: _isSignUp ? 'Entrar' : 'Aqui',
+                                text: _isSignUp
+                                    ? AppLocalizations.current.signIn
+                                    : AppLocalizations.current.loginHere,
                                 style: context.textRobotoMediumToLarge.copyWith(
                                   color: AppColors.primary,
                                 ),
@@ -172,7 +183,7 @@ class _LoginPageState extends State<LoginPage> {
     if (match) {
       showDialog(
         context: context,
-        builder: (context) => const LoadingPage2(),
+        builder: (context) => const LoadingAnimation(),
       );
     }
   }

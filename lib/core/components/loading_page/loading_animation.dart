@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:so_boleto/core/theme/settings/app_colors.dart';
+import 'package:so_boleto/core/components/loading_page/widgets/dot.dart';
 
 class LoadingAnimation extends StatefulWidget {
   final Duration duration;
@@ -97,26 +97,5 @@ class _LoadingAnimationState extends State<LoadingAnimation>
   void dispose() {
     _controller.dispose();
     super.dispose();
-  }
-}
-
-class Dot extends StatelessWidget {
-  const Dot({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 8.0),
-      child: Center(
-        child: Container(
-          height: 10.0,
-          width: 10.0,
-          decoration: const BoxDecoration(
-            color: AppColors.primary,
-            shape: BoxShape.circle,
-          ),
-        ),
-      ),
-    );
   }
 }

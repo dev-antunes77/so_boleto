@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/custom_pop_scope/custom_pop_scope.dart';
-import 'package:so_boleto/core/components/loading_page/loading_page.dart';
-import 'package:so_boleto/core/routes/routes.dart';
+import 'package:so_boleto/core/components/dialogs/app_dialogs.dart';
+import 'package:so_boleto/core/components/loading_page/loading_animation.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
@@ -33,7 +33,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
             if (state.status == BaseStateStatus.loading) {
               showDialog(
                 context: context,
-                builder: (context) => const LoadingPage2(),
+                builder: (context) => const LoadingAnimation(),
               );
             }
           },
@@ -50,7 +50,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       children: [
                         if (index < 5)
                           OnboardingSkipButton(
-                            onSkip: _onSkipOnboardingPressed,
+                            onSkip: () => AppDialogs.skipOnboarding(context),
                           ),
                         OnboardingPageHandler(index),
                       ],
@@ -64,19 +64,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
         bottomNavigationBar:
             OnboardingBottomNavigator(pageController: _pageController),
       ),
-    );
-  }
-
-  void _onSkipOnboardingPressed() {
-    context.showDialog(
-      title: 'Pular boas vindas?',
-      description: "Tem certeza que deseja pular a tela de boas vindas?",
-      onAcept: () {
-        context.pop(true);
-        context.read<InitialCubit>().onSkipOnboarding().then(
-              (_) => context.navigateTo(Routes.home),
-            );
-      },
     );
   }
 }

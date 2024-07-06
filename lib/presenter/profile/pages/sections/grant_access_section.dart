@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:so_boleto/core/components/buttons/rectangular_button.dart';
 import 'package:so_boleto/core/components/custom_text_form_filed/custom_text_form_filed.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
@@ -46,7 +47,7 @@ class _GrantAccessSectionState extends State<GrantAccessSection> {
                 children: [
                   AppThemeValues.spaceVerticalMassive,
                   Text(
-                    'Use sua senha para continuar',
+                    AppLocalizations.current.profileAccess,
                     style: context.textRobotoSubtitleMedium,
                   ),
                   AppThemeValues.spaceVerticalMedium,
@@ -54,7 +55,7 @@ class _GrantAccessSectionState extends State<GrantAccessSection> {
                     padding: const EdgeInsets.all(AppThemeValues.spaceMedium),
                     child: CustomTextFormField(
                       controller: _controller,
-                      labelText: 'Senha',
+                      labelText: AppLocalizations.current.loginPassword,
                       obscureText: !_isPasswordVisible,
                       textInputAction: TextInputAction.done,
                       validator: FormValidator.validatePassword,
@@ -81,7 +82,7 @@ class _GrantAccessSectionState extends State<GrantAccessSection> {
                   RectangularButton(
                     onTap: () => widget.onConfirm(_controller.text),
                     isValid: true,
-                    label: 'Confirmar',
+                    label: AppLocalizations.current.confirm,
                   ),
                   AppThemeValues.spaceVerticalMedium,
                 ],

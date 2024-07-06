@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
@@ -39,7 +40,8 @@ class _SecurityPageState extends State<SecurityPage> {
           current.status == BaseStateStatus.focusedError,
       listener: (context, state) {
         if (state.allowSecurityAccess == false) {
-          context.showSnackBar('Senha incorreta');
+          context
+              .showSnackBar(AppLocalizations.current.profileIncorrectPassword);
         }
       },
       buildWhen: (previous, current) => previous.status != current.status,
@@ -51,17 +53,18 @@ class _SecurityPageState extends State<SecurityPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AppThemeValues.spaceVerticalLarge,
-                const ProfileTitleSection('Opções de segurança'),
+                ProfileTitleSection(
+                    AppLocalizations.current.profileSecurityOption),
                 AppThemeValues.spaceVerticalXSmall,
                 ProfileOptionTile(
-                  label: 'Trocar senha',
+                  label: AppLocalizations.current.profileChangePassword,
                   onTap: () {},
                   svg: AppIcons.password,
                   color: _themeColors.text,
                 ),
                 AppThemeValues.spaceVerticalXSmall,
                 ProfileOptionTile(
-                  label: 'Deletar conta',
+                  label: AppLocalizations.current.profileDeleteAccount,
                   onTap: () {},
                   svg: AppIcons.delete2,
                   color: _themeColors.text,

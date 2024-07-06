@@ -5,7 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:so_boleto/core/components/custom_menu_anchor/custom_menu_anchor.dart';
 import 'package:so_boleto/core/components/custom_menu_anchor/custom_menu_item_button.dart';
+import 'package:so_boleto/core/components/dialogs/app_dialogs.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
@@ -100,7 +102,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           _user.profilePicturePath.isNotEmpty)
                         CustomMenuItemButton(
                           svg: AppIcons.picture,
-                          label: 'Ver foto',
+                          label: AppLocalizations.current.profileSeePicture,
                           onPressed: () => context.pushTo(
                             Routes.profileViewPicture,
                             params: navigationParams,
@@ -108,12 +110,12 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       CustomMenuItemButton(
                         svg: AppIcons.camera,
-                        label: 'tirar foto',
+                        label: AppLocalizations.current.profileTakePicture,
                         onPressed: () => _onCameraChoice(),
                       ),
                       CustomMenuItemButton(
                         svg: AppIcons.gallery,
-                        label: 'Galeria',
+                        label: AppLocalizations.current.profileSeeGallery,
                         onPressed: () => _onGalleryChoice(),
                       ),
                     ],
@@ -137,39 +139,39 @@ class _ProfilePageState extends State<ProfilePage> {
             ],
           ),
           const Divider(height: AppThemeValues.spaceXLarge),
-          const ProfileTitleSection('Preferências'),
+          ProfileTitleSection(AppLocalizations.current.profilePreferences),
           ProfileOptionTile(
-            label: 'Tema',
-            subtitle: 'Temas e cores do seu app',
+            label: AppLocalizations.current.profileTheme,
+            subtitle: AppLocalizations.current.profileThemeText,
             onTap: () => context.pushTo(Routes.profileTheme),
             svg: AppIcons.paintRoll,
             color: themeColors.text,
           ),
           ProfileOptionTile(
-            label: 'Vencimento',
-            subtitle: 'Dia preferido para suas contas vencerem',
+            label: AppLocalizations.current.profileDueDay,
+            subtitle: AppLocalizations.current.profileDueDayText,
             onTap: () => context.pushTo(Routes.profileDueDay),
             svg: AppIcons.calendar2,
             color: themeColors.text,
           ),
           ProfileOptionTile(
-            label: 'Marca de pagamento',
-            subtitle: 'Tag para as contas marcadas como pagas',
+            label: AppLocalizations.current.profilePaymentTag,
+            subtitle: AppLocalizations.current.profilePaymentTagText,
             onTap: () => context.pushTo(Routes.profilePayedTag),
             svg: AppIcons.tag,
             color: themeColors.text,
           ),
           const Divider(height: AppThemeValues.spaceXLarge),
-          const ProfileTitleSection('Gerenciamento'),
+          ProfileTitleSection(AppLocalizations.current.profileManagement),
           ProfileOptionTile(
-            label: 'Segurança',
+            label: AppLocalizations.current.profileSecurity,
             onTap: () => context.pushTo(Routes.profileSecurity),
             svg: AppIcons.key,
             color: themeColors.text,
           ),
           ProfileOptionTile(
-            label: 'Sair',
-            onTap: _onLogoutPressed,
+            label: AppLocalizations.current.profileLogout,
+            onTap: () => AppDialogs.logOut(context, _user.name),
             svg: AppIcons.logout,
             color: themeColors.text,
           ),
@@ -187,14 +189,4 @@ class _ProfilePageState extends State<ProfilePage> {
     _profileCubit.getImageFromGallery(
         context.read<InitialCubit>().onUpdateUserProfilePictrue);
   }
-
-  void _onLogoutPressed() => context.showDialog(
-        title: 'Sair?',
-        description: 'Tem certeza que deseja deslogar deslogar, ${_user.name}?',
-        onAcept: () {
-          _profileCubit.onLogout().then(
-                (_) => context.navigateTo(Routes.login),
-              );
-        },
-      );
 }

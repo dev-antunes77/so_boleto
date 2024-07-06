@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/presenter/initial/widgets/onboarding_section.dart';
 
@@ -14,43 +15,39 @@ class OnboardingPageHandler extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (pageIndex) {
       case 0:
-        return const OnboardingSection(
-          title: 'Bem-vindo',
-          text:
-              'Só Boleto vai ser o seu assitente pessoal de contas daqui em diante, ok?\n\nDeixa com a gente.',
+        return OnboardingSection(
+          title: AppLocalizations.current.onboardingWelcome,
+          text: AppLocalizations.current.onboardingWelcomeText,
           svg: AppIcons.onboardingWelcome,
         );
       case 1:
-        return const OnboardingSection(
-          title: 'Agilidade',
-          text:
-              'Contas registradas serão gerenciadas de forma simples e rápida.\n\nRelaxe!',
+        return OnboardingSection(
+          title: AppLocalizations.current.onboardingAgility,
+          text: AppLocalizations.current.onboardingAgilityText,
           svg: AppIcons.onboardingRelax,
         );
       case 2:
-        return const OnboardingSection(
-          title: 'Notificações',
-          text: 'Vamos notificá-lo quando uma conta estiver perto de vencer.',
+        return OnboardingSection(
+          title: AppLocalizations.current.onboardingNotifications,
+          text: AppLocalizations.current.onboardingNotificationsText,
           svg: AppIcons.onboardingNotifications,
         );
       case 3:
-        return const OnboardingSection(
-          title: 'Controle',
-          text:
-              'Acompanhe seus gastos mensais.\nDo mês atual até 6 meses anteriores.',
+        return OnboardingSection(
+          title: AppLocalizations.current.onboardingControl,
+          text: AppLocalizations.current.onboardingControlText,
           svg: AppIcons.onboardingExpenses,
         );
       case 4:
-        return const OnboardingSection(
-          title: 'Poupe seu tempo',
-          text:
-              'Deixa de lado as preocupações com os vencimentos de suas contas e aproveite a vida.',
+        return OnboardingSection(
+          title: AppLocalizations.current.onboardingSaveTime,
+          text: AppLocalizations.current.onboardingSaveTimeText,
           svg: AppIcons.onboardingLiving,
         );
       case 5:
-        return const OnboardingSection(
-          title: 'Comece agora',
-          text: 'Vamos lá?',
+        return OnboardingSection(
+          title: AppLocalizations.current.onboardingStart,
+          text: AppLocalizations.current.onboardingLetsGo,
           svg: AppIcons.onboardingLetsGo,
         );
     }

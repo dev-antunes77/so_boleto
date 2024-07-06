@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/buttons/custom_text_button.dart';
 import 'package:so_boleto/core/components/buttons/rectangular_button.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
@@ -51,7 +52,7 @@ class _OnboardingBottomNavigatorState extends State<OnboardingBottomNavigator>
           Column(
             children: [
               RectangularButton(
-                label: 'Começar',
+                label: AppLocalizations.current.onboardingStart,
                 isValid: true,
                 onTap: () =>
                     context.read<InitialCubit>().onSkipOnboarding().then(
@@ -60,7 +61,7 @@ class _OnboardingBottomNavigatorState extends State<OnboardingBottomNavigator>
               ),
               AppThemeValues.spaceVerticalSmall,
               RectangularButton.inverse(
-                label: 'Voltar',
+                label: AppLocalizations.current.back,
                 isValid: true,
                 onTap: _onPriviousPage,
               ),

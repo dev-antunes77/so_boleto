@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/buttons/pill_button.dart';
 import 'package:so_boleto/core/constants/app_constants.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
@@ -25,19 +26,20 @@ class _DueDayChoiceState extends State<DueDayChoice> {
     final color = context.read<ThemeCubit>().state.selectedColors.tag;
     return Column(
       children: [
-        const ProfileTitleSection('Escolha um vencimento'),
+        ProfileTitleSection(
+            AppLocalizations.current.profileDueDayPageChooseDueDay),
         Padding(
           padding:
               const EdgeInsets.symmetric(horizontal: AppThemeValues.spaceLarge),
           child: Column(
             children: [
-              const Text(
-                'Ao selecionar um dia, todas as contas criadas terão automaticamente esse dia como vencimento.',
+              Text(
+                AppLocalizations.current.profileDueDayPageTitle,
                 textAlign: TextAlign.center,
               ),
               AppThemeValues.spaceVerticalSmall,
-              const Text(
-                'Você ainda pode alterar essa data\nao criar ou editar uma conta.',
+              Text(
+                AppLocalizations.current.profileDueDayPageSubtitle,
                 textAlign: TextAlign.center,
               ),
               AppThemeValues.spaceVerticalMassive,
@@ -76,7 +78,7 @@ class _DueDayChoiceState extends State<DueDayChoice> {
             context.pop(true);
           },
           isDisabled: _dueDay < 1,
-          child: const Text('Pronto'),
+          child: Text(AppLocalizations.current.done),
         ),
       ],
     );

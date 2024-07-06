@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/custom_payed_tag/payed_tag_selector.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
@@ -16,7 +17,7 @@ class PayedTagChoice extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tagChoiceBill = BillModel(
-      name: 'Exemplo',
+      name: AppLocalizations.current.profilePayedTagExample,
       value: 0,
       userId: '',
       billStatus: BillStatus.payed,
@@ -25,22 +26,22 @@ class PayedTagChoice extends StatelessWidget {
     List<PaymentTagChoiceTile> paymentTagOptions = [
       PaymentTagChoiceTile(
         tagChoiceBill: tagChoiceBill,
-        label: 'Carimbo',
+        label: AppLocalizations.current.profilePayedTagStaple,
         tag: PayedTag.stample,
       ),
       PaymentTagChoiceTile(
         tagChoiceBill: tagChoiceBill,
-        label: 'Check na borda',
+        label: AppLocalizations.current.profilePayedTagCheck,
         tag: PayedTag.check,
       ),
       PaymentTagChoiceTile(
         tagChoiceBill: tagChoiceBill,
-        label: 'Barra lateral',
+        label: AppLocalizations.current.profilePayedTagSideBar,
         tag: PayedTag.sideBar,
       ),
       PaymentTagChoiceTile(
         tagChoiceBill: tagChoiceBill,
-        label: 'Barra inferior',
+        label: AppLocalizations.current.profilePayedTagBottomBar,
         tag: PayedTag.bottomBar,
       ),
     ];
@@ -53,7 +54,7 @@ class PayedTagChoice extends StatelessWidget {
             AppThemeValues.spaceXSmall,
           ),
           child: Text(
-            'Selecione a tag de pagamento que melhor se adapte a você',
+            AppLocalizations.current.profilePayedTagTitle,
             style: context.textRobotoSubtitleMedium,
             textAlign: TextAlign.center,
           ),
@@ -138,82 +139,5 @@ class PaymentTagChoiceTile extends StatelessWidget {
         );
       },
     );
-  }
-}
-
-class ConvexCarousel extends StatefulWidget {
-  final List<Widget> items;
-  const ConvexCarousel({super.key, required this.items});
-  @override
-  State<ConvexCarousel> createState() => _ConvexCarouselState();
-}
-
-class _ConvexCarouselState extends State<ConvexCarousel> {
-  late PageController _controller;
-  int _currentIndex = 0;
-  @override
-  void initState() {
-    _controller =
-        PageController(initialPage: _currentIndex, viewportFraction: 1);
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SizedBox(
-          height: 200,
-          child: PageView.builder(
-              controller: _controller,
-              itemCount: widget.items.length,
-              itemBuilder: (context, index) {
-                double scale = index == _currentIndex ? 1.0 : 0.6;
-                return AnimatedContainer(
-                  duration: const Duration(milliseconds: 300),
-                  transform: Matrix4.identity()..scale(scale),
-                  child: Center(
-                    child: widget.items[index],
-                  ),
-                );
-              },
-              onPageChanged: (index) => setState(() => _currentIndex = index)),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                _controller.previousPage(
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.ease);
-              },
-              child: const Text('Previous'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                if ((_controller.page! + 1.0) == widget.items.length) {
-                  _controller.animateToPage(0,
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.ease);
-                } else {
-                  _controller.nextPage(
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.ease);
-                }
-              },
-              child: const Text('Next'),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 }

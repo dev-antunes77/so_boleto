@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:so_boleto/core/components/loading_page/loading_page.dart';
+import 'package:so_boleto/core/components/loading_page/loading_animation.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
@@ -22,7 +23,7 @@ class ThemeChoice extends StatefulWidget {
   static const List<Color> themeColors = [
     Color.fromARGB(255, 4, 136, 59),
     Color.fromARGB(255, 251, 125, 35),
-    Colors.deepPurple,
+    Color.fromARGB(255, 103, 58, 183),
     Color.fromARGB(255, 0, 154, 166),
   ];
 }
@@ -48,7 +49,7 @@ class _ThemeChoiceState extends State<ThemeChoice> {
       buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, state) {
         if (state.status == BaseStateStatus.loading) {
-          return const Center(child: LoadingPage());
+          return const Center(child: LoadingAnimation());
         }
         return Column(
           children: [
@@ -65,7 +66,8 @@ class _ThemeChoiceState extends State<ThemeChoice> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const ProfileTitleSection('Cor do tema'),
+                  ProfileTitleSection(
+                      AppLocalizations.current.profileThemeTitle),
                   GridView.builder(
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(

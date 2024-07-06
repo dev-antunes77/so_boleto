@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/buttons/pill_button.dart';
 import 'package:so_boleto/core/components/buttons/svg_button.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
@@ -75,13 +76,15 @@ class BaseDialog extends StatelessWidget {
                             PillButton(
                               backgroundColor: color.tag,
                               onTap: () => context.pop(true),
-                              child: Text(onDenyText ?? 'Não'),
+                              child: Text(
+                                onDenyText ?? AppLocalizations.current.no,
+                              ),
                             ),
                             PillButton(
                               backgroundColor: AppColors.white.withOpacity(0.5),
                               onTap: onAcept,
                               child: Text(
-                                onConfirmText ?? 'Sim',
+                                onConfirmText ?? AppLocalizations.current.yes,
                                 style: context.textRobotoMedium
                                     .copyWith(color: Colors.black),
                               ),

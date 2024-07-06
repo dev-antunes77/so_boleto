@@ -110,16 +110,6 @@ class AppLocalizations {
     );
   }
 
-  /// `Cadastrar`
-  String get signIn {
-    return Intl.message(
-      'Cadastrar',
-      name: 'signIn',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Nome da conta`
   String get billFlowName {
     return Intl.message(
@@ -500,6 +490,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Confirmar`
+  String get confirm {
+    return Intl.message(
+      'Confirmar',
+      name: 'confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Continuar`
   String get continueButton {
     return Intl.message(
@@ -515,6 +515,96 @@ class AppLocalizations {
     return Intl.message(
       'Encerrar',
       name: 'close',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pular boas vindas?`
+  String get dialogOnboardingSkip {
+    return Intl.message(
+      'Pular boas vindas?',
+      name: 'dialogOnboardingSkip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tem certeza que deseja pular a tela de boas vindas?`
+  String get dialogOnboardingSkipText {
+    return Intl.message(
+      'Tem certeza que deseja pular a tela de boas vindas?',
+      name: 'dialogOnboardingSkipText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sair?`
+  String get dialogProfileLogout {
+    return Intl.message(
+      'Sair?',
+      name: 'dialogProfileLogout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tem certeza que deseja deslogar deslogar, {user}`
+  String dialogProfileLogoutText(String user) {
+    return Intl.message(
+      'Tem certeza que deseja deslogar deslogar, $user',
+      name: 'dialogProfileLogoutText',
+      desc: '',
+      args: [user],
+    );
+  }
+
+  /// `Tem certeza?`
+  String get dialogBillFlowLeaveBill {
+    return Intl.message(
+      'Tem certeza?',
+      name: 'dialogBillFlowLeaveBill',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Se sair,\na criação dessa conta será perdida.`
+  String get dialogBillFlowLeaveBillText {
+    return Intl.message(
+      'Se sair,\na criação dessa conta será perdida.',
+      name: 'dialogBillFlowLeaveBillText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sair do app?`
+  String get dialogLeaveApp {
+    return Intl.message(
+      'Sair do app?',
+      name: 'dialogLeaveApp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tem certeza que deseja\nsair do app?`
+  String get dialogLeaveAppText {
+    return Intl.message(
+      'Tem certeza que deseja\nsair do app?',
+      name: 'dialogLeaveAppText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deseja mesmo deletar essa conta?`
+  String get dialogDeleteBill {
+    return Intl.message(
+      'Deseja mesmo deletar essa conta?',
+      name: 'dialogDeleteBill',
       desc: '',
       args: [],
     );
@@ -900,6 +990,226 @@ class AppLocalizations {
     );
   }
 
+  /// `Nome`
+  String get loginName {
+    return Intl.message(
+      'Nome',
+      name: 'loginName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get loginEmail {
+    return Intl.message(
+      'Email',
+      name: 'loginEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Senha`
+  String get loginPassword {
+    return Intl.message(
+      'Senha',
+      name: 'loginPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sobrenome`
+  String get loginSurename {
+    return Intl.message(
+      'Sobrenome',
+      name: 'loginSurename',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Já possui conta?  `
+  String get loginHasAccountAlready {
+    return Intl.message(
+      'Já possui conta?  ',
+      name: 'loginHasAccountAlready',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ainda não tem conta? Cadastre-se  `
+  String get loginNoAccount {
+    return Intl.message(
+      'Ainda não tem conta? Cadastre-se  ',
+      name: 'loginNoAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Aqui`
+  String get loginHere {
+    return Intl.message(
+      'Aqui',
+      name: 'loginHere',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Não`
+  String get no {
+    return Intl.message(
+      'Não',
+      name: 'no',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pular`
+  String get onboardingSkip {
+    return Intl.message(
+      'Pular',
+      name: 'onboardingSkip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bem-vindo`
+  String get onboardingWelcome {
+    return Intl.message(
+      'Bem-vindo',
+      name: 'onboardingWelcome',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Só Boleto vai ser o seu assitente pessoal de contas daqui em diante, ok?\n\nDeixa com a gente.`
+  String get onboardingWelcomeText {
+    return Intl.message(
+      'Só Boleto vai ser o seu assitente pessoal de contas daqui em diante, ok?\n\nDeixa com a gente.',
+      name: 'onboardingWelcomeText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Agilidade`
+  String get onboardingAgility {
+    return Intl.message(
+      'Agilidade',
+      name: 'onboardingAgility',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contas registradas serão gerenciadas de forma simples e rápida.\n\nRelaxe!`
+  String get onboardingAgilityText {
+    return Intl.message(
+      'Contas registradas serão gerenciadas de forma simples e rápida.\n\nRelaxe!',
+      name: 'onboardingAgilityText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notificações`
+  String get onboardingNotifications {
+    return Intl.message(
+      'Notificações',
+      name: 'onboardingNotifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vamos notificá-lo quando uma conta estiver perto de vencer.`
+  String get onboardingNotificationsText {
+    return Intl.message(
+      'Vamos notificá-lo quando uma conta estiver perto de vencer.',
+      name: 'onboardingNotificationsText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Controle`
+  String get onboardingControl {
+    return Intl.message(
+      'Controle',
+      name: 'onboardingControl',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Acompanhe seus gastos mensais.\nDo mês atual até 6 meses anteriores.`
+  String get onboardingControlText {
+    return Intl.message(
+      'Acompanhe seus gastos mensais.\nDo mês atual até 6 meses anteriores.',
+      name: 'onboardingControlText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Poupe seu tempo`
+  String get onboardingSaveTime {
+    return Intl.message(
+      'Poupe seu tempo',
+      name: 'onboardingSaveTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deixa de lado as preocupações com os vencimentos de suas contas e aproveite a vida.`
+  String get onboardingSaveTimeText {
+    return Intl.message(
+      'Deixa de lado as preocupações com os vencimentos de suas contas e aproveite a vida.',
+      name: 'onboardingSaveTimeText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Comece agora`
+  String get onboardingStartNow {
+    return Intl.message(
+      'Comece agora',
+      name: 'onboardingStartNow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vamos lá?`
+  String get onboardingLetsGo {
+    return Intl.message(
+      'Vamos lá?',
+      name: 'onboardingLetsGo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Começar`
+  String get onboardingStart {
+    return Intl.message(
+      'Começar',
+      name: 'onboardingStart',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `PAGA`
   String get payedTag {
     return Intl.message(
@@ -925,6 +1235,326 @@ class AppLocalizations {
     return Intl.message(
       'Perfil',
       name: 'profile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `'Ver foto'`
+  String get profileSeePicture {
+    return Intl.message(
+      '\'Ver foto\'',
+      name: 'profileSeePicture',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tirar foto`
+  String get profileTakePicture {
+    return Intl.message(
+      'Tirar foto',
+      name: 'profileTakePicture',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Galeria`
+  String get profileSeeGallery {
+    return Intl.message(
+      'Galeria',
+      name: 'profileSeeGallery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Preferências`
+  String get profilePreferences {
+    return Intl.message(
+      'Preferências',
+      name: 'profilePreferences',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tema`
+  String get profileTheme {
+    return Intl.message(
+      'Tema',
+      name: 'profileTheme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Temas e cores do seu app`
+  String get profileThemeText {
+    return Intl.message(
+      'Temas e cores do seu app',
+      name: 'profileThemeText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vencimento`
+  String get profileDueDay {
+    return Intl.message(
+      'Vencimento',
+      name: 'profileDueDay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dia preferido para suas contas vencerem`
+  String get profileDueDayText {
+    return Intl.message(
+      'Dia preferido para suas contas vencerem',
+      name: 'profileDueDayText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Marca de pagamento`
+  String get profilePaymentTag {
+    return Intl.message(
+      'Marca de pagamento',
+      name: 'profilePaymentTag',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Escolha uma tag para as contas marcadas como pagas`
+  String get profilePaymentTagText {
+    return Intl.message(
+      'Escolha uma tag para as contas marcadas como pagas',
+      name: 'profilePaymentTagText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gerenciamento`
+  String get profileManagement {
+    return Intl.message(
+      'Gerenciamento',
+      name: 'profileManagement',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Segurança`
+  String get profileSecurity {
+    return Intl.message(
+      'Segurança',
+      name: 'profileSecurity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sair`
+  String get profileLogout {
+    return Intl.message(
+      'Sair',
+      name: 'profileLogout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Escolha um vencimento`
+  String get profileDueDayPageChooseDueDay {
+    return Intl.message(
+      'Escolha um vencimento',
+      name: 'profileDueDayPageChooseDueDay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ao selecionar um dia, todas as contas criadas terão automaticamente esse dia como vencimento.`
+  String get profileDueDayPageTitle {
+    return Intl.message(
+      'Ao selecionar um dia, todas as contas criadas terão automaticamente esse dia como vencimento.',
+      name: 'profileDueDayPageTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Você ainda pode alterar essa data\nao criar ou editar uma conta.`
+  String get profileDueDayPageSubtitle {
+    return Intl.message(
+      'Você ainda pode alterar essa data\nao criar ou editar uma conta.',
+      name: 'profileDueDayPageSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Use sua senha para continuar`
+  String get profileAccess {
+    return Intl.message(
+      'Use sua senha para continuar',
+      name: 'profileAccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Opções de segurança`
+  String get profileSecurityOption {
+    return Intl.message(
+      'Opções de segurança',
+      name: 'profileSecurityOption',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Trocar senha`
+  String get profileChangePassword {
+    return Intl.message(
+      'Trocar senha',
+      name: 'profileChangePassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deletar conta`
+  String get profileDeleteAccount {
+    return Intl.message(
+      'Deletar conta',
+      name: 'profileDeleteAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Senha incorreta`
+  String get profileIncorrectPassword {
+    return Intl.message(
+      'Senha incorreta',
+      name: 'profileIncorrectPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Exemplo`
+  String get profilePayedTagExample {
+    return Intl.message(
+      'Exemplo',
+      name: 'profilePayedTagExample',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Carimbo`
+  String get profilePayedTagStaple {
+    return Intl.message(
+      'Carimbo',
+      name: 'profilePayedTagStaple',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check na borda`
+  String get profilePayedTagCheck {
+    return Intl.message(
+      'Check na borda',
+      name: 'profilePayedTagCheck',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Barra lateral`
+  String get profilePayedTagSideBar {
+    return Intl.message(
+      'Barra lateral',
+      name: 'profilePayedTagSideBar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Barra inferior`
+  String get profilePayedTagBottomBar {
+    return Intl.message(
+      'Barra inferior',
+      name: 'profilePayedTagBottomBar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Selecione a tag de pagamento que melhor se adapte a você`
+  String get profilePayedTagTitle {
+    return Intl.message(
+      'Selecione a tag de pagamento que melhor se adapte a você',
+      name: 'profilePayedTagTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Foto de perfil`
+  String get profilePhoto {
+    return Intl.message(
+      'Foto de perfil',
+      name: 'profilePhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Meu Perfil`
+  String get profileMyProfile {
+    return Intl.message(
+      'Meu Perfil',
+      name: 'profileMyProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cor do tema`
+  String get profileThemeTitle {
+    return Intl.message(
+      'Cor do tema',
+      name: 'profileThemeTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dark`
+  String get profileThemeDark {
+    return Intl.message(
+      'Dark',
+      name: 'profileThemeDark',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Light`
+  String get profileThemeLight {
+    return Intl.message(
+      'Light',
+      name: 'profileThemeLight',
       desc: '',
       args: [],
     );
@@ -1130,6 +1760,56 @@ class AppLocalizations {
     );
   }
 
+  /// `P A G A`
+  String get spacedPayedTag {
+    return Intl.message(
+      'P A G A',
+      name: 'spacedPayedTag',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cadastrar`
+  String get signUp {
+    return Intl.message(
+      'Cadastrar',
+      name: 'signUp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cadastre-se`
+  String get signUpTitle {
+    return Intl.message(
+      'Cadastre-se',
+      name: 'signUpTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Entrar`
+  String get signIn {
+    return Intl.message(
+      'Entrar',
+      name: 'signIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Entre`
+  String get signInTitle {
+    return Intl.message(
+      'Entre',
+      name: 'signInTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Tente novamente`
   String get tryAgain {
     return Intl.message(
@@ -1145,6 +1825,16 @@ class AppLocalizations {
     return Intl.message(
       'Não é um email válido',
       name: 'validatorEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sim`
+  String get yes {
+    return Intl.message(
+      'Sim',
+      name: 'yes',
       desc: '',
       args: [],
     );

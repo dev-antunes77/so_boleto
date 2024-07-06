@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
 
 class BottomBarTag extends StatelessWidget {
@@ -27,10 +28,10 @@ class BottomBarTag extends StatelessWidget {
                 ),
                 color: color,
               ),
-              child: const Center(
+              child: Center(
                 child: Text(
-                  'P A G A',
-                  style: TextStyle(
+                  AppLocalizations.current.spacedPayedTag,
+                  style: const TextStyle(
                     letterSpacing: 3,
                     fontSize: 10,
                     color: AppColors.white,

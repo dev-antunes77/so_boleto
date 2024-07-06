@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/custom_bottom_navigator/widgets/bottom_navigator_item.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
@@ -42,19 +43,17 @@ class CustomBottomNavigator extends StatelessWidget {
             unselectedLabelStyle: context.textRobotoSubtitleTiny,
             items: [
               buildBottomNavigationBarItem(
-                'Suas contas',
+                AppLocalizations.current.homeAppBarTitle,
                 AppIcons.yourBills,
                 color,
               ),
               buildBottomNavigationBarItem(
-                'Gastos',
-                // AppLocalizations.current.favoriteRadios,
+                AppLocalizations.current.expenses,
                 AppIcons.expense,
                 color,
               ),
               buildBottomNavigationBarItem(
-                'Perfil',
-                // AppLocalizations.current.profile,
+                AppLocalizations.current.profile,
                 AppIcons.profile,
                 color,
               ),
