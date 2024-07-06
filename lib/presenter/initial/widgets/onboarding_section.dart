@@ -43,6 +43,7 @@ class OnboardingSection extends StatelessWidget {
           SvgAsset(
             svg: svg,
             height: context.height * 0.25,
+            isMulticolor: true,
           ),
         ],
       ),
