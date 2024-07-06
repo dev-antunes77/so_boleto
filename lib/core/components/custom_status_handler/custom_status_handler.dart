@@ -19,7 +19,7 @@ class CustomStatusHandler extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = context.read<ThemeCubit>().state.selectedColors.inversedText;
+    final color = context.read<ThemeCubit>().state.selectedColors.text;
     return SingleChildScrollView(
       child: ConstrainedBox(
         constraints: BoxConstraints(

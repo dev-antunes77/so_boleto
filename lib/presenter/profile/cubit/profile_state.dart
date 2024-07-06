@@ -7,12 +7,12 @@ class ProfileState extends BaseState with EquatableMixin {
     super.callbackMessage,
     this.allowSecurityAccess = false,
     this.userId = '',
-    Object? image,
-  }) : image = image ?? Object();
+    dynamic image,
+  }) : image = image ?? dynamic;
 
   final bool allowSecurityAccess;
   final String userId;
-  final Object image;
+  final dynamic image;
 
   @override
   List<Object> get props {

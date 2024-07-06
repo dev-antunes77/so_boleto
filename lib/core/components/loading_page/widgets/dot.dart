@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:so_boleto/core/theme/settings/app_colors.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 
 class Dot extends StatelessWidget {
   const Dot({super.key});
@@ -12,8 +13,8 @@ class Dot extends StatelessWidget {
         child: Container(
           height: 10.0,
           width: 10.0,
-          decoration: const BoxDecoration(
-            color: AppColors.primary,
+          decoration: BoxDecoration(
+            color: context.read<ThemeCubit>().state.selectedColors.primary,
             shape: BoxShape.circle,
           ),
         ),

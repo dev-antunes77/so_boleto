@@ -58,7 +58,9 @@ class _ProfilePageState extends State<ProfilePage> {
 
                   final navigationParams = _user.profilePicturePath.isNotEmpty
                       ? ImageModel(path: _user.profilePicturePath)
-                      : ImageModel.fromXfile(state.image as XFile);
+                      : state.image is! XFile
+                          ? const SizedBox.shrink()
+                          : ImageModel.fromXfile(state.image as XFile);
                   return CustomMenuAnchor(
                     alignment: Alignment.topRight,
                     builder: (context, controller, child) {

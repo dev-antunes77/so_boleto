@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/theme_colors.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
 import 'package:so_boleto/domain/models/user_data.dart';

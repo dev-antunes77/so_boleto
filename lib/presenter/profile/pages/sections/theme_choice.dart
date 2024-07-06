@@ -21,7 +21,7 @@ class ThemeChoice extends StatefulWidget {
   State<ThemeChoice> createState() => _ThemeChoiceState();
 
   static const List<Color> themeColors = [
-    Color.fromARGB(255, 4, 136, 59),
+    AppColors.primary,
     Color.fromARGB(255, 251, 125, 35),
     Color.fromARGB(255, 103, 58, 183),
     Color.fromARGB(255, 0, 154, 166),
