@@ -58,6 +58,10 @@ abstract class AppIcons {
   static const rent = '${_path}rent.svg';
   static const search = '${_path}search.svg';
   static const security = '${_path}security.svg';
+  static const sort = '${_path}sort.svg';
+  static const sortByDueDay = '${_path}sort_by_due_day.svg';
+  static const sortByName = '${_path}sort_by_name.svg';
+  static const sortByValue = '${_path}sort_by_value.svg';
   static const tag = '${_path}tag.svg';
   static const telephone = '${_path}telephone.svg';
   static const theme = '${_path}theme.svg';

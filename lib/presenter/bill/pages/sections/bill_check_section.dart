@@ -81,7 +81,7 @@ class _BillCheckSectionState extends State<BillCheckSection> {
                   icon: AppIcons.calendar,
                   label: AppLocalizations.current.billFlowCheckDueDay,
                   color: color,
-                  value: state.bill.dueDayOfTheMonth.addLeadingZero(),
+                  value: state.bill.dueDay.addLeadingZero(),
                   onPressed: () =>
                       _pushToEditionFlow(context, Routes.billDueDay),
                 ),

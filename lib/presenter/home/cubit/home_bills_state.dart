@@ -9,17 +9,23 @@ class HomeBillsState extends BaseState with EquatableMixin {
     List<BillModel>? filterParams,
     bool? paramsApplied,
     String? userId,
+    BillSorting? billSorting,
+    bool? hasInvertedSorting,
   })  : userId = userId ?? '',
         filteredByParams = filterParams ?? List.empty(),
         bills = bills ?? List.empty(),
         querySearch = querySearch ?? '',
+        billSorting = billSorting ?? BillSorting.date,
+        hasInvertedSorting = hasInvertedSorting ?? false,
         paramsApplied = paramsApplied ?? false;
 
   final List<BillModel> bills;
   final List<BillModel> filteredByParams;
   final String querySearch;
   final bool paramsApplied;
+  final bool hasInvertedSorting;
   final String userId;
+  final BillSorting billSorting;
 
   @override
   List<Object?> get props => [
@@ -29,6 +35,8 @@ class HomeBillsState extends BaseState with EquatableMixin {
         filteredByParams,
         querySearch,
         paramsApplied,
+        hasInvertedSorting,
+        billSorting,
         userId,
       ];
 
@@ -81,6 +89,8 @@ class HomeBillsState extends BaseState with EquatableMixin {
     List<BillModel>? filteredByParams,
     String? querySearch,
     bool? paramsApplied,
+    bool? hasInvertedSorting,
+    BillSorting? billSorting,
     String? userId,
   }) =>
       HomeBillsState(
@@ -90,6 +100,8 @@ class HomeBillsState extends BaseState with EquatableMixin {
         filterParams: filteredByParams ?? this.filteredByParams,
         querySearch: querySearch ?? this.querySearch,
         paramsApplied: paramsApplied ?? this.paramsApplied,
+        billSorting: billSorting ?? this.billSorting,
+        hasInvertedSorting: hasInvertedSorting ?? this.hasInvertedSorting,
         userId: userId ?? this.userId,
       );
 }

@@ -65,7 +65,7 @@ class BillCubit extends Cubit<BillState> with BaseCubit {
     emit(
       state.copyWith(
         status: BaseStateStatus.success,
-        bill: state.bill.copyWith(dueDayOfTheMonth: billDueDate),
+        bill: state.bill.copyWith(dueDay: billDueDate),
       ),
     );
   }
@@ -73,7 +73,7 @@ class BillCubit extends Cubit<BillState> with BaseCubit {
   BillModel onBillPayed(bool payed) {
     var newStatus = BillStatus.payed;
     if (!payed) {
-      newStatus = state.bill.dueDayOfTheMonth < DateTime.now().day
+      newStatus = state.bill.dueDay < DateTime.now().day
           ? BillStatus.delayed
           : BillStatus.open;
     }

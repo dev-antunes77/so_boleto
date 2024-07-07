@@ -19,7 +19,7 @@ class BillModel extends Equatable {
     this.totalParcels = 0,
     this.value = 0,
     this.payedParcels = 0,
-    this.dueDayOfTheMonth = 0,
+    this.dueDay = 0,
     this.userId = '',
     String? id,
     BillCategory? category,
@@ -45,7 +45,7 @@ class BillModel extends Equatable {
         'value': value,
         'totalParcels': totalParcels,
         'payedParcels': payedParcels,
-        'dueDay': dueDayOfTheMonth,
+        'dueDay': dueDay,
         'createdAt': createdAt.dateTimeToStringData(),
       };
 
@@ -62,7 +62,7 @@ class BillModel extends Equatable {
       value: data?['value'],
       payedParcels: data?['payedParcels'],
       totalParcels: data?['totalParcels'],
-      dueDayOfTheMonth: data?['dueDay'],
+      dueDay: data?['dueDay'],
       userId: data?['userId'],
       createdAt: (data?['createdAt'] as String).stringToDateTime(),
     );
@@ -77,7 +77,7 @@ class BillModel extends Equatable {
         totalParcels: bill.totalParcels,
         payedParcels: bill.payedParcels,
         value: bill.value,
-        dueDayOfTheMonth: bill.dueDayOfTheMonth,
+        dueDay: bill.dueDay,
         createdAt: bill.createdAt,
       );
 
@@ -92,7 +92,7 @@ class BillModel extends Equatable {
         totalParcels: 0,
         payedParcels: 0,
         value: promptBill.value,
-        dueDayOfTheMonth: promptBill.dueDay,
+        dueDay: promptBill.dueDay,
         createdAt: DateTime.now(),
       );
 
@@ -103,7 +103,7 @@ class BillModel extends Equatable {
   final BillCategory category;
   final int value;
   final DateTime createdAt;
-  final int dueDayOfTheMonth;
+  final int dueDay;
   final BillStatus billStatus;
   final int totalParcels;
   final int payedParcels;
@@ -119,7 +119,7 @@ class BillModel extends Equatable {
         category,
         value,
         createdAt,
-        dueDayOfTheMonth,
+        dueDay,
         billStatus,
         totalParcels,
         payedParcels,
@@ -134,7 +134,7 @@ class BillModel extends Equatable {
     int? value,
     DateTime? createdAt,
     BillStatus? billStatus,
-    int? dueDayOfTheMonth,
+    int? dueDay,
     int? totalParcels,
     int? payedParcels,
   }) {
@@ -146,8 +146,8 @@ class BillModel extends Equatable {
       category: category ?? this.category,
       value: value ?? this.value,
       createdAt: createdAt ?? this.createdAt,
-      billStatus: billStatus ?? billStatus,
-      dueDayOfTheMonth: dueDayOfTheMonth ?? this.dueDayOfTheMonth,
+      billStatus: billStatus ?? this.billStatus,
+      dueDay: dueDay ?? this.dueDay,
       totalParcels: totalParcels ?? this.totalParcels,
       payedParcels: payedParcels ?? this.payedParcels,
     );

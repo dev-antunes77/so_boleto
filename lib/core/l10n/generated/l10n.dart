@@ -910,6 +910,46 @@ class AppLocalizations {
     );
   }
 
+  /// `Ordenar`
+  String get homeAppBarOrder {
+    return Intl.message(
+      'Ordenar',
+      name: 'homeAppBarOrder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Por nome`
+  String get homeAppBarOrderByName {
+    return Intl.message(
+      'Por nome',
+      name: 'homeAppBarOrderByName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Por vencimento`
+  String get homeAppBarOrderByDueDay {
+    return Intl.message(
+      'Por vencimento',
+      name: 'homeAppBarOrderByDueDay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Por valor`
+  String get homeAppBarOrderByValue {
+    return Intl.message(
+      'Por valor',
+      name: 'homeAppBarOrderByValue',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Pagando...`
   String get homeBillPaying {
     return Intl.message(
@@ -1240,10 +1280,10 @@ class AppLocalizations {
     );
   }
 
-  /// `'Ver foto'`
+  /// `Ver foto`
   String get profileSeePicture {
     return Intl.message(
-      '\'Ver foto\'',
+      'Ver foto',
       name: 'profileSeePicture',
       desc: '',
       args: [],

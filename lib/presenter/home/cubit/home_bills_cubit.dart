@@ -6,6 +6,7 @@ import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/utils/base_cubit.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
 import 'package:so_boleto/domain/models/bill.dart';
+import 'package:so_boleto/domain/models/enums/bill_sorting.dart';
 import 'package:so_boleto/domain/models/enums/bill_status.dart';
 import 'package:so_boleto/domain/models/filter_params.dart';
 import 'package:so_boleto/domain/models/prompt_bill.dart';
@@ -38,17 +39,27 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
   final FilterBillsByParams _filterBillsByParamsUseCase;
   final AddPromptBills _addPromptBillsUsecase;
 
-  Future<void> onInit(String userId) async {
+  Future<void> onInit(
+    String userId,
+    BillSorting billSorting,
+    bool hasInvertedSorting,
+  ) async {
     try {
       if (state.bills.isNotEmpty) return;
 
       emit(state.copyWith(status: BaseStateStatus.loading));
-      final updatedBills = await _getBillsUseCase(userId);
+      final updatedBills = await _getBillsUseCase(
+        userId,
+        billSorting,
+        isInverted: hasInvertedSorting,
+      );
       emit(
         state.copyWith(
           status: BaseStateStatus.success,
           bills: updatedBills,
           userId: userId,
+          billSorting: billSorting,
+          hasInvertedSorting: hasInvertedSorting,
         ),
       );
     } on AppError catch (error) {
@@ -71,7 +82,11 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
   }
 
   Future<void> _updateBills() async {
-    final updatedBills = await _getBillsUseCase(state.userId);
+    final updatedBills = await _getBillsUseCase(
+      state.userId,
+      state.billSorting,
+      isInverted: false,
+    );
     emit(
       state.copyWith(
         status: BaseStateStatus.success,
@@ -158,6 +173,33 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
         status: BaseStateStatus.success,
       ),
     );
+  }
+
+  Future<void> onSortBills(
+    BillSorting billSorting, {
+    required Future<void> Function() onUpdate,
+  }) async {
+    try {
+      emit(state.copyWith(status: BaseStateStatus.loading));
+
+      final bool isInverted = billSorting == state.billSorting;
+
+      final updatedBills = await _getBillsUseCase(
+        state.userId,
+        billSorting,
+        isInverted: isInverted,
+      );
+      await onUpdate();
+      emit(
+        state.copyWith(
+          status: BaseStateStatus.success,
+          bills: updatedBills,
+          billSorting: billSorting,
+        ),
+      );
+    } on AppError catch (_) {
+      _handleErrorEmit(AppLocalizations.current.homeBillActionError);
+    }
   }
 
   void addPrompBills(List<PromptBill> promptBills) async {

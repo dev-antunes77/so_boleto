@@ -118,7 +118,7 @@ class _ThemeChoiceState extends State<ThemeChoice> {
                   Center(
                     child: SvgAsset(
                       svg: AppIcons.theme,
-                      height: context.height * 0.25,
+                      height: context.height * 0.2,
                       isMulticolor: true,
                     ),
                   )

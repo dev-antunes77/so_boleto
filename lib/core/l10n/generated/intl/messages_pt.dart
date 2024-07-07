@@ -161,6 +161,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Adicionar conta nova"),
         "homeAppBarAddPromptBills":
             MessageLookupByLibrary.simpleMessage("Adicionar contas prontas"),
+        "homeAppBarOrder": MessageLookupByLibrary.simpleMessage("Ordenar"),
+        "homeAppBarOrderByDueDay":
+            MessageLookupByLibrary.simpleMessage("Por vencimento"),
+        "homeAppBarOrderByName":
+            MessageLookupByLibrary.simpleMessage("Por nome"),
+        "homeAppBarOrderByValue":
+            MessageLookupByLibrary.simpleMessage("Por valor"),
         "homeAppBarTitle": MessageLookupByLibrary.simpleMessage("Suas contas"),
         "homeBillActionError": MessageLookupByLibrary.simpleMessage(
             "Ops! Não foi possível realizar essa ação."),
@@ -253,8 +260,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "profileSecurityOption":
             MessageLookupByLibrary.simpleMessage("Opções de segurança"),
         "profileSeeGallery": MessageLookupByLibrary.simpleMessage("Galeria"),
-        "profileSeePicture":
-            MessageLookupByLibrary.simpleMessage("\'Ver foto\'"),
+        "profileSeePicture": MessageLookupByLibrary.simpleMessage("Ver foto"),
         "profileTakePicture":
             MessageLookupByLibrary.simpleMessage("Tirar foto"),
         "profileTheme": MessageLookupByLibrary.simpleMessage("Tema"),

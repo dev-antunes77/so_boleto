@@ -38,9 +38,7 @@ class BillDueDayOfTheMonthSection extends StatelessWidget {
                 ),
               ),
               CustomDropdownMenu(
-                value: state.bill.dueDayOfTheMonth == 0
-                    ? 1
-                    : state.bill.dueDayOfTheMonth,
+                value: state.bill.dueDay == 0 ? 1 : state.bill.dueDay,
                 items: AppConstants.monthDays
                     .map(
                       (e) => DropdownMenuItem<int>(

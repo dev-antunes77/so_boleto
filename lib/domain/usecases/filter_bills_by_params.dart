@@ -52,7 +52,7 @@ final class FilterBillsByParams {
               if (type == parcels) {
                 return _filterMatch(element.totalParcels, params);
               } else if (type == dueDay) {
-                return _filterMatch(element.dueDayOfTheMonth, params);
+                return _filterMatch(element.dueDay, params);
               } else {
                 return _filterMatch(element.value, params);
               }

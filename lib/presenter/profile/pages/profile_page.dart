@@ -56,11 +56,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 builder: (context, state) {
                   _user = context.read<InitialCubit>().state.user!;
 
-                  final navigationParams = _user.profilePicturePath.isNotEmpty
-                      ? ImageModel(path: _user.profilePicturePath)
-                      : state.image is! XFile
-                          ? const SizedBox.shrink()
-                          : ImageModel.fromXfile(state.image as XFile);
+                  final navigationParams = _getNavigationParams(state.image);
+
                   return CustomMenuAnchor(
                     alignment: Alignment.topRight,
                     builder: (context, controller, child) {
@@ -77,8 +74,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 backgroundImage:
                                     FileImage(File(_user.profilePicturePath)),
                               );
-                            }
-                            if (state.image is XFile) {
+                            } else if (state.image is XFile) {
                               return CircleAvatar(
                                 radius: 36,
                                 backgroundColor: themeColors.primary,
@@ -182,13 +178,18 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  void _onCameraChoice() {
-    _profileCubit.getImageFromCamera(
-        context.read<InitialCubit>().onUpdateUserProfilePictrue);
-  }
+  dynamic _getNavigationParams(dynamic image) =>
+      _user.profilePicturePath.isNotEmpty
+          ? ImageModel(path: _user.profilePicturePath)
+          : image is XFile
+              ? ImageModel.fromXfile(image)
+              : const SizedBox.shrink();
 
-  void _onGalleryChoice() {
-    _profileCubit.getImageFromGallery(
-        context.read<InitialCubit>().onUpdateUserProfilePictrue);
-  }
+  void _onCameraChoice() => _profileCubit.getImageFromCamera(
+        context.read<InitialCubit>().onUpdateUserProfilePictrue,
+      );
+
+  void _onGalleryChoice() => _profileCubit.getImageFromGallery(
+        context.read<InitialCubit>().onUpdateUserProfilePictrue,
+      );
 }

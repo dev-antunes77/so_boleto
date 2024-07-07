@@ -17,6 +17,8 @@ class HiveUserData with HiveObjectMixin {
     required this.hasSeenOnboarding,
     required this.hasLightTheme,
     required this.payedTag,
+    required this.billSorting,
+    required this.hasInvertedSorting,
     required this.baseColor,
     required this.favoredDueDay,
     required this.profilePicturePath,
@@ -32,6 +34,8 @@ class HiveUserData with HiveObjectMixin {
         hasLightTheme: user.hasLightTheme,
         hasSeenOnboarding: user.hasSeenOnboarding,
         payedTag: user.payedTag.value,
+        billSorting: user.billSorting.kind,
+        hasInvertedSorting: user.hasInvertedSorting,
         favoredDueDay: user.favoredDueDay,
         profilePicturePath: user.profilePicturePath,
         baseColor: user.baseColor.colorToJson(),
@@ -63,14 +67,20 @@ class HiveUserData with HiveObjectMixin {
   final String payedTag;
 
   @HiveField(9)
-  final String baseColor;
+  final String billSorting;
 
   @HiveField(10)
-  final int favoredDueDay;
+  final bool hasInvertedSorting;
 
   @HiveField(11)
-  final String profilePicturePath;
+  final String baseColor;
 
   @HiveField(12)
+  final int favoredDueDay;
+
+  @HiveField(13)
+  final String profilePicturePath;
+
+  @HiveField(14)
   final DateTime createdAt;
 }

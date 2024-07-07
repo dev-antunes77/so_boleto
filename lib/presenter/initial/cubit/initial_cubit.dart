@@ -6,6 +6,7 @@ import 'package:so_boleto/core/errors/app_errors.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/utils/base_cubit.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
+import 'package:so_boleto/domain/models/enums/bill_sorting.dart';
 import 'package:so_boleto/domain/models/enums/payed_tag.dart';
 import 'package:so_boleto/domain/models/user_data.dart';
 import 'package:so_boleto/domain/usecases/create_user.dart';
@@ -100,54 +101,89 @@ class InitialCubit extends Cubit<InitialState> with BaseCubit {
       emit(state.copyWith(currentPage: page));
 
   Future<void> onUpdateUserTag(PayedTag payedTag) async {
-    emit(state.copyWith(status: BaseStateStatus.loading));
-    final updatedUser = state.user!.copyWith(payedTag: payedTag);
-    await _updateUserStorage(updatedUser);
-    emit(
-      state.copyWith(
-        status: BaseStateStatus.success,
-        user: updatedUser,
-      ),
-    );
+    try {
+      emit(state.copyWith(status: BaseStateStatus.loading));
+      final updatedUser = state.user!.copyWith(payedTag: payedTag);
+      await _updateUserStorage(updatedUser);
+      emit(
+        state.copyWith(
+          status: BaseStateStatus.success,
+          user: updatedUser,
+        ),
+      );
+    } on AppError catch (error) {
+      onAppError(error);
+    }
+  }
+
+  Future<void> onUpdateBillSorting(BillSorting billSorting) async {
+    try {
+      final hasInvertedSorting = state.user!.billSorting == billSorting;
+      final updatedUser = state.user!.copyWith(
+        billSorting: billSorting,
+        hasInvertedSorting: hasInvertedSorting,
+      );
+      await _updateUserStorage(updatedUser);
+      emit(
+        state.copyWith(
+          status: BaseStateStatus.success,
+          user: updatedUser,
+        ),
+      );
+    } on AppError catch (error) {
+      onAppError(error);
+    }
   }
 
   Future<void> onUpdateUserFavoredDueDay(int dueDay) async {
-    emit(state.copyWith(status: BaseStateStatus.loading));
-    final updatedUser = state.user!.copyWith(favoredDueDay: dueDay);
-    await _updateUserStorage(updatedUser);
-    emit(
-      state.copyWith(
-        status: BaseStateStatus.success,
-        user: updatedUser,
-      ),
-    );
+    try {
+      emit(state.copyWith(status: BaseStateStatus.loading));
+      final updatedUser = state.user!.copyWith(favoredDueDay: dueDay);
+      await _updateUserStorage(updatedUser);
+      emit(
+        state.copyWith(
+          status: BaseStateStatus.success,
+          user: updatedUser,
+        ),
+      );
+    } on AppError catch (error) {
+      onAppError(error);
+    }
   }
 
   Future<void> onUpdateUserThemeColors(
       Color baseColor, bool hasLightTheme) async {
-    emit(state.copyWith(status: BaseStateStatus.loading));
-    final updatedUser = state.user!.copyWith(
-      hasLightTheme: hasLightTheme,
-      baseColor: baseColor,
-    );
-    await _updateUserStorage(updatedUser);
-    emit(
-      state.copyWith(
-        status: BaseStateStatus.success,
-        user: updatedUser,
-      ),
-    );
+    try {
+      emit(state.copyWith(status: BaseStateStatus.loading));
+      final updatedUser = state.user!.copyWith(
+        hasLightTheme: hasLightTheme,
+        baseColor: baseColor,
+      );
+      await _updateUserStorage(updatedUser);
+      emit(
+        state.copyWith(
+          status: BaseStateStatus.success,
+          user: updatedUser,
+        ),
+      );
+    } on AppError catch (error) {
+      onAppError(error);
+    }
   }
 
   Future<void> onUpdateUserProfilePictrue(String path) async {
-    emit(state.copyWith(status: BaseStateStatus.loading));
-    final updatedUser = state.user!.copyWith(profilePicturePath: path);
-    await _updateUserStorage(updatedUser);
-    emit(
-      state.copyWith(
-        status: BaseStateStatus.success,
-        user: updatedUser,
-      ),
-    );
+    try {
+      emit(state.copyWith(status: BaseStateStatus.loading));
+      final updatedUser = state.user!.copyWith(profilePicturePath: path);
+      await _updateUserStorage(updatedUser);
+      emit(
+        state.copyWith(
+          status: BaseStateStatus.success,
+          user: updatedUser,
+        ),
+      );
+    } on AppError catch (error) {
+      onAppError(error);
+    }
   }
 }

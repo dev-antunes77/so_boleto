@@ -10,12 +10,14 @@ class CustomMenuItemButton extends StatelessWidget {
     required this.svg,
     required this.label,
     this.height,
+    this.closeOnActivate = true,
     required this.onPressed,
   });
 
   final String svg;
   final String label;
   final double? height;
+  final bool closeOnActivate;
   final VoidCallback onPressed;
 
   @override
@@ -23,6 +25,7 @@ class CustomMenuItemButton extends StatelessWidget {
     final themeColors = context.read<ThemeCubit>().state.selectedColors;
 
     return MenuItemButton(
+      closeOnActivate: closeOnActivate,
       leadingIcon: SvgAsset(
         svg: svg,
         height: height ?? 22,

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:so_boleto/core/extensions/color_extensions.dart';
 import 'package:so_boleto/core/extensions/date_time_extensions.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
+import 'package:so_boleto/domain/models/enums/bill_sorting.dart';
 import 'package:so_boleto/domain/models/enums/payed_tag.dart';
 import 'package:so_boleto/infra/local_database/hive_user_database/hive_user_data.dart';
 
@@ -18,7 +19,9 @@ class UserData extends Equatable {
     this.hasSeenOnboarding = false,
     this.hasLightTheme = true,
     this.favoredDueDay = 0,
+    this.hasInvertedSorting = false,
     this.payedTag = PayedTag.stample,
+    this.billSorting = BillSorting.date,
     this.baseColor = const Color.fromARGB(255, 4, 135, 58),
     DateTime? createdAt,
   }) : createdAt = createdAt ?? DateTime.now();
@@ -31,6 +34,8 @@ class UserData extends Equatable {
         'hasSeenOnboarding': hasSeenOnboarding,
         'hasLightTheme': hasLightTheme,
         'payedTag': payedTag.value,
+        'billSorting': billSorting.kind,
+        'hasInvertedSorting': hasInvertedSorting,
         'favoredDueDay': favoredDueDay,
         'profilePicturePath': profilePicturePath,
         'baseColor': baseColor.colorToJson(),
@@ -50,7 +55,9 @@ class UserData extends Equatable {
       hasLightTheme: data?['hasLightTheme'],
       favoredDueDay: data?['favoredDueDay'],
       profilePicturePath: data?['profilePicturePath'],
+      hasInvertedSorting: data?['hasInvertedSorting'],
       payedTag: (data?['payedTag'] as String).payedTagToEnum(),
+      billSorting: (data?['billSorting'] as String).billSortingToEnum(),
       baseColor: (data?['baseColor'] as String).colorFromJson(),
       createdAt: (data?['createdAt'] as String).stringToDateTime(),
     );
@@ -64,7 +71,9 @@ class UserData extends Equatable {
         password: hiveUser.password,
         hasLightTheme: hiveUser.hasLightTheme,
         hasSeenOnboarding: hiveUser.hasSeenOnboarding,
+        hasInvertedSorting: hiveUser.hasInvertedSorting,
         payedTag: hiveUser.payedTag.payedTagToEnum(),
+        billSorting: hiveUser.billSorting.billSortingToEnum(),
         baseColor: hiveUser.baseColor.colorFromJson(),
         favoredDueDay: hiveUser.favoredDueDay,
         profilePicturePath: hiveUser.profilePicturePath,
@@ -82,6 +91,8 @@ class UserData extends Equatable {
   final bool hasSeenOnboarding;
   final bool hasLightTheme;
   final PayedTag payedTag;
+  final BillSorting billSorting;
+  final bool hasInvertedSorting;
   final int favoredDueDay;
   final Color baseColor;
   final DateTime createdAt;
@@ -98,6 +109,8 @@ class UserData extends Equatable {
         hasLightTheme,
         payedTag,
         baseColor,
+        billSorting,
+        hasInvertedSorting,
         profilePicturePath,
         favoredDueDay,
         createdAt,
@@ -113,6 +126,8 @@ class UserData extends Equatable {
     bool? hasSeenOnboarding,
     bool? hasLightTheme,
     PayedTag? payedTag,
+    BillSorting? billSorting,
+    bool? hasInvertedSorting,
     Color? baseColor,
     int? favoredDueDay,
     DateTime? createdAt,
@@ -127,6 +142,8 @@ class UserData extends Equatable {
         hasSeenOnboarding: hasSeenOnboarding ?? this.hasSeenOnboarding,
         hasLightTheme: hasLightTheme ?? this.hasLightTheme,
         payedTag: payedTag ?? this.payedTag,
+        billSorting: billSorting ?? this.billSorting,
+        hasInvertedSorting: hasInvertedSorting ?? this.hasInvertedSorting,
         baseColor: baseColor ?? this.baseColor,
         favoredDueDay: favoredDueDay ?? this.favoredDueDay,
         createdAt: createdAt ?? this.createdAt,

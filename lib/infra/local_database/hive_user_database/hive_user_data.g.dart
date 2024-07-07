@@ -25,17 +25,19 @@ class HiveUserDataAdapter extends TypeAdapter<HiveUserData> {
       hasSeenOnboarding: fields[6] as bool,
       hasLightTheme: fields[7] as bool,
       payedTag: fields[8] as String,
-      baseColor: fields[9] as String,
-      favoredDueDay: fields[10] as int,
-      profilePicturePath: fields[11] as String,
-      createdAt: fields[12] as DateTime,
+      billSorting: fields[9] as String,
+      hasInvertedSorting: fields[10] as bool,
+      baseColor: fields[11] as String,
+      favoredDueDay: fields[12] as int,
+      profilePicturePath: fields[13] as String,
+      createdAt: fields[14] as DateTime,
     );
   }
 
   @override
   void write(BinaryWriter writer, HiveUserData obj) {
     writer
-      ..writeByte(12)
+      ..writeByte(14)
       ..writeByte(1)
       ..write(obj.id)
       ..writeByte(2)
@@ -53,12 +55,16 @@ class HiveUserDataAdapter extends TypeAdapter<HiveUserData> {
       ..writeByte(8)
       ..write(obj.payedTag)
       ..writeByte(9)
-      ..write(obj.baseColor)
+      ..write(obj.billSorting)
       ..writeByte(10)
-      ..write(obj.favoredDueDay)
+      ..write(obj.hasInvertedSorting)
       ..writeByte(11)
-      ..write(obj.profilePicturePath)
+      ..write(obj.baseColor)
       ..writeByte(12)
+      ..write(obj.favoredDueDay)
+      ..writeByte(13)
+      ..write(obj.profilePicturePath)
+      ..writeByte(14)
       ..write(obj.createdAt);
   }
 

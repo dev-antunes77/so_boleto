@@ -16,7 +16,7 @@ final class HiveBillModel with HiveObjectMixin {
     required this.totalParcels,
     required this.payedParcels,
     required this.value,
-    required this.dueDayOfTheMonth,
+    required this.dueDay,
     required this.createdAt,
   });
 
@@ -29,7 +29,7 @@ final class HiveBillModel with HiveObjectMixin {
         totalParcels: bill.totalParcels,
         payedParcels: bill.payedParcels,
         value: bill.value,
-        dueDayOfTheMonth: bill.dueDayOfTheMonth,
+        dueDay: bill.dueDay,
         createdAt: bill.createdAt,
       );
 
@@ -61,7 +61,7 @@ final class HiveBillModel with HiveObjectMixin {
   int value;
 
   @HiveField(10)
-  int dueDayOfTheMonth;
+  int dueDay;
 
   @HiveField(11)
   DateTime createdAt;

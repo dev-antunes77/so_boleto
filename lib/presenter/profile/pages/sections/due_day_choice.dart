@@ -17,7 +17,15 @@ class DueDayChoice extends StatefulWidget {
 }
 
 class _DueDayChoiceState extends State<DueDayChoice> {
-  int _dueDay = 0;
+  late int _dueDay;
+  late InitialCubit _initialCubit;
+
+  @override
+  void initState() {
+    _initialCubit = context.read<InitialCubit>();
+    _dueDay = _initialCubit.state.user?.favoredDueDay ?? 0;
+    super.initState();
+  }
 
   _onDueDayChange(int newDay) => setState(() => _dueDay = newDay);
 
@@ -74,7 +82,7 @@ class _DueDayChoiceState extends State<DueDayChoice> {
         AppThemeValues.spaceVerticalMassive,
         PillButton(
           onTap: () {
-            context.read<InitialCubit>().onUpdateUserFavoredDueDay(_dueDay);
+            _initialCubit.onUpdateUserFavoredDueDay(_dueDay);
             context.pop(true);
           },
           isDisabled: _dueDay < 1,

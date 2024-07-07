@@ -130,7 +130,7 @@ class _BillListTileState extends State<BillListTile> {
                     children: [
                       if (widget.bill.billStatus != BillStatus.payed)
                         Text(
-                          widget.bill.dueDayOfTheMonth.properDueDay(),
+                          widget.bill.dueDay.properDueDay(),
                           style: context.textRobotoSubtitleTiny,
                         ),
                     ],
