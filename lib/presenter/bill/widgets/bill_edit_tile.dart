@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
-import 'package:so_boleto/core/extensions/string_extensions.dart';
-import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 
 class BillEditTile extends StatelessWidget {
@@ -11,8 +9,8 @@ class BillEditTile extends StatelessWidget {
     required this.label,
     required this.value,
     required this.onPressed,
-    this.width,
     required this.color,
+    this.width,
   });
 
   final String icon;
@@ -24,33 +22,31 @@ class BillEditTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: AppThemeValues.spaceTiny),
-      child: Row(
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      minVerticalPadding: 0.0,
+      dense: true,
+      leading: SvgAsset(
+        svg: icon,
+        height: 32,
+        color: color,
+      ),
+      title: Text(label),
+      subtitle: Row(
         children: [
-          SvgAsset(
-            svg: icon,
-            height: 32,
-            color: color,
+          Flexible(
+            flex: 7,
+            child: Text(
+              value,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
-          AppThemeValues.spaceHorizontalXLarge,
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(label, style: context.textRobotoSubtitleSmall),
-              GestureDetector(
-                onTap: onPressed,
-                child: Row(
-                  children: [
-                    Text(value.breakLongStrings(),
-                        style: context.textRobotoMedium),
-                    AppThemeValues.spaceHorizontalTiny,
-                    const Icon(Icons.edit_outlined, size: 16)
-                  ],
-                ),
-              ),
-            ],
-          ),
+          const Flexible(
+              child: Padding(
+            padding: EdgeInsets.only(left: AppThemeValues.spaceXSmall),
+            child: Icon(Icons.edit_outlined, size: 16),
+          )),
         ],
       ),
     );

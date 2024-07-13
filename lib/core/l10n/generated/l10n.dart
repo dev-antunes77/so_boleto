@@ -1960,6 +1960,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Você não tem contas tão antigas assim.`
+  String get responseHandlerNoneForThisMonth {
+    return Intl.message(
+      'Você não tem contas tão antigas assim.',
+      name: 'responseHandlerNoneForThisMonth',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Você não tem contas atrasadas.`
   String get responseHandlerNoneDelayed {
     return Intl.message(

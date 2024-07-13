@@ -8,7 +8,8 @@ import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/domain/models/enums/page_response_handler.dart';
 import 'package:so_boleto/domain/models/enums/payed_tag.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
-import 'package:so_boleto/presenter/home/widgets/bill_list_tile.dart';
+import 'package:so_boleto/presenter/home/widgets/current_bill_list_tile.dart';
+import 'package:so_boleto/presenter/home/widgets/old_bill_list_tile.dart';
 import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
 
 class HomeBillTab extends StatelessWidget {
@@ -16,10 +17,12 @@ class HomeBillTab extends StatelessWidget {
     this.bills, {
     super.key,
     required this.message,
+    this.isOldMonthTab = false,
   });
 
   final List<BillModel> bills;
   final PageResponseHandler message;
+  final bool isOldMonthTab;
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +45,23 @@ class HomeBillTab extends StatelessWidget {
         itemBuilder: (context, index) {
           final bill = bills[index];
 
-          return BillListTile(
-            bill,
-            payedTagSelector: PayedTagSelector(
-              bill.billStatus.isPayed,
-              payedTag: payedTag,
-            ),
-          );
+          return isOldMonthTab
+              ? OldBillListTile(
+                  bill,
+                  payedTag: payedTag,
+                  payedTagSelector: PayedTagSelector(
+                    bill.billStatus.isPayed,
+                    payedTag: payedTag,
+                  ),
+                )
+              : CurrentBillListTile(
+                  bill,
+                  payedTag: payedTag,
+                  payedTagSelector: PayedTagSelector(
+                    bill.billStatus.isPayed,
+                    payedTag: payedTag,
+                  ),
+                );
         },
       ),
     );

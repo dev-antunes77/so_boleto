@@ -264,6 +264,7 @@
     "responseHandlerNoMorePromptBills":"Você já utilizou todas as contas prontas disponíveis.",
     "responseHandlerNoneRegistered":"Você não tem contas cadastradas.",
     "responseHandlerNoneFutureBills":"Você não tem contas parceladas para frente.",
+    "responseHandlerNoneForThisMonth":"Você não tem contas tão antigas assim.",
     "responseHandlerNoneDelayed":"Você não tem contas atrasadas.",
     "responseHandlerNoneForTheseFilters":"Nenhuma conta com esses filtros.",
     "responseHandlerNonePayed":"Você não tem contas pagas.",

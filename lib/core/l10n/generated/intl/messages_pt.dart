@@ -324,6 +324,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "responseHandlerNoneForTheseFilters":
             MessageLookupByLibrary.simpleMessage(
                 "Nenhuma conta com esses filtros."),
+        "responseHandlerNoneForThisMonth": MessageLookupByLibrary.simpleMessage(
+            "Você não tem contas tão antigas assim."),
         "responseHandlerNoneFutureBills": MessageLookupByLibrary.simpleMessage(
             "Você não tem contas parceladas para frente."),
         "responseHandlerNonePayed":

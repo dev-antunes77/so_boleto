@@ -40,7 +40,7 @@ class _BillCheckSectionState extends State<BillCheckSection> {
   Widget build(BuildContext context) {
     final color = context.read<ThemeCubit>().state.selectedColors.tag;
     return BillShell(
-      height: context.height * 0.8,
+      height: context.height * 0.83,
       child: Padding(
         padding: const EdgeInsets.all(AppThemeValues.spaceMedium),
         child: BlocBuilder<BillCubit, BillState>(

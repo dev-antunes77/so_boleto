@@ -26,7 +26,7 @@ class BillModel extends Equatable {
     BillStatus? billStatus,
     DateTime? createdAt,
   })  : id = id ?? AppFormatters.randomIdFormater(),
-        createdAt = createdAt ?? DateTime.now(),
+        createdAt = createdAt ?? DateTime(DateTime.now().year, DateTime.april),
         category = category ?? BillCategory.miscellaneous,
         billStatus = billStatus ?? BillStatus.open;
 

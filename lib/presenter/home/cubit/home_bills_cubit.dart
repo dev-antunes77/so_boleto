@@ -196,6 +196,7 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
           status: BaseStateStatus.success,
           bills: updatedBills,
           billSorting: billSorting,
+          hasInvertedSorting: !isInverted,
         ),
       );
     } on AppError catch (_) {

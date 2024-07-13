@@ -36,7 +36,8 @@ extension StringExtensions on String {
 
   String decodePassword() => utf8.decode(base64.decode(this));
 
-  String breakLongStrings() => length > 30 ? "${substring(0, 28)}..." : this;
+  String breakLongStrings({required int length, required int desiredLength}) =>
+      length > desiredLength ? "${substring(0, desiredLength)}..." : this;
 
   Color colorFromJson() {
     String hexColor = replaceAll('#', '');

@@ -8,7 +8,7 @@ import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/domain/models/enums/bill_status.dart';
 import 'package:so_boleto/domain/models/enums/payed_tag.dart';
-import 'package:so_boleto/presenter/home/widgets/bill_list_tile.dart';
+import 'package:so_boleto/presenter/home/widgets/current_bill_list_tile.dart';
 import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
 
 class PayedTagChoice extends StatelessWidget {
@@ -125,8 +125,9 @@ class PaymentTagChoiceTile extends StatelessWidget {
                     ),
                   ),
                 ),
-                BillListTile(
+                CurrentBillListTile(
                   tagChoiceBill,
+                  payedTag: tag,
                   payedTagSelector: PayedTagSelector(
                     tagChoiceBill.billStatus.isPayed,
                     payedTag: tag,

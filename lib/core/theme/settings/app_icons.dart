@@ -41,10 +41,12 @@ abstract class AppIcons {
   static const noneRegistered = '${_path}none_registered.svg';
   static const noneForFilters = '${_path}none_for_filters.svg';
   static const noneDelayed = '${_path}none_delayed.svg';
+  static const noneForThisMonth = '${_path}none_for_this_month.svg';
   static const noneFutureBills = '${_path}none_future_bills.svg';
   static const nonePayed = '${_path}none_payed.svg';
   static const noneForPrompt = '${_path}none_for_prompt.svg';
   static const noneForName = '${_path}none_for_name.svg';
+  static const notebook = '${_path}notebook.svg';
   static const onboardingExpenses = '${_path}onboarding_expenses.svg';
   static const onboardingLetsGo = '${_path}onboarding_lets_go.svg';
   static const onboardingLiving = '${_path}onboarding_living.svg';
