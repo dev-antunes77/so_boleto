@@ -11,13 +11,15 @@ class HomeBillsState extends BaseState with EquatableMixin {
     String? userId,
     BillSorting? billSorting,
     bool? hasInvertedSorting,
+    DateTime? currentMonth,
   })  : userId = userId ?? '',
         filteredByParams = filterParams ?? List.empty(),
         bills = bills ?? List.empty(),
         querySearch = querySearch ?? '',
         billSorting = billSorting ?? BillSorting.date,
         hasInvertedSorting = hasInvertedSorting ?? false,
-        paramsApplied = paramsApplied ?? false;
+        paramsApplied = paramsApplied ?? false,
+        currentMonth = currentMonth ?? DateTime.now();
 
   final List<BillModel> bills;
   final List<BillModel> filteredByParams;
@@ -26,6 +28,7 @@ class HomeBillsState extends BaseState with EquatableMixin {
   final bool hasInvertedSorting;
   final String userId;
   final BillSorting billSorting;
+  final DateTime currentMonth;
 
   @override
   List<Object?> get props => [
@@ -37,6 +40,7 @@ class HomeBillsState extends BaseState with EquatableMixin {
         paramsApplied,
         hasInvertedSorting,
         billSorting,
+        currentMonth,
         userId,
       ];
 
@@ -56,6 +60,9 @@ class HomeBillsState extends BaseState with EquatableMixin {
   List<BillModel> get delayedBills => allBills
       .where((element) => element.billStatus == BillStatus.delayed)
       .toList();
+
+  List<BillModel> get parceledBills =>
+      allBills.where((element) => element.totalParcels > 1).toList();
 
   List<BillModel> inFilteringCase(List<BillModel> bills) =>
       querySearch.isNotEmpty ? bills.filterBills(querySearch) : bills;
@@ -91,6 +98,7 @@ class HomeBillsState extends BaseState with EquatableMixin {
     bool? paramsApplied,
     bool? hasInvertedSorting,
     BillSorting? billSorting,
+    DateTime? currentMonth,
     String? userId,
   }) =>
       HomeBillsState(
@@ -101,6 +109,7 @@ class HomeBillsState extends BaseState with EquatableMixin {
         querySearch: querySearch ?? this.querySearch,
         paramsApplied: paramsApplied ?? this.paramsApplied,
         billSorting: billSorting ?? this.billSorting,
+        currentMonth: currentMonth ?? this.currentMonth,
         hasInvertedSorting: hasInvertedSorting ?? this.hasInvertedSorting,
         userId: userId ?? this.userId,
       );

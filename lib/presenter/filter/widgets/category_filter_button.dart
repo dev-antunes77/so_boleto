@@ -55,7 +55,7 @@ class CategoryFilterButton extends StatelessWidget {
                 ),
                 AppThemeValues.spaceHorizontalTiny,
                 Text(
-                  pill.category.getTextResponse(),
+                  pill.category.getTextResponse,
                   style: context.textRobotoXSmall,
                 ),
               ],

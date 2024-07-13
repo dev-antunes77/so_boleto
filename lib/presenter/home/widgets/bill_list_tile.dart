@@ -86,7 +86,7 @@ class _BillListTileState extends State<BillListTile> {
                         radius: 25,
                         backgroundColor: theme.selectedColors.circleBackground,
                         child: SvgAsset(
-                          svg: widget.bill.category.getIconResponse(),
+                          svg: widget.bill.category.getIconResponse,
                           height: 30,
                           color: theme.selectedColors.icon,
                         ),
@@ -95,7 +95,6 @@ class _BillListTileState extends State<BillListTile> {
                   ),
                   title: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
                         widget.bill.name.capitalize(),
@@ -103,13 +102,13 @@ class _BillListTileState extends State<BillListTile> {
                       ),
                       if (widget.bill.description.isNotEmpty) ...[
                         CustomTextButton(
-                          label:
-                              expand ? 'Fechar descrição' : 'Abrir descrição',
-                          padding: EdgeInsets.zero,
+                          label: expand ? 'Fechar descrição' : 'Ler descrição',
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: AppThemeValues.spaceSmall,
+                            vertical: AppThemeValues.spaceXXSmall,
+                          ),
                           fontSize: 12,
-                          onPressed: widget.isTagPreferenceScreen
-                              ? () {}
-                              : _toggleExpandDescription,
+                          onPressed: _toggleExpandDescription,
                         ),
                         ExpandedSection(
                           expand: expand,

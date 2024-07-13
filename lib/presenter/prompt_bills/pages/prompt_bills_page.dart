@@ -109,8 +109,7 @@ class _PromptBillsPageState extends State<PromptBillsPage> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           SvgAsset(
-                                            svg:
-                                                bill.category.getIconResponse(),
+                                            svg: bill.category.getIconResponse,
                                             height: bill.isSelected ? 40 : 32,
                                             color: bill.isSelected
                                                 ? colors.primary

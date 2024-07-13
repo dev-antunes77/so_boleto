@@ -18,8 +18,8 @@ final class GetBills {
     try {
       // final bills = await _hiveBillsDatabase.getBills();
       final bills = await _firestoreRepository.getBills(userId);
-      _billSorting(bills, billSorting, isInverted);
-      _setDelayedBill(bills);
+      final sortedBills = _billSorting(bills, billSorting, isInverted);
+      _setDelayedBill(sortedBills);
       return bills;
     } on AppError catch (error, trace) {
       Log.error(error, trace, 'Error executing $runtimeType: ${error.message}');
@@ -30,23 +30,29 @@ final class GetBills {
     }
   }
 
-  void _billSorting(
+  List<BillModel> _billSorting(
       List<BillModel> bills, BillSorting billSorting, bool isInverted) {
+    List<BillModel> sortedBills = [];
     if (billSorting.byName) {
       isInverted
           ? bills.sort((a, b) => b.name.compareTo(a.name))
           : bills.sort((a, b) => a.name.compareTo(b.name));
+      sortedBills = bills;
     } else if (billSorting.byDueDay) {
       isInverted
           ? bills.sort((a, b) => b.dueDay.compareTo(a.dueDay))
           : bills.sort((a, b) => a.dueDay.compareTo(b.dueDay));
+      sortedBills = bills;
     } else if (billSorting.byValue) {
       isInverted
           ? bills.sort((a, b) => b.value.compareTo(a.value))
           : bills.sort((a, b) => a.value.compareTo(b.value));
+      sortedBills = bills;
     } else {
       bills.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+      sortedBills = bills;
     }
+    return sortedBills;
   }
 
   void _setDelayedBill(List<BillModel> bills) {

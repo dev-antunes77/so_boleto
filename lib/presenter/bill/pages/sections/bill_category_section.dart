@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/buttons/pill_button.dart';
 import 'package:so_boleto/core/components/custom_dropdown_menu/custom_dropdown_menu.dart';
 import 'package:so_boleto/core/components/expanded_space/expanded_space.dart';
+import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
 import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
@@ -24,17 +25,23 @@ class BillCategorySection extends StatelessWidget {
         builder: (context, state) {
           return Column(
             children: [
-              BillSectionTopIcon(state.bill.category.getIconResponse()),
+              BillSectionTopIcon(state.bill.category.getIconResponse),
               AppThemeValues.spaceVerticalLarge,
               Center(
                 child: CustomDropdownMenu(
-                  width: context.width * 0.35,
-                  value: state.bill.category.getTextResponse(),
+                  width: context.width * 0.45,
+                  value: state.bill.category.getTextResponse,
                   items: BillCategory.values
                       .map(
                         (e) => DropdownMenuItem<String>(
-                          value: e.getTextResponse(),
-                          child: Text(e.getTextResponse()),
+                          value: e.getTextResponse,
+                          child: Row(
+                            children: [
+                              SvgAsset(svg: e.getIconResponse, height: 25),
+                              AppThemeValues.spaceHorizontalMedium,
+                              Text(e.getTextResponse),
+                            ],
+                          ),
                         ),
                       )
                       .toList(),
@@ -62,5 +69,5 @@ class BillCategorySection extends StatelessWidget {
   }
 
   BillCategory _getCategoryFromText(String value) => BillCategory.values
-      .firstWhere((element) => element.getTextResponse() == value);
+      .firstWhere((element) => element.getTextResponse == value);
 }

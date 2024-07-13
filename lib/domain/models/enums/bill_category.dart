@@ -4,6 +4,7 @@ import 'package:so_boleto/core/theme/settings/app_icons.dart';
 enum BillCategory {
   automobile('automobile'),
   creditCard('creditCard'),
+  clothes('clothes'),
   debt('debt'),
   devices('devices'),
   education('education'),
@@ -15,6 +16,7 @@ enum BillCategory {
   insurance('insurance'),
   investment('investment'),
   internet('internet'),
+  maintenance('maintenance'),
   miscellaneous('miscellaneous'),
   rent('rent'),
   petShop('petShop'),
@@ -26,12 +28,14 @@ enum BillCategory {
   const BillCategory(this.value);
   final String value;
 
-  String getTextResponse() {
+  String get getTextResponse {
     switch (this) {
       case automobile:
         return AppLocalizations.current.categoryAutomobile;
       case creditCard:
         return AppLocalizations.current.categoryCreditCard;
+      case clothes:
+        return AppLocalizations.current.categoryClothes;
       case debt:
         return AppLocalizations.current.categoryDebt;
       case devices:
@@ -56,6 +60,8 @@ enum BillCategory {
         return AppLocalizations.current.categoryInternet;
       case miscellaneous:
         return AppLocalizations.current.categoryMiscellaneous;
+      case maintenance:
+        return AppLocalizations.current.categoryMaintenance;
       case rent:
         return AppLocalizations.current.categoryRent;
       case petShop:
@@ -71,12 +77,14 @@ enum BillCategory {
     }
   }
 
-  String getIconResponse() {
+  String get getIconResponse {
     switch (this) {
       case automobile:
         return AppIcons.automobile;
       case creditCard:
         return AppIcons.creditCard;
+      case clothes:
+        return AppIcons.clothes;
       case debt:
         return AppIcons.debt;
       case devices:
@@ -99,6 +107,8 @@ enum BillCategory {
         return AppIcons.investment;
       case internet:
         return AppIcons.internet;
+      case maintenance:
+        return AppIcons.maintenance;
       case miscellaneous:
         return AppIcons.miscellaneous;
       case rent:

@@ -10,6 +10,7 @@ abstract class AppIcons {
   static const calendar2 = '${_path}calendar2.svg';
   static const circle = '${_path}circle.svg';
   static const close = '${_path}close.svg';
+  static const clothes = '${_path}clothes.svg';
   static const creditCard = '${_path}credit_card.svg';
   static const debt = '${_path}debt.svg';
   static const delete = '${_path}delete.svg';
@@ -33,12 +34,14 @@ abstract class AppIcons {
   static const internet = '${_path}internet.svg';
   static const logout = '${_path}logout.svg';
   static const key = '${_path}key.svg';
+  static const maintenance = '${_path}maintenance.svg';
   static const miscellaneous = '${_path}miscellaneous.svg';
   static const money = '${_path}money.svg';
   static const more = '${_path}more.svg';
   static const noneRegistered = '${_path}none_registered.svg';
   static const noneForFilters = '${_path}none_for_filters.svg';
   static const noneDelayed = '${_path}none_delayed.svg';
+  static const noneFutureBills = '${_path}none_future_bills.svg';
   static const nonePayed = '${_path}none_payed.svg';
   static const noneForPrompt = '${_path}none_for_prompt.svg';
   static const noneForName = '${_path}none_for_name.svg';

@@ -290,11 +290,31 @@ class AppLocalizations {
     );
   }
 
-  /// `Automóvel`
+  /// `Veículo`
   String get categoryAutomobile {
     return Intl.message(
-      'Automóvel',
+      'Veículo',
       name: 'categoryAutomobile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Carro`
+  String get categoryAutomobileCar {
+    return Intl.message(
+      'Carro',
+      name: 'categoryAutomobileCar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Moto`
+  String get categoryAutomobileMotorcycle {
+    return Intl.message(
+      'Moto',
+      name: 'categoryAutomobileMotorcycle',
       desc: '',
       args: [],
     );
@@ -305,6 +325,16 @@ class AppLocalizations {
     return Intl.message(
       'Cartão de crédito',
       name: 'categoryCreditCard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vestimenta`
+  String get categoryClothes {
+    return Intl.message(
+      'Vestimenta',
+      name: 'categoryClothes',
       desc: '',
       args: [],
     );
@@ -430,6 +460,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Manutenção`
+  String get categoryMaintenance {
+    return Intl.message(
+      'Manutenção',
+      name: 'categoryMaintenance',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Aluguel`
   String get categoryRent {
     return Intl.message(
@@ -450,10 +490,10 @@ class AppLocalizations {
     );
   }
 
-  /// `telefone`
+  /// `Telefone`
   String get categoryTelephone {
     return Intl.message(
-      'telefone',
+      'Telefone',
       name: 'categoryTelephone',
       desc: '',
       args: [],
@@ -1030,6 +1070,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Futuras`
+  String get homeTabFutureBills {
+    return Intl.message(
+      'Futuras',
+      name: 'homeTabFutureBills',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Nome`
   String get loginName {
     return Intl.message(
@@ -1095,6 +1145,126 @@ class AppLocalizations {
     return Intl.message(
       'Aqui',
       name: 'loginHere',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Janeiro`
+  String get monthJanuary {
+    return Intl.message(
+      'Janeiro',
+      name: 'monthJanuary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fevereiro`
+  String get monthFebruary {
+    return Intl.message(
+      'Fevereiro',
+      name: 'monthFebruary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Março`
+  String get monthMarch {
+    return Intl.message(
+      'Março',
+      name: 'monthMarch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Abril`
+  String get monthApril {
+    return Intl.message(
+      'Abril',
+      name: 'monthApril',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Maio`
+  String get monthMay {
+    return Intl.message(
+      'Maio',
+      name: 'monthMay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Junho`
+  String get monthJune {
+    return Intl.message(
+      'Junho',
+      name: 'monthJune',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Julho`
+  String get monthJuly {
+    return Intl.message(
+      'Julho',
+      name: 'monthJuly',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Agosto`
+  String get monthAugust {
+    return Intl.message(
+      'Agosto',
+      name: 'monthAugust',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Setembro`
+  String get monthSeptember {
+    return Intl.message(
+      'Setembro',
+      name: 'monthSeptember',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Outubro`
+  String get monthOctober {
+    return Intl.message(
+      'Outubro',
+      name: 'monthOctober',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Novembro`
+  String get monthNovember {
+    return Intl.message(
+      'Novembro',
+      name: 'monthNovember',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dezembro`
+  String get monthDecember {
+    return Intl.message(
+      'Dezembro',
+      name: 'monthDecember',
       desc: '',
       args: [],
     );
@@ -1690,6 +1860,26 @@ class AppLocalizations {
     );
   }
 
+  /// `Reparos`
+  String get prompBillRepairs {
+    return Intl.message(
+      'Reparos',
+      name: 'prompBillRepairs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Manutenção`
+  String get prompBillMaintenance {
+    return Intl.message(
+      'Manutenção',
+      name: 'prompBillMaintenance',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Plano de saúde`
   String get prompBillHelthInsurance {
     return Intl.message(
@@ -1755,6 +1945,16 @@ class AppLocalizations {
     return Intl.message(
       'Você não tem contas cadastradas.',
       name: 'responseHandlerNoneRegistered',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Você não tem contas parceladas para frente.`
+  String get responseHandlerNoneFutureBills {
+    return Intl.message(
+      'Você não tem contas parceladas para frente.',
+      name: 'responseHandlerNoneFutureBills',
       desc: '',
       args: [],
     );

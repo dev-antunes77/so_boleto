@@ -96,10 +96,10 @@ class _BillCheckSectionState extends State<BillCheckSection> {
                 ),
                 LineSeparator.infiniteHorizon(),
                 BillEditTile(
-                  icon: state.bill.category.getIconResponse(),
+                  icon: state.bill.category.getIconResponse,
                   label: AppLocalizations.current.billFlowCheckCategory,
                   color: color,
-                  value: state.bill.category.getTextResponse(),
+                  value: state.bill.category.getTextResponse,
                   onPressed: () =>
                       _pushToEditionFlow(context, Routes.billCategory),
                 ),

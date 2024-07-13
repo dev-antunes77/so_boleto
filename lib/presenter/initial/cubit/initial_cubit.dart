@@ -118,7 +118,8 @@ class InitialCubit extends Cubit<InitialState> with BaseCubit {
 
   Future<void> onUpdateBillSorting(BillSorting billSorting) async {
     try {
-      final hasInvertedSorting = state.user!.billSorting == billSorting;
+      final hasInvertedSorting = state.user!.billSorting == billSorting &&
+          state.user!.hasInvertedSorting;
       final updatedUser = state.user!.copyWith(
         billSorting: billSorting,
         hasInvertedSorting: hasInvertedSorting,

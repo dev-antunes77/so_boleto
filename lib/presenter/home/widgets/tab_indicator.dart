@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 
 class TabIndicator extends StatelessWidget {
@@ -12,7 +13,10 @@ class TabIndicator extends StatelessWidget {
       width: double.infinity,
       child: Align(
         alignment: Alignment.bottomCenter,
-        child: Text(label),
+        child: Text(
+          label,
+          style: context.textSmall.copyWith(fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }

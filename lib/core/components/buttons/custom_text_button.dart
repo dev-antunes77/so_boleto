@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
-import 'package:so_boleto/core/theme/settings/app_colors.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 
 class CustomTextButton extends StatelessWidget {
@@ -21,6 +22,7 @@ class CustomTextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = context.read<ThemeCubit>().state.selectedColors.icon;
     return InkWell(
       borderRadius: BorderRadius.circular(AppThemeValues.spaceSmall),
       onTap: disable ? null : onPressed,
@@ -35,9 +37,7 @@ class CustomTextButton extends StatelessWidget {
           style: context.textRobotoSmall.copyWith(
             fontWeight: FontWeight.bold,
             fontSize: fontSize,
-            color: disable
-                ? AppColors.primary.withOpacity(0.4)
-                : AppColors.primary,
+            color: disable ? color.withOpacity(0.4) : color,
           ),
         ),
       ),

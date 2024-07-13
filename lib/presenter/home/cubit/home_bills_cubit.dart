@@ -182,7 +182,8 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
     try {
       emit(state.copyWith(status: BaseStateStatus.loading));
 
-      final bool isInverted = billSorting == state.billSorting;
+      final bool isInverted =
+          billSorting == state.billSorting && state.hasInvertedSorting;
 
       final updatedBills = await _getBillsUseCase(
         state.userId,
@@ -215,5 +216,14 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
         ),
       );
     }
+  }
+
+  void onMonthCange(DateTime newMonth) {
+    emit(
+      state.copyWith(
+        status: BaseStateStatus.success,
+        currentMonth: newMonth,
+      ),
+    );
   }
 }

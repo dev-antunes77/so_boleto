@@ -20,7 +20,7 @@ class PromptBillsCubit extends Cubit<PromptBillsState> with BaseCubit {
     promptBills.removeWhere(
       (element) => homeBills.any((bill) => bill.id == element.id),
     );
-    promptBills.shuffle();
+    promptBills.sort((a, b) => b.name.compareTo(a.name));
     emit(
       state.copyWith(
         status: BaseStateStatus.success,

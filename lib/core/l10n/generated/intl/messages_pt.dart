@@ -74,7 +74,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Remover das contas pagas"),
         "billFlowValueTitle":
             MessageLookupByLibrary.simpleMessage("Valor da conta"),
-        "categoryAutomobile": MessageLookupByLibrary.simpleMessage("Automóvel"),
+        "categoryAutomobile": MessageLookupByLibrary.simpleMessage("Veículo"),
+        "categoryAutomobileCar": MessageLookupByLibrary.simpleMessage("Carro"),
+        "categoryAutomobileMotorcycle":
+            MessageLookupByLibrary.simpleMessage("Moto"),
+        "categoryClothes": MessageLookupByLibrary.simpleMessage("Vestimenta"),
         "categoryCreditCard":
             MessageLookupByLibrary.simpleMessage("Cartão de crédito"),
         "categoryDebt": MessageLookupByLibrary.simpleMessage("Dívida"),
@@ -90,10 +94,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "categoryInternet": MessageLookupByLibrary.simpleMessage("Internet"),
         "categoryInvestment":
             MessageLookupByLibrary.simpleMessage("Investimento"),
+        "categoryMaintenance":
+            MessageLookupByLibrary.simpleMessage("Manutenção"),
         "categoryMiscellaneous":
             MessageLookupByLibrary.simpleMessage("Diversos"),
         "categoryRent": MessageLookupByLibrary.simpleMessage("Aluguel"),
-        "categoryTelephone": MessageLookupByLibrary.simpleMessage("telefone"),
+        "categoryTelephone": MessageLookupByLibrary.simpleMessage("Telefone"),
         "categoryTransportation":
             MessageLookupByLibrary.simpleMessage("Transporte"),
         "categoryTravel": MessageLookupByLibrary.simpleMessage("Viagem"),
@@ -180,6 +186,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "homeBillPaying": MessageLookupByLibrary.simpleMessage("Pagando..."),
         "homeTabAll": MessageLookupByLibrary.simpleMessage("Todas"),
         "homeTabDelayed": MessageLookupByLibrary.simpleMessage("Atrasadas"),
+        "homeTabFutureBills": MessageLookupByLibrary.simpleMessage("Futuras"),
         "homeTabPayed": MessageLookupByLibrary.simpleMessage("Pagas"),
         "loginEmail": MessageLookupByLibrary.simpleMessage("Email"),
         "loginHasAccountAlready":
@@ -190,6 +197,18 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ainda não tem conta? Cadastre-se  "),
         "loginPassword": MessageLookupByLibrary.simpleMessage("Senha"),
         "loginSurename": MessageLookupByLibrary.simpleMessage("Sobrenome"),
+        "monthApril": MessageLookupByLibrary.simpleMessage("Abril"),
+        "monthAugust": MessageLookupByLibrary.simpleMessage("Agosto"),
+        "monthDecember": MessageLookupByLibrary.simpleMessage("Dezembro"),
+        "monthFebruary": MessageLookupByLibrary.simpleMessage("Fevereiro"),
+        "monthJanuary": MessageLookupByLibrary.simpleMessage("Janeiro"),
+        "monthJuly": MessageLookupByLibrary.simpleMessage("Julho"),
+        "monthJune": MessageLookupByLibrary.simpleMessage("Junho"),
+        "monthMarch": MessageLookupByLibrary.simpleMessage("Março"),
+        "monthMay": MessageLookupByLibrary.simpleMessage("Maio"),
+        "monthNovember": MessageLookupByLibrary.simpleMessage("Novembro"),
+        "monthOctober": MessageLookupByLibrary.simpleMessage("Outubro"),
+        "monthSeptember": MessageLookupByLibrary.simpleMessage("Setembro"),
         "no": MessageLookupByLibrary.simpleMessage("Não"),
         "onboardingAgility": MessageLookupByLibrary.simpleMessage("Agilidade"),
         "onboardingAgilityText": MessageLookupByLibrary.simpleMessage(
@@ -286,7 +305,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(" Valor"),
         "prompBillHelthInsurance":
             MessageLookupByLibrary.simpleMessage("Plano de saúde"),
+        "prompBillMaintenance":
+            MessageLookupByLibrary.simpleMessage("Manutenção"),
         "prompBillMedicine": MessageLookupByLibrary.simpleMessage("Remédios"),
+        "prompBillRepairs": MessageLookupByLibrary.simpleMessage("Reparos"),
         "prompBillSchool": MessageLookupByLibrary.simpleMessage("Escola"),
         "promptBillEditionTitle": MessageLookupByLibrary.simpleMessage(
             "Selecione um dia para o vencimento e um valor para as contas prontas selecionadas"),
@@ -302,6 +324,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "responseHandlerNoneForTheseFilters":
             MessageLookupByLibrary.simpleMessage(
                 "Nenhuma conta com esses filtros."),
+        "responseHandlerNoneFutureBills": MessageLookupByLibrary.simpleMessage(
+            "Você não tem contas parceladas para frente."),
         "responseHandlerNonePayed":
             MessageLookupByLibrary.simpleMessage("Você não tem contas pagas."),
         "responseHandlerNoneRegistered": MessageLookupByLibrary.simpleMessage(
