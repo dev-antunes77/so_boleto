@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
@@ -8,7 +6,6 @@ import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/helpers/app_formatters.dart';
 import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
-import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/domain/models/enums/bill_status.dart';
@@ -45,8 +42,9 @@ class BillListTile extends StatelessWidget {
               vertical: AppThemeValues.spaceXXSmall,
             ),
             child: ListTile(
+              dense: true,
               contentPadding: const EdgeInsets.symmetric(
-                horizontal: AppThemeValues.spaceSmall,
+                horizontal: AppThemeValues.spaceXXSmall,
               ),
               horizontalTitleGap: AppThemeValues.spaceXSmall,
               leading: Row(
@@ -63,40 +61,30 @@ class BillListTile extends StatelessWidget {
                   ),
                 ],
               ),
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Flexible(
-                    flex: 7,
-                    child: Text(
-                      payedTag.isStample && bill.billStatus.isPayed
-                          ? bill.name.capitalize().breakLongStrings(
-                              length: bill.name.length, desiredLength: 15)
-                          : bill.name.capitalize(),
-                      style: context.textRobotoSubtitleSmall,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                  if (bill.description.isNotEmpty)
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: AppThemeValues.spaceXXSmall,
-                      ),
-                      child: Transform.rotate(
-                        angle: pi / 8.0,
-                        child: SvgAsset(
-                          svg: AppIcons.notebook,
-                          color: theme.selectedColors.primary,
-                          height: 20,
-                        ),
-                      ),
-                    ),
-                ],
+              title: Text(
+                payedTag.isStample && bill.billStatus.isPayed
+                    ? bill.name.capitalize().breakLongStrings(
+                          length: bill.name.length,
+                          desiredLength: 18,
+                        )
+                    : bill.name.capitalize(),
+                style: context.textRobotoSubtitleSmall,
+                maxLines: 1,
               ),
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  if (bill.description.isNotEmpty)
+                    Text(
+                      payedTag.isStample && bill.billStatus.isPayed
+                          ? bill.description.capitalize().breakLongStrings(
+                                length: bill.description.length,
+                                desiredLength: 22,
+                              )
+                          : bill.description.capitalize(),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   if (bill.billStatus != BillStatus.payed)
                     Text(
                       bill.dueDay.properDueDay(),
@@ -129,7 +117,7 @@ class BillListTile extends StatelessWidget {
                     ],
                   ),
                   const Padding(
-                    padding: EdgeInsets.all(AppThemeValues.spaceSmall),
+                    padding: EdgeInsets.all(AppThemeValues.spaceXXXSmall),
                     child: Icon(
                       Icons.arrow_forward_ios_rounded,
                       size: 16,

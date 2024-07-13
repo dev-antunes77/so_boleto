@@ -12,7 +12,7 @@ final class SetBillAsPaid {
   final HiveBillsDatabase _hiveBillsDatabase;
   final FirestoreRepository _firestoreRepository;
 
-  Future<void> call(BillModel bill) async {
+  Future<void> call(BillModel bill, DateTime date) async {
     try {
       final hasParcels = bill.totalParcels > 1;
       final parcelPaid = hasParcels ? bill.payedParcels + 1 : null;

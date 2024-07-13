@@ -8,7 +8,7 @@ class BillEditTile extends StatelessWidget {
     required this.icon,
     required this.label,
     required this.value,
-    required this.onPressed,
+    required this.onTap,
     required this.color,
     this.width,
   });
@@ -17,7 +17,7 @@ class BillEditTile extends StatelessWidget {
   final String label;
   final String value;
   final Color color;
-  final VoidCallback onPressed;
+  final VoidCallback onTap;
   final double? width;
 
   @override
@@ -25,6 +25,7 @@ class BillEditTile extends StatelessWidget {
     return ListTile(
       contentPadding: EdgeInsets.zero,
       minVerticalPadding: 0.0,
+      onTap: onTap,
       dense: true,
       leading: SvgAsset(
         svg: icon,
@@ -43,10 +44,11 @@ class BillEditTile extends StatelessWidget {
             ),
           ),
           const Flexible(
-              child: Padding(
-            padding: EdgeInsets.only(left: AppThemeValues.spaceXSmall),
-            child: Icon(Icons.edit_outlined, size: 16),
-          )),
+            child: Padding(
+              padding: EdgeInsets.only(left: AppThemeValues.spaceXSmall),
+              child: Icon(Icons.edit_outlined, size: 16),
+            ),
+          ),
         ],
       ),
     );

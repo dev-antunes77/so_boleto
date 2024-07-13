@@ -35,7 +35,8 @@ class HomeBillTab extends StatelessWidget {
     final payedTag =
         context.read<InitialCubit>().state.user?.payedTag ?? PayedTag.stample;
     return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(
+          decelerationRate: ScrollDecelerationRate.fast),
       child: ListView.separated(
         separatorBuilder: (context, index) =>
             LineSeparator.horizontal(noPadding: true),

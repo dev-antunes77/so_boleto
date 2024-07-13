@@ -60,5 +60,5 @@ class CurrentBillListTile extends StatelessWidget {
           DismissDirection direction, BuildContext context) =>
       direction == DismissDirection.endToStart
           ? AppDialogs.confirmDeleteBill(context, bill)
-          : context.read<HomeBillsCubit>().setBillAsPaid(bill);
+          : context.read<HomeBillsCubit>().setBillAsPaid(bill, DateTime.now());
 }

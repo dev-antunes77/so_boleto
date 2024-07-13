@@ -50,8 +50,9 @@ class LineSeparator extends StatelessWidget {
         color: color,
       );
 
-  factory LineSeparator.infiniteHorizon() => LineSeparator(
-        verticalPadding: AppThemeValues.spaceXXSmall,
+  factory LineSeparator.infiniteHorizon({double? verticalPadding}) =>
+      LineSeparator(
+        verticalPadding: verticalPadding ?? AppThemeValues.spaceXXSmall,
         horizontalPadding: 0.0,
         height: 0.5,
         width: double.infinity,

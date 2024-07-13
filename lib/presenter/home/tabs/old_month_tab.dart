@@ -6,6 +6,7 @@ import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
+import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/domain/models/enums/page_response_handler.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 import 'package:so_boleto/presenter/home/tabs/home_bill_tab.dart';
@@ -13,20 +14,13 @@ import 'package:so_boleto/presenter/home/tabs/home_bill_tab.dart';
 class OldMonthTab extends StatelessWidget {
   const OldMonthTab({
     super.key,
-    required this.oldMonth,
+    required this.thisMonthBills,
   });
 
-  final DateTime oldMonth;
+  final List<BillModel> thisMonthBills;
 
   @override
   Widget build(BuildContext context) {
-    final thisMonthBills = context
-        .read<HomeBillsCubit>()
-        .state
-        .allBills
-        .where((bill) => oldMonth.month > bill.createdAt.month)
-        .toList();
-
     return Column(
       children: [
         LineSeparator.horizontalLimitedThick(

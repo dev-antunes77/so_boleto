@@ -53,17 +53,21 @@ class _BillCheckSectionState extends State<BillCheckSection> {
                   color: color,
                   value: state.bill.name.capitalize(),
                   width: double.infinity,
-                  onPressed: () => _pushToEditionFlow(context, Routes.billName),
+                  onTap: () => _pushToEditionFlow(context, Routes.billName),
                 ),
-                LineSeparator.infiniteHorizon(),
+                LineSeparator.infiniteHorizon(
+                  verticalPadding: AppThemeValues.spaceXXXSmall,
+                ),
                 BillEditTile(
                   icon: AppIcons.description,
                   label: AppLocalizations.current.billFlowCheckDescription,
                   color: color,
                   value: state.bill.description.capitalize(),
-                  onPressed: () => _pushToEditionFlow(context, Routes.billName),
+                  onTap: () => _pushToEditionFlow(context, Routes.billName),
                 ),
-                LineSeparator.infiniteHorizon(),
+                LineSeparator.infiniteHorizon(
+                  verticalPadding: AppThemeValues.spaceXXXSmall,
+                ),
                 BillEditTile(
                   icon: AppIcons.parcels,
                   color: color,
@@ -73,37 +77,41 @@ class _BillCheckSectionState extends State<BillCheckSection> {
                   value: AppFormatters.parcelInfoFormatter(
                     state.bill.totalParcels,
                   ),
-                  onPressed: () =>
-                      _pushToEditionFlow(context, Routes.billParcels),
+                  onTap: () => _pushToEditionFlow(context, Routes.billParcels),
                 ),
-                LineSeparator.infiniteHorizon(),
+                LineSeparator.infiniteHorizon(
+                  verticalPadding: AppThemeValues.spaceXXXSmall,
+                ),
                 BillEditTile(
                   icon: AppIcons.calendar,
                   label: AppLocalizations.current.billFlowCheckDueDay,
                   color: color,
                   value: state.bill.dueDay.addLeadingZero(),
-                  onPressed: () =>
-                      _pushToEditionFlow(context, Routes.billDueDay),
+                  onTap: () => _pushToEditionFlow(context, Routes.billDueDay),
                 ),
-                LineSeparator.infiniteHorizon(),
+                LineSeparator.infiniteHorizon(
+                  verticalPadding: AppThemeValues.spaceXXXSmall,
+                ),
                 BillEditTile(
                   icon: AppIcons.value,
                   label: AppLocalizations.current.billFlowCheckValue,
                   color: color,
                   value: state.bill.value.toDouble().formatCurrency(),
-                  onPressed: () =>
-                      _pushToEditionFlow(context, Routes.billValue),
+                  onTap: () => _pushToEditionFlow(context, Routes.billValue),
                 ),
-                LineSeparator.infiniteHorizon(),
+                LineSeparator.infiniteHorizon(
+                  verticalPadding: AppThemeValues.spaceXXXSmall,
+                ),
                 BillEditTile(
                   icon: state.bill.category.getIconResponse,
                   label: AppLocalizations.current.billFlowCheckCategory,
                   color: color,
                   value: state.bill.category.getTextResponse,
-                  onPressed: () =>
-                      _pushToEditionFlow(context, Routes.billCategory),
+                  onTap: () => _pushToEditionFlow(context, Routes.billCategory),
                 ),
-                LineSeparator.infiniteHorizon(),
+                LineSeparator.infiniteHorizon(
+                  verticalPadding: AppThemeValues.spaceXXXSmall,
+                ),
                 AppThemeValues.spaceVerticalSmall,
                 Row(
                   children: [

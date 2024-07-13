@@ -4,12 +4,11 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:so_boleto/core/extensions/date_time_extensions.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/helpers/app_formatters.dart';
+import 'package:so_boleto/domain/models/bill_payment.dart';
 import 'package:so_boleto/domain/models/enums/bill_category.dart';
 import 'package:so_boleto/domain/models/enums/bill_status.dart';
 import 'package:so_boleto/domain/models/prompt_bill.dart';
 import 'package:so_boleto/infra/local_database/hive_bill_database/hive_bill_model.dart';
-
-part 'bill.g.dart';
 
 @JsonSerializable()
 class BillModel extends Equatable {
@@ -21,6 +20,7 @@ class BillModel extends Equatable {
     this.payedParcels = 0,
     this.dueDay = 0,
     this.userId = '',
+    this.billPayment = const [],
     String? id,
     BillCategory? category,
     BillStatus? billStatus,
@@ -30,11 +30,6 @@ class BillModel extends Equatable {
         category = category ?? BillCategory.miscellaneous,
         billStatus = billStatus ?? BillStatus.open;
 
-  factory BillModel.fromJson(Map<String, dynamic> json) =>
-      _$BillModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$BillModelToJson(this);
-
   Map<String, dynamic> toFirestore() => <String, dynamic>{
         'id': id,
         'userId': userId,
@@ -42,6 +37,7 @@ class BillModel extends Equatable {
         'description': description,
         'category': category.value,
         'billStatus': billStatus.value,
+        'billPayment': billPayment.map((e) => e.toMap()),
         'value': value,
         'totalParcels': totalParcels,
         'payedParcels': payedParcels,
@@ -62,6 +58,10 @@ class BillModel extends Equatable {
       value: data?['value'],
       payedParcels: data?['payedParcels'],
       totalParcels: data?['totalParcels'],
+      billPayment: (data?['billPayment'])
+          .map((e) => BillPayment.fromMap(e))
+          .cast<BillPayment>()
+          .toList(),
       dueDay: data?['dueDay'],
       userId: data?['userId'],
       createdAt: (data?['createdAt'] as String).stringToDateTime(),
@@ -91,6 +91,7 @@ class BillModel extends Equatable {
         billStatus: BillStatus.open,
         totalParcels: 0,
         payedParcels: 0,
+        billPayment: const [],
         value: promptBill.value,
         dueDay: promptBill.dueDay,
         createdAt: DateTime.now(),
@@ -105,6 +106,7 @@ class BillModel extends Equatable {
   final DateTime createdAt;
   final int dueDay;
   final BillStatus billStatus;
+  final List<BillPayment> billPayment;
   final int totalParcels;
   final int payedParcels;
 
@@ -120,6 +122,7 @@ class BillModel extends Equatable {
         value,
         createdAt,
         dueDay,
+        billPayment,
         billStatus,
         totalParcels,
         payedParcels,
@@ -135,6 +138,7 @@ class BillModel extends Equatable {
     DateTime? createdAt,
     BillStatus? billStatus,
     int? dueDay,
+    List<BillPayment>? billPayment,
     int? totalParcels,
     int? payedParcels,
   }) {
@@ -147,6 +151,7 @@ class BillModel extends Equatable {
       value: value ?? this.value,
       createdAt: createdAt ?? this.createdAt,
       billStatus: billStatus ?? this.billStatus,
+      billPayment: billPayment ?? this.billPayment,
       dueDay: dueDay ?? this.dueDay,
       totalParcels: totalParcels ?? this.totalParcels,
       payedParcels: payedParcels ?? this.payedParcels,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 
@@ -24,22 +25,30 @@ class MonthNavigator extends StatelessWidget {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(
-              onPressed: () => _previousMonth(context, month),
-              icon: const Icon(
-                Icons.arrow_back_ios_new_rounded,
-              ),
+            BlocBuilder<HomeBillsCubit, HomeBillsState>(
+              builder: (context, state) {
+                return IconButton(
+                  onPressed: state.getOldBills(month).isEmpty
+                      ? null
+                      : () => _previousMonth(context, month),
+                  icon: const Icon(
+                    Icons.arrow_back_ios_new_rounded,
+                  ),
+                );
+              },
             ),
             Text(
-              DateFormat('MMMM yyyy').format(month),
+              DateFormat('MMMM yyyy').format(month).capitalize(),
               style: context.textRobotoMediumToLarge,
             ),
-            if (month == months.last)
+            if (month.month == months.last.month)
               Row(
                 children: [
                   Text(
                     'Contas\nFuturas',
-                    style: context.textSmall,
+                    style:
+                        context.textSmall.copyWith(fontWeight: FontWeight.w500),
+                    textScaler: const TextScaler.linear(0.9),
                     textAlign: TextAlign.center,
                   ),
                   const Icon(

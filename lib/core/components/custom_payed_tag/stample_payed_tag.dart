@@ -17,11 +17,11 @@ class StamplePayedTag extends StatelessWidget {
     return showTag
         ? Positioned(
             top: AppThemeValues.spaceXXXSmall,
-            left: context.width * 0.55,
+            left: context.width * 0.65,
             child: Transform.rotate(
               angle: pi / 6.0,
               child: Transform.translate(
-                offset: const Offset(-10, 20),
+                offset: const Offset(-10, 30),
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(
@@ -33,7 +33,7 @@ class StamplePayedTag extends StatelessWidget {
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(AppThemeValues.spaceXXSmall),
+                    padding: const EdgeInsets.all(AppThemeValues.spaceXXXSmall),
                     child: Text(
                       AppLocalizations.current.payedTag,
                       style: context.textStamper.copyWith(

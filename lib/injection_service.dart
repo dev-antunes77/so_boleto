@@ -15,6 +15,7 @@ import 'package:so_boleto/domain/usecases/filter_bills_by_params.dart';
 import 'package:so_boleto/domain/usecases/get_bills.dart';
 import 'package:so_boleto/domain/usecases/get_image_from_camera.dart';
 import 'package:so_boleto/domain/usecases/get_image_from_gallery.dart';
+import 'package:so_boleto/domain/usecases/get_new_month_bills.dart';
 import 'package:so_boleto/domain/usecases/get_user_from_firebase.dart';
 import 'package:so_boleto/domain/usecases/get_user_from_storage.dart';
 import 'package:so_boleto/domain/usecases/set_bill_as_paid.dart';
@@ -166,6 +167,13 @@ abstract class InjectionService {
     );
 
     // Bill Usecase
+
+    _i.registerFactory(
+      () => GetNewMonthBills(
+        _i.get<FirestoreService>(),
+      ),
+    );
+
     _i.registerFactory(
       () => GetBills(
         _i.get<HiveBillsDatabase>(),
@@ -244,6 +252,7 @@ abstract class InjectionService {
 
     _i.registerFactory(
       () => HomeBillsCubit(
+        _i.get<GetNewMonthBills>(),
         _i.get<GetBills>(),
         _i.get<CreateBill>(),
         _i.get<SetBillAsPaid>(),
