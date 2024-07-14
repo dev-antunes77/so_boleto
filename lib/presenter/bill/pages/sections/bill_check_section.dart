@@ -27,12 +27,14 @@ class BillCheckSection extends StatefulWidget {
 
 class _BillCheckSectionState extends State<BillCheckSection> {
   late bool isBillPayed;
+  late final DateTime currentMonth;
   late final BillCubit cubit;
 
   @override
   void initState() {
     cubit = context.read<BillCubit>();
     isBillPayed = cubit.state.bill.isMonthPayed();
+    currentMonth = context.read<HomeBillsCubit>().state.currentMonth;
     super.initState();
   }
 
@@ -148,7 +150,7 @@ class _BillCheckSectionState extends State<BillCheckSection> {
   }
 
   void _onDone(BuildContext context, bool isEditionFlow) {
-    final bill = cubit.onBillPayed(isBillPayed);
+    final bill = cubit.onBillPayed(isBillPayed, currentMonth, isEditionFlow);
     isEditionFlow
         ? context.read<HomeBillsCubit>().editBill(bill)
         : context.read<HomeBillsCubit>().createBill(bill);

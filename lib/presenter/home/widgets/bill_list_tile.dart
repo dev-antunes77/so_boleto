@@ -30,10 +30,7 @@ class BillListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.read<ThemeCubit>().state;
-    final payedThisMonth = bill.billPayment
-        .firstWhere((e) => e.referredMonth.month == date.month)
-        .billStatus
-        .isPayed;
+    final payedThisMonth = bill.isMonthPayed(date: date);
     return DecoratedBox(
       decoration: BoxDecoration(
         color: payedThisMonth ? theme.selectedColors.cardBackground : null,
@@ -88,7 +85,12 @@ class BillListTile extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                  if (!payedThisMonth)
+                  if (payedThisMonth)
+                    Text(
+                      bill.getPaymentDate(date),
+                      style: context.textRobotoSubtitleTiny,
+                    )
+                  else
                     Text(
                       bill.dueDay.properDueDay(),
                       style: context.textRobotoSubtitleTiny,

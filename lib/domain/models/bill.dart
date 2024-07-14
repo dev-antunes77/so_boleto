@@ -114,35 +114,41 @@ class BillModel extends Equatable {
   /// When no date is provided, the fucntion will work on the current date
   /// If a date is provided, the function will work on the date provided
   bool isMonthPayed({DateTime? date}) =>
-      billPayment
-          .where((e) => e.referredMonth.month == (date ?? DateTime.now()).month)
-          .toList()
+      _paymentList(date)
           .firstWhereOrNull((e) => e.billStatus.isPayed)
           ?.billStatus
           .isPayed ??
       false;
 
+  List<BillPayment> _paymentList(DateTime? date) => billPayment
+      .where((e) => e.referredMonth.month == (date ?? DateTime.now()).month)
+      .toList();
+
   bool isMonthDelayed({DateTime? date}) =>
-      billPayment
-          .where((e) => e.referredMonth.month == (date ?? DateTime.now()).month)
-          .toList()
+      _paymentList(date)
           .firstWhereOrNull((e) => e.billStatus.isDelayed)
           ?.billStatus
           .isDelayed ??
       false;
 
+  String getPaymentDate(DateTime? date) =>
+      _paymentList(date)
+          .firstWhereOrNull((e) => e.billStatus.isPayed)
+          ?.payedAt ??
+      '';
+
   void updateBillPayment(DateTime date, BillStatus newStatus) {
-    var newPayment = BillPayment();
-    int index = -1;
     for (var payment in billPayment) {
       if (payment.referredMonth.month == date.month) {
-        newPayment = payment.copyWith(
-            billStatus: newStatus, payedAt: DateTime.now().dateTimeToString());
-        index = billPayment.indexOf(payment);
+        var newPayment = payment.copyWith(
+          billStatus: newStatus,
+          payedAt:
+              newStatus.isPayed ? DateTime.now().getFormattedCreatedAt() : '',
+        );
+        billPayment.insert(billPayment.indexOf(payment), newPayment);
+        billPayment.remove(newPayment);
       }
     }
-    billPayment.removeAt(index);
-    billPayment.insert(index, newPayment);
   }
 
   @override

@@ -70,7 +70,7 @@ class BillCubit extends Cubit<BillState> with BaseCubit {
     );
   }
 
-  BillModel onBillPayed(bool payed) {
+  BillModel onBillPayed(bool payed, DateTime currentMonth, bool isEditionFlow) {
     var newStatus = BillStatus.payed;
     if (!payed) {
       newStatus = state.bill.dueDay < DateTime.now().day
@@ -78,8 +78,10 @@ class BillCubit extends Cubit<BillState> with BaseCubit {
           : BillStatus.open;
     }
     //TODO remove the teste date
-    state.bill.updateBillPayment(
-        DateTime(DateTime.now().year, DateTime.april), newStatus);
+    final date = isEditionFlow
+        ? currentMonth
+        : DateTime(DateTime.now().year, DateTime.april);
+    state.bill.updateBillPayment(date, newStatus);
     final newPayments = state.bill.billPayment;
     return state.bill.copyWith(billPayment: newPayments);
   }
