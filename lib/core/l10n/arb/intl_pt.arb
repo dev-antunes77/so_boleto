@@ -24,8 +24,6 @@
     "billFlowCheckValue":"Valor:",
     "billFlowCheckCategory":"Categoria",
     "categoryAutomobile":"Veículo",
-    "categoryAutomobileCar":"Carro",
-    "categoryAutomobileMotorcycle":"Moto",
     "categoryCreditCard":"Cartão de crédito",
     "categoryClothes":"Vestimenta",
     "categoryDebt":"Dívida",
@@ -211,6 +209,14 @@
     "onboardingLetsGo":"Vamos lá?",
     "onboardingStart":"Começar",
     "payedTag":"PAGA",
+    "payedAt":"Paga em {date}",
+    "@payedAt" :{
+        "placeholders":{
+            "date":{
+                "type": "String"
+            }
+        }
+    },
     "parcels":"Parcelas",
     "profile" : "Perfil",
     "profileSeePicture":"Ver foto",

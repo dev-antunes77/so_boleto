@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'dart:core';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:so_boleto/core/constants/app_constants.dart';
 import 'package:so_boleto/domain/models/enums/bill_category.dart';
 import 'package:so_boleto/domain/models/enums/bill_sorting.dart';
 import 'package:so_boleto/domain/models/enums/bill_status.dart';
@@ -48,4 +50,8 @@ extension StringExtensions on String {
     int blue = intValue & 0xFF;
     return Color.fromARGB(alpha, red, green, blue);
   }
+
+  String removeDiacritics() => split('')
+      .map((char) => AppConstants.diacriticsMap[char.toUpperCase()] ?? char)
+      .join('');
 }

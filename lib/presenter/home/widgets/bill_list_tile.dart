@@ -4,6 +4,7 @@ import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
 import 'package:so_boleto/core/extensions/num_extensions.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/helpers/app_formatters.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
@@ -87,7 +88,8 @@ class BillListTile extends StatelessWidget {
                     ),
                   if (payedThisMonth)
                     Text(
-                      bill.getPaymentDate(date),
+                      AppLocalizations.current
+                          .payedAt(bill.getPaymentDate(date)),
                       style: context.textRobotoSubtitleTiny,
                     )
                   else

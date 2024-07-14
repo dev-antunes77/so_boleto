@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:so_boleto/core/components/buttons/pill_button.dart';
+import 'package:so_boleto/core/components/buttons/rectangular_button.dart';
 import 'package:so_boleto/core/components/custom_safe_area/custom_safe_area.dart';
 import 'package:so_boleto/core/components/custom_status_handler/custom_status_handler.dart';
-import 'package:so_boleto/core/components/expanded_space/expanded_space.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
 import 'package:so_boleto/core/components/thin_line_separator/thin_line_separator.dart';
 import 'package:so_boleto/core/l10n/generated/l10n.dart';
@@ -32,7 +31,7 @@ class _PromptBillsPageState extends State<PromptBillsPage> {
   @override
   void initState() {
     cubit = context.read<PromptBillsCubit>();
-    final homeBills = context.read<HomeBillsCubit>().state.bills;
+    final homeBills = context.read<HomeBillsCubit>().state.allBills;
     cubit.onInit(homeBills);
     colors = context.read<ThemeCubit>().state.selectedColors;
     super.initState();
@@ -54,131 +53,145 @@ class _PromptBillsPageState extends State<PromptBillsPage> {
                 PageResponseHandler.noMorePromptBills,
               );
             }
-            return Column(
+            return Stack(
               children: [
-                AppThemeValues.spaceVerticalLarge,
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppThemeValues.spaceLarge,
-                  ),
-                  child: Text(
-                    AppLocalizations.current.promptBillTitle,
-                    textAlign: TextAlign.center,
-                    style: context.textMedium,
-                  ),
-                ),
-                LineSeparator.horizontal(),
                 SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppThemeValues.spaceSmall,
-                    ),
-                    child: GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        childAspectRatio: 4 / 3.5,
-                        crossAxisSpacing: AppThemeValues.spaceSmall,
-                        mainAxisSpacing: AppThemeValues.spaceSmall,
+                  physics: const BouncingScrollPhysics(
+                      decelerationRate: ScrollDecelerationRate.fast),
+                  child: Column(
+                    children: [
+                      AppThemeValues.spaceVerticalLarge,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppThemeValues.spaceLarge,
+                        ),
+                        child: Text(
+                          AppLocalizations.current.promptBillTitle,
+                          textAlign: TextAlign.center,
+                          style: context.textMedium,
+                        ),
                       ),
-                      itemCount: state.promptBills.length,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        final bill = state.promptBills[index];
-                        return GestureDetector(
-                          onTap: () => cubit.onCardClicked(bill),
-                          child: Stack(
-                            children: [
-                              Card(
-                                child: DecoratedBox(
-                                  decoration: BoxDecoration(
-                                    border: bill.isSelected
-                                        ? Border.all(
-                                            width: AppThemeValues.spaceXXSmall,
-                                            color: colors.primary,
-                                          )
-                                        : null,
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(
-                                        AppThemeValues.spaceXXSmall),
-                                    child: Center(
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          SvgAsset(
-                                            svg: bill.category.getIconResponse,
-                                            height: bill.isSelected ? 40 : 32,
-                                            color: bill.isSelected
-                                                ? colors.primary
-                                                : AppColors.greyMediumLight,
-                                          ),
-                                          AppThemeValues.spaceVerticalTiny,
-                                          FittedBox(
-                                            fit: BoxFit.contain,
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                horizontal:
-                                                    AppThemeValues.spaceTiny,
+                      LineSeparator.horizontal(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppThemeValues.spaceSmall,
+                        ),
+                        child: GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            childAspectRatio: 4 / 3.5,
+                            crossAxisSpacing: AppThemeValues.spaceSmall,
+                            mainAxisSpacing: AppThemeValues.spaceSmall,
+                          ),
+                          itemCount: state.promptBills.length,
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            final bill = state.promptBills[index];
+                            return GestureDetector(
+                              onTap: () => cubit.onCardClicked(bill),
+                              child: Stack(
+                                children: [
+                                  Card(
+                                    child: DecoratedBox(
+                                      decoration: BoxDecoration(
+                                        border: bill.isSelected
+                                            ? Border.all(
+                                                width:
+                                                    AppThemeValues.spaceXXSmall,
+                                                color: colors.primary,
+                                              )
+                                            : null,
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(
+                                            AppThemeValues.spaceXXSmall),
+                                        child: Center(
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              SvgAsset(
+                                                svg: bill
+                                                    .category.getIconResponse,
+                                                height:
+                                                    bill.isSelected ? 40 : 32,
+                                                color: bill.isSelected
+                                                    ? colors.primary
+                                                    : AppColors.greyMediumLight,
                                               ),
-                                              child: Text(
-                                                bill.name,
-                                                style: context
-                                                    .textRobotoSubtitleSmall
-                                                    .copyWith(
-                                                  color: bill.isSelected
-                                                      ? colors.text
-                                                      : null,
+                                              AppThemeValues.spaceVerticalTiny,
+                                              FittedBox(
+                                                fit: BoxFit.contain,
+                                                child: Padding(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                    horizontal: AppThemeValues
+                                                        .spaceTiny,
+                                                  ),
+                                                  child: Text(
+                                                    bill.name,
+                                                    style: context
+                                                        .textRobotoSubtitleXSmall
+                                                        .copyWith(
+                                                      color: bill.isSelected
+                                                          ? colors.text
+                                                          : null,
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
-                                            ),
+                                            ],
                                           ),
-                                        ],
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
+                                  if (bill.isSelected) ...[
+                                    CardEdgeDecoration(
+                                      color: colors.primary,
+                                      alignment: Alignment.topLeft,
+                                      bottomRightRadius: true,
+                                    ),
+                                    CardEdgeDecoration(
+                                      color: colors.primary,
+                                      alignment: Alignment.topRight,
+                                      bottomLeftRadius: true,
+                                    ),
+                                    CardEdgeDecoration(
+                                      color: colors.primary,
+                                      alignment: Alignment.bottomLeft,
+                                      topRightRadius: true,
+                                    ),
+                                    CardEdgeDecoration(
+                                      color: colors.primary,
+                                      alignment: Alignment.bottomRight,
+                                      topLefttRadius: true,
+                                    ),
+                                  ],
+                                ],
                               ),
-                              if (bill.isSelected) ...[
-                                CardEdgeDecoration(
-                                  color: colors.primary,
-                                  alignment: Alignment.topLeft,
-                                  bottomRightRadius: true,
-                                ),
-                                CardEdgeDecoration(
-                                  color: colors.primary,
-                                  alignment: Alignment.topRight,
-                                  bottomLeftRadius: true,
-                                ),
-                                CardEdgeDecoration(
-                                  color: colors.primary,
-                                  alignment: Alignment.bottomLeft,
-                                  topRightRadius: true,
-                                ),
-                                CardEdgeDecoration(
-                                  color: colors.primary,
-                                  alignment: Alignment.bottomRight,
-                                  topLefttRadius: true,
-                                ),
-                              ],
-                            ],
-                          ),
-                        );
-                      },
-                    ),
+                            );
+                          },
+                        ),
+                      ),
+                      LineSeparator.horizontal(),
+                      AppThemeValues.spaceVerticalImense,
+                    ],
                   ),
                 ),
-                LineSeparator.horizontal(),
-                const ExpandedSpace(),
-                PillButton(
-                  onTap: () => context.pushTo(Routes.promptBillsEdition),
-                  isDisabled: !state.hasAnySelected,
-                  child: Text(AppLocalizations.current.continueButton),
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: RectangularButton(
+                    onTap: () => context.pushTo(Routes.promptBillsEdition),
+                    isValid: state.hasAnySelected,
+                    label: AppLocalizations.current.continueButton,
+                  ),
                 ),
-                AppThemeValues.spaceVerticalMedium,
               ],
             );
           },
@@ -186,11 +199,4 @@ class _PromptBillsPageState extends State<PromptBillsPage> {
       ),
     );
   }
-
-  // void _onAddTapped() {
-  //   context.read<HomeBillsCubit>().addPrompBills(
-  //         cubit.onAddPrompBills(),
-  //       );
-  //   context.navigateTo(Routes.home);
-  // }
 }

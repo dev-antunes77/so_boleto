@@ -197,12 +197,13 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
       final bool isInverted =
           billSorting == state.billSorting && state.hasInvertedSorting;
 
+      await onUpdate();
+
       final updatedBills = await _getBillsUseCase(
         state.userId,
         billSorting,
         isInverted: isInverted,
       );
-      await onUpdate();
       emit(
         state.copyWith(
           status: BaseStateStatus.success,

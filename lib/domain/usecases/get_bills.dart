@@ -1,4 +1,5 @@
 import 'package:so_boleto/core/errors/app_errors.dart';
+import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/utils/log_utils.dart';
 import 'package:so_boleto/domain/models/bill.dart';
@@ -35,8 +36,16 @@ final class GetBills {
     List<BillModel> sortedBills = [];
     if (billSorting.byName) {
       isInverted
-          ? bills.sort((a, b) => b.name.compareTo(a.name))
-          : bills.sort((a, b) => a.name.compareTo(b.name));
+          ? bills.sort(
+              (a, b) => b.name
+                  .removeDiacritics()
+                  .compareTo(a.name.removeDiacritics()),
+            )
+          : bills.sort(
+              (a, b) => a.name
+                  .removeDiacritics()
+                  .compareTo(b.name.removeDiacritics()),
+            );
       sortedBills = bills;
     } else if (billSorting.byDueDay) {
       isInverted

@@ -63,8 +63,15 @@ class HomeBillsState extends BaseState with EquatableMixin {
   List<BillModel> get parceledBills =>
       allBills.where((element) => element.totalParcels > 1).toList();
 
-  List<BillModel> getOldBills(DateTime oldMonth) =>
-      allBills.where((bill) => oldMonth.month > bill.createdAt.month).toList();
+  List<BillModel> getOldBills(DateTime oldMonth) {
+    List<BillModel> bills = [];
+    for (var bill in allBills) {
+      if (bill.checkReferredMonth(oldMonth)) {
+        bills.add(bill);
+      }
+    }
+    return bills;
+  }
 
   List<BillModel> inFilteringCase(List<BillModel> bills) =>
       querySearch.isNotEmpty ? bills.filterBills(querySearch) : bills;

@@ -38,6 +38,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m8(payedParcels, parcels) => "${payedParcels} de ${parcels}";
 
+  static String m9(date) => "Paga em ${date}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "appNameHalf1": MessageLookupByLibrary.simpleMessage("Só"),
@@ -75,9 +77,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "billFlowValueTitle":
             MessageLookupByLibrary.simpleMessage("Valor da conta"),
         "categoryAutomobile": MessageLookupByLibrary.simpleMessage("Veículo"),
-        "categoryAutomobileCar": MessageLookupByLibrary.simpleMessage("Carro"),
-        "categoryAutomobileMotorcycle":
-            MessageLookupByLibrary.simpleMessage("Moto"),
         "categoryClothes": MessageLookupByLibrary.simpleMessage("Vestimenta"),
         "categoryCreditCard":
             MessageLookupByLibrary.simpleMessage("Cartão de crédito"),
@@ -235,6 +234,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "onboardingWelcomeText": MessageLookupByLibrary.simpleMessage(
             "Só Boleto vai ser o seu assitente pessoal de contas daqui em diante, ok?\n\nDeixa com a gente."),
         "parcels": MessageLookupByLibrary.simpleMessage("Parcelas"),
+        "payedAt": m9,
         "payedTag": MessageLookupByLibrary.simpleMessage("PAGA"),
         "profile": MessageLookupByLibrary.simpleMessage("Perfil"),
         "profileAccess": MessageLookupByLibrary.simpleMessage(

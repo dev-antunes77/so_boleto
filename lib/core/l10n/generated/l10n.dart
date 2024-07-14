@@ -300,26 +300,6 @@ class AppLocalizations {
     );
   }
 
-  /// `Carro`
-  String get categoryAutomobileCar {
-    return Intl.message(
-      'Carro',
-      name: 'categoryAutomobileCar',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Moto`
-  String get categoryAutomobileMotorcycle {
-    return Intl.message(
-      'Moto',
-      name: 'categoryAutomobileMotorcycle',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Cartão de crédito`
   String get categoryCreditCard {
     return Intl.message(
@@ -1437,6 +1417,16 @@ class AppLocalizations {
       name: 'payedTag',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Paga em {date}`
+  String payedAt(String date) {
+    return Intl.message(
+      'Paga em $date',
+      name: 'payedAt',
+      desc: '',
+      args: [date],
     );
   }
 

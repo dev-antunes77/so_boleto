@@ -18,7 +18,7 @@ abstract final class PromptBillData {
     ),
     PromptBill(
       id: '00000000003',
-      name: AppLocalizations.current.categoryAutomobileCar,
+      name: AppLocalizations.current.categoryAutomobile,
       category: BillCategory.automobile,
       isSelected: false,
     ),
@@ -96,18 +96,12 @@ abstract final class PromptBillData {
     ),
     PromptBill(
       id: '00000000016',
-      name: AppLocalizations.current.categoryAutomobileMotorcycle,
-      category: BillCategory.automobile,
-      isSelected: false,
-    ),
-    PromptBill(
-      id: '00000000017',
       name: AppLocalizations.current.prompBillMaintenance,
       category: BillCategory.maintenance,
       isSelected: false,
     ),
     PromptBill(
-      id: '00000000018',
+      id: '00000000017',
       name: AppLocalizations.current.prompBillRepairs,
       category: BillCategory.maintenance,
       isSelected: false,

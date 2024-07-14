@@ -91,7 +91,7 @@ class BillModel extends Equatable {
         category: promptBill.category,
         totalParcels: 0,
         payedParcels: 0,
-        billPayment: const [],
+        billPayment: [BillPayment()],
         value: promptBill.value,
         dueDay: promptBill.dueDay,
         createdAt: DateTime.now(),
@@ -131,6 +131,9 @@ class BillModel extends Equatable {
           .isDelayed ??
       false;
 
+  bool checkReferredMonth(DateTime date) =>
+      billPayment.any((e) => e.referredMonth.month == date.month);
+
   String getPaymentDate(DateTime? date) =>
       _paymentList(date)
           .firstWhereOrNull((e) => e.billStatus.isPayed)
@@ -146,7 +149,7 @@ class BillModel extends Equatable {
               newStatus.isPayed ? DateTime.now().getFormattedCreatedAt() : '',
         );
         billPayment.insert(billPayment.indexOf(payment), newPayment);
-        billPayment.remove(newPayment);
+        billPayment.remove(payment);
       }
     }
   }

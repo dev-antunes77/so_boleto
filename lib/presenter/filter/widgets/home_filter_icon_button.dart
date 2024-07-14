@@ -53,6 +53,6 @@ class HomeFilterIconButton extends StatelessWidget {
 
   void _onFilterPressed(BuildContext context) {
     showFilterBottomSheet(context);
-    context.read<HomeBillsCubit>().setSearchByNameValue('');
+    // context.read<HomeBillsCubit>().setSearchByNameValue('');
   }
 }

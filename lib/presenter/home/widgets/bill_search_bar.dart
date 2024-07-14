@@ -12,25 +12,34 @@ import 'package:so_boleto/core/theme/settings/theme_colors.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 
 class BillSearchBar extends StatefulWidget {
-  const BillSearchBar(this.themeColors, {super.key});
+  const BillSearchBar({
+    super.key,
+    required this.isExpanded,
+    required this.themeColors,
+    required this.onExpand,
+    required this.onCloseSearch,
+  });
+
+  final bool isExpanded;
+  final void Function() onExpand;
+  final void Function() onCloseSearch;
   final ThemeColors themeColors;
 
   @override
-  State<BillSearchBar> createState() => _SearchBarAnimationState();
+  State<BillSearchBar> createState() => _BillSearchBarState();
 }
 
-class _SearchBarAnimationState extends State<BillSearchBar> {
-  bool isExpanded = false;
+class _BillSearchBarState extends State<BillSearchBar> {
   TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      duration: const Duration(milliseconds: 500),
-      width: isExpanded ? context.width * 0.65 : 36,
+      duration: const Duration(milliseconds: 350),
+      width: widget.isExpanded ? context.width * 0.7 : 36,
       height: 42,
       child: TextField(
-        onTap: () => setState(() => isExpanded = true),
+        onTap: widget.onExpand,
         cursorHeight: 25,
         maxLines: 1,
         style: context.textMedium,
@@ -42,14 +51,13 @@ class _SearchBarAnimationState extends State<BillSearchBar> {
             height: 28,
             color: widget.themeColors.icon,
           ),
-          suffixIcon: isExpanded
+          suffixIcon: widget.isExpanded
               ? AppBarButton(
                   onTap: () {
                     context.read<HomeBillsCubit>().setSearchByNameValue('');
                     FocusScope.of(context).unfocus();
                     controller.text = '';
-                    isExpanded = false;
-                    setState(() {});
+                    widget.onCloseSearch();
                   },
                   label: AppLocalizations.current.close,
                   colors: context.read<ThemeCubit>().state.selectedColors,
