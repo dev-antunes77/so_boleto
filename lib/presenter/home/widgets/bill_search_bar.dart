@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/buttons/app_bar_button.dart';
 import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
 import 'package:so_boleto/core/l10n/generated/l10n.dart';
-import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
@@ -60,7 +59,7 @@ class _BillSearchBarState extends State<BillSearchBar> {
                     widget.onCloseSearch();
                   },
                   label: AppLocalizations.current.close,
-                  colors: context.read<ThemeCubit>().state.selectedColors,
+                  color: widget.themeColors.tag,
                 )
               : const SizedBox.shrink(),
           suffixIconConstraints: const BoxConstraints.tightFor(height: 22),

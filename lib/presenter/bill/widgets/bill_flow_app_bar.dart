@@ -52,7 +52,7 @@ class _BillFlowAppBarState extends State<BillFlowAppBar> {
             padding: const EdgeInsets.only(right: AppThemeValues.spaceSmall),
             child: AppBarButton(
               label: AppLocalizations.current.close,
-              colors: context.read<ThemeCubit>().state.selectedColors,
+              color: context.read<ThemeCubit>().state.selectedColors.tag,
               onTap: () => AppDialogs.leaveBillCreation(context),
             ),
           ),

@@ -83,10 +83,10 @@ class _FilterPageState extends State<FilterPage> {
                           context.pop(true);
                           FocusScope.of(context).unfocus();
                         },
-                        child: const CircleAvatar(
+                        child: CircleAvatar(
                           radius: AppThemeValues.spaceMedium,
-                          backgroundColor: AppColors.greyLight,
-                          child: SvgAsset(
+                          backgroundColor: themeColors.cardBackground,
+                          child: const SvgAsset(
                             svg: AppIcons.close,
                           ),
                         ),
