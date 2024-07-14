@@ -15,4 +15,6 @@ enum BillStatus {
   }
 
   bool get isPayed => this == BillStatus.payed;
+
+  bool get isDelayed => this == BillStatus.delayed;
 }

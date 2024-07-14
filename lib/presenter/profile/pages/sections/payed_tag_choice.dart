@@ -6,6 +6,7 @@ import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/domain/models/bill.dart';
+import 'package:so_boleto/domain/models/bill_payment.dart';
 import 'package:so_boleto/domain/models/enums/bill_status.dart';
 import 'package:so_boleto/domain/models/enums/payed_tag.dart';
 import 'package:so_boleto/presenter/home/widgets/current_bill_list_tile.dart';
@@ -17,11 +18,10 @@ class PayedTagChoice extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tagChoiceBill = BillModel(
-      name: AppLocalizations.current.profilePayedTagExample,
-      value: 0,
-      userId: '',
-      billStatus: BillStatus.payed,
-    );
+        name: AppLocalizations.current.profilePayedTagExample,
+        value: 0,
+        userId: '',
+        billPayment: [BillPayment(billStatus: BillStatus.payed)]);
 
     List<PaymentTagChoiceTile> paymentTagOptions = [
       PaymentTagChoiceTile(
@@ -129,7 +129,7 @@ class PaymentTagChoiceTile extends StatelessWidget {
                   tagChoiceBill,
                   payedTag: tag,
                   payedTagSelector: PayedTagSelector(
-                    tagChoiceBill.billStatus.isPayed,
+                    tagChoiceBill.billPayment.first.billStatus.isPayed,
                     payedTag: tag,
                   ),
                   isTagPreferenceScreen: true,

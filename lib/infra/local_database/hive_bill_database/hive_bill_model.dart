@@ -12,7 +12,6 @@ final class HiveBillModel with HiveObjectMixin {
     required this.name,
     required this.description,
     required this.category,
-    required this.billStatus,
     required this.totalParcels,
     required this.payedParcels,
     required this.value,
@@ -25,7 +24,6 @@ final class HiveBillModel with HiveObjectMixin {
         name: bill.name,
         description: bill.description,
         category: bill.category.value,
-        billStatus: bill.billStatus.value,
         totalParcels: bill.totalParcels,
         payedParcels: bill.payedParcels,
         value: bill.value,
@@ -49,20 +47,17 @@ final class HiveBillModel with HiveObjectMixin {
   String category;
 
   @HiveField(5)
-  String billStatus;
-
-  @HiveField(7)
   int totalParcels;
 
-  @HiveField(8)
+  @HiveField(6)
   int payedParcels;
 
-  @HiveField(9)
+  @HiveField(7)
   int value;
 
-  @HiveField(10)
+  @HiveField(8)
   int dueDay;
 
-  @HiveField(11)
+  @HiveField(9)
   DateTime createdAt;
 }

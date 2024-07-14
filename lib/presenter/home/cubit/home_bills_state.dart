@@ -55,11 +55,10 @@ class HomeBillsState extends BaseState with EquatableMixin {
       : bills;
 
   List<BillModel> get payedBills =>
-      allBills.where((element) => element.billStatus.isPayed).toList();
+      allBills.where((element) => element.isMonthPayed()).toList();
 
-  List<BillModel> get delayedBills => allBills
-      .where((element) => element.billStatus == BillStatus.delayed)
-      .toList();
+  List<BillModel> get delayedBills =>
+      allBills.where((element) => element.isMonthDelayed()).toList();
 
   List<BillModel> get parceledBills =>
       allBills.where((element) => element.totalParcels > 1).toList();
@@ -73,8 +72,10 @@ class HomeBillsState extends BaseState with EquatableMixin {
   int get totalExpensesPayed {
     int total = 0;
     for (var bill in allBills) {
-      if (bill.billStatus.isPayed) {
-        total += bill.value;
+      for (var payment in bill.billPayment) {
+        if (payment.billStatus.isPayed) {
+          total += bill.value;
+        }
       }
     }
     return total;
@@ -83,9 +84,11 @@ class HomeBillsState extends BaseState with EquatableMixin {
   int get totalExpensesUnpayed {
     int total = 0;
     for (var bill in allBills) {
-      if (bill.billStatus == BillStatus.open ||
-          bill.billStatus == BillStatus.delayed) {
-        total += bill.value;
+      for (var payment in bill.billPayment) {
+        if (payment.billStatus == BillStatus.open ||
+            payment.billStatus == BillStatus.delayed) {
+          total += bill.value;
+        }
       }
     }
     return total;

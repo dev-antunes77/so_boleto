@@ -73,6 +73,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   final oldBills = cubit.state.getOldBills(_months[index]);
                   return OldMonthTab(
                     thisMonthBills: oldBills,
+                    month: _months[index],
                   );
                 },
               ),

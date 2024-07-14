@@ -16,8 +16,8 @@ final class SetBillAsPaid {
     try {
       final hasParcels = bill.totalParcels > 1;
       final parcelPaid = hasParcels ? bill.payedParcels + 1 : null;
-      final paidBill =
-          bill.copyWith(billStatus: BillStatus.payed, payedParcels: parcelPaid);
+      bill.updateBillPayment(date, BillStatus.payed);
+      final paidBill = bill.copyWith(payedParcels: parcelPaid);
       await _firestoreRepository.editBill(paidBill);
     } on AppError catch (error, trace) {
       Log.error(error, trace, 'Error executing $runtimeType: ${error.message}');

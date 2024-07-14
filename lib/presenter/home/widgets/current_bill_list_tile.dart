@@ -36,7 +36,7 @@ class CurrentBillListTile extends StatelessWidget {
             },
       child: Dismissible(
         key: Key(bill.id),
-        direction: bill.billStatus.isPayed
+        direction: bill.isMonthPayed()
             ? DismissDirection.endToStart
             : DismissDirection.horizontal,
         confirmDismiss: isTagPreferenceScreen
@@ -51,6 +51,7 @@ class CurrentBillListTile extends StatelessWidget {
           payedTag: payedTag,
           payedTagSelector: payedTagSelector,
           isTagPreferenceScreen: isTagPreferenceScreen,
+          date: DateTime.now(),
         ),
       ),
     );

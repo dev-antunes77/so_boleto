@@ -77,7 +77,11 @@ class BillCubit extends Cubit<BillState> with BaseCubit {
           ? BillStatus.delayed
           : BillStatus.open;
     }
-    return state.bill.copyWith(billStatus: newStatus);
+    //TODO remove the teste date
+    state.bill.updateBillPayment(
+        DateTime(DateTime.now().year, DateTime.april), newStatus);
+    final newPayments = state.bill.billPayment;
+    return state.bill.copyWith(billPayment: newPayments);
   }
 
   void initiateEditionFlow({BillModel? bill}) =>

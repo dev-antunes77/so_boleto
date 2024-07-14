@@ -32,7 +32,7 @@ class _BillCheckSectionState extends State<BillCheckSection> {
   @override
   void initState() {
     cubit = context.read<BillCubit>();
-    isBillPayed = cubit.state.bill.billStatus.isPayed;
+    isBillPayed = cubit.state.bill.isMonthPayed();
     super.initState();
   }
 

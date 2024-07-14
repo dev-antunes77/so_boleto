@@ -8,7 +8,6 @@ import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/domain/models/bill.dart';
-import 'package:so_boleto/domain/models/enums/bill_status.dart';
 import 'package:so_boleto/domain/models/enums/payed_tag.dart';
 
 class BillListTile extends StatelessWidget {
@@ -18,22 +17,26 @@ class BillListTile extends StatelessWidget {
     required this.payedTagSelector,
     this.isTagPreferenceScreen = false,
     required this.payedTag,
+    required this.date,
   });
 
   final BillModel bill;
   final Widget payedTagSelector;
   final PayedTag payedTag;
+  final DateTime date;
 
   final bool isTagPreferenceScreen;
 
   @override
   Widget build(BuildContext context) {
     final theme = context.read<ThemeCubit>().state;
+    final payedThisMonth = bill.billPayment
+        .firstWhere((e) => e.referredMonth.month == date.month)
+        .billStatus
+        .isPayed;
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: bill.billStatus.isPayed
-            ? theme.selectedColors.cardBackground
-            : null,
+        color: payedThisMonth ? theme.selectedColors.cardBackground : null,
       ),
       child: Stack(
         children: [
@@ -62,7 +65,7 @@ class BillListTile extends StatelessWidget {
                 ],
               ),
               title: Text(
-                payedTag.isStample && bill.billStatus.isPayed
+                payedTag.isStample && payedThisMonth
                     ? bill.name.capitalize().breakLongStrings(
                           length: bill.name.length,
                           desiredLength: 18,
@@ -76,7 +79,7 @@ class BillListTile extends StatelessWidget {
                 children: [
                   if (bill.description.isNotEmpty)
                     Text(
-                      payedTag.isStample && bill.billStatus.isPayed
+                      payedTag.isStample && payedThisMonth
                           ? bill.description.capitalize().breakLongStrings(
                                 length: bill.description.length,
                                 desiredLength: 22,
@@ -85,7 +88,7 @@ class BillListTile extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                  if (bill.billStatus != BillStatus.payed)
+                  if (!payedThisMonth)
                     Text(
                       bill.dueDay.properDueDay(),
                       style: context.textRobotoSubtitleTiny,

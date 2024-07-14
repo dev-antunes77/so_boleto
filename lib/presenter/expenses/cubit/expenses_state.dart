@@ -8,13 +8,16 @@ class ExpensesState extends BaseState with EquatableMixin {
     int? totalExpenses,
     int? totalExpensesLast3Months,
     int? totalExpensesLast6Months,
+    int? totalExpensesLast9Months,
   })  : totalExpenses = totalExpenses ?? 0,
         totalExpensesLast3Months = totalExpensesLast3Months ?? 0,
-        totalExpensesLast6Months = totalExpensesLast6Months ?? 0;
+        totalExpensesLast6Months = totalExpensesLast6Months ?? 0,
+        totalExpensesLast9Months = totalExpensesLast9Months ?? 0;
 
   final int totalExpenses;
   final int totalExpensesLast3Months;
   final int totalExpensesLast6Months;
+  final int totalExpensesLast9Months;
 
   @override
   List<Object> get props {
@@ -24,6 +27,7 @@ class ExpensesState extends BaseState with EquatableMixin {
       totalExpenses,
       totalExpensesLast3Months,
       totalExpensesLast6Months,
+      totalExpensesLast9Months,
     ];
   }
 
@@ -34,6 +38,7 @@ class ExpensesState extends BaseState with EquatableMixin {
     int? totalExpenses,
     int? totalExpensesLast3Months,
     int? totalExpensesLast6Months,
+    int? totalExpensesLast9Months,
   }) =>
       ExpensesState(
         status: status ?? this.status,
@@ -43,5 +48,7 @@ class ExpensesState extends BaseState with EquatableMixin {
             totalExpensesLast3Months ?? this.totalExpensesLast3Months,
         totalExpensesLast6Months:
             totalExpensesLast6Months ?? this.totalExpensesLast6Months,
+        totalExpensesLast9Months:
+            totalExpensesLast9Months ?? this.totalExpensesLast9Months,
       );
 }

@@ -21,19 +21,18 @@ class HiveBillModelAdapter extends TypeAdapter<HiveBillModel> {
       name: fields[2] as String,
       description: fields[3] as String,
       category: fields[4] as String,
-      billStatus: fields[5] as String,
-      totalParcels: fields[7] as int,
-      payedParcels: fields[8] as int,
-      value: fields[9] as int,
-      dueDay: fields[10] as int,
-      createdAt: fields[11] as DateTime,
+      totalParcels: fields[5] as int,
+      payedParcels: fields[6] as int,
+      value: fields[7] as int,
+      dueDay: fields[8] as int,
+      createdAt: fields[9] as DateTime,
     );
   }
 
   @override
   void write(BinaryWriter writer, HiveBillModel obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(9)
       ..writeByte(1)
       ..write(obj.id)
       ..writeByte(2)
@@ -43,16 +42,14 @@ class HiveBillModelAdapter extends TypeAdapter<HiveBillModel> {
       ..writeByte(4)
       ..write(obj.category)
       ..writeByte(5)
-      ..write(obj.billStatus)
-      ..writeByte(7)
       ..write(obj.totalParcels)
-      ..writeByte(8)
+      ..writeByte(6)
       ..write(obj.payedParcels)
-      ..writeByte(9)
+      ..writeByte(7)
       ..write(obj.value)
-      ..writeByte(10)
+      ..writeByte(8)
       ..write(obj.dueDay)
-      ..writeByte(11)
+      ..writeByte(9)
       ..write(obj.createdAt);
   }
 

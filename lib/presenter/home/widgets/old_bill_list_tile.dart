@@ -9,11 +9,12 @@ class OldBillListTile extends StatelessWidget {
     super.key,
     required this.payedTagSelector,
     required this.payedTag,
+    required this.month,
   });
 
   final BillModel bill;
   final PayedTag payedTag;
-
+  final DateTime month;
   final Widget payedTagSelector;
 
   @override
@@ -22,6 +23,7 @@ class OldBillListTile extends StatelessWidget {
       bill: bill,
       payedTagSelector: payedTagSelector,
       payedTag: payedTag,
+      date: month,
     );
   }
 }

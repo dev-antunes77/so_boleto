@@ -76,6 +76,7 @@
     "expensesForThisMonth":"Gastos deste mês",
     "expensesForThreeMonth":"Gastos dos últimos 3 meses",
     "expensesForSixMonth":"Gastos dos últimos 6 meses",
+    "expensesForNineMonth":"Gastos dos últimos 9 meses",
     "filter":"Filtros",
     "filterByCategory":"Por categoria",
     "filterDueDay":"Vencimento",

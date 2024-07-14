@@ -750,6 +750,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Gastos dos últimos 9 meses`
+  String get expensesForNineMonth {
+    return Intl.message(
+      'Gastos dos últimos 9 meses',
+      name: 'expensesForNineMonth',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Filtros`
   String get filter {
     return Intl.message(

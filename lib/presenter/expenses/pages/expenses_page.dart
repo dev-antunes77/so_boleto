@@ -47,6 +47,11 @@ class _ExpensesPageState extends State<ExpensesPage>
             label: AppLocalizations.current.expensesForSixMonth,
             value: cubit.state.totalExpensesLast6Months,
           ),
+          LineSeparator.infiniteHorizon(),
+          ExpensesTile(
+            label: AppLocalizations.current.expensesForNineMonth,
+            value: cubit.state.totalExpensesLast9Months,
+          ),
           AppThemeValues.spaceVerticalHuge,
         ],
       ),

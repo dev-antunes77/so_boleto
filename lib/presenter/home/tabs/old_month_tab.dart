@@ -15,9 +15,11 @@ class OldMonthTab extends StatelessWidget {
   const OldMonthTab({
     super.key,
     required this.thisMonthBills,
+    required this.month,
   });
 
   final List<BillModel> thisMonthBills;
+  final DateTime month;
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +56,7 @@ class OldMonthTab extends StatelessWidget {
                 onState: (_) => HomeBillTab(
                   state.inFilteringCase(thisMonthBills),
                   isOldMonthTab: true,
+                  month: month,
                   message: state.paramsApplied
                       ? PageResponseHandler.noneForTheseFilters
                       : PageResponseHandler.noneForThisMonth,

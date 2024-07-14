@@ -18,11 +18,13 @@ class HomeBillTab extends StatelessWidget {
     super.key,
     required this.message,
     this.isOldMonthTab = false,
+    this.month,
   });
 
   final List<BillModel> bills;
   final PageResponseHandler message;
   final bool isOldMonthTab;
+  final DateTime? month;
 
   @override
   Widget build(BuildContext context) {
@@ -51,15 +53,16 @@ class HomeBillTab extends StatelessWidget {
                   bill,
                   payedTag: payedTag,
                   payedTagSelector: PayedTagSelector(
-                    bill.billStatus.isPayed,
+                    bill.isMonthPayed(date: month!),
                     payedTag: payedTag,
                   ),
+                  month: month!,
                 )
               : CurrentBillListTile(
                   bill,
                   payedTag: payedTag,
                   payedTagSelector: PayedTagSelector(
-                    bill.billStatus.isPayed,
+                    bill.isMonthPayed(),
                     payedTag: payedTag,
                   ),
                 );

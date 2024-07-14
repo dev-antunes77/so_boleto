@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:json_annotation/json_annotation.dart';
 import 'package:so_boleto/core/extensions/date_time_extensions.dart';
+import 'package:so_boleto/core/extensions/iterable_extensions.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/helpers/app_formatters.dart';
 import 'package:so_boleto/domain/models/bill_payment.dart';
@@ -10,7 +10,6 @@ import 'package:so_boleto/domain/models/enums/bill_status.dart';
 import 'package:so_boleto/domain/models/prompt_bill.dart';
 import 'package:so_boleto/infra/local_database/hive_bill_database/hive_bill_model.dart';
 
-@JsonSerializable()
 class BillModel extends Equatable {
   BillModel({
     this.name = '',
@@ -20,15 +19,20 @@ class BillModel extends Equatable {
     this.payedParcels = 0,
     this.dueDay = 0,
     this.userId = '',
-    this.billPayment = const [],
+    List<BillPayment>? billPayment,
     String? id,
     BillCategory? category,
-    BillStatus? billStatus,
     DateTime? createdAt,
   })  : id = id ?? AppFormatters.randomIdFormater(),
+        //TODO remove the teste date
         createdAt = createdAt ?? DateTime(DateTime.now().year, DateTime.april),
-        category = category ?? BillCategory.miscellaneous,
-        billStatus = billStatus ?? BillStatus.open;
+        billPayment = billPayment ??
+            [
+              BillPayment(
+                  //TODO remove the teste date
+                  referredMonth: DateTime(DateTime.now().year, DateTime.april))
+            ],
+        category = category ?? BillCategory.miscellaneous;
 
   Map<String, dynamic> toFirestore() => <String, dynamic>{
         'id': id,
@@ -36,7 +40,6 @@ class BillModel extends Equatable {
         'name': name,
         'description': description,
         'category': category.value,
-        'billStatus': billStatus.value,
         'billPayment': billPayment.map((e) => e.toMap()),
         'value': value,
         'totalParcels': totalParcels,
@@ -53,7 +56,6 @@ class BillModel extends Equatable {
       id: data?['id'],
       name: data?['name'],
       description: data?['description'],
-      billStatus: (data?['billStatus'] as String).billStatuToEnum(),
       category: (data?['category'] as String).categoryToEnum(),
       value: data?['value'],
       payedParcels: data?['payedParcels'],
@@ -73,7 +75,6 @@ class BillModel extends Equatable {
         name: bill.name,
         description: bill.description,
         category: bill.category.categoryToEnum(),
-        billStatus: bill.billStatus.billStatuToEnum(),
         totalParcels: bill.totalParcels,
         payedParcels: bill.payedParcels,
         value: bill.value,
@@ -88,7 +89,6 @@ class BillModel extends Equatable {
         name: promptBill.name,
         description: '',
         category: promptBill.category,
-        billStatus: BillStatus.open,
         totalParcels: 0,
         payedParcels: 0,
         billPayment: const [],
@@ -105,12 +105,45 @@ class BillModel extends Equatable {
   final int value;
   final DateTime createdAt;
   final int dueDay;
-  final BillStatus billStatus;
   final List<BillPayment> billPayment;
   final int totalParcels;
   final int payedParcels;
 
   int get parcelsLeft => totalParcels - payedParcels;
+
+  /// When no date is provided, the fucntion will work on the current date
+  /// If a date is provided, the function will work on the date provided
+  bool isMonthPayed({DateTime? date}) =>
+      billPayment
+          .where((e) => e.referredMonth.month == (date ?? DateTime.now()).month)
+          .toList()
+          .firstWhereOrNull((e) => e.billStatus.isPayed)
+          ?.billStatus
+          .isPayed ??
+      false;
+
+  bool isMonthDelayed({DateTime? date}) =>
+      billPayment
+          .where((e) => e.referredMonth.month == (date ?? DateTime.now()).month)
+          .toList()
+          .firstWhereOrNull((e) => e.billStatus.isDelayed)
+          ?.billStatus
+          .isDelayed ??
+      false;
+
+  void updateBillPayment(DateTime date, BillStatus newStatus) {
+    var newPayment = BillPayment();
+    int index = -1;
+    for (var payment in billPayment) {
+      if (payment.referredMonth.month == date.month) {
+        newPayment = payment.copyWith(
+            billStatus: newStatus, payedAt: DateTime.now().dateTimeToString());
+        index = billPayment.indexOf(payment);
+      }
+    }
+    billPayment.removeAt(index);
+    billPayment.insert(index, newPayment);
+  }
 
   @override
   List<Object?> get props => [
@@ -123,7 +156,6 @@ class BillModel extends Equatable {
         createdAt,
         dueDay,
         billPayment,
-        billStatus,
         totalParcels,
         payedParcels,
       ];
@@ -136,7 +168,6 @@ class BillModel extends Equatable {
     BillCategory? category,
     int? value,
     DateTime? createdAt,
-    BillStatus? billStatus,
     int? dueDay,
     List<BillPayment>? billPayment,
     int? totalParcels,
@@ -150,7 +181,6 @@ class BillModel extends Equatable {
       category: category ?? this.category,
       value: value ?? this.value,
       createdAt: createdAt ?? this.createdAt,
-      billStatus: billStatus ?? this.billStatus,
       billPayment: billPayment ?? this.billPayment,
       dueDay: dueDay ?? this.dueDay,
       totalParcels: totalParcels ?? this.totalParcels,
