@@ -1,3 +1,4 @@
+import 'package:so_boleto/core/constants/app_constants.dart';
 import 'package:so_boleto/core/errors/app_errors.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/l10n/generated/l10n.dart';
@@ -65,7 +66,7 @@ final class GetBills {
   }
 
   void _setDelayedBill(List<BillModel> bills) {
-    final date = DateTime.now();
+    final date = AppConstants.currentDate;
     for (var bill in bills) {
       if (bill.dueDay < date.day && !bill.isMonthPayed()) {
         bill.updateBillPayment(date, BillStatus.delayed);

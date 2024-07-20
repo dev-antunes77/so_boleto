@@ -7,7 +7,8 @@ enum PageResponseHandler {
   noneRegistered(AppIcons.noneRegistered),
   noneDelayed(AppIcons.noneDelayed),
   noneFutureBills(AppIcons.noneFutureBills),
-  noneForThisMonth(AppIcons.noneForThisMonth),
+  noneThatFarAhead(AppIcons.noneThatFarAhead),
+  noneThatOld(AppIcons.noneThatOld),
   noneForTheseFilters(AppIcons.noneForFilters),
   nonePayed(AppIcons.nonePayed),
   noneWithThisName(AppIcons.noneForName);
@@ -27,8 +28,10 @@ enum PageResponseHandler {
         return AppLocalizations.current.responseHandlerNoneDelayed;
       case noneFutureBills:
         return AppLocalizations.current.responseHandlerNoneFutureBills;
-      case noneForThisMonth:
-        return AppLocalizations.current.responseHandlerNoneForThisMonth;
+      case noneThatOld:
+        return AppLocalizations.current.responseHandlerNoneThatOld;
+      case noneThatFarAhead:
+        return AppLocalizations.current.responseHandlerNoneThatFarAhead;
       case noneForTheseFilters:
         return AppLocalizations.current.responseHandlerNoneForTheseFilters;
       case nonePayed:

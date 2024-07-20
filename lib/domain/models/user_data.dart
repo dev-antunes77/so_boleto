@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:so_boleto/core/constants/app_constants.dart';
 import 'package:so_boleto/core/extensions/color_extensions.dart';
 import 'package:so_boleto/core/extensions/date_time_extensions.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
@@ -24,7 +25,7 @@ class UserData extends Equatable {
     this.billSorting = BillSorting.date,
     this.baseColor = const Color.fromARGB(255, 4, 135, 58),
     DateTime? createdAt,
-  }) : createdAt = createdAt ?? DateTime.now();
+  }) : createdAt = createdAt ?? AppConstants.currentDate;
 
   Map<String, dynamic> toJson() => <String, dynamic>{
         'id': id,

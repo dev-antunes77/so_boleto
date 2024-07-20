@@ -1,3 +1,4 @@
+import 'package:so_boleto/core/constants/app_constants.dart';
 import 'package:so_boleto/core/errors/app_errors.dart';
 import 'package:so_boleto/core/extensions/date_time_extensions.dart';
 import 'package:so_boleto/core/l10n/generated/l10n.dart';
@@ -14,8 +15,8 @@ final class GetNewMonthBills {
     try {
       final bills = await _firestoreRepository.getBills(userId);
       for (var bill in bills) {
-        while (
-            DateTime.now().month > bill.billPayment.last.referredMonth.month) {
+        while (AppConstants.currentDate.month >
+            bill.billPayment.last.referredMonth.month) {
           var newPayment = BillPayment();
           newPayment = BillPayment(
             referredMonth: bill.billPayment.last.referredMonth

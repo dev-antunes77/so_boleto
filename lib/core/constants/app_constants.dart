@@ -4,10 +4,12 @@ abstract final class AppConstants {
   static final List<int> monthDays =
       List.generate(31, (index) => index + 1, growable: true);
 
-  static List<DateTime> get months {
-    return List.generate(12, (index) {
-      final currentDate = DateTime.now();
-      return DateTime(currentDate.year, currentDate.month - (11 - index));
+  static final currentDate = DateTime.now();
+
+  static List<DateTime> get pastMonths {
+    return List.generate(11, (index) {
+      // This excludes the current month from past month list
+      return DateTime(currentDate.year, (currentDate.month - 1) - (10 - index));
     });
   }
 

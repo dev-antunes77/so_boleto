@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
+import 'package:intl/intl.dart';
+import 'package:so_boleto/core/constants/app_constants.dart';
 import 'package:so_boleto/core/extensions/date_time_extensions.dart';
 import 'package:so_boleto/core/extensions/iterable_extensions.dart';
+import 'package:so_boleto/core/extensions/num_extensions.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/helpers/app_formatters.dart';
 import 'package:so_boleto/domain/models/bill_payment.dart';
@@ -94,7 +97,7 @@ class BillModel extends Equatable {
         billPayment: [BillPayment()],
         value: promptBill.value,
         dueDay: promptBill.dueDay,
-        createdAt: DateTime.now(),
+        createdAt: AppConstants.currentDate,
       );
 
   final String id;
@@ -111,6 +114,18 @@ class BillModel extends Equatable {
 
   int get parcelsLeft => totalParcels - payedParcels;
 
+  String get lastParcelDate {
+    DateTime lastMonth = createdAt;
+    for (var i = 0; i < parcelsLeft; i++) {
+      lastMonth = lastMonth.changeMonth(isAddition: true);
+    }
+    return DateFormat('MMMM yyyy').format(lastMonth).capitalize();
+  }
+
+  String get totalPayedInThisBill => payedParcels == 0
+      ? '0'
+      : (value * payedParcels).toDouble().formatCurrency();
+
   /// When no date is provided, the fucntion will work on the current date
   /// If a date is provided, the function will work on the date provided
   bool isMonthPayed({DateTime? date}) =>
@@ -121,7 +136,8 @@ class BillModel extends Equatable {
       false;
 
   List<BillPayment> _paymentList(DateTime? date) => billPayment
-      .where((e) => e.referredMonth.month == (date ?? DateTime.now()).month)
+      .where((e) =>
+          e.referredMonth.month == (date ?? AppConstants.currentDate).month)
       .toList();
 
   bool isMonthDelayed({DateTime? date}) =>
@@ -145,8 +161,9 @@ class BillModel extends Equatable {
       if (payment.referredMonth.month == date.month) {
         var newPayment = payment.copyWith(
           billStatus: newStatus,
-          payedAt:
-              newStatus.isPayed ? DateTime.now().getFormattedCreatedAt() : '',
+          payedAt: newStatus.isPayed
+              ? AppConstants.currentDate.getFormattedCreatedAt()
+              : '',
         );
         billPayment.insert(billPayment.indexOf(payment), newPayment);
         billPayment.remove(payment);

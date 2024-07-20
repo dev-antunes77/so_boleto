@@ -54,6 +54,8 @@ class _AppShellState extends State<AppShell> {
 
   bool _showBottomNav() =>
       context.currentRoute == Routes.home ||
+      context.currentRoute == Routes.homePast ||
+      context.currentRoute == Routes.homeFuture ||
       context.currentRoute == Routes.profile ||
       context.currentRoute == Routes.expenses;
 

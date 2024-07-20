@@ -12,7 +12,9 @@ import 'package:so_boleto/presenter/bill/pages/sections/bill_parcel_section.dart
 import 'package:so_boleto/presenter/bill/pages/sections/bill_value_section.dart';
 import 'package:so_boleto/presenter/expenses/pages/expenses_page.dart';
 import 'package:so_boleto/presenter/filter/pages/filter_page.dart';
-import 'package:so_boleto/presenter/home/pages/home_page.dart';
+import 'package:so_boleto/presenter/home/pages/home_page_current.dart';
+import 'package:so_boleto/presenter/home/pages/home_page_future.dart';
+import 'package:so_boleto/presenter/home/pages/home_page_past.dart';
 import 'package:so_boleto/presenter/initial/app_shell.dart';
 import 'package:so_boleto/presenter/initial/pages/login_page.dart';
 import 'package:so_boleto/presenter/initial/pages/onboarding_page.dart';
@@ -64,10 +66,27 @@ abstract class RoutesConfig {
             parentNavigatorKey: _shellKey,
             pageBuilder: (_, state) => _getTransitionPage(
               state,
-              const HomePage(),
+              const HomePageCurrent(),
             ),
           ),
-
+          GoRoute(
+            path: RelativePaths.homePast,
+            parentNavigatorKey: _shellKey,
+            pageBuilder: (_, state) => _getTransitionPage(
+              state,
+              type: PageTransitions.transitionSlide,
+              const HomePagePast(),
+            ),
+          ),
+          GoRoute(
+            path: RelativePaths.homeFuture,
+            parentNavigatorKey: _shellKey,
+            pageBuilder: (_, state) => _getTransitionPage(
+              state,
+              type: PageTransitions.transitionSlide,
+              const HomePageFuture(),
+            ),
+          ),
           GoRoute(
             path: RelativePaths.billName,
             parentNavigatorKey: _shellKey,

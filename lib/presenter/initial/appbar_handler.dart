@@ -15,6 +15,8 @@ class AppBarHandler extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (route) {
       case Routes.home:
+      case Routes.homePast:
+      case Routes.homeFuture:
         return const HomeAppBar();
       case Routes.expenses:
         return const ExpensesAppBar();

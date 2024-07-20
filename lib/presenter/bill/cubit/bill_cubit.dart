@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:so_boleto/core/constants/app_constants.dart';
+import 'package:so_boleto/core/extensions/num_extensions.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/utils/base_cubit.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
@@ -73,18 +75,19 @@ class BillCubit extends Cubit<BillState> with BaseCubit {
   BillModel onBillPayed(bool payed, DateTime currentMonth, bool isEditionFlow) {
     var newStatus = BillStatus.payed;
     if (!payed) {
-      newStatus = state.bill.dueDay < DateTime.now().day
+      newStatus = state.bill.dueDay < AppConstants.currentDate.day
           ? BillStatus.delayed
           : BillStatus.open;
     }
     //TODO remove the teste date
     final date = isEditionFlow
         ? currentMonth
-        : DateTime(DateTime.now().year, DateTime.april);
+        : DateTime(AppConstants.currentDate.year, DateTime.april);
     state.bill.updateBillPayment(date, newStatus);
     final newPayments = state.bill.billPayment;
+    final payedParcels = state.bill.payedParcels;
     final updatedPayedParcels =
-        payed ? state.bill.payedParcels + 1 : state.bill.payedParcels - 1;
+        payed ? payedParcels + 1 : payedParcels.nonZero() - 1;
     return state.bill.copyWith(
       billPayment: newPayments,
       payedParcels: updatedPayedParcels,

@@ -59,7 +59,7 @@ class HomeBillTab extends StatelessWidget {
                   month: month!,
                 )
               : CurrentBillListTile(
-                  bill,
+                  bill: bill,
                   payedTag: payedTag,
                   payedTagSelector: PayedTagSelector(
                     bill.isMonthPayed(),

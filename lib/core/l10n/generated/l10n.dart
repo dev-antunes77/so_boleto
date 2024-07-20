@@ -1961,10 +1961,20 @@ class AppLocalizations {
   }
 
   /// `Você não tem contas tão antigas assim.`
-  String get responseHandlerNoneForThisMonth {
+  String get responseHandlerNoneThatOld {
     return Intl.message(
       'Você não tem contas tão antigas assim.',
-      name: 'responseHandlerNoneForThisMonth',
+      name: 'responseHandlerNoneThatOld',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Você não tem parcelados futuros.`
+  String get responseHandlerNoneThatFarAhead {
+    return Intl.message(
+      'Você não tem parcelados futuros.',
+      name: 'responseHandlerNoneThatFarAhead',
       desc: '',
       args: [],
     );

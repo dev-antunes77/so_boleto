@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:so_boleto/core/constants/app_constants.dart';
 import 'package:so_boleto/core/errors/app_errors.dart';
 import 'package:so_boleto/core/extensions/list_extensions.dart';
 import 'package:so_boleto/core/l10n/generated/l10n.dart';
@@ -63,6 +64,7 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
           status: BaseStateStatus.success,
           bills: updatedBills,
           userId: userId,
+          currentMonth: AppConstants.currentDate,
           billSorting: billSorting,
           hasInvertedSorting: hasInvertedSorting,
         ),

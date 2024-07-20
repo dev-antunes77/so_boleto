@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:so_boleto/core/components/svg_asset/svg_asset.dart';
+import 'package:so_boleto/core/components/custom_category_icon/custom_category_item.dart';
 import 'package:so_boleto/core/extensions/num_extensions.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/helpers/app_formatters.dart';
@@ -16,7 +16,6 @@ class BillListTile extends StatelessWidget {
     super.key,
     required this.bill,
     required this.payedTagSelector,
-    this.isTagPreferenceScreen = false,
     required this.payedTag,
     required this.date,
   });
@@ -25,8 +24,6 @@ class BillListTile extends StatelessWidget {
   final Widget payedTagSelector;
   final PayedTag payedTag;
   final DateTime date;
-
-  final bool isTagPreferenceScreen;
 
   @override
   Widget build(BuildContext context) {
@@ -48,20 +45,7 @@ class BillListTile extends StatelessWidget {
                 horizontal: AppThemeValues.spaceXXSmall,
               ),
               horizontalTitleGap: AppThemeValues.spaceXSmall,
-              leading: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  CircleAvatar(
-                    radius: 25,
-                    backgroundColor: theme.selectedColors.circleBackground,
-                    child: SvgAsset(
-                      svg: bill.category.getIconResponse,
-                      height: 30,
-                      color: theme.selectedColors.icon,
-                    ),
-                  ),
-                ],
-              ),
+              leading: CustomCategoryItem(bill: bill),
               title: Text(
                 payedTag.isStample && payedThisMonth
                     ? bill.name.capitalize().breakLongStrings(

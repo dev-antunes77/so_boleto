@@ -52,12 +52,7 @@ class _BillSearchBarState extends State<BillSearchBar> {
           ),
           suffixIcon: widget.isExpanded
               ? AppBarButton(
-                  onTap: () {
-                    context.read<HomeBillsCubit>().setSearchByNameValue('');
-                    FocusScope.of(context).unfocus();
-                    controller.text = '';
-                    widget.onCloseSearch();
-                  },
+                  onTap: _dismissSearch,
                   label: AppLocalizations.current.close,
                   color: widget.themeColors.tag,
                 )
@@ -76,5 +71,12 @@ class _BillSearchBarState extends State<BillSearchBar> {
             context.read<HomeBillsCubit>().setSearchByNameValue(value),
       ),
     );
+  }
+
+  void _dismissSearch() {
+    context.read<HomeBillsCubit>().setSearchByNameValue('');
+    FocusScope.of(context).unfocus();
+    controller.text = '';
+    widget.onCloseSearch();
   }
 }

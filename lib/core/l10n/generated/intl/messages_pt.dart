@@ -326,14 +326,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "responseHandlerNoneForTheseFilters":
             MessageLookupByLibrary.simpleMessage(
                 "Nenhuma conta com esses filtros."),
-        "responseHandlerNoneForThisMonth": MessageLookupByLibrary.simpleMessage(
-            "Você não tem contas tão antigas assim."),
         "responseHandlerNoneFutureBills": MessageLookupByLibrary.simpleMessage(
             "Você não tem contas parceladas para frente."),
         "responseHandlerNonePayed":
             MessageLookupByLibrary.simpleMessage("Você não tem contas pagas."),
         "responseHandlerNoneRegistered": MessageLookupByLibrary.simpleMessage(
             "Você não tem contas cadastradas."),
+        "responseHandlerNoneThatFarAhead": MessageLookupByLibrary.simpleMessage(
+            "Você não tem parcelados futuros."),
+        "responseHandlerNoneThatOld": MessageLookupByLibrary.simpleMessage(
+            "Você não tem contas tão antigas assim."),
         "responseHandlerNoneWithThisName": MessageLookupByLibrary.simpleMessage(
             "Nenhuma conta com esse nome."),
         "signIn": MessageLookupByLibrary.simpleMessage("Entrar"),

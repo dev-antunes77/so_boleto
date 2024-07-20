@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:equatable/equatable.dart';
+import 'package:so_boleto/core/constants/app_constants.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/domain/models/enums/bill_status.dart';
 
@@ -9,7 +10,7 @@ class BillPayment extends Equatable {
     this.payedAt = 'None',
     DateTime? referredMonth,
     BillStatus? billStatus,
-  })  : referredMonth = referredMonth ?? DateTime.now(),
+  })  : referredMonth = referredMonth ?? AppConstants.currentDate,
         billStatus = billStatus ?? BillStatus.open;
 
   final String payedAt;

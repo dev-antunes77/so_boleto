@@ -1,3 +1,4 @@
+import 'package:so_boleto/core/constants/app_constants.dart';
 import 'package:so_boleto/core/l10n/generated/l10n.dart';
 
 extension IntExtensions on int {
@@ -8,8 +9,10 @@ extension IntExtensions on int {
     return toString().padLeft(2, '0');
   }
 
+  int nonZero() => this == 0 ? 1 : this;
+
   String properDueDay() {
-    final now = DateTime.now();
+    final now = AppConstants.currentDate;
     final days = (this - now.day) == 1 || (this - now.day) == -1
         ? AppLocalizations.current.dueDayExtensionsDay
         : AppLocalizations.current.dueDayExtensionsDays;

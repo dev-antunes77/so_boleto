@@ -19,7 +19,7 @@ class HomeBillsState extends BaseState with EquatableMixin {
         billSorting = billSorting ?? BillSorting.date,
         hasInvertedSorting = hasInvertedSorting ?? false,
         paramsApplied = paramsApplied ?? false,
-        currentMonth = currentMonth ?? DateTime.now();
+        currentMonth = currentMonth ?? AppConstants.currentDate;
 
   final List<BillModel> bills;
   final List<BillModel> filteredByParams;
@@ -68,6 +68,26 @@ class HomeBillsState extends BaseState with EquatableMixin {
     for (var bill in allBills) {
       if (bill.checkReferredMonth(oldMonth)) {
         bills.add(bill);
+      }
+    }
+    return bills;
+  }
+
+  List<BillModel> getPayedOldBills(DateTime oldMonth) => getOldBills(oldMonth)
+      .where((element) => element.isMonthPayed(date: oldMonth))
+      .toList();
+
+  List<BillModel> getDelayedOldBills(DateTime oldMonth) => getOldBills(oldMonth)
+      .where((element) => element.isMonthDelayed(date: oldMonth))
+      .toList();
+
+  List<BillModel> get futureBills {
+    List<BillModel> bills = [];
+    for (var bill in allBills) {
+      if (bill.totalParcels > 1) {
+        if (bill.parcelsLeft > bill.billPayment.length) {
+          bills.add(bill);
+        }
       }
     }
     return bills;

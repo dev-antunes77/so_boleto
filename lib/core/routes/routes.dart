@@ -6,6 +6,8 @@ class Routes {
   static const login = '/login';
   static const onboarding = '/onboarding';
   static const home = '/home';
+  static const homeFuture = '/home-future';
+  static const homePast = '/home-past';
   static const billCategory = '/bill-category';
   static const billCheck = '/bill-check';
   static const billDueDay = '/bill-due-day';
@@ -32,6 +34,8 @@ class RelativePaths {
   static const login = '/login';
   static const onboarding = '/onboarding';
   static const home = '/home';
+  static const homePast = '/home-past';
+  static const homeFuture = '/home-future';
   static const billCategory = '/bill-category';
   static const billCheck = '/bill-check';
   static const billDueDay = '/bill-due-day';
