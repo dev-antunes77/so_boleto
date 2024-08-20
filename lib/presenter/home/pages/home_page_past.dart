@@ -60,6 +60,7 @@ class _HomePagePastState extends State<HomePagePast>
 
                   return TabBarView(
                     controller: _tabController,
+                    physics: const NeverScrollableScrollPhysics(),
                     children: [
                       HomeBillTab(
                         state.inFilteringCase(oldBills),

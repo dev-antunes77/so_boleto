@@ -77,7 +77,9 @@ class _HomePageCurrentState extends State<HomePageCurrent>
                 ),
                 HomeNavigatorButton(
                   isFuture: true,
-                  onTap: () => context.pushTo(Routes.homeFuture),
+                  onTap: () => context.pushTo(
+                    Routes.homeFuture,
+                  ),
                 ),
               ],
             ),
@@ -99,6 +101,7 @@ class _HomePageCurrentState extends State<HomePageCurrent>
                         const CustomStatusHandler(PageResponseHandler.error),
                     onState: (_) => TabBarView(
                       controller: _tabController,
+                      physics: const NeverScrollableScrollPhysics(),
                       children: [
                         HomeBillTab(
                           state.inFilteringCase(state.allBills),

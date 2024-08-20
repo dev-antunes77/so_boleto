@@ -27,14 +27,9 @@ class BillModel extends Equatable {
     BillCategory? category,
     DateTime? createdAt,
   })  : id = id ?? AppFormatters.randomIdFormater(),
-        //TODO remove the teste date
-        createdAt = createdAt ?? DateTime(DateTime.now().year, DateTime.april),
+        createdAt = createdAt ?? AppConstants.currentDate,
         billPayment = billPayment ??
-            [
-              BillPayment(
-                  //TODO remove the teste date
-                  referredMonth: DateTime(DateTime.now().year, DateTime.april))
-            ],
+            [BillPayment(referredMonth: AppConstants.currentDate)],
         category = category ?? BillCategory.miscellaneous;
 
   Map<String, dynamic> toFirestore() => <String, dynamic>{
@@ -116,15 +111,20 @@ class BillModel extends Equatable {
 
   String get lastParcelDate {
     DateTime lastMonth = createdAt;
-    for (var i = 0; i < parcelsLeft; i++) {
+    for (var i = 0; i < totalParcels; i++) {
       lastMonth = lastMonth.changeMonth(isAddition: true);
     }
     return DateFormat('MMMM yyyy').format(lastMonth).capitalize();
   }
 
-  String get totalPayedInThisBill => payedParcels == 0
-      ? '0'
-      : (value * payedParcels).toDouble().formatCurrency();
+  double get totalValue => (value * totalParcels).toDouble();
+
+  double get totalPayedValue => (value * payedParcels).toDouble();
+
+  double get totalUnpayedValue => totalValue - (value * payedParcels);
+
+  String get totalPayedStringValue =>
+      payedParcels == 0 ? '0' : totalPayedValue.formatCurrency();
 
   /// When no date is provided, the fucntion will work on the current date
   /// If a date is provided, the function will work on the date provided
@@ -169,6 +169,12 @@ class BillModel extends Equatable {
         billPayment.remove(payment);
       }
     }
+  }
+
+  int daysTillOrAfterDueDay(DateTime endDate) {
+    final presentDay = DateTime(
+        AppConstants.currentDate.year, AppConstants.currentDate.month, dueDay);
+    return endDate.difference(presentDay).inDays;
   }
 
   @override

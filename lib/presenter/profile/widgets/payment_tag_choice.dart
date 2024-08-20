@@ -7,7 +7,7 @@ import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/domain/models/enums/payed_tag.dart';
-import 'package:so_boleto/presenter/home/widgets/bill_list_tile.dart';
+import 'package:so_boleto/presenter/home/widgets/bill_tiles/bill_list_tile.dart';
 import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
 
 class PaymentTagChoiceTile extends StatelessWidget {

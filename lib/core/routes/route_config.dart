@@ -74,6 +74,7 @@ abstract class RoutesConfig {
             parentNavigatorKey: _shellKey,
             pageBuilder: (_, state) => _getTransitionPage(
               state,
+              duration: duration200,
               type: PageTransitions.transitionSlide,
               const HomePagePast(),
             ),
@@ -84,6 +85,7 @@ abstract class RoutesConfig {
             pageBuilder: (_, state) => _getTransitionPage(
               state,
               type: PageTransitions.transitionSlide,
+              duration: duration200,
               const HomePageFuture(),
             ),
           ),

@@ -1070,6 +1070,36 @@ class AppLocalizations {
     );
   }
 
+  /// `Pago  `
+  String get homeTabFuturePaied {
+    return Intl.message(
+      'Pago  ',
+      name: 'homeTabFuturePaied',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Restante  `
+  String get homeTabFutureRemaining {
+    return Intl.message(
+      'Restante  ',
+      name: 'homeTabFutureRemaining',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Última parcela em  `
+  String get homeTabFutureLastParcel {
+    return Intl.message(
+      'Última parcela em  ',
+      name: 'homeTabFutureLastParcel',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Nome`
   String get loginName {
     return Intl.message(

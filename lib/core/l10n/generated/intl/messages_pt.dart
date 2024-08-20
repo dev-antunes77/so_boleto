@@ -188,6 +188,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "homeTabAll": MessageLookupByLibrary.simpleMessage("Todas"),
         "homeTabDelayed": MessageLookupByLibrary.simpleMessage("Atrasadas"),
         "homeTabFutureBills": MessageLookupByLibrary.simpleMessage("Futuras"),
+        "homeTabFutureLastParcel":
+            MessageLookupByLibrary.simpleMessage("Última parcela em  "),
+        "homeTabFuturePaied": MessageLookupByLibrary.simpleMessage("Pago  "),
+        "homeTabFutureRemaining":
+            MessageLookupByLibrary.simpleMessage("Restante  "),
         "homeTabPayed": MessageLookupByLibrary.simpleMessage("Pagas"),
         "loginEmail": MessageLookupByLibrary.simpleMessage("Email"),
         "loginHasAccountAlready":

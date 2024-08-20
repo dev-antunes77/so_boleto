@@ -4,13 +4,17 @@ import 'package:go_router/go_router.dart';
 import 'package:so_boleto/core/components/custom_category_icon/custom_category_item.dart';
 import 'package:so_boleto/core/components/custom_status_handler/custom_status_handler.dart';
 import 'package:so_boleto/core/components/thin_line_separator/thin_line_separator.dart';
+import 'package:so_boleto/core/extensions/num_extensions.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/helpers/app_formatters.dart';
+import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
+import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/domain/models/enums/page_response_handler.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
+import 'package:so_boleto/presenter/home/widgets/future_bill_info_row.dart';
 
 class HomePageFuture extends StatefulWidget {
   const HomePageFuture({super.key});
@@ -40,7 +44,7 @@ class _HomePageFutureState extends State<HomePageFuture>
             ),
             AppThemeValues.spaceHorizontalMassive,
             Text(
-              'Contas futuras',
+              AppLocalizations.current.homeTabFutureBills,
               style: context.textRobotoMediumToLarge,
             ),
           ],
@@ -88,77 +92,65 @@ class _HomePageFutureState extends State<HomePageFuture>
                       children: [
                         Padding(
                           padding: const EdgeInsets.symmetric(
-                            vertical: AppThemeValues.spaceXXSmall,
+                            horizontal: AppThemeValues.spaceSmall,
+                            vertical: AppThemeValues.spaceXXXSmall,
                           ),
-                          child: ListTile(
-                            dense: true,
-                            contentPadding: const EdgeInsets.symmetric(
-                              horizontal: AppThemeValues.spaceXXSmall,
-                            ),
-                            horizontalTitleGap: AppThemeValues.spaceXSmall,
-                            leading: CustomCategoryItem(bill: bill),
-                            title: Text(
-                              bill.name.capitalize(),
-                              style: context.textRobotoSubtitleSmall,
-                              maxLines: 1,
-                            ),
-                            subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                FutureBillInfoRow(
-                                  label: 'Parcelas pagas  ',
-                                  value: AppFormatters.parcelRelationFormatter(
-                                    bill.totalParcels,
-                                    bill.payedParcels,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                bill.name.capitalize(),
+                                style: context.textRobotoSubtitleSmall,
+                                maxLines: 1,
+                              ),
+                              LineSeparator.horizontalThickWithPadding(
+                                width: context.width * 0.8,
+                                height: 2,
+                                horizontalPadding: 0.0,
+                              ),
+                              Row(
+                                children: [
+                                  FutureBillInfoRow(
+                                    label: AppLocalizations
+                                        .current.homeTabFuturePaied,
+                                    value:
+                                        bill.totalPayedStringValue.toString(),
                                   ),
-                                ),
-                                FutureBillInfoRow(
-                                  label: 'Valor gasto em parcelas pagas  ',
-                                  value: bill.totalPayedInThisBill.toString(),
-                                  isDate: true,
-                                ),
-                                FutureBillInfoRow(
-                                  label: 'Última parcela em  ',
-                                  value: bill.lastParcelDate,
-                                  isDate: true,
-                                ),
-                              ],
-                            ),
-                            // trailing: Row(
-                            //   mainAxisSize: MainAxisSize.min,
-                            //   children: [
-                            //     Column(
-                            //       crossAxisAlignment: CrossAxisAlignment.end,
-                            //       mainAxisAlignment: MainAxisAlignment.center,
-                            //       children: [
-                            //         Text(
-                            //           bill.value.toDouble().formatCurrency(),
-                            //           style: bill.value <= 0
-                            //               ? context.textRobotoSubtitleTiny
-                            //               : context.textRobotoSubtitleXSmall,
-                            //           textAlign: TextAlign.right,
-                            //         ),
-                            //         Text(
-                            //           AppFormatters.parcelRelationFormatter(
-                            //             bill.totalParcels,
-                            //             bill.payedParcels,
-                            //           ),
-                            //           textAlign: TextAlign.right,
-                            //           style: context.textRobotoSubtitleTiny,
-                            //         ),
-                            //       ],
-                            //     ),
-                            //     const Padding(
-                            //       padding: EdgeInsets.all(
-                            //           AppThemeValues.spaceXXXSmall),
-                            //       child: Icon(
-                            //         Icons.arrow_forward_ios_rounded,
-                            //         size: 16,
-                            //       ),
-                            //     )
-                            //   ],
-                            // ),
+                                  const SizedBox(
+                                      width: AppThemeValues.spaceXXSmall),
+                                  Text(
+                                    '(${AppFormatters.parcelRelationFormatter(
+                                      bill.totalParcels,
+                                      bill.payedParcels,
+                                    )})',
+                                    style: context.textRobotoSubtitleSmall,
+                                    textScaler: const TextScaler.linear(1.1),
+                                  ),
+                                  const SizedBox(
+                                      width: AppThemeValues.spaceXXSmall),
+                                  FutureBillInfoRow(
+                                    label: AppLocalizations
+                                        .current.homeTabFutureBills,
+                                    value:
+                                        bill.totalUnpayedValue.formatCurrency(),
+                                  ),
+                                ],
+                              ),
+                              FutureBillInfoRow(
+                                label: AppLocalizations
+                                    .current.homeTabFutureLastParcel,
+                                value: bill.lastParcelDate,
+                              ),
+                            ],
                           ),
+                        ),
+                        Positioned(
+                          right: AppThemeValues.spaceXXXSmall,
+                          top: AppThemeValues.spaceXXXSmall,
+                          child: Align(
+                              alignment: Alignment.topRight,
+                              child:
+                                  CustomCategoryItem(category: bill.category)),
                         ),
                       ],
                     ),
@@ -169,40 +161,6 @@ class _HomePageFutureState extends State<HomePageFuture>
           },
         ),
       ],
-    );
-  }
-}
-
-class FutureBillInfoRow extends StatelessWidget {
-  const FutureBillInfoRow({
-    super.key,
-    required this.label,
-    required this.value,
-    this.isDate = false,
-  });
-
-  final String label;
-  final String value;
-  final bool isDate;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: AppThemeValues.spaceXTiny,
-      ),
-      child: Row(
-        children: [
-          Text(
-            label,
-            style: context.textRobotoXSmall,
-          ),
-          Text(
-            value,
-            style: context.textRobotoSubtitleSmall,
-          ),
-        ],
-      ),
     );
   }
 }

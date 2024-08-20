@@ -6,7 +6,7 @@ import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/presenter/filter/widgets/home_filter_icon_button.dart';
 import 'package:so_boleto/presenter/home/widgets/bill_search_bar.dart';
-import 'package:so_boleto/presenter/home/widgets/moro_options_achor_menu.dart';
+import 'package:so_boleto/presenter/home/widgets/more_options_achor_menu.dart';
 
 class HomeAppBar extends StatefulWidget {
   const HomeAppBar({super.key});

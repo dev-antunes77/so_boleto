@@ -8,8 +8,8 @@ import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/domain/models/enums/page_response_handler.dart';
 import 'package:so_boleto/domain/models/enums/payed_tag.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
-import 'package:so_boleto/presenter/home/widgets/current_bill_list_tile.dart';
-import 'package:so_boleto/presenter/home/widgets/old_bill_list_tile.dart';
+import 'package:so_boleto/presenter/home/widgets/bill_tiles/current_bill_list_tile.dart';
+import 'package:so_boleto/presenter/home/widgets/bill_tiles/old_bill_list_tile.dart';
 import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
 
 class HomeBillTab extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/domain/models/enums/payed_tag.dart';
-import 'package:so_boleto/presenter/home/widgets/bill_list_tile.dart';
+import 'package:so_boleto/presenter/home/widgets/bill_tiles/bill_list_tile.dart';
 
 class OldBillListTile extends StatelessWidget {
   const OldBillListTile(
@@ -19,11 +19,14 @@ class OldBillListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BillListTile(
-      bill: bill,
-      payedTagSelector: payedTagSelector,
-      payedTag: payedTag,
-      date: month,
+    return GestureDetector(
+      onTap: () {},
+      child: BillListTile(
+        bill: bill,
+        payedTagSelector: payedTagSelector,
+        payedTag: payedTag,
+        date: month,
+      ),
     );
   }
 }

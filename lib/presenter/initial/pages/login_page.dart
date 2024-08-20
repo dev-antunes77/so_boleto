@@ -30,6 +30,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
   bool _isPasswordVisible = false;
   bool _isSignUp = false;
+  late InitialCubit cubit;
 
   void _togglePasswordVisibility() =>
       setState(() => _isPasswordVisible = !_isPasswordVisible);
@@ -40,13 +41,37 @@ class _LoginPageState extends State<LoginPage> {
         _passwordController.text = '';
       });
 
-  late InitialCubit cubit;
+  void _onTextChanged(TextEditingController controller) {
+    String text = controller.text;
+    if (text.isEmpty) {
+      return;
+    }
+    String capitalizedText = text[0].toUpperCase() + text.substring(1);
+    if (text != capitalizedText) {
+      controller.text = capitalizedText;
+      controller.selection = TextSelection.fromPosition(
+        TextPosition(offset: capitalizedText.length),
+      );
+    }
+  }
 
   @override
   void initState() {
     cubit = context.read<InitialCubit>();
     cubit.state.user == null ? _isSignUp = true : false;
+    _nameController.addListener(() => _onTextChanged(_nameController));
+    _lastNameController.addListener(() => _onTextChanged(_lastNameController));
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _nameController.removeListener(() => _onTextChanged(_nameController));
+    _lastNameController
+        .removeListener(() => _onTextChanged(_lastNameController));
+    _nameController.dispose();
+    _lastNameController.dispose();
+    super.dispose();
   }
 
   @override

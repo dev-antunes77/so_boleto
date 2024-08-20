@@ -8,7 +8,7 @@ import 'package:so_boleto/domain/models/enums/page_transitions.dart';
 import 'package:so_boleto/domain/models/enums/payed_tag.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
-import 'package:so_boleto/presenter/home/widgets/bill_list_tile.dart';
+import 'package:so_boleto/presenter/home/widgets/bill_tiles/bill_list_tile.dart';
 import 'package:so_boleto/presenter/home/widgets/dismissable_background.dart';
 
 class CurrentBillListTile extends StatelessWidget {

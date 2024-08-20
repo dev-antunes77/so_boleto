@@ -36,10 +36,7 @@ class HomeFilterIconButton extends StatelessWidget {
                   CustomMenuItemButton(
                     svg: AppIcons.close,
                     label: AppLocalizations.current.filterRemove,
-                    onPressed: () {
-                      context.read<HomeBillsCubit>().removeFilterParams();
-                      context.read<FilterCubit>().removeFilters();
-                    },
+                    onPressed: () => _onCloseButtonPressed(context),
                   ),
                 ],
               )
@@ -51,8 +48,10 @@ class HomeFilterIconButton extends StatelessWidget {
     );
   }
 
-  void _onFilterPressed(BuildContext context) {
-    showFilterBottomSheet(context);
-    // context.read<HomeBillsCubit>().setSearchByNameValue('');
+  void _onCloseButtonPressed(BuildContext context) {
+    context.read<HomeBillsCubit>().removeFilterParams();
+    context.read<FilterCubit>().removeFilters();
   }
+
+  void _onFilterPressed(BuildContext context) => showFilterBottomSheet(context);
 }

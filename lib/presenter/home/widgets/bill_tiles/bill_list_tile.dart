@@ -45,7 +45,7 @@ class BillListTile extends StatelessWidget {
                 horizontal: AppThemeValues.spaceXXSmall,
               ),
               horizontalTitleGap: AppThemeValues.spaceXSmall,
-              leading: CustomCategoryItem(bill: bill),
+              leading: CustomCategoryItem(category: bill.category),
               title: Text(
                 payedTag.isStample && payedThisMonth
                     ? bill.name.capitalize().breakLongStrings(
@@ -78,7 +78,7 @@ class BillListTile extends StatelessWidget {
                     )
                   else
                     Text(
-                      bill.dueDay.properDueDay(),
+                      bill.daysTillOrAfterDueDay(date).properDueDay(),
                       style: context.textRobotoSubtitleTiny,
                     ),
                 ],
