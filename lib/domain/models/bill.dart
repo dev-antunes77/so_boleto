@@ -123,8 +123,7 @@ class BillModel extends Equatable {
 
   double get totalUnpayedValue => totalValue - (value * payedParcels);
 
-  String get totalPayedStringValue =>
-      payedParcels == 0 ? '0' : totalPayedValue.formatCurrency();
+  String get totalPayedStringValue => totalPayedValue.formatCurrency();
 
   /// When no date is provided, the fucntion will work on the current date
   /// If a date is provided, the function will work on the date provided

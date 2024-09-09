@@ -93,7 +93,7 @@ class _HomePageFutureState extends State<HomePageFuture>
                         Padding(
                           padding: const EdgeInsets.symmetric(
                             horizontal: AppThemeValues.spaceSmall,
-                            vertical: AppThemeValues.spaceXXXSmall,
+                            vertical: AppThemeValues.spaceXXSmall,
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

@@ -27,6 +27,9 @@ extension IntExtensions on int {
 
 extension DoubleExtensions on double {
   String formatCurrency() {
+    if (this <= 0) {
+      return 'R\$0,00';
+    }
     String formattedNumber = '${this / 100}';
     List<String> parts = formattedNumber.split('.');
     RegExp regex = RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))');

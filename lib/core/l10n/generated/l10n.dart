@@ -1060,10 +1060,10 @@ class AppLocalizations {
     );
   }
 
-  /// `Futuras`
+  /// `Futuras `
   String get homeTabFutureBills {
     return Intl.message(
-      'Futuras',
+      'Futuras ',
       name: 'homeTabFutureBills',
       desc: '',
       args: [],
