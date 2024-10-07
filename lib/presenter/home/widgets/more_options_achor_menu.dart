@@ -9,7 +9,6 @@ import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/domain/models/enums/bill_sorting.dart';
-import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
 
@@ -48,11 +47,6 @@ class _MoreOptionsAnchorMenuState extends State<MoreOptionsAnchorMenu> {
         );
       },
       menuChildren: [
-        CustomMenuItemButton(
-          svg: AppIcons.add,
-          label: AppLocalizations.current.homeAppBarAddNewBill,
-          onPressed: () => _onCreateBillPressed(context),
-        ),
         CustomMenuItemButton(
           svg: AppIcons.addReady,
           label: AppLocalizations.current.homeAppBarAddPromptBills,
@@ -106,13 +100,5 @@ class _MoreOptionsAnchorMenuState extends State<MoreOptionsAnchorMenu> {
       onUpdate: () => _initialCubit.onUpdateBillSorting(billSorting),
     );
     _onToggleOrderOption();
-  }
-
-  void _onCreateBillPressed(BuildContext context) {
-    _homeBillsCubit.setSearchByNameValue('');
-    context.read<BillCubit>().initiateCreationFlow(
-          _homeBillsCubit.state.userId,
-        );
-    context.pushTo(Routes.billName);
   }
 }

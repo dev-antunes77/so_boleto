@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/custom_payed_tag/payed_tag_selector.dart';
 import 'package:so_boleto/core/components/custom_status_handler/custom_status_handler.dart';
 import 'package:so_boleto/core/components/thin_line_separator/thin_line_separator.dart';
+import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/domain/models/enums/page_response_handler.dart';
 import 'package:so_boleto/domain/models/enums/payed_tag.dart';
@@ -58,13 +59,19 @@ class HomeBillTab extends StatelessWidget {
                   ),
                   month: month!,
                 )
-              : CurrentBillListTile(
-                  bill: bill,
-                  payedTag: payedTag,
-                  payedTagSelector: PayedTagSelector(
-                    bill.isMonthPayed(),
-                    payedTag: payedTag,
-                  ),
+              : Column(
+                  children: [
+                    CurrentBillListTile(
+                      bill: bill,
+                      payedTag: payedTag,
+                      payedTagSelector: PayedTagSelector(
+                        bill.isMonthPayed(),
+                        payedTag: payedTag,
+                      ),
+                    ),
+                    if (bill == bills.last)
+                      const SizedBox(height: AppThemeValues.spaceEnormous),
+                  ],
                 );
         },
       ),

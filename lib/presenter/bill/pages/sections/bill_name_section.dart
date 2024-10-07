@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/buttons/pill_button.dart';
 import 'package:so_boleto/core/components/expanded_space/expanded_space.dart';
+import 'package:so_boleto/core/extensions/string_extensions.dart';
+import 'package:so_boleto/core/helpers/capitalize_formatter.dart';
 import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
@@ -46,22 +48,24 @@ class _BillNameSectionState extends State<BillNameSection> {
               BillTextField(
                 hitText: AppLocalizations.current.billFlowName,
                 controller: _billNameController,
-                onChanged: (value) {
-                  context.read<BillCubit>().onBillNameChange(value);
-                },
+                onChanged: (value) => context
+                    .read<BillCubit>()
+                    .onBillNameChange(value.capitalize()),
                 textInputAction: _getTextInputAction(
                     state.bill.name, state.bill.description),
                 onSubmitted: (_) => _onSubmitted(state.bill.name,
                     state.bill.description, state.isEditionFlow),
                 onTapOutside: (p0) => FocusScope.of(context).unfocus(),
                 maxLines: _getProperMaxLines(_billNameController.text.length),
+                formatters: [CapitalizeInputFormatter()],
               ),
               BillTextField(
                 hitText: AppLocalizations.current.billFlowDescription,
                 controller: _billDescriptionController,
                 helperText: AppLocalizations.current.billFlowOptional,
-                onChanged: (value) =>
-                    context.read<BillCubit>().onBillDescriptionChange(value),
+                onChanged: (value) => context
+                    .read<BillCubit>()
+                    .onBillDescriptionChange(value.capitalize()),
                 textInputAction: _getTextInputAction(
                     state.bill.name, state.bill.description),
                 onSubmitted: (_) => _onSubmitted(state.bill.name,
@@ -70,6 +74,7 @@ class _BillNameSectionState extends State<BillNameSection> {
                 maxLines:
                     _getProperMaxLines(_billDescriptionController.text.length),
                 hasExtendedLength: true,
+                formatters: [CapitalizeInputFormatter()],
               ),
               const ExpandedSpace(),
               if (state.isEditionFlow)

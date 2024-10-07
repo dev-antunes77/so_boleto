@@ -9,10 +9,12 @@ import 'package:so_boleto/core/components/thin_line_separator/thin_line_separato
 import 'package:so_boleto/core/constants/app_constants.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/routes/routes.dart';
+import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
 import 'package:so_boleto/domain/models/enums/page_response_handler.dart';
+import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
 import 'package:so_boleto/presenter/home/tabs/home_bill_tab.dart';
 import 'package:so_boleto/presenter/home/tabs/home_bill_tab_titles.dart';
@@ -46,6 +48,7 @@ class _HomePageCurrentState extends State<HomePageCurrent>
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.read<ThemeCubit>().state.selectedColors;
     return CustomSafeArea(
       child: FullPageLoadingStack(
         overlayBuilder: BlocConsumer<HomeBillsCubit, HomeBillsState>(
@@ -60,77 +63,99 @@ class _HomePageCurrentState extends State<HomePageCurrent>
             isLoading: state.status == BaseStateStatus.loading,
           ),
         ),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                HomeNavigatorButton(
-                  isFuture: false,
-                  onTap: _onOldBillsNavigation,
-                ),
-                Text(
-                  DateFormat('MMMM yyyy')
-                      .format(AppConstants.currentDate)
-                      .capitalize(),
-                  style: context.textRobotoMediumToLarge,
-                ),
-                HomeNavigatorButton(
-                  isFuture: true,
-                  onTap: () => context.pushTo(
-                    Routes.homeFuture,
+        child: Scaffold(
+          body: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  HomeNavigatorButton(
+                    isFuture: false,
+                    onTap: _onOldBillsNavigation,
                   ),
-                ),
-              ],
-            ),
-            LineSeparator.horizontalLimitedThick(
-              height: AppThemeValues.spaceXTiny,
-              width: double.infinity,
-              noPadding: true,
-            ),
-            HomeBillTabTitles(tabController: _tabController),
-            Expanded(
-              child: BlocBuilder<HomeBillsCubit, HomeBillsState>(
-                builder: (context, state) {
-                  if (state.status == BaseStateStatus.loading &&
-                      state.bills.isEmpty) {
-                    return const SizedBox.shrink();
-                  }
-                  return state.when(
-                    onError: () =>
-                        const CustomStatusHandler(PageResponseHandler.error),
-                    onState: (_) => TabBarView(
-                      controller: _tabController,
-                      physics: const NeverScrollableScrollPhysics(),
-                      children: [
-                        HomeBillTab(
-                          state.inFilteringCase(state.allBills),
-                          message: state.paramsApplied
-                              ? PageResponseHandler.noneForTheseFilters
-                              : PageResponseHandler.noneRegistered,
-                        ),
-                        HomeBillTab(
-                          state.inFilteringCase(state.payedBills),
-                          message: state.paramsApplied
-                              ? PageResponseHandler.noneForTheseFilters
-                              : PageResponseHandler.nonePayed,
-                        ),
-                        HomeBillTab(
-                          state.inFilteringCase(state.delayedBills),
-                          message: state.paramsApplied
-                              ? PageResponseHandler.noneForTheseFilters
-                              : PageResponseHandler.noneDelayed,
-                        ),
-                      ],
+                  Text(
+                    DateFormat('MMMM yyyy')
+                        .format(AppConstants.currentDate)
+                        .capitalize(),
+                    style: context.textRobotoMediumToLarge,
+                  ),
+                  HomeNavigatorButton(
+                    isFuture: true,
+                    onTap: () => context.pushTo(
+                      Routes.homeFuture,
                     ),
-                  );
-                },
+                  ),
+                ],
+              ),
+              LineSeparator.horizontalLimitedThick(
+                height: AppThemeValues.spaceXTiny,
+                width: double.infinity,
+                noPadding: true,
+              ),
+              HomeBillTabTitles(tabController: _tabController),
+              Expanded(
+                child: BlocBuilder<HomeBillsCubit, HomeBillsState>(
+                  builder: (context, state) {
+                    if (state.status == BaseStateStatus.loading &&
+                        state.bills.isEmpty) {
+                      return const SizedBox.shrink();
+                    }
+                    return state.when(
+                      onError: () =>
+                          const CustomStatusHandler(PageResponseHandler.error),
+                      onState: (_) => TabBarView(
+                        controller: _tabController,
+                        physics: const NeverScrollableScrollPhysics(),
+                        children: [
+                          HomeBillTab(
+                            state.inFilteringCase(state.allBills),
+                            message: state.paramsApplied
+                                ? PageResponseHandler.noneForTheseFilters
+                                : PageResponseHandler.noneRegistered,
+                          ),
+                          HomeBillTab(
+                            state.inFilteringCase(state.payedBills),
+                            message: state.paramsApplied
+                                ? PageResponseHandler.noneForTheseFilters
+                                : PageResponseHandler.nonePayed,
+                          ),
+                          HomeBillTab(
+                            state.inFilteringCase(state.delayedBills),
+                            message: state.paramsApplied
+                                ? PageResponseHandler.noneForTheseFilters
+                                : PageResponseHandler.noneDelayed,
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+          floatingActionButton: Card(
+            shape: const CircleBorder(),
+            color: colors.circleBackground,
+            elevation: 12,
+            child: Padding(
+              padding: const EdgeInsets.all(AppThemeValues.spaceXXSmall),
+              child: InkWell(
+                onTap: () => _onCreateBillPressed(context),
+                child: Icon(Icons.add, size: 30, color: colors.tag),
               ),
             ),
-          ],
+          ),
         ),
       ),
     );
+  }
+
+  void _onCreateBillPressed(BuildContext context) {
+    cubit.setSearchByNameValue('');
+    context.read<BillCubit>().initiateCreationFlow(
+          cubit.state.userId,
+        );
+    context.pushTo(Routes.billName);
   }
 
   void _onOldBillsNavigation() {

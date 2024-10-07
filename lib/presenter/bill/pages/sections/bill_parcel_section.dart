@@ -8,6 +8,7 @@ import 'package:so_boleto/core/constants/app_constants.dart';
 import 'package:so_boleto/core/extensions/num_extensions.dart';
 import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes.dart';
+import 'package:so_boleto/core/theme/extensions/size_extensions.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
@@ -24,29 +25,54 @@ class BillParcelSection extends StatefulWidget {
 
 class _BillParcelSectionState extends State<BillParcelSection> {
   bool parcelChoice = false;
+  bool uniqueChoice = false;
   bool monthlyChoice = false;
 
   @override
   Widget build(BuildContext context) {
     return BillShell(
+      height: context.height * 0.5,
       child: Column(
         children: [
           AppThemeValues.spaceVerticalImense,
+          Padding(
+            padding: const EdgeInsets.only(left: AppThemeValues.spaceLarge),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Tipo de conta:',
+                style: context.textRobotoSubtitleMediumToLarge,
+              ),
+            ),
+          ),
+          AppThemeValues.spaceVerticalLarge,
           BillParcelSwitchRow(
-            label: 'Essa é uma conta mensal?',
+            label: 'Mensal?',
             choice: monthlyChoice,
             onChanged: (value) => setState(() {
               monthlyChoice = value;
               parcelChoice = false;
+              uniqueChoice = false;
               context.read<BillCubit>().onBillMonthlyChange(value);
             }),
           ),
           BillParcelSwitchRow(
-            label: 'Ou uma conta parcelada?',
+            label: 'Única?',
+            choice: uniqueChoice,
+            onChanged: (value) => setState(() {
+              uniqueChoice = value;
+              parcelChoice = false;
+              monthlyChoice = false;
+              context.read<BillCubit>().onBillParcelsChange(billParcels: 1);
+            }),
+          ),
+          BillParcelSwitchRow(
+            label: 'Parcelada?',
             choice: parcelChoice,
             onChanged: (value) => setState(() {
               parcelChoice = value;
               monthlyChoice = false;
+              uniqueChoice = false;
               context.read<BillCubit>().onBillParcelsChange(billParcels: 2);
             }),
           ),
@@ -111,5 +137,5 @@ class _BillParcelSectionState extends State<BillParcelSection> {
     });
   }
 
-  bool _disableButton() => !parcelChoice && !monthlyChoice;
+  bool _disableButton() => !parcelChoice && !monthlyChoice && !uniqueChoice;
 }

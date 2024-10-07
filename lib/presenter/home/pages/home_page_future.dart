@@ -75,8 +75,7 @@ class _HomePageFutureState extends State<HomePageFuture>
               physics: const BouncingScrollPhysics(
                   decelerationRate: ScrollDecelerationRate.fast),
               child: ListView.separated(
-                separatorBuilder: (context, index) =>
-                    LineSeparator.horizontal(noPadding: true),
+                separatorBuilder: (context, index) => const SizedBox(height: 6),
                 itemCount: bills.length,
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,

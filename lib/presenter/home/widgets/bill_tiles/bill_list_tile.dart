@@ -48,11 +48,11 @@ class BillListTile extends StatelessWidget {
               leading: CustomCategoryItem(category: bill.category),
               title: Text(
                 payedTag.isStample && payedThisMonth
-                    ? bill.name.capitalize().breakLongStrings(
-                          length: bill.name.length,
-                          desiredLength: 18,
-                        )
-                    : bill.name.capitalize(),
+                    ? bill.name.breakLongStrings(
+                        length: bill.name.length,
+                        desiredLength: 18,
+                      )
+                    : bill.name,
                 style: context.textRobotoSubtitleSmall,
                 maxLines: 1,
               ),
@@ -62,11 +62,11 @@ class BillListTile extends StatelessWidget {
                   if (bill.description.isNotEmpty)
                     Text(
                       payedTag.isStample && payedThisMonth
-                          ? bill.description.capitalize().breakLongStrings(
-                                length: bill.description.length,
-                                desiredLength: 22,
-                              )
-                          : bill.description.capitalize(),
+                          ? bill.description.breakLongStrings(
+                              length: bill.description.length,
+                              desiredLength: 22,
+                            )
+                          : bill.description,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),

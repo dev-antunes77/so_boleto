@@ -23,7 +23,7 @@ extension StringExtensions on String {
       BillSorting.values.firstWhere((element) => element.kind == this);
 
   String capitalize() =>
-      isNotEmpty ? this[0].toUpperCase() + substring(1).toLowerCase() : this;
+      isNotEmpty ? this[0].toUpperCase() + substring(1) : this;
 
   int revertCurrencyFormat() {
     RegExp regex = RegExp(r'[^0-9]');
