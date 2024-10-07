@@ -78,7 +78,7 @@ class BillListTile extends StatelessWidget {
                     )
                   else
                     Text(
-                      bill.daysTillOrAfterDueDay(date).properDueDay(),
+                      bill.dueDay.properDueDay(),
                       style: context.textRobotoSubtitleTiny,
                     ),
                 ],

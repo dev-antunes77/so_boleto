@@ -170,12 +170,6 @@ class BillModel extends Equatable {
     }
   }
 
-  int daysTillOrAfterDueDay(DateTime endDate) {
-    final presentDay = DateTime(
-        AppConstants.currentDate.year, AppConstants.currentDate.month, dueDay);
-    return endDate.difference(presentDay).inDays;
-  }
-
   @override
   List<Object?> get props => [
         id,
