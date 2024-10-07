@@ -141,7 +141,7 @@ class _HomePageCurrentState extends State<HomePageCurrent>
               padding: const EdgeInsets.all(AppThemeValues.spaceXXSmall),
               child: InkWell(
                 onTap: () => _onCreateBillPressed(context),
-                child: Icon(Icons.add, size: 30, color: colors.tag),
+                child: Icon(Icons.add, size: 30, color: colors.text),
               ),
             ),
           ),
