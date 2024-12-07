@@ -107,6 +107,11 @@ class _HomePageFutureState extends State<HomePageFuture>
                                 height: 2,
                                 horizontalPadding: 0.0,
                               ),
+                              FutureBillInfoRow(
+                                label:
+                                    AppLocalizations.current.homeTabFutureTotal,
+                                value: bill.totalValue.formatCurrency(),
+                              ),
                               Row(
                                 children: [
                                   FutureBillInfoRow(

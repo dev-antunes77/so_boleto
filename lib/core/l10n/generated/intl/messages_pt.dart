@@ -195,6 +195,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "homeTabFuturePaied": MessageLookupByLibrary.simpleMessage("Pago  "),
         "homeTabFutureRemaining":
             MessageLookupByLibrary.simpleMessage("Restante  "),
+        "homeTabFutureTotal": MessageLookupByLibrary.simpleMessage("Total  "),
         "homeTabPayed": MessageLookupByLibrary.simpleMessage("Pagas"),
         "loginEmail": MessageLookupByLibrary.simpleMessage("Email"),
         "loginHasAccountAlready":

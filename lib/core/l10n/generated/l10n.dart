@@ -1110,6 +1110,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Total  `
+  String get homeTabFutureTotal {
+    return Intl.message(
+      'Total  ',
+      name: 'homeTabFutureTotal',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Última parcela em  `
   String get homeTabFutureLastParcel {
     return Intl.message(

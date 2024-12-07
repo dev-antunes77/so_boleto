@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:so_boleto/core/constants/app_constants.dart';
 
 extension DateTimeExtensions on DateTime {
   String dateTimeToDayMonthString() =>
@@ -10,6 +11,10 @@ extension DateTimeExtensions on DateTime {
     final DateFormat format = DateFormat('dd/MM/yyyy');
     return format.format(this);
   }
+
+  bool currentMonthAndYear() =>
+      month == AppConstants.currentDate.month &&
+      year == AppConstants.currentDate.year;
 
   DateTime changeMonth({required bool isAddition, DateTime? givingMonth}) {
     int year = givingMonth?.year ?? this.year;

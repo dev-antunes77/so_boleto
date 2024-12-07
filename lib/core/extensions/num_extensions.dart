@@ -23,6 +23,12 @@ extension IntExtensions on int {
     }
     return AppLocalizations.current.dueDayExtensionsDueToday;
   }
+
+  String properOldMonthsDelay(DateTime date) {
+    Duration difference = AppConstants.currentDate.difference(date);
+
+    return '${AppLocalizations.current.dueDayExtensionsDelayedSince} ${difference.inDays.abs()} days';
+  }
 }
 
 extension DoubleExtensions on double {

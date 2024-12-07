@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:so_boleto/core/components/custom_category_icon/custom_category_item.dart';
+import 'package:so_boleto/core/extensions/date_time_extensions.dart';
 import 'package:so_boleto/core/extensions/num_extensions.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/helpers/app_formatters.dart';
@@ -76,9 +77,14 @@ class BillListTile extends StatelessWidget {
                           .payedAt(bill.getPaymentDate(date)),
                       style: context.textRobotoSubtitleTiny,
                     )
-                  else
+                  else if (date.currentMonthAndYear())
                     Text(
                       bill.dueDay.properDueDay(),
+                      style: context.textRobotoSubtitleTiny,
+                    )
+                  else
+                    Text(
+                      bill.dueDay.properOldMonthsDelay(date),
                       style: context.textRobotoSubtitleTiny,
                     ),
                 ],
