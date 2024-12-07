@@ -22,7 +22,7 @@ class _ExpensesPageState extends State<ExpensesPage>
   void initState() {
     cubit = context.read<ExpensesCubit>();
     final homeBillState = context.read<HomeBillsCubit>().state;
-    cubit.onInit(homeBillState.totalExpensesPayed);
+    cubit.onInit(homeBillState.allBills);
     super.initState();
   }
 
@@ -35,7 +35,7 @@ class _ExpensesPageState extends State<ExpensesPage>
         children: [
           ExpensesTile(
             label: AppLocalizations.current.expensesForThisMonth,
-            value: cubit.state.totalExpenses,
+            value: cubit.state.totalExpensesThisMonth,
           ),
           LineSeparator.infiniteHorizon(),
           ExpensesTile(

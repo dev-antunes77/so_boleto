@@ -111,7 +111,7 @@ class BillModel extends Equatable {
 
   String get lastParcelDate {
     DateTime lastMonth = createdAt;
-    for (var i = 0; i < totalParcels; i++) {
+    for (var i = 1; i < totalParcels; i++) {
       lastMonth = lastMonth.changeMonth(isAddition: true);
     }
     return DateFormat('MMMM yyyy').format(lastMonth).capitalize();

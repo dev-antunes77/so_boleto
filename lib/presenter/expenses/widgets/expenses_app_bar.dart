@@ -8,7 +8,7 @@ class ExpensesAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomAppBar(
-      title: AppLocalizations.current.expensesForThisMonth,
+      title: AppLocalizations.current.expenses,
       actions: const [],
     );
   }

@@ -34,8 +34,11 @@ class _MonthNavigatorState extends State<MonthNavigator> {
         return state.currentMonth;
       },
       builder: (context, month) {
-        final isListEmpty =
-            context.read<HomeBillsCubit>().state.getOldBills(month).isEmpty;
+        final isListEmpty = context
+            .read<HomeBillsCubit>()
+            .state
+            .getReferredMonthBills(month)
+            .isEmpty;
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

@@ -11,10 +11,10 @@ extension DateTimeExtensions on DateTime {
     return format.format(this);
   }
 
-  DateTime changeMonth({required bool isAddition}) {
-    int year = this.year;
-    int month = this.month;
-    int day = this.day;
+  DateTime changeMonth({required bool isAddition, DateTime? givingMonth}) {
+    int year = givingMonth?.year ?? this.year;
+    int month = givingMonth?.month ?? this.month;
+    int day = givingMonth?.year ?? this.day;
 
     int newMonth = isAddition ? month + 1 : month - 1;
     int newYear = year;

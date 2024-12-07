@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, must_be_immutable
 part of 'expenses_cubit.dart';
 
 class ExpensesState extends BaseState with EquatableMixin {
@@ -9,12 +9,12 @@ class ExpensesState extends BaseState with EquatableMixin {
     int? totalExpensesLast3Months,
     int? totalExpensesLast6Months,
     int? totalExpensesLast9Months,
-  })  : totalExpenses = totalExpenses ?? 0,
+  })  : totalExpensesThisMonth = totalExpenses ?? 0,
         totalExpensesLast3Months = totalExpensesLast3Months ?? 0,
         totalExpensesLast6Months = totalExpensesLast6Months ?? 0,
         totalExpensesLast9Months = totalExpensesLast9Months ?? 0;
 
-  final int totalExpenses;
+  final int totalExpensesThisMonth;
   final int totalExpensesLast3Months;
   final int totalExpensesLast6Months;
   final int totalExpensesLast9Months;
@@ -24,7 +24,7 @@ class ExpensesState extends BaseState with EquatableMixin {
     return [
       callbackMessage,
       status,
-      totalExpenses,
+      totalExpensesThisMonth,
       totalExpensesLast3Months,
       totalExpensesLast6Months,
       totalExpensesLast9Months,
@@ -35,7 +35,7 @@ class ExpensesState extends BaseState with EquatableMixin {
   ExpensesState copyWith({
     BaseStateStatus? status,
     String? callbackMessage,
-    int? totalExpenses,
+    int? totalExpensesThisMonth,
     int? totalExpensesLast3Months,
     int? totalExpensesLast6Months,
     int? totalExpensesLast9Months,
@@ -43,7 +43,7 @@ class ExpensesState extends BaseState with EquatableMixin {
       ExpensesState(
         status: status ?? this.status,
         callbackMessage: callbackMessage ?? this.callbackMessage,
-        totalExpenses: totalExpenses ?? this.totalExpenses,
+        totalExpenses: totalExpensesThisMonth ?? totalExpensesThisMonth,
         totalExpensesLast3Months:
             totalExpensesLast3Months ?? this.totalExpensesLast3Months,
         totalExpensesLast6Months:

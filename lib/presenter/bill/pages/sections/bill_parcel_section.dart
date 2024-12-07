@@ -40,14 +40,14 @@ class _BillParcelSectionState extends State<BillParcelSection> {
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Tipo de conta:',
+                AppLocalizations.current.billFlowBillKindQuestion,
                 style: context.textRobotoSubtitleMediumToLarge,
               ),
             ),
           ),
           AppThemeValues.spaceVerticalLarge,
           BillParcelSwitchRow(
-            label: 'Mensal?',
+            label: AppLocalizations.current.billFlowSwitchMonthly,
             choice: monthlyChoice,
             onChanged: (value) => setState(() {
               monthlyChoice = value;
@@ -57,7 +57,7 @@ class _BillParcelSectionState extends State<BillParcelSection> {
             }),
           ),
           BillParcelSwitchRow(
-            label: 'Única?',
+            label: AppLocalizations.current.billFlowSwitchUnique,
             choice: uniqueChoice,
             onChanged: (value) => setState(() {
               uniqueChoice = value;
@@ -67,7 +67,7 @@ class _BillParcelSectionState extends State<BillParcelSection> {
             }),
           ),
           BillParcelSwitchRow(
-            label: 'Parcelada?',
+            label: AppLocalizations.current.billFlowSwitchParceled,
             choice: parcelChoice,
             onChanged: (value) => setState(() {
               parcelChoice = value;

@@ -160,21 +160,41 @@ class AppLocalizations {
     );
   }
 
-  /// `Essa é uma conta mensal fixa?`
-  String get billFlowFixedSwitch {
+  /// `Qual o tipo dessa conta?`
+  String get billFlowBillKindQuestion {
     return Intl.message(
-      'Essa é uma conta mensal fixa?',
-      name: 'billFlowFixedSwitch',
+      'Qual o tipo dessa conta?',
+      name: 'billFlowBillKindQuestion',
       desc: '',
       args: [],
     );
   }
 
-  /// `Ou uma conta mensal parcelada?`
-  String get billFlowParceledSwitch {
+  /// `Mensal`
+  String get billFlowSwitchMonthly {
     return Intl.message(
-      'Ou uma conta mensal parcelada?',
-      name: 'billFlowParceledSwitch',
+      'Mensal',
+      name: 'billFlowSwitchMonthly',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Parcelada`
+  String get billFlowSwitchParceled {
+    return Intl.message(
+      'Parcelada',
+      name: 'billFlowSwitchParceled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Única`
+  String get billFlowSwitchUnique {
+    return Intl.message(
+      'Única',
+      name: 'billFlowSwitchUnique',
       desc: '',
       args: [],
     );

@@ -53,7 +53,7 @@ class _HomePagePastState extends State<HomePagePast>
                 buildWhen: (previous, current) =>
                     previous.status != current.status,
                 builder: (context, state) {
-                  final oldBills = state.getOldBills(_months[index]);
+                  final oldBills = state.getReferredMonthBills(_months[index]);
                   final oldPayedBills = state.getPayedOldBills(_months[index]);
                   final oldDelayedBills =
                       state.getDelayedOldBills(_months[index]);

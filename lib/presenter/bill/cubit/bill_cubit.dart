@@ -67,7 +67,7 @@ class BillCubit extends Cubit<BillState> with BaseCubit {
     emit(
       state.copyWith(
         status: BaseStateStatus.success,
-        bill: state.bill.copyWith(dueDay: billDueDate),
+        bill: state.bill.copyWith(dueDay: billDueDate.nonZero()),
       ),
     );
   }

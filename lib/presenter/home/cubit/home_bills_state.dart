@@ -63,7 +63,7 @@ class HomeBillsState extends BaseState with EquatableMixin {
   List<BillModel> get parceledBills =>
       allBills.where((element) => element.totalParcels > 1).toList();
 
-  List<BillModel> getOldBills(DateTime oldMonth) {
+  List<BillModel> getReferredMonthBills(DateTime oldMonth) {
     List<BillModel> bills = [];
     for (var bill in allBills) {
       if (bill.checkReferredMonth(oldMonth)) {
@@ -73,13 +73,15 @@ class HomeBillsState extends BaseState with EquatableMixin {
     return bills;
   }
 
-  List<BillModel> getPayedOldBills(DateTime oldMonth) => getOldBills(oldMonth)
-      .where((element) => element.isMonthPayed(date: oldMonth))
-      .toList();
+  List<BillModel> getPayedOldBills(DateTime oldMonth) =>
+      getReferredMonthBills(oldMonth)
+          .where((element) => element.isMonthPayed(date: oldMonth))
+          .toList();
 
-  List<BillModel> getDelayedOldBills(DateTime oldMonth) => getOldBills(oldMonth)
-      .where((element) => element.isMonthDelayed(date: oldMonth))
-      .toList();
+  List<BillModel> getDelayedOldBills(DateTime oldMonth) =>
+      getReferredMonthBills(oldMonth)
+          .where((element) => element.isMonthDelayed(date: oldMonth))
+          .toList();
 
   List<BillModel> get futureBills {
     List<BillModel> bills = [];
@@ -95,31 +97,6 @@ class HomeBillsState extends BaseState with EquatableMixin {
 
   List<BillModel> inFilteringCase(List<BillModel> bills) =>
       querySearch.isNotEmpty ? bills.filterBills(querySearch) : bills;
-
-  int get totalExpensesPayed {
-    int total = 0;
-    for (var bill in allBills) {
-      for (var payment in bill.billPayment) {
-        if (payment.billStatus.isPayed) {
-          total += bill.value;
-        }
-      }
-    }
-    return total;
-  }
-
-  int get totalExpensesUnpayed {
-    int total = 0;
-    for (var bill in allBills) {
-      for (var payment in bill.billPayment) {
-        if (payment.billStatus == BillStatus.open ||
-            payment.billStatus == BillStatus.delayed) {
-          total += bill.value;
-        }
-      }
-    }
-    return total;
-  }
 
   @override
   HomeBillsState copyWith({

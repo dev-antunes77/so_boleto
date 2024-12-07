@@ -11,6 +11,7 @@ import 'package:so_boleto/domain/usecases/create_user.dart';
 import 'package:so_boleto/domain/usecases/create_user_storage.dart';
 import 'package:so_boleto/domain/usecases/delete_bill.dart';
 import 'package:so_boleto/domain/usecases/edit_bill.dart';
+import 'package:so_boleto/domain/usecases/expense_three_to_nine_months.dart';
 import 'package:so_boleto/domain/usecases/filter_bills_by_params.dart';
 import 'package:so_boleto/domain/usecases/get_bills.dart';
 import 'package:so_boleto/domain/usecases/get_image_from_camera.dart';
@@ -129,6 +130,8 @@ abstract class InjectionService {
         _i.get<HiveUserDatabase>(),
       ),
     );
+
+    _i.registerFactory(() => ExpenseThreeToNineMonths());
 
     _i.registerFactory(
       () => ClearUserStorage(
@@ -276,7 +279,9 @@ abstract class InjectionService {
     );
 
     _i.registerFactory(
-      () => ExpensesCubit(),
+      () => ExpensesCubit(
+        _i.get<ExpenseThreeToNineMonths>(),
+      ),
     );
 
     _i.registerFactory(

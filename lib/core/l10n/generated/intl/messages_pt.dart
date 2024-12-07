@@ -49,6 +49,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Adicionar às contas pagas"),
         "billFlowBillEdition":
             MessageLookupByLibrary.simpleMessage("Edição da conta"),
+        "billFlowBillKindQuestion":
+            MessageLookupByLibrary.simpleMessage("Qual o tipo dessa conta?"),
         "billFlowCheckCategory":
             MessageLookupByLibrary.simpleMessage("Categoria"),
         "billFlowCheckDescription":
@@ -61,8 +63,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Descrição da conta"),
         "billFlowDueDayTitle":
             MessageLookupByLibrary.simpleMessage("Dia do vencimento"),
-        "billFlowFixedSwitch": MessageLookupByLibrary.simpleMessage(
-            "Essa é uma conta mensal fixa?"),
         "billFlowHowManyParcels":
             MessageLookupByLibrary.simpleMessage("Quantas parcelas?"),
         "billFlowName": MessageLookupByLibrary.simpleMessage("Nome da conta"),
@@ -70,10 +70,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "billFlowOptional": MessageLookupByLibrary.simpleMessage("(Opcional)"),
         "billFlowParcelValue":
             MessageLookupByLibrary.simpleMessage("(Valor da parcela)"),
-        "billFlowParceledSwitch": MessageLookupByLibrary.simpleMessage(
-            "Ou uma conta mensal parcelada?"),
         "billFlowRemoveFromPayed":
             MessageLookupByLibrary.simpleMessage("Remover das contas pagas"),
+        "billFlowSwitchMonthly": MessageLookupByLibrary.simpleMessage("Mensal"),
+        "billFlowSwitchParceled":
+            MessageLookupByLibrary.simpleMessage("Parcelada"),
+        "billFlowSwitchUnique": MessageLookupByLibrary.simpleMessage("Única"),
         "billFlowValueTitle":
             MessageLookupByLibrary.simpleMessage("Valor da conta"),
         "categoryAutomobile": MessageLookupByLibrary.simpleMessage("Veículo"),

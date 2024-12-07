@@ -6,9 +6,9 @@ import 'package:so_boleto/domain/models/filter_params.dart';
 
 final class FilterBillsByParams {
   FilterBillsByParams();
-  static const parcels = 'parcels';
-  static const dueDay = 'dueDay';
-  static const value = 'value';
+  static const _parcels = 'parcels';
+  static const _dueDay = 'dueDay';
+  static const _value = 'value';
 
   List<BillModel> call(List<BillModel> bills, FilterParams params) {
     try {
@@ -22,8 +22,8 @@ final class FilterBillsByParams {
           .toList();
 
       billsByParecels =
-          _filterNumericalRange(bills, parcels, params.parcelRange);
-      billByDueDay = _filterNumericalRange(bills, dueDay, params.dueDayRange);
+          _filterNumericalRange(bills, _parcels, params.parcelRange);
+      billByDueDay = _filterNumericalRange(bills, _dueDay, params.dueDayRange);
 
       if (params.priceRange.isNotEmpty) {
         final updatedPriceRange = [
@@ -31,7 +31,7 @@ final class FilterBillsByParams {
           (params.priceRange.last * 100)
         ];
         billByPriceRange =
-            _filterNumericalRange(bills, value, updatedPriceRange);
+            _filterNumericalRange(bills, _value, updatedPriceRange);
       }
 
       return billByCategory + billsByParecels + billByDueDay + billByPriceRange;
@@ -49,9 +49,9 @@ final class FilterBillsByParams {
       params.isEmpty
           ? []
           : bills.where((element) {
-              if (type == parcels) {
+              if (type == _parcels) {
                 return _filterMatch(element.totalParcels, params);
-              } else if (type == dueDay) {
+              } else if (type == _dueDay) {
                 return _filterMatch(element.dueDay, params);
               } else {
                 return _filterMatch(element.value, params);
