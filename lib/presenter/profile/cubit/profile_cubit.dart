@@ -13,18 +13,18 @@ part 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> with BaseCubit {
   ProfileCubit(
-    this._signOutUsecase,
+    // this._signOutUsecase,
     this._confirmUserPasswordUsecase,
     this._clearUserStorageUsecase,
-    this._getImageFromCameraUsecase,
-    this._getImageFromGalleryUsecase,
+    // this._getImageFromCameraUsecase,
+    // this._getImageFromGalleryUsecase,
   ) : super(ProfileState(status: BaseStateStatus.initial));
 
-  final SignOut _signOutUsecase;
+  // final SignOut _signOutUsecase;
   final ConfirmUserPassword _confirmUserPasswordUsecase;
   final ClearUserStorage _clearUserStorageUsecase;
-  final GetImageFromCamera _getImageFromCameraUsecase;
-  final GetImageFromGallery _getImageFromGalleryUsecase;
+  // final GetImageFromCamera _getImageFromCameraUsecase;
+  // final GetImageFromGallery _getImageFromGalleryUsecase;
 
   void onInit(String userId) {
     emit(state.copyWith(status: BaseStateStatus.initial, userId: userId));
@@ -32,7 +32,7 @@ class ProfileCubit extends Cubit<ProfileState> with BaseCubit {
 
   Future<void> onLogout() async {
     emit(state.copyWith(status: BaseStateStatus.loading));
-    await _signOutUsecase();
+    // await _signOutUsecase();
     emit(state.copyWith(status: BaseStateStatus.success));
   }
 
@@ -63,14 +63,14 @@ class ProfileCubit extends Cubit<ProfileState> with BaseCubit {
     Future<void> Function(String) savePath,
   ) async {
     try {
-      emit(state.copyWith(status: BaseStateStatus.loading));
-      final image = await _getImageFromCameraUsecase();
-      if (image != null) {
-        await savePath(image.path);
-        emit(state.copyWith(status: BaseStateStatus.success, image: image));
-      } else {
-        emit(state.copyWith(status: BaseStateStatus.focusedError));
-      }
+      // emit(state.copyWith(status: BaseStateStatus.loading));
+      // final image = await _getImageFromCameraUsecase();
+      // if (image != null) {
+      //   await savePath(image.path);
+      //   emit(state.copyWith(status: BaseStateStatus.success, image: image));
+      // } else {
+      //   emit(state.copyWith(status: BaseStateStatus.focusedError));
+      // }
     } on AppError catch (error) {
       onAppError(error);
     }
@@ -80,14 +80,14 @@ class ProfileCubit extends Cubit<ProfileState> with BaseCubit {
     Future<void> Function(String) savePath,
   ) async {
     try {
-      emit(state.copyWith(status: BaseStateStatus.loading));
-      final image = await _getImageFromGalleryUsecase();
-      if (image != null) {
-        await savePath(image.path);
-        emit(state.copyWith(status: BaseStateStatus.success, image: image));
-      } else {
-        emit(state.copyWith(status: BaseStateStatus.focusedError));
-      }
+      // emit(state.copyWith(status: BaseStateStatus.loading));
+      // final image = await _getImageFromGalleryUsecase();
+      // if (image != null) {
+      //   await savePath(image.path);
+      //   emit(state.copyWith(status: BaseStateStatus.success, image: image));
+      // } else {
+      //   emit(state.copyWith(status: BaseStateStatus.focusedError));
+      // }
     } on AppError catch (error) {
       onAppError(error);
     }

@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:so_boleto/core/extensions/color_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
@@ -89,23 +88,23 @@ class ThemeColors {
     return Color(value);
   }
 
-  factory ThemeColors.fromFirestore(
-      DocumentSnapshot<Map<String, dynamic>> snapshot,
-      [SnapshotOptions? options]) {
-    final data = snapshot.data();
-    return ThemeColors(
-      baseColor: data?['baseColor'],
-      primary: data?['primary'],
-      cardBackground: data?['cardBackground'],
-      circleBackground: data?['circleBackground'],
-      icon: data?['icon'],
-      text: data?['text'],
-      tag: data?['tag'],
-      inversedText: data?['inversedText'],
-      disabled: data?['disabled'],
-      error: data?['error'],
-    );
-  }
+  // factory ThemeColors.fromFirestore(
+  //     DocumentSnapshot<Map<String, dynamic>> snapshot,
+  //     [SnapshotOptions? options]) {
+  //   final data = snapshot.data();
+  //   return ThemeColors(
+  //     baseColor: data?['baseColor'],
+  //     primary: data?['primary'],
+  //     cardBackground: data?['cardBackground'],
+  //     circleBackground: data?['circleBackground'],
+  //     icon: data?['icon'],
+  //     text: data?['text'],
+  //     tag: data?['tag'],
+  //     inversedText: data?['inversedText'],
+  //     disabled: data?['disabled'],
+  //     error: data?['error'],
+  //   );
+  // }
 
   final Color baseColor;
   final Color primary;

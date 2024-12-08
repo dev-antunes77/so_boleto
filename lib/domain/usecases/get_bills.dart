@@ -10,19 +10,24 @@ import 'package:so_boleto/domain/repositories/firestore_repository.dart';
 import 'package:so_boleto/infra/local_database/hive_bill_database/hive_bills_database.dart';
 
 final class GetBills {
-  GetBills(this._hiveBillsDatabase, this._firestoreRepository);
+  GetBills(
+    this._hiveBillsDatabase,
+    // this._firestoreRepository,
+  );
 
   final HiveBillsDatabase _hiveBillsDatabase;
-  final FirestoreRepository _firestoreRepository;
+  // final FirestoreRepository _firestoreRepository;
 
   Future<List<BillModel>> call(String userId, BillSorting billSorting,
       {required bool isInverted}) async {
     try {
       // final bills = await _hiveBillsDatabase.getBills();
-      final bills = await _firestoreRepository.getBills(userId);
-      final sortedBills = _billSorting(bills, billSorting, isInverted);
-      _setDelayedBill(sortedBills);
-      return bills;
+      // final bills = await _firestoreRepository.getBills(userId);
+      // final sortedBills = _billSorting(bills, billSorting, isInverted);
+      // _setDelayedBill(sortedBills);
+      // return bills;
+
+      return [];
     } on AppError catch (error, trace) {
       Log.error(error, trace, 'Error executing $runtimeType: ${error.message}');
       rethrow;

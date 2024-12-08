@@ -207,7 +207,8 @@ abstract class RoutesConfig {
               parentNavigatorKey: _shellKey,
               pageBuilder: (_, state) {
                 final image =
-                    state.extra != null ? state.extra as ImageModel : null;
+                    // state.extra != null ? state.extra as ImageModel :
+                    null;
                 return _getTransitionPage(
                   state,
                   ViewPicture(image!),

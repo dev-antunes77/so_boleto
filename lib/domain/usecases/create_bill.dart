@@ -6,15 +6,18 @@ import 'package:so_boleto/domain/repositories/firestore_repository.dart';
 import 'package:so_boleto/infra/local_database/hive_bill_database/hive_bills_database.dart';
 
 final class CreateBill {
-  CreateBill(this._hiveBillsDatabase, this._firestoreRepository);
+  CreateBill(
+    this._hiveBillsDatabase,
+    //  this._firestoreRepository,
+  );
 
   final HiveBillsDatabase _hiveBillsDatabase;
-  final FirestoreRepository _firestoreRepository;
+  // final FirestoreRepository _firestoreRepository;
 
   Future<void> call(BillModel bill) async {
     try {
       // await _hiveBillsDatabase.createBill(bill);
-      await _firestoreRepository.addBill(bill);
+      // await _firestoreRepository.addBill(bill);
     } on AppError catch (error, trace) {
       Log.error(error, trace, 'Error executing $runtimeType: ${error.message}');
       rethrow;

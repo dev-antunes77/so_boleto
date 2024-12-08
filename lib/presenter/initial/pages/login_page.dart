@@ -214,13 +214,15 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _whenLogInIsSuccessful(bool match) {
-    if (match) {
-      if (cubit.state.user!.hasSeenOnboarding) {
-        context.navigateTo(Routes.home);
-      } else {
-        context.navigateTo(Routes.onboarding);
-      }
-    }
+    context.navigateTo(Routes.home);
+
+    // if (match) {
+    //   if (cubit.state.user!.hasSeenOnboarding) {
+    //     context.navigateTo(Routes.home);
+    //   } else {
+    //     context.navigateTo(Routes.onboarding);
+    //   }
+    // }
   }
 
   _onSignUp() => cubit.onSignUp(_buildUser());

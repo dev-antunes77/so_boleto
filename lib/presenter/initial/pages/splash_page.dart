@@ -27,6 +27,7 @@ class _SplashPageState extends State<SplashPage> {
         context.read<ThemeCubit>().onInit(initialCubit.state.user!);
       }
     });
+    Future.delayed(Duration(seconds: 3), () => context.pushTo(Routes.home));
     super.initState();
   }
 
@@ -40,14 +41,16 @@ class _SplashPageState extends State<SplashPage> {
           listenWhen: (previous, current) => previous.status != current.status,
           listener: (context, state) {
             if (state.status == BaseStateStatus.success && state.user != null) {
-              if (state.user!.hasSeenOnboarding) {
-                context.navigateTo(Routes.home);
-              } else {
-                context.navigateTo(Routes.onboarding);
-              }
-            }
-            if (state.status == BaseStateStatus.success && state.user == null) {
-              context.navigateTo(Routes.login);
+              context.navigateTo(Routes.home);
+
+              //   if (state.user!.hasSeenOnboarding) {
+              //     context.navigateTo(Routes.home);
+              //   } else {
+              //     context.navigateTo(Routes.onboarding);
+              //   }
+              // }
+              // if (state.status == BaseStateStatus.success && state.user == null) {
+              //   context.navigateTo(Routes.login);
             }
           },
           child: Center(

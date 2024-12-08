@@ -1,4 +1,3 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:so_boleto/core/environment/firebase_env.dart';
@@ -53,7 +52,7 @@ abstract class InjectionService {
   }
 
   static Future<void> _initFirebase() async {
-    await Firebase.initializeApp(options: FirebaseEnv.instance);
+    // await Firebase.initializeApp(options: FirebaseEnv.instance);
   }
 
   static Future<void> _initLocalStorage() async {
@@ -68,50 +67,18 @@ abstract class InjectionService {
     _i.get<HiveBillsDatabase>();
   }
 
-  // static Future<void> _initStorages() async {
-  //   _i.registerSingleton<LocalStorage>(
-  //     SharedPreferencesLocalStorage(await SharedPreferences.getInstance()),
-  //   );
-
-  //   _i.registerSingleton<Cache>(LocalCache());
-  // }
-
-  // static void _initNetwork() {
-  //   _i.registerSingleton<RadiosClient>(HttpRadiosClient());
-  //   _i.registerSingleton<ApiService>(HttpApiService(_i.get<RadiosClient>()));
-  // }
-
-  //   final apiService = _i.get<ApiService>();
-
-  //   _i.registerFactory<AuthRepository>(() => ApiAuthRepository(apiService));
-  //   _i.registerFactory<RadioRepository>(() => ApiRadioRepository(apiService));
-  //   _i.registerFactory<SongRepository>(() => ApiSongRepository(apiService));
-  //   _i.registerFactory<UpdateRepository>(() => ApiUpdateRepository(apiService));
-  //   _i.registerFactory<EditorialRepository>(
-  //     () => ApiEditorialRepository(apiService),
-  //   );
-  // }
-
   static Future<void> _initServices() async {
-    _i.registerSingleton<FirestoreService>(FirestoreService());
-    _i.registerSingleton<AuthService>(AuthService());
-    _i.registerSingleton<ImageService>(ImageService());
-
-    // final playerService = await AudioServiceInitializer.init(
-    //   _i.get<SongRepository>(),
-    // );
-    // _i.registerSingleton<PlayerService>(playerService);
-
-    // final apiAuthRepository = ApiAuthService(_i.get<AuthRepository>());
-    // _i.registerSingleton<AuthService>(apiAuthRepository);
+    // _i.registerSingleton<FirestoreService>(FirestoreService());
+    // _i.registerSingleton<AuthService>(AuthService());
+    // _i.registerSingleton<ImageService>(ImageService());
   }
 
   static void _initUseCases() {
-    _i.registerFactory(
-      () => CreateUser(
-        _i.get<FirestoreService>(),
-      ),
-    );
+    // _i.registerFactory(
+    //   () => CreateUser(
+    //     _i.get<FirestoreService>(),
+    //   ),
+    // );
 
     _i.registerFactory(
       () => CreateUserStorage(
@@ -145,70 +112,70 @@ abstract class InjectionService {
       ),
     );
 
-    _i.registerFactory(
-      () => GetUserFromFirebase(
-        _i.get<FirestoreService>(),
-      ),
-    );
+    // _i.registerFactory(
+    //   () => GetUserFromFirebase(
+    //     _i.get<FirestoreService>(),
+    //   ),
+    // );
 
-    _i.registerFactory(
-      () => SignUp(
-        _i.get<AuthService>(),
-      ),
-    );
+    // _i.registerFactory(
+    //   () => SignUp(
+    //     _i.get<AuthService>(),
+    //   ),
+    // );
 
-    _i.registerFactory(
-      () => SignIn(
-        _i.get<AuthService>(),
-      ),
-    );
+    // _i.registerFactory(
+    //   () => SignIn(
+    //     _i.get<AuthService>(),
+    //   ),
+    // );
 
-    _i.registerFactory(
-      () => SignOut(
-        _i.get<AuthService>(),
-      ),
-    );
+    // _i.registerFactory(
+    //   () => SignOut(
+    //     _i.get<AuthService>(),
+    //   ),
+    // );
 
     // Bill Usecase
 
     _i.registerFactory(
       () => GetNewMonthBills(
-        _i.get<FirestoreService>(),
-      ),
+          // _i.get<FirestoreService>(),
+          ),
     );
 
     _i.registerFactory(
       () => GetBills(
         _i.get<HiveBillsDatabase>(),
-        _i.get<FirestoreService>(),
+        // _i.get<FirestoreService>(),
       ),
     );
 
     _i.registerFactory(
       () => CreateBill(
         _i.get<HiveBillsDatabase>(),
-        _i.get<FirestoreService>(),
+        // _i.get<FirestoreService>(),
       ),
     );
 
     _i.registerFactory(
       () => SetBillAsPaid(
         _i.get<HiveBillsDatabase>(),
-        _i.get<FirestoreService>(),
+        // _i.get<FirestoreService>(),
       ),
     );
 
     _i.registerFactory(
       () => DeleteBill(
         _i.get<HiveBillsDatabase>(),
-        _i.get<FirestoreService>(),
+        // _i.get<FirestoreService>(),
       ),
     );
 
     _i.registerFactory(
       () => EditBill(
         _i.get<HiveBillsDatabase>(),
-        _i.get<FirestoreService>(),
+        // _i.get<FirestoreService>(),
       ),
     );
 
@@ -219,21 +186,21 @@ abstract class InjectionService {
     _i.registerFactory(
       () => AddPromptBills(
         _i.get<HiveBillsDatabase>(),
-        _i.get<FirestoreService>(),
+        // _i.get<FirestoreService>(),
       ),
     );
 
-    _i.registerFactory(
-      () => GetImageFromCamera(
-        _i.get<ImageService>(),
-      ),
-    );
+    // _i.registerFactory(
+    //   () => GetImageFromCamera(
+    //       _i.get<ImageService>(),
+    //       ),
+    // );
 
-    _i.registerFactory(
-      () => GetImageFromGallery(
-        _i.get<ImageService>(),
-      ),
-    );
+    // _i.registerFactory(
+    //   () => GetImageFromGallery(
+    //       _i.get<ImageService>(),
+    //       ),
+    // );
   }
 
   static void _initBloc() {
@@ -243,11 +210,11 @@ abstract class InjectionService {
 
     _i.registerFactory(
       () => InitialCubit(
-        _i.get<SignUp>(),
-        _i.get<SignIn>(),
+        // _i.get<SignUp>(),
+        // _i.get<SignIn>(),
         _i.get<GetUserFromStorage>(),
-        _i.get<GetUserFromFirebase>(),
-        _i.get<CreateUser>(),
+        // _i.get<GetUserFromFirebase>(),
+        // _i.get<CreateUser>(),
         _i.get<CreateUserStorage>(),
         _i.get<UpdateUserStorage>(),
       ),
@@ -286,11 +253,11 @@ abstract class InjectionService {
 
     _i.registerFactory(
       () => ProfileCubit(
-        _i.get<SignOut>(),
+        // _i.get<SignOut>(),
         _i.get<ConfirmUserPassword>(),
         _i.get<ClearUserStorage>(),
-        _i.get<GetImageFromCamera>(),
-        _i.get<GetImageFromGallery>(),
+        // _i.get<GetImageFromCamera>(),
+        // _i.get<GetImageFromGallery>(),
       ),
     );
   }

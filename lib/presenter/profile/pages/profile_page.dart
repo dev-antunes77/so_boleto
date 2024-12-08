@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
+// import 'package:image_picker/image_picker.dart';
 import 'package:so_boleto/core/components/custom_menu_anchor/custom_menu_anchor.dart';
 import 'package:so_boleto/core/components/custom_menu_anchor/custom_menu_item_button.dart';
 import 'package:so_boleto/core/components/dialogs/app_dialogs.dart';
@@ -74,14 +74,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                 backgroundImage:
                                     FileImage(File(_user.profilePicturePath)),
                               );
-                            } else if (state.image is XFile) {
-                              return CircleAvatar(
-                                radius: 36,
-                                backgroundColor: themeColors.primary,
-                                backgroundImage: FileImage(
-                                    File((state.image as XFile).path)),
-                              );
                             }
+                            // else if (state.image is XFile) {
+                            //   return CircleAvatar(
+                            //     radius: 36,
+                            //     backgroundColor: themeColors.primary,
+                            //     backgroundImage: FileImage(
+                            //         File((state.image as XFile).path)),
+                            //   );
+                            // }
                             return CircleAvatar(
                               radius: 36,
                               backgroundColor: themeColors.primary,
@@ -96,16 +97,16 @@ class _ProfilePageState extends State<ProfilePage> {
                       );
                     },
                     menuChildren: [
-                      if (state.image is XFile ||
-                          _user.profilePicturePath.isNotEmpty)
-                        CustomMenuItemButton(
-                          svg: AppIcons.picture,
-                          label: AppLocalizations.current.profileSeePicture,
-                          onPressed: () => context.pushTo(
-                            Routes.profileViewPicture,
-                            params: navigationParams,
-                          ),
+                      // if (state.image is XFile ||
+                      //     _user.profilePicturePath.isNotEmpty)
+                      CustomMenuItemButton(
+                        svg: AppIcons.picture,
+                        label: AppLocalizations.current.profileSeePicture,
+                        onPressed: () => context.pushTo(
+                          Routes.profileViewPicture,
+                          params: navigationParams,
                         ),
+                      ),
                       CustomMenuItemButton(
                         svg: AppIcons.camera,
                         label: AppLocalizations.current.profileTakePicture,
@@ -179,11 +180,12 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   dynamic _getNavigationParams(dynamic image) =>
-      _user.profilePicturePath.isNotEmpty
-          ? ImageModel(path: _user.profilePicturePath)
-          : image is XFile
-              ? ImageModel.fromXfile(image)
-              : const SizedBox.shrink();
+      // _user.profilePicturePath.isNotEmpty
+      // ? ImageModel(path: _user.profilePicturePath)
+      // : image is XFile
+      //     ? ImageModel.fromXfile(image)
+      // :
+      const SizedBox.shrink();
 
   void _onCameraChoice() => _profileCubit.getImageFromCamera(
         context.read<InitialCubit>().onUpdateUserProfilePictrue,

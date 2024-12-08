@@ -10,7 +10,8 @@ class ViewPicture extends StatelessWidget {
     super.key,
   });
 
-  final ImageModel image;
+  final String image;
+  // final ImageModel image;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,8 @@ class ViewPicture extends StatelessWidget {
         fit: BoxFit.contain,
         child: SizedBox(
           width: context.width,
-          child: Image.file(File(image.path)),
+          child: Image.file(File(image)),
+          // child: Image.file(File(image.path)),
         ),
       ),
     );

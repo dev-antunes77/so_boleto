@@ -1,17 +1,17 @@
-import 'package:image_picker/image_picker.dart';
+// import 'package:image_picker/image_picker.dart';
 
-class ImageModel {
-  ImageModel({
-    required this.path,
-  });
+// class ImageModel {
+//   ImageModel({
+//     required this.path,
+//   });
 
-  final String path;
+//   final String path;
 
-  Map<String, dynamic> toJson() => <String, dynamic>{
-        'path': path,
-      };
+//   Map<String, dynamic> toJson() => <String, dynamic>{
+//         'path': path,
+//       };
 
-  factory ImageModel.fromXfile(XFile file) => ImageModel(
-        path: file.path,
-      );
-}
+//   factory ImageModel.fromXfile(XFile file) => ImageModel(
+//         path: file.path,
+//       );
+// }

@@ -7,10 +7,13 @@ import 'package:so_boleto/domain/repositories/firestore_repository.dart';
 import 'package:so_boleto/infra/local_database/hive_bill_database/hive_bills_database.dart';
 
 final class SetBillAsPaid {
-  SetBillAsPaid(this._hiveBillsDatabase, this._firestoreRepository);
+  SetBillAsPaid(
+    this._hiveBillsDatabase,
+    // this._firestoreRepository,
+  );
 
   final HiveBillsDatabase _hiveBillsDatabase;
-  final FirestoreRepository _firestoreRepository;
+  // final FirestoreRepository _firestoreRepository;
 
   Future<void> call(BillModel bill, DateTime date) async {
     try {
@@ -18,7 +21,7 @@ final class SetBillAsPaid {
       final parcelPaid = hasParcels ? bill.payedParcels + 1 : null;
       bill.updateBillPayment(date, BillStatus.payed);
       final paidBill = bill.copyWith(payedParcels: parcelPaid);
-      await _firestoreRepository.editBill(paidBill);
+      // await _firestoreRepository.editBill(paidBill);
     } on AppError catch (error, trace) {
       Log.error(error, trace, 'Error executing $runtimeType: ${error.message}');
       rethrow;

@@ -7,25 +7,25 @@ import 'package:so_boleto/domain/models/bill_payment.dart';
 import 'package:so_boleto/domain/repositories/firestore_repository.dart';
 
 final class GetNewMonthBills {
-  GetNewMonthBills(this._firestoreRepository);
+  GetNewMonthBills();
 
-  final FirestoreRepository _firestoreRepository;
+  // final FirestoreRepository _firestoreRepository;
 
   Future<void> call(String userId) async {
     try {
-      final bills = await _firestoreRepository.getBills(userId);
-      for (var bill in bills) {
-        while (AppConstants.currentDate.month >
-            bill.billPayment.last.referredMonth.month) {
-          var newPayment = BillPayment();
-          newPayment = BillPayment(
-            referredMonth: bill.billPayment.last.referredMonth
-                .changeMonth(isAddition: true),
-          );
-          bill.billPayment.insert(bill.billPayment.length, newPayment);
-          await _firestoreRepository.editBill(bill);
-        }
-      }
+      // final bills = await _firestoreRepository.getBills(userId);
+      // for (var bill in bills) {
+      //   while (AppConstants.currentDate.month >
+      //       bill.billPayment.last.referredMonth.month) {
+      //     var newPayment = BillPayment();
+      //     newPayment = BillPayment(
+      //       referredMonth: bill.billPayment.last.referredMonth
+      //           .changeMonth(isAddition: true),
+      //     );
+      //     bill.billPayment.insert(bill.billPayment.length, newPayment);
+      //     await _firestoreRepository.editBill(bill);
+      //   }
+      // }
     } on AppError catch (error, trace) {
       Log.error(error, trace, 'Error executing $runtimeType: ${error.message}');
       rethrow;

@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:so_boleto/core/constants/app_constants.dart';
@@ -43,26 +42,26 @@ class UserData extends Equatable {
         'createdAt': createdAt.dateTimeToStringData(),
       };
 
-  factory UserData.fromFirestore(
-      DocumentSnapshot<Map<String, dynamic>> snapshot,
-      [SnapshotOptions? options]) {
-    final data = snapshot.data();
-    return UserData(
-      id: data?['id'],
-      name: data?['name'],
-      lastName: data?['lastName'],
-      email: data?['email'],
-      hasSeenOnboarding: data?['hasSeenOnboarding'],
-      hasLightTheme: data?['hasLightTheme'],
-      favoredDueDay: data?['favoredDueDay'],
-      profilePicturePath: data?['profilePicturePath'],
-      hasInvertedSorting: data?['hasInvertedSorting'],
-      payedTag: (data?['payedTag'] as String).payedTagToEnum(),
-      billSorting: (data?['billSorting'] as String).billSortingToEnum(),
-      baseColor: (data?['baseColor'] as String).colorFromJson(),
-      createdAt: (data?['createdAt'] as String).stringToDateTime(),
-    );
-  }
+  // factory UserData.fromFirestore(
+  //     DocumentSnapshot<Map<String, dynamic>> snapshot,
+  //     [SnapshotOptions? options]) {
+  //   final data = snapshot.data();
+  //   return UserData(
+  //     id: data?['id'],
+  //     name: data?['name'],
+  //     lastName: data?['lastName'],
+  //     email: data?['email'],
+  //     hasSeenOnboarding: data?['hasSeenOnboarding'],
+  //     hasLightTheme: data?['hasLightTheme'],
+  //     favoredDueDay: data?['favoredDueDay'],
+  //     profilePicturePath: data?['profilePicturePath'],
+  //     hasInvertedSorting: data?['hasInvertedSorting'],
+  //     payedTag: (data?['payedTag'] as String).payedTagToEnum(),
+  //     billSorting: (data?['billSorting'] as String).billSortingToEnum(),
+  //     baseColor: (data?['baseColor'] as String).colorFromJson(),
+  //     createdAt: (data?['createdAt'] as String).stringToDateTime(),
+  //   );
+  // }
 
   factory UserData.fromHiveUser(HiveUserData hiveUser) => UserData(
         id: hiveUser.id,

@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:intl/intl.dart';
 import 'package:so_boleto/core/constants/app_constants.dart';
@@ -46,27 +45,27 @@ class BillModel extends Equatable {
         'createdAt': createdAt.dateTimeToStringData(),
       };
 
-  factory BillModel.fromFirestore(
-      DocumentSnapshot<Map<String, dynamic>> snapshot,
-      [SnapshotOptions? options]) {
-    final data = snapshot.data();
-    return BillModel(
-      id: data?['id'],
-      name: data?['name'],
-      description: data?['description'],
-      category: (data?['category'] as String).categoryToEnum(),
-      value: data?['value'],
-      payedParcels: data?['payedParcels'],
-      totalParcels: data?['totalParcels'],
-      billPayment: (data?['billPayment'])
-          .map((e) => BillPayment.fromMap(e))
-          .cast<BillPayment>()
-          .toList(),
-      dueDay: data?['dueDay'],
-      userId: data?['userId'],
-      createdAt: (data?['createdAt'] as String).stringToDateTime(),
-    );
-  }
+  // factory BillModel.fromFirestore(
+  //     DocumentSnapshot<Map<String, dynamic>> snapshot,
+  //     [SnapshotOptions? options]) {
+  //   final data = snapshot.data();
+  //   return BillModel(
+  //     id: data?['id'],
+  //     name: data?['name'],
+  //     description: data?['description'],
+  //     category: (data?['category'] as String).categoryToEnum(),
+  //     value: data?['value'],
+  //     payedParcels: data?['payedParcels'],
+  //     totalParcels: data?['totalParcels'],
+  //     billPayment: (data?['billPayment'])
+  //         .map((e) => BillPayment.fromMap(e))
+  //         .cast<BillPayment>()
+  //         .toList(),
+  //     dueDay: data?['dueDay'],
+  //     userId: data?['userId'],
+  //     createdAt: (data?['createdAt'] as String).stringToDateTime(),
+  //   );
+  // }
 
   factory BillModel.fromHiveBillModel(HiveBillModel bill) => BillModel(
         id: bill.id,

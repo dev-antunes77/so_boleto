@@ -13,6 +13,7 @@ import 'package:so_boleto/core/theme/cubit/theme_cubit.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
+import 'package:so_boleto/domain/models/enums/bill_sorting.dart';
 import 'package:so_boleto/domain/models/enums/page_response_handler.dart';
 import 'package:so_boleto/presenter/bill/cubit/bill_cubit.dart';
 import 'package:so_boleto/presenter/home/cubit/home_bills_cubit.dart';
@@ -39,9 +40,12 @@ class _HomePageCurrentState extends State<HomePageCurrent>
     cubit = context.read<HomeBillsCubit>();
     final user = context.read<InitialCubit>().state.user;
     cubit.onInit(
-      user!.id,
-      user.billSorting,
-      user.hasInvertedSorting,
+      '23456',
+      BillSorting.date,
+      false,
+      // user!.id,
+      // user.billSorting,
+      // user.hasInvertedSorting,
     );
     super.initState();
   }
