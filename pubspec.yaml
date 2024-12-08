@@ -47,7 +47,6 @@ flutter:
   assets:
     - assets/svgs/
     - assets/images/
-    - assets/icons/
     
   fonts:
     - family: AMX

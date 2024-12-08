@@ -18,6 +18,14 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$(FLUTTER_BUILD_NAME)</string>
+	<key>GoogleAppID</key>
+    <string>soboleto-2d2b7</string>
+    <key>your-gcm-sender-id</key>
+    <string>648410798758</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>We need access to your photo library</string>
+    <key>NSCameraUsageDescription</key>
+    <string>We need access to your camera</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
