@@ -55,6 +55,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Edição da conta"),
         "billFlowBillKindQuestion":
             MessageLookupByLibrary.simpleMessage("Qual o tipo dessa conta?"),
+        "billFlowCheckAccessHistory":
+            MessageLookupByLibrary.simpleMessage("Acessar Histórico"),
         "billFlowCheckCategory":
             MessageLookupByLibrary.simpleMessage("Categoria"),
         "billFlowCheckDescription":

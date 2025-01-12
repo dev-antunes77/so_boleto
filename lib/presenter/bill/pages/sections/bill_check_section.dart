@@ -133,8 +133,8 @@ class _BillCheckSectionState extends State<BillCheckSection> {
                     onTap: () =>
                         context.pushTo(Routes.billHistory, params: state.bill),
                     color: color,
-                    child: const Text(
-                      'Acessar Histórico',
+                    child: Text(
+                      AppLocalizations.current.billFlowCheckAccessHistory,
                     ),
                   ),
                 const ExpandedSpace(),

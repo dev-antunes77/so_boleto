@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:so_boleto/core/components/thin_line_separator/thin_line_separator.dart';
+import 'package:so_boleto/core/extensions/date_time_extensions.dart';
 import 'package:so_boleto/core/extensions/num_extensions.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/l10n/generated/l10n.dart';
@@ -60,9 +61,15 @@ class BillHistoryPage extends StatelessWidget {
                                 payment.payedAt.substring(0, 5)),
                             style: context.textRobotoMedium,
                           )
-                        else
+                        else if (payment.referredMonth.currentMonthAndYear())
                           Text(
                             bill.dueDay.properDueDay(),
+                            style: context.textRobotoMedium,
+                          )
+                        else
+                          Text(
+                            bill.dueDay
+                                .properOldMonthsDelay(payment.referredMonth),
                             style: context.textRobotoMedium,
                           )
                       ],

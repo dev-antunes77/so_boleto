@@ -20,6 +20,7 @@
     "billFlowValueTitle":"Valor da conta",
     "billFlowParcelValue":"(Valor da parcela)",
     "billFlowDueDayTitle":"Dia do vencimento",
+    "billFlowCheckAccessHistory":"Acessar Histórico",
     "billFlowCheckName":"Name:",
     "billFlowCheckDescription":"Descrição:",
     "billFlowCheckDueDay":"Vencimento:",

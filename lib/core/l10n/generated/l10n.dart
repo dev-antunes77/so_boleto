@@ -260,6 +260,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Acessar Histórico`
+  String get billFlowCheckAccessHistory {
+    return Intl.message(
+      'Acessar Histórico',
+      name: 'billFlowCheckAccessHistory',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Name:`
   String get billFlowCheckName {
     return Intl.message(
