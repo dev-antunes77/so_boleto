@@ -20,7 +20,7 @@ class ExpensesCubit extends Cubit<ExpensesState> with BaseCubit {
     emit(
       state.copyWith(
         totalExpensesThisMonth: expenses.thisMonthExpenses,
-        totalExpensesLast3Months: expenses.thisMonthExpenses,
+        totalExpensesLast3Months: expenses.threeMonthExpenses,
         totalExpensesLast6Months: expenses.sixMonthExpenses,
         totalExpensesLast9Months: expenses.nineMonthExpenses,
         status: BaseStateStatus.success,

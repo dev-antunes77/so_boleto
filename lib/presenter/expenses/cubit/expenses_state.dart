@@ -43,7 +43,7 @@ class ExpensesState extends BaseState with EquatableMixin {
       ExpensesState(
         status: status ?? this.status,
         callbackMessage: callbackMessage ?? this.callbackMessage,
-        totalExpenses: totalExpensesThisMonth ?? totalExpensesThisMonth,
+        totalExpenses: totalExpensesThisMonth ?? this.totalExpensesThisMonth,
         totalExpensesLast3Months:
             totalExpensesLast3Months ?? this.totalExpensesLast3Months,
         totalExpensesLast6Months:
