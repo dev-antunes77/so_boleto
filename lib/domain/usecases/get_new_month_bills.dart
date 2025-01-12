@@ -15,8 +15,8 @@ final class GetNewMonthBills {
     try {
       final bills = await _firestoreRepository.getBills(userId);
       for (var bill in bills) {
-        while (AppConstants.currentDate.month >
-            bill.billPayment.last.referredMonth.month) {
+        while (_isNewMonth(bill.billPayment.last.referredMonth.year,
+            bill.billPayment.last.referredMonth.month)) {
           var newPayment = BillPayment();
           newPayment = BillPayment(
             referredMonth: bill.billPayment.last.referredMonth
@@ -32,6 +32,17 @@ final class GetNewMonthBills {
     } catch (error, trace) {
       Log.error(error, trace, 'Error executing $runtimeType: $error');
       throw ClientError(AppLocalizations.current.errorUnknowError);
+    }
+  }
+
+  bool _isNewMonth(int billYear, int billMonth) {
+    if (AppConstants.currentDate.year == billYear &&
+        AppConstants.currentDate.month > billMonth) {
+      return true;
+    } else if (AppConstants.currentDate.year > billYear) {
+      return true;
+    } else {
+      return false;
     }
   }
 }
