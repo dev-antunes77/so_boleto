@@ -310,6 +310,26 @@ class AppLocalizations {
     );
   }
 
+  /// `Histórico de "{bill}"`
+  String billHistoryTitle(String bill) {
+    return Intl.message(
+      'Histórico de "$bill"',
+      name: 'billHistoryTitle',
+      desc: '',
+      args: [bill],
+    );
+  }
+
+  /// `paga em "{date}"`
+  String billHistoryPaidAt(String date) {
+    return Intl.message(
+      'paga em "$date"',
+      name: 'billHistoryPaidAt',
+      desc: '',
+      args: [date],
+    );
+  }
+
   /// `Veículo`
   String get categoryAutomobile {
     return Intl.message(

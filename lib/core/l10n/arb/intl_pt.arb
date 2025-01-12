@@ -25,6 +25,22 @@
     "billFlowCheckDueDay":"Vencimento:",
     "billFlowCheckValue":"Valor:",
     "billFlowCheckCategory":"Categoria",
+    "billHistoryTitle":"Histórico de \"{bill}\"",
+    "@billHistoryTitle" :{
+        "placeholders":{
+            "bill":{
+                "type": "String"
+            }
+        }
+    },
+    "billHistoryPaidAt":"paga em \"{date}\"",
+    "@billHistoryPaidAt" :{
+        "placeholders":{
+            "date":{
+                "type": "String"
+            }
+        }
+    },
     "categoryAutomobile":"Veículo",
     "categoryCreditCard":"Cartão de crédito",
     "categoryClothes":"Vestimenta",

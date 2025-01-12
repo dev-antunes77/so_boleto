@@ -18,11 +18,7 @@ final class GetBills {
     try {
       // final bills = await _hiveBillsDatabase.getBills();
       var bills = await _firestoreRepository.getBills(userId);
-      if (shouldSort) {
-        final sortedBills = _billSorting(bills, billSorting, isInverted);
-        return sortedBills;
-      }
-      return bills;
+      return _billSorting(bills, billSorting, isInverted);
     } on AppError catch (error, trace) {
       Log.error(error, trace, 'Error executing $runtimeType: ${error.message}');
       rethrow;

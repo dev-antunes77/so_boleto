@@ -128,6 +128,15 @@ class _BillCheckSectionState extends State<BillCheckSection> {
                     ),
                   ],
                 ),
+                if (state.isEditionFlow)
+                  PillButton.outlined(
+                    onTap: () =>
+                        context.pushTo(Routes.billHistory, params: state.bill),
+                    color: color,
+                    child: const Text(
+                      'Acessar Histórico',
+                    ),
+                  ),
                 const ExpandedSpace(),
                 PillButton(
                   onTap: () => _onDone(context, state.isEditionFlow),

@@ -5,6 +5,9 @@ extension DateTimeExtensions on DateTime {
   String dateTimeToDayMonthString() =>
       '${day.toString().padLeft(2, '0')}/${month.toString().padLeft(2, '0')}';
 
+  String dateTimeToMonthAndYearString() =>
+      '${month.toString().padLeft(2, '0')}/${year.toString().padLeft(2, '0')}';
+
   String dateTimeToStringData() => DateFormat.yMd().add_jms().format(this);
 
   String getFormattedCreatedAt() {

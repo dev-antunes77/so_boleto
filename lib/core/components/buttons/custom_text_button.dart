@@ -37,7 +37,7 @@ class CustomTextButton extends StatelessWidget {
           style: context.textRobotoSmall.copyWith(
             fontWeight: FontWeight.bold,
             fontSize: fontSize,
-            color: disable ? color.withOpacity(0.4) : color,
+            color: disable ? color.withAlpha(4) : color,
           ),
         ),
       ),

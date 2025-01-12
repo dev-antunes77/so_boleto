@@ -93,17 +93,16 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
         ],
       );
       await _createBillUseCase(userBoundedBill);
-      await _updateBills(shouldSort: false);
+      await _updateBills();
     } on AppError catch (_) {
       _handleErrorEmit(AppLocalizations.current.homeBillCreationError);
     }
   }
 
-  Future<void> _updateBills({required bool shouldSort}) async {
+  Future<void> _updateBills() async {
     final updatedBills = await _getBillsUseCase(
       state.userId,
       state.billSorting,
-      shouldSort: shouldSort,
       isInverted: false,
     );
     emit(
@@ -128,7 +127,7 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
     try {
       emit(state.copyWith(status: BaseStateStatus.loading));
       await _editBillUseCase(bill);
-      await _updateBills(shouldSort: false);
+      await _updateBills();
     } on AppError catch (_) {
       _handleErrorEmit(AppLocalizations.current.homeBillEditionError);
     }
@@ -139,7 +138,7 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
       if (bill.isMonthPayed()) return false;
       emit(state.copyWith(status: BaseStateStatus.loading));
       await _setBillAsPaidUseCase(bill, month);
-      await _updateBills(shouldSort: false);
+      await _updateBills();
       return false;
     } on AppError catch (_) {
       return _handleErrorEmit(AppLocalizations.current.homeBillActionError);
@@ -151,7 +150,7 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
       emit(state.copyWith(status: BaseStateStatus.loading));
       final hasDeleted = await _deleteBillUseCase(state.userId, billId);
       if (hasDeleted) {
-        await _updateBills(shouldSort: false);
+        await _updateBills();
         return true;
       }
       return _handleErrorEmit(AppLocalizations.current.homeBillActionError);
@@ -229,7 +228,7 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
     try {
       emit(state.copyWith(status: BaseStateStatus.loading));
       await _addPromptBillsUsecase(state.userId, promptBills);
-      await _updateBills(shouldSort: false);
+      await _updateBills();
     } on AppError catch (error) {
       onAppError(error);
       emit(

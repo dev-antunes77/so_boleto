@@ -11,6 +11,7 @@ class Routes {
   static const billCategory = '/bill-category';
   static const billCheck = '/bill-check';
   static const billDueDay = '/bill-due-day';
+  static const billHistory = '/bill-history';
   static const billName = '/bill-name';
   static const billParcels = '/bill-parcels';
   static const billValue = '/bill-value';
@@ -39,6 +40,7 @@ class RelativePaths {
   static const billCategory = '/bill-category';
   static const billCheck = '/bill-check';
   static const billDueDay = '/bill-due-day';
+  static const billHistory = '/bill-history';
   static const billName = '/bill-name';
   static const billParcels = '/bill-parcels';
   static const billValue = '/bill-value';
