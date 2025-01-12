@@ -9,11 +9,13 @@ import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/routes/routes.dart';
 import 'package:so_boleto/core/theme/extensions/typography_extensions.dart';
 import 'package:so_boleto/core/theme/settings/app_colors.dart';
+import 'package:so_boleto/core/theme/settings/app_icons.dart';
 import 'package:so_boleto/core/theme/settings/app_theme_values.dart';
 import 'package:so_boleto/core/utils/base_state.dart';
 import 'package:so_boleto/core/utils/form_validator.dart';
 import 'package:so_boleto/domain/models/user_data.dart';
 import 'package:so_boleto/presenter/initial/cubit/initial_cubit.dart';
+import 'package:so_boleto/presenter/initial/widgets/alternative_login_button.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -80,124 +82,161 @@ class _LoginPageState extends State<LoginPage> {
       leaveTheApp: true,
       child: Scaffold(
         backgroundColor: AppColors.primaryBackground,
-        body: SingleChildScrollView(
-          child: BlocConsumer<InitialCubit, InitialState>(
-            listenWhen: (previous, current) =>
-                previous.status != current.status,
-            buildWhen: (previous, current) => previous.status != current.status,
-            bloc: cubit,
-            listener: (context, state) {
-              if (state.status == BaseStateStatus.generalError) {
-                context.pop(true);
-                context.showSnackBar(state.callbackMessage);
-              }
-              _whenStateIsLoading(state.status == BaseStateStatus.loading);
-              _whenLogInIsSuccessful(state.status == BaseStateStatus.success);
-            },
-            builder: (context, state) {
-              return state.when(
-                onState: (_) => Padding(
-                  padding: const EdgeInsets.all(AppThemeValues.spaceMassive),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Center(
-                            child: Text(
-                                _isSignUp
-                                    ? AppLocalizations.current.signUp
-                                    : AppLocalizations.current.signIn,
-                                style: context.textLarge)),
-                        if (_isSignUp) ...[
+        body: Center(
+          child: SingleChildScrollView(
+            child: BlocConsumer<InitialCubit, InitialState>(
+              listenWhen: (previous, current) =>
+                  previous.status != current.status,
+              buildWhen: (previous, current) =>
+                  previous.status != current.status,
+              bloc: cubit,
+              listener: (context, state) {
+                if (state.status == BaseStateStatus.generalError) {
+                  context.pop(true);
+                  context.showSnackBar(state.callbackMessage);
+                }
+                _whenStateIsLoading(state.status == BaseStateStatus.loading);
+                _whenLogInIsSuccessful(state.status == BaseStateStatus.success);
+              },
+              builder: (context, state) {
+                return state.when(
+                  onState: (_) => Padding(
+                    padding: const EdgeInsets.all(AppThemeValues.spaceMassive),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Center(
+                              child: Text(
+                                  _isSignUp
+                                      ? AppLocalizations.current.signUp
+                                      : AppLocalizations.current.signIn,
+                                  style: context.textLarge)),
+                          if (_isSignUp) ...[
+                            AppThemeValues.spaceVerticalLarge,
+                            TextFormField(
+                              controller: _nameController,
+                              decoration: InputDecoration(
+                                labelText: AppLocalizations.current.loginName,
+                                icon: const Icon(Icons.person_4_outlined),
+                              ),
+                              validator: FormValidator.validateNames,
+                            ),
+                            AppThemeValues.spaceVerticalLarge,
+                            TextFormField(
+                              controller: _lastNameController,
+                              decoration: InputDecoration(
+                                labelText:
+                                    AppLocalizations.current.loginSurename,
+                                icon: const Icon(Icons.person_4),
+                              ),
+                              validator: FormValidator.validateNames,
+                            ),
+                          ],
                           AppThemeValues.spaceVerticalLarge,
                           TextFormField(
-                            controller: _nameController,
+                            controller: _emailController,
                             decoration: InputDecoration(
-                              labelText: AppLocalizations.current.loginName,
-                              icon: const Icon(Icons.person_4_outlined),
+                              labelText: AppLocalizations.current.loginEmail,
+                              icon: const Icon(Icons.email),
                             ),
-                            validator: FormValidator.validateNames,
+                            validator: FormValidator.validateEmailField,
                           ),
                           AppThemeValues.spaceVerticalLarge,
                           TextFormField(
-                            controller: _lastNameController,
+                            controller: _passwordController,
+                            obscureText: !_isPasswordVisible,
                             decoration: InputDecoration(
-                              labelText: AppLocalizations.current.loginSurename,
-                              icon: const Icon(Icons.person_4),
+                              labelText: AppLocalizations.current.loginPassword,
+                              icon: const Icon(Icons.lock),
+                              suffixIcon: IconButton(
+                                icon: _isPasswordVisible
+                                    ? const Icon(Icons.visibility_off)
+                                    : const Icon(Icons.visibility),
+                                onPressed: _togglePasswordVisibility,
+                              ),
                             ),
-                            validator: FormValidator.validateNames,
+                          ),
+                          AppThemeValues.spaceVerticalImense,
+                          PillButton(
+                              child: Text(
+                                _isSignUp
+                                    ? AppLocalizations.current.signUpTitle
+                                    : AppLocalizations.current.signInTitle,
+                              ),
+                              onTap: () {
+                                if (_formKey.currentState!.validate()) {
+                                  _isSignUp ? _onSignUp() : _onSignIn();
+                                }
+                              }),
+                          AppThemeValues.spaceVerticalLarge,
+                          RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: _isSignUp
+                                      ? AppLocalizations
+                                          .current.loginHasAccountAlready
+                                      : AppLocalizations.current.loginNoAccount,
+                                  style:
+                                      context.textRobotoMediumToLarge.copyWith(
+                                    color: AppColors.black,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: _isSignUp
+                                      ? AppLocalizations.current.signIn
+                                      : AppLocalizations.current.loginHere,
+                                  style:
+                                      context.textRobotoMediumToLarge.copyWith(
+                                    color: AppColors.primary,
+                                  ),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () => _toggleSignUpAndSignIn(),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 18),
+                            child: Row(
+                              children: [
+                                Expanded(child: Divider()),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 16),
+                                  child: Text(
+                                    'or',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: 'Inter',
+                                      fontWeight: FontWeight.w400,
+                                      color: AppColors.darkGrey,
+                                    ),
+                                  ),
+                                ),
+                                Expanded(child: Divider())
+                              ],
+                            ),
+                          ),
+                          AlternativeLoginButton(
+                            height: 56,
+                            textColor: AppColors.black,
+                            width: 260,
+                            onTap: cubit.onSignInWithGoogle,
+                            borderRadius: 24,
+                            bgColor: AppColors.greyLight,
+                            text: AppLocalizations.current.loginWithGoogle,
+                            icons: AppIcons.google,
                           ),
                         ],
-                        AppThemeValues.spaceVerticalLarge,
-                        TextFormField(
-                          controller: _emailController,
-                          decoration: InputDecoration(
-                            labelText: AppLocalizations.current.loginEmail,
-                            icon: const Icon(Icons.email),
-                          ),
-                          validator: FormValidator.validateEmailField,
-                        ),
-                        AppThemeValues.spaceVerticalLarge,
-                        TextFormField(
-                          controller: _passwordController,
-                          obscureText: !_isPasswordVisible,
-                          decoration: InputDecoration(
-                            labelText: AppLocalizations.current.loginPassword,
-                            icon: const Icon(Icons.lock),
-                            suffixIcon: IconButton(
-                              icon: _isPasswordVisible
-                                  ? const Icon(Icons.visibility_off)
-                                  : const Icon(Icons.visibility),
-                              onPressed: _togglePasswordVisibility,
-                            ),
-                          ),
-                        ),
-                        AppThemeValues.spaceVerticalImense,
-                        PillButton(
-                            child: Text(
-                              _isSignUp
-                                  ? AppLocalizations.current.signUpTitle
-                                  : AppLocalizations.current.signInTitle,
-                            ),
-                            onTap: () {
-                              if (_formKey.currentState!.validate()) {
-                                _isSignUp ? _onSignUp() : _onSignIn();
-                              }
-                            }),
-                        AppThemeValues.spaceVerticalLarge,
-                        RichText(
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: _isSignUp
-                                    ? AppLocalizations
-                                        .current.loginHasAccountAlready
-                                    : AppLocalizations.current.loginNoAccount,
-                                style: context.textRobotoMediumToLarge.copyWith(
-                                  color: AppColors.black,
-                                ),
-                              ),
-                              TextSpan(
-                                text: _isSignUp
-                                    ? AppLocalizations.current.signIn
-                                    : AppLocalizations.current.loginHere,
-                                style: context.textRobotoMediumToLarge.copyWith(
-                                  color: AppColors.primary,
-                                ),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () => _toggleSignUpAndSignIn(),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         ),
       ),

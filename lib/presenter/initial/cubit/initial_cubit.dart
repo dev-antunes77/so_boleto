@@ -14,6 +14,7 @@ import 'package:so_boleto/domain/usecases/create_user_storage.dart';
 import 'package:so_boleto/domain/usecases/get_user_from_firebase.dart';
 import 'package:so_boleto/domain/usecases/get_user_from_storage.dart';
 import 'package:so_boleto/domain/usecases/sign_in.dart';
+import 'package:so_boleto/domain/usecases/sign_in_with_ggogle.dart';
 import 'package:so_boleto/domain/usecases/sign_up.dart';
 import 'package:so_boleto/domain/usecases/update_user_storage.dart';
 
@@ -25,6 +26,7 @@ class InitialCubit extends Cubit<InitialState> with BaseCubit {
     this._signInUsecase,
     this._getUserFromStorageUsecase,
     this._getUserFromFirebaseUsecase,
+    this._signInWithGgogleUsecase,
     this._createUserUsecase,
     this._createUserStorageUsecase,
     this._updateUserStorage,
@@ -37,6 +39,7 @@ class InitialCubit extends Cubit<InitialState> with BaseCubit {
   final UpdateUserStorage _updateUserStorage;
   final GetUserFromStorage _getUserFromStorageUsecase;
   final GetUserFromFirebase _getUserFromFirebaseUsecase;
+  final SignInWithGgogle _signInWithGgogleUsecase;
   final SignUp _signUpUsecase;
   final SignIn _signInUsecase;
 
@@ -66,6 +69,21 @@ class InitialCubit extends Cubit<InitialState> with BaseCubit {
       await _createUserStorageUsecase(identifiedUser);
       emit(state.copyWith(
           status: BaseStateStatus.success, user: identifiedUser));
+    } on AppError catch (error) {
+      onAppError(error);
+    }
+  }
+
+  Future<void> onSignInWithGoogle() async {
+    try {
+      emit(state.copyWith(status: BaseStateStatus.loading));
+      final user = await _signInWithGgogleUsecase();
+      if (user != null) {
+        final userToStore = UserData.fromGoogle(user);
+        await _createUserStorageUsecase(userToStore);
+        emit(
+            state.copyWith(status: BaseStateStatus.success, user: userToStore));
+      }
     } on AppError catch (error) {
       onAppError(error);
     }

@@ -21,6 +21,7 @@ import 'package:so_boleto/domain/usecases/get_user_from_firebase.dart';
 import 'package:so_boleto/domain/usecases/get_user_from_storage.dart';
 import 'package:so_boleto/domain/usecases/set_bill_as_paid.dart';
 import 'package:so_boleto/domain/usecases/sign_in.dart';
+import 'package:so_boleto/domain/usecases/sign_in_with_ggogle.dart';
 import 'package:so_boleto/domain/usecases/sign_out.dart';
 import 'package:so_boleto/domain/usecases/sign_up.dart';
 import 'package:so_boleto/domain/usecases/update_user_storage.dart';
@@ -164,6 +165,12 @@ abstract class InjectionService {
     );
 
     _i.registerFactory(
+      () => SignInWithGgogle(
+        _i.get<AuthService>(),
+      ),
+    );
+
+    _i.registerFactory(
       () => SignOut(
         _i.get<AuthService>(),
       ),
@@ -247,6 +254,7 @@ abstract class InjectionService {
         _i.get<SignIn>(),
         _i.get<GetUserFromStorage>(),
         _i.get<GetUserFromFirebase>(),
+        _i.get<SignInWithGgogle>(),
         _i.get<CreateUser>(),
         _i.get<CreateUserStorage>(),
         _i.get<UpdateUserStorage>(),

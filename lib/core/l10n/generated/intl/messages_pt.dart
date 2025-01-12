@@ -206,6 +206,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ainda não tem conta? Cadastre-se  "),
         "loginPassword": MessageLookupByLibrary.simpleMessage("Senha"),
         "loginSurename": MessageLookupByLibrary.simpleMessage("Sobrenome"),
+        "loginWithGoogle":
+            MessageLookupByLibrary.simpleMessage("Continue com Google"),
         "monthApril": MessageLookupByLibrary.simpleMessage("Abril"),
         "monthAugust": MessageLookupByLibrary.simpleMessage("Agosto"),
         "monthDecember": MessageLookupByLibrary.simpleMessage("Dezembro"),

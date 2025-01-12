@@ -1200,6 +1200,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Continue com Google`
+  String get loginWithGoogle {
+    return Intl.message(
+      'Continue com Google',
+      name: 'loginWithGoogle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Janeiro`
   String get monthJanuary {
     return Intl.message(

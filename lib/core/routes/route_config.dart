@@ -185,7 +185,6 @@ abstract class RoutesConfig {
               const PromptBillsEditionPage(),
             ),
           ),
-
           GoRoute(
             path: RelativePaths.expenses,
             parentNavigatorKey: _shellKey,
@@ -246,50 +245,6 @@ abstract class RoutesConfig {
               const SecurityPage(),
             ),
           ),
-          // GoRoute(
-          //   path: RelativePaths.profile,
-          //   parentNavigatorKey: _shellKey,
-          //   pageBuilder: (_, state) =>
-          //       _fadeTransition(state, const ProfilePage()),
-          //   routes: [
-          //     GoRoute(
-          //       path: RelativePaths.account,
-          //       parentNavigatorKey: _shellKey,
-          //       pageBuilder: (_, state) => _fadeTransition(
-          //           state, MyAccountPage(user: state.extra as User?)),
-          //     ),
-          //     GoRoute(
-          //       path: RelativePaths.help,
-          //       parentNavigatorKey: _shellKey,
-          //       pageBuilder: (_, state) =>
-          //           _fadeTransition(state, const HelpPage()),
-          //     ),
-          //     GoRoute(
-          //       path: RelativePaths.about,
-          //       parentNavigatorKey: _shellKey,
-          //       pageBuilder: (_, state) =>
-          //           _fadeTransition(state, const AboutPage()),
-          //     ),
-          //     GoRoute(
-          //       path: RelativePaths.editorial,
-          //       parentNavigatorKey: _shellKey,
-          //       pageBuilder: (_, state) => _fadeTransition(
-          //           state, EditorialPage(type: state.extra as EditorialType)),
-          //     ),
-          //     GoRoute(
-          //       path: RelativePaths.policies,
-          //       parentNavigatorKey: _shellKey,
-          //       pageBuilder: (_, state) =>
-          //           _fadeTransition(state, const PoliciesPage()),
-          //     ),
-          //     GoRoute(
-          //       path: RelativePaths.requestData,
-          //       parentNavigatorKey: _shellKey,
-          //       pageBuilder: (_, state) =>
-          //           _fadeTransition(state, RequestDataPage()),
-          //     ),
-          //   ],
-          // ),
         ],
       ),
     ],

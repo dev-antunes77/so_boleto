@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:so_boleto/core/constants/app_constants.dart';
 import 'package:so_boleto/core/extensions/color_extensions.dart';
 import 'package:so_boleto/core/extensions/date_time_extensions.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
+import 'package:so_boleto/core/helpers/app_formatters.dart';
 import 'package:so_boleto/domain/models/enums/bill_sorting.dart';
 import 'package:so_boleto/domain/models/enums/payed_tag.dart';
 import 'package:so_boleto/infra/local_database/hive_user_database/hive_user_data.dart';
@@ -79,6 +81,14 @@ class UserData extends Equatable {
         favoredDueDay: hiveUser.favoredDueDay,
         profilePicturePath: hiveUser.profilePicturePath,
         createdAt: hiveUser.createdAt,
+      );
+
+  factory UserData.fromGoogle(User googleUser) => UserData(
+        id: AppFormatters.randomIdFormater(),
+        name: googleUser.providerData.first.displayName ?? '',
+        lastName: googleUser.providerData.first.displayName ?? '',
+        email: googleUser.providerData.first.displayName ?? '',
+        createdAt: AppConstants.currentDate,
       );
 
   String get userName => '${name.capitalize()} ${lastName.capitalize()}';

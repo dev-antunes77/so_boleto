@@ -12,7 +12,12 @@
           "package_name": "com.example.so_boleto"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "648410798758-tp8o0tigv4tu7g3mhgsk4aos61h7a320.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDdW-ru34XapoPrD2oMXg8urWOCGpIJISU"
@@ -20,7 +25,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "648410798758-tp8o0tigv4tu7g3mhgsk4aos61h7a320.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
