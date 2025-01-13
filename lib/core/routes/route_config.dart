@@ -2,8 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/domain/models/enums/page_transitions.dart';
 import 'package:so_boleto/domain/models/image_model.dart';
+import 'package:so_boleto/presenter/bill/pages/bill_history/bill_history_page.dart';
 import 'package:so_boleto/presenter/bill/pages/sections/bill_category_section.dart';
 import 'package:so_boleto/presenter/bill/pages/sections/bill_check_section.dart';
 import 'package:so_boleto/presenter/bill/pages/sections/bill_due_day_of_the_month_section.dart';
@@ -134,6 +136,20 @@ abstract class RoutesConfig {
               type: PageTransitions.transitionMatrix,
             ),
           ),
+          GoRoute(
+              path: RelativePaths.billHistory,
+              parentNavigatorKey: _shellKey,
+              pageBuilder: (_, state) {
+                final bill = state.extra != null
+                    ? state.extra as BillModel
+                    : BillModel();
+                return _getTransitionPage(
+                  state,
+                  BillHistoryPage(bill),
+                  duration: duration100,
+                  type: PageTransitions.transitionFade,
+                );
+              }),
           GoRoute(
             path: RelativePaths.billCategory,
             parentNavigatorKey: _shellKey,

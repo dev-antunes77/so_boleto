@@ -9,7 +9,6 @@ import 'package:so_boleto/core/utils/base_state.dart';
 import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/domain/models/bill_payment.dart';
 import 'package:so_boleto/domain/models/enums/bill_sorting.dart';
-import 'package:so_boleto/domain/models/enums/bill_status.dart';
 import 'package:so_boleto/domain/models/filter_params.dart';
 import 'package:so_boleto/domain/models/prompt_bill.dart';
 import 'package:so_boleto/domain/usecases/add_prompt_bills.dart';
@@ -20,6 +19,7 @@ import 'package:so_boleto/domain/usecases/filter_bills_by_params.dart';
 import 'package:so_boleto/domain/usecases/get_bills.dart';
 import 'package:so_boleto/domain/usecases/get_new_month_bills.dart';
 import 'package:so_boleto/domain/usecases/set_bill_as_paid.dart';
+import 'package:so_boleto/domain/usecases/set_delayed_bill.dart';
 
 part 'home_bills_state.dart';
 
@@ -29,6 +29,7 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
     this._getBillsUseCase,
     this._createBillUseCase,
     this._setBillAsPaidUseCase,
+    this._setDelayedBill,
     this._deleteBillUseCase,
     this._editBillUseCase,
     this._filterBillsByParamsUseCase,
@@ -41,6 +42,7 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
   final DeleteBill _deleteBillUseCase;
   final EditBill _editBillUseCase;
   final SetBillAsPaid _setBillAsPaidUseCase;
+  final SetDelayedBill _setDelayedBill;
   final FilterBillsByParams _filterBillsByParamsUseCase;
   final AddPromptBills _addPromptBillsUsecase;
 
@@ -57,8 +59,10 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
       final updatedBills = await _getBillsUseCase(
         userId,
         billSorting,
+        shouldSort: true,
         isInverted: hasInvertedSorting,
       );
+      _setDelayedBill(updatedBills);
       emit(
         state.copyWith(
           status: BaseStateStatus.success,
@@ -204,6 +208,7 @@ class HomeBillsCubit extends Cubit<HomeBillsState> with BaseCubit {
       final updatedBills = await _getBillsUseCase(
         state.userId,
         billSorting,
+        shouldSort: true,
         isInverted: isInverted,
       );
       emit(

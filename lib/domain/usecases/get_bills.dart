@@ -1,11 +1,9 @@
-import 'package:so_boleto/core/constants/app_constants.dart';
 import 'package:so_boleto/core/errors/app_errors.dart';
 import 'package:so_boleto/core/extensions/string_extensions.dart';
 import 'package:so_boleto/core/l10n/generated/l10n.dart';
 import 'package:so_boleto/core/utils/log_utils.dart';
 import 'package:so_boleto/domain/models/bill.dart';
 import 'package:so_boleto/domain/models/enums/bill_sorting.dart';
-import 'package:so_boleto/domain/models/enums/bill_status.dart';
 import 'package:so_boleto/domain/repositories/firestore_repository.dart';
 import 'package:so_boleto/infra/local_database/hive_bill_database/hive_bills_database.dart';
 
@@ -16,13 +14,11 @@ final class GetBills {
   final FirestoreRepository _firestoreRepository;
 
   Future<List<BillModel>> call(String userId, BillSorting billSorting,
-      {required bool isInverted}) async {
+      {bool shouldSort = false, required bool isInverted}) async {
     try {
       // final bills = await _hiveBillsDatabase.getBills();
-      final bills = await _firestoreRepository.getBills(userId);
-      final sortedBills = _billSorting(bills, billSorting, isInverted);
-      _setDelayedBill(sortedBills);
-      return bills;
+      var bills = await _firestoreRepository.getBills(userId);
+      return _billSorting(bills, billSorting, isInverted);
     } on AppError catch (error, trace) {
       Log.error(error, trace, 'Error executing $runtimeType: ${error.message}');
       rethrow;
@@ -63,17 +59,5 @@ final class GetBills {
       sortedBills = bills;
     }
     return sortedBills;
-  }
-
-  void _setDelayedBill(List<BillModel> bills) {
-    final date = AppConstants.currentDate;
-    for (var bill in bills) {
-      if (bill.dueDay < date.day && !bill.isMonthPayed()) {
-        bill.updateBillPayment(date, BillStatus.delayed);
-        final updatedBill = bill.copyWith();
-        bills.insert(bills.indexOf(bill), updatedBill);
-        bills.remove(bill);
-      }
-    }
   }
 }

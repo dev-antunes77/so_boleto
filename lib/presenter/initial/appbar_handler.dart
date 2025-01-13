@@ -28,6 +28,7 @@ class AppBarHandler extends StatelessWidget {
       case Routes.billCheck:
       case Routes.billName:
       case Routes.billDueDay:
+      case Routes.billHistory:
       case Routes.billParcels:
       case Routes.billValue:
         return const BillFlowAppBar();

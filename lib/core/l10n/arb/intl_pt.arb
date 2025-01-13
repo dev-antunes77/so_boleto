@@ -20,11 +20,28 @@
     "billFlowValueTitle":"Valor da conta",
     "billFlowParcelValue":"(Valor da parcela)",
     "billFlowDueDayTitle":"Dia do vencimento",
+    "billFlowCheckAccessHistory":"Acessar Histórico",
     "billFlowCheckName":"Name:",
     "billFlowCheckDescription":"Descrição:",
     "billFlowCheckDueDay":"Vencimento:",
     "billFlowCheckValue":"Valor:",
     "billFlowCheckCategory":"Categoria",
+    "billHistoryTitle":"Histórico de \"{bill}\"",
+    "@billHistoryTitle" :{
+        "placeholders":{
+            "bill":{
+                "type": "String"
+            }
+        }
+    },
+    "billHistoryPaidAt":"paga em \"{date}\"",
+    "@billHistoryPaidAt" :{
+        "placeholders":{
+            "date":{
+                "type": "String"
+            }
+        }
+    },
     "categoryAutomobile":"Veículo",
     "categoryCreditCard":"Cartão de crédito",
     "categoryClothes":"Vestimenta",

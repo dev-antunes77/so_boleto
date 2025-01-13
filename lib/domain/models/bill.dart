@@ -157,7 +157,8 @@ class BillModel extends Equatable {
 
   void updateBillPayment(DateTime date, BillStatus newStatus) {
     for (var payment in billPayment) {
-      if (payment.referredMonth.month == date.month) {
+      if (payment.referredMonth.month == date.month &&
+          payment.referredMonth.year == date.year) {
         var newPayment = payment.copyWith(
           billStatus: newStatus,
           payedAt: newStatus.isPayed

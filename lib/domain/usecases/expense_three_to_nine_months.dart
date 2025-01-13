@@ -75,10 +75,13 @@ final class ExpenseThreeToNineMonths {
           eightMonthsAgoPayedBills +
           nineMonthsAgoPayedBills;
 
+      final threeMonthSum = _paymentSum(threeMonthsBills);
+      final sixMonthSum = _paymentSum(sixMonthsBills);
+
       return ExpensesParams(
         thisMonthExpenses: _paymentSum(thisMonthPayedBills),
-        threeMonthExpenses: _paymentSum(threeMonthsBills),
-        sixMonthExpenses: _paymentSum(sixMonthsBills),
+        threeMonthExpenses: threeMonthSum,
+        sixMonthExpenses: sixMonthSum,
         nineMonthExpenses: _paymentSum(nineMonthsBills),
       );
     } on AppError catch (error, trace) {

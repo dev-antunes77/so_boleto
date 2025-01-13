@@ -260,6 +260,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Acessar Histórico`
+  String get billFlowCheckAccessHistory {
+    return Intl.message(
+      'Acessar Histórico',
+      name: 'billFlowCheckAccessHistory',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Name:`
   String get billFlowCheckName {
     return Intl.message(
@@ -307,6 +317,26 @@ class AppLocalizations {
       name: 'billFlowCheckCategory',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Histórico de "{bill}"`
+  String billHistoryTitle(String bill) {
+    return Intl.message(
+      'Histórico de "$bill"',
+      name: 'billHistoryTitle',
+      desc: '',
+      args: [bill],
+    );
+  }
+
+  /// `paga em "{date}"`
+  String billHistoryPaidAt(String date) {
+    return Intl.message(
+      'paga em "$date"',
+      name: 'billHistoryPaidAt',
+      desc: '',
+      args: [date],
     );
   }
 

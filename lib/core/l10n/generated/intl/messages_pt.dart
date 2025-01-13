@@ -20,25 +20,29 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'pt';
 
-  static String m0(user) => "Tem certeza que deseja deslogar deslogar, ${user}";
+  static String m0(date) => "paga em \"${date}\"";
 
-  static String m1(range) => "depois do dia ${range}";
+  static String m1(bill) => "Histórico de \"${bill}\"";
 
-  static String m2(range) => "antes do dia ${range}";
+  static String m2(user) => "Tem certeza que deseja deslogar deslogar, ${user}";
 
-  static String m3(range1, range2) => "entre os dias ${range1} e ${range2}";
+  static String m3(range) => "depois do dia ${range}";
 
-  static String m4(fisrtRange, lastRange) => "de ${fisrtRange} a ${lastRange}";
+  static String m4(range) => "antes do dia ${range}";
 
-  static String m5(parcelNumber) => "mais de ${parcelNumber}";
+  static String m5(range1, range2) => "entre os dias ${range1} e ${range2}";
 
-  static String m6(parcelNumber) => "${parcelNumber} ou menos";
+  static String m6(fisrtRange, lastRange) => "de ${fisrtRange} a ${lastRange}";
 
-  static String m7(parcelNumber) => "${parcelNumber} parcelas";
+  static String m7(parcelNumber) => "mais de ${parcelNumber}";
 
-  static String m8(payedParcels, parcels) => "${payedParcels} de ${parcels}";
+  static String m8(parcelNumber) => "${parcelNumber} ou menos";
 
-  static String m9(date) => "Paga em ${date}";
+  static String m9(parcelNumber) => "${parcelNumber} parcelas";
+
+  static String m10(payedParcels, parcels) => "${payedParcels} de ${parcels}";
+
+  static String m11(date) => "Paga em ${date}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -51,6 +55,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Edição da conta"),
         "billFlowBillKindQuestion":
             MessageLookupByLibrary.simpleMessage("Qual o tipo dessa conta?"),
+        "billFlowCheckAccessHistory":
+            MessageLookupByLibrary.simpleMessage("Acessar Histórico"),
         "billFlowCheckCategory":
             MessageLookupByLibrary.simpleMessage("Categoria"),
         "billFlowCheckDescription":
@@ -78,6 +84,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "billFlowSwitchUnique": MessageLookupByLibrary.simpleMessage("Única"),
         "billFlowValueTitle":
             MessageLookupByLibrary.simpleMessage("Valor da conta"),
+        "billHistoryPaidAt": m0,
+        "billHistoryTitle": m1,
         "categoryAutomobile": MessageLookupByLibrary.simpleMessage("Veículo"),
         "categoryClothes": MessageLookupByLibrary.simpleMessage("Vestimenta"),
         "categoryCreditCard":
@@ -123,7 +131,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "dialogOnboardingSkipText": MessageLookupByLibrary.simpleMessage(
             "Tem certeza que deseja pular a tela de boas vindas?"),
         "dialogProfileLogout": MessageLookupByLibrary.simpleMessage("Sair?"),
-        "dialogProfileLogoutText": m0,
+        "dialogProfileLogoutText": m2,
         "done": MessageLookupByLibrary.simpleMessage("Pronto"),
         "dueDayExtensionsDay": MessageLookupByLibrary.simpleMessage("dia"),
         "dueDayExtensionsDays": MessageLookupByLibrary.simpleMessage("dias"),
@@ -155,17 +163,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "filterRemove": MessageLookupByLibrary.simpleMessage("Remover filtros"),
         "filterSee": MessageLookupByLibrary.simpleMessage("Ver filtros"),
         "filterValue": MessageLookupByLibrary.simpleMessage("Valor"),
-        "formatterDayAfter": m1,
-        "formatterDayBefore": m2,
-        "formatterDayBetween": m3,
+        "formatterDayAfter": m3,
+        "formatterDayBefore": m4,
+        "formatterDayBetween": m5,
         "formatterMonth": MessageLookupByLibrary.simpleMessage("Mensal fixa"),
         "formatterMonthBill":
             MessageLookupByLibrary.simpleMessage("Conta fixa"),
-        "formatterParcelsFromTo": m4,
-        "formatterParcelsMoreThan": m5,
-        "formatterParcelsOrLess": m6,
-        "formatterParcelsTimes": m7,
-        "formatterPayedParcelsOfParcels": m8,
+        "formatterParcelsFromTo": m6,
+        "formatterParcelsMoreThan": m7,
+        "formatterParcelsOrLess": m8,
+        "formatterParcelsTimes": m9,
+        "formatterPayedParcelsOfParcels": m10,
         "homeAppBarAddNewBill":
             MessageLookupByLibrary.simpleMessage("Adicionar conta nova"),
         "homeAppBarAddPromptBills":
@@ -242,7 +250,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "onboardingWelcomeText": MessageLookupByLibrary.simpleMessage(
             "Só Boleto vai ser o seu assitente pessoal de contas daqui em diante, ok?\n\nDeixa com a gente."),
         "parcels": MessageLookupByLibrary.simpleMessage("Parcelas"),
-        "payedAt": m9,
+        "payedAt": m11,
         "payedTag": MessageLookupByLibrary.simpleMessage("PAGA"),
         "profile": MessageLookupByLibrary.simpleMessage("Perfil"),
         "profileAccess": MessageLookupByLibrary.simpleMessage(

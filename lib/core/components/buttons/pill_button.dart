@@ -29,6 +29,20 @@ class PillButton extends StatelessWidget {
   final Size? size;
   final bool isDisabled;
 
+  factory PillButton.outlined({
+    required VoidCallback onTap,
+    required Color color,
+    required Widget child,
+  }) =>
+      PillButton(
+        onTap: onTap,
+        outlinedButton: true,
+        foregroundColor: color,
+        backgroundColor: AppColors.background,
+        borderColor: color,
+        child: child,
+      );
+
   @override
   Widget build(BuildContext context) {
     final minimunSize = size ??
